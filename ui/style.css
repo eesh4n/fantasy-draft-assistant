@@ -335,21 +335,6 @@ body{
   font-weight:600;
 }
 
-.analyst-badge{
-  display:inline-block;
-  margin-left:6px;
-  font-size:10px;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:0.3px;
-  padding:2px 6px;
-  border-radius:4px;
-  background:rgba(79,140,255,0.16);
-  color:var(--accent);
-  border:1px solid var(--accent-dim);
-  cursor:help;
-}
-
 .pos-pill{
   display:inline-block;
   font-size:11px;

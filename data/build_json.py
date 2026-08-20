@@ -12,16 +12,6 @@ UI. Schema (hard contract):
   "adp": number,
   "adp_position_rank": integer (1-indexed, by adp within position),
   "value_gap": integer (adp_position_rank - position_rank),
-  "analyst_tag": "string|null",       // e.g. "target"/"fade"/"sleeper" --
-                                       // set only if a manual override
-                                       // (data/overrides_*.json) matched
-                                       // this player. Multiple matching
-                                       // overrides are joined with "; ".
-  "analyst_note": "string|null",      // human-readable reasoning for the
-                                       // tag(s) above, sourced from short-
-                                       // form analyst video content (see
-                                       // data/README.md). null if no
-                                       // override applies.
   "stats": {                          // raw inputs behind value_score, for
     "ppg": number|null,               // a "why this ranking" detail view.
     "volume": number|null,            // null for K/DEF (ADP-only model)
@@ -32,11 +22,76 @@ UI. Schema (hard contract):
     "receiving_ppg": number|null,     // receiving-only fantasy pts/game
                                        // (RB/WR/TE only; null for QB, who
                                        // don't receive)
-    "td_rate": number|null            // TDs per opportunity, a red-zone
-                                       // proxy (RB/WR/TE only; see
-                                       // data/README.md for why this is
-                                       // an approximation, not real
-                                       // red-zone data)
+    "red_zone_share": number|null,    // REAL red-zone usage share: (red-
+                                       // zone rush attempts + red-zone
+                                       // targets) / (total carries +
+                                       // targets), from 2024 play-by-play
+                                       // data (data/redzone_stats.csv,
+                                       // built by data/redzone.py;
+                                       // RB/WR/TE only). Replaces the old
+                                       // td_rate approximation.
+    "goal_line_share": number|null,   // same, but for goal-line usage
+                                       // specifically (yardline_100 <= 5,
+                                       // a stricter cut than red zone's
+                                       // <= 20). Not part of value_score,
+                                       // surfaced for detail views only
+                                       // (RB/WR/TE only).
+    "fg_pct": number|null,            // K only. Real 2024 overall FG
+                                       // accuracy (fg_made/fg_attempts)
+                                       // from play-by-play data
+                                       // (data/kicker_stats.csv, built by
+                                       // data/pull_kicker_stats.py). null
+                                       // for non-K positions and for K
+                                       // rows with no 2024 pbp match
+                                       // (ADP-only fallback).
+    "fg_pct_50plus": number|null,     // K only. FG accuracy specifically
+                                       // from 50+ yards; null if the
+                                       // kicker had fewer than
+                                       // MIN_50PLUS_ATTEMPTS (3) attempts
+                                       // from that range in 2024 (too
+                                       // noisy to trust as a rate) --
+                                       // score.py falls back to fg_pct in
+                                       // that case for the composite, but
+                                       // this raw field stays null so the
+                                       // UI can show "not enough attempts"
+                                       // rather than a misleading number.
+    "is_dome": boolean|null,          // K only. Whether the kicker's 2024
+                                       // team's home stadium has a fixed
+                                       // or normally-closed roof (see
+                                       // data/pull_kicker_stats.py for the
+                                       // team list and reasoning).
+    "team_offense_ppg": number|null,  // K only. The kicker's 2024 team's
+                                       // average points scored per game
+                                       // (REG season, home+away), a proxy
+                                       // for scoring-drive volume /
+                                       // kick-attempt opportunity.
+    // -- DEF-only fields below (null for every other position). Sourced
+    // from data/defense_stats.csv (built by data/build_defense_stats.py
+    // from 2024 play-by-play data) -- see that file's docstring for exact
+    // stat attribution and the documented points-allowed-tier assumption.
+    "sacks": number|null,
+    "interceptions": number|null,     // DEF interceptions -- NOT the same
+                                       // stat as a QB's thrown picks; no
+                                       // collision since a given row only
+                                       // ever populates one position's
+                                       // fields.
+    "fumble_recoveries": number|null,
+    "forced_fumbles": number|null,
+    "safeties": number|null,
+    "blocked_kicks": number|null,
+    "def_tds": number|null,
+    "st_tds": number|null,
+    "st_ff": number|null,
+    "st_fr": number|null,
+    "points_allowed_per_game": number|null,
+    "custom_adjusted_ppg": number|null, // this league's EXACT custom DEF
+                                       // scoring, averaged per game -- the
+                                       // dominant input to DEF value_score
+    "pressure_rate_proxy": number|null  // sacks per opponent pass attempt
+                                       // faced; a PROXY for real pressure
+                                       // rate, which isn't in public
+                                       // nflverse data -- see
+                                       // build_defense_stats.py
   }
 }
 """
@@ -62,23 +117,6 @@ def slugify(name: str, team: str) -> str:
     base = f"{name}-{team}".lower()
     base = re.sub(r"[^a-z0-9]+", "-", base).strip("-")
     return base
-
-
-def load_overrides():
-    """Merge every data/overrides_*.json file into {id: [{tag, note, score_nudge}, ...]}.
-
-    Each file is produced independently (see data/README.md) from manual,
-    human-sourced analyst commentary -- not modeled data. These are additive
-    nudges layered on top of the stats-driven value_score, never a
-    replacement for it.
-    """
-    merged = {}
-    for path in sorted(DATA_DIR.glob("overrides_*.json")):
-        with open(path, "r", encoding="utf-8") as f:
-            entries = json.load(f)
-        for entry in entries:
-            merged.setdefault(entry["id"], []).append(entry)
-    return merged
 
 
 def main():
@@ -119,40 +157,31 @@ def main():
                     "efficiency": clean_num(row.get("efficiency")),
                     "rushing_ppg": clean_num(row.get("rushing_ppg")),
                     "receiving_ppg": clean_num(row.get("receiving_ppg")),
-                    "td_rate": clean_num(row.get("td_rate")),
+                    "red_zone_share": clean_num(row.get("red_zone_share")),
+                    "goal_line_share": clean_num(row.get("goal_line_share")),
+                    "fg_pct": clean_num(row.get("fg_pct")),
+                    "fg_pct_50plus": clean_num(row.get("fg_pct_50plus")),
+                    "is_dome": (
+                        bool(row.get("is_dome"))
+                        if pd.notna(row.get("is_dome"))
+                        else None
+                    ),
+                    "team_offense_ppg": clean_num(row.get("team_offense_ppg")),
+                    "sacks": clean_num(row.get("def_sacks")),
+                    "interceptions": clean_num(row.get("def_interceptions")),
+                    "fumble_recoveries": clean_num(row.get("def_fumble_recoveries")),
+                    "forced_fumbles": clean_num(row.get("def_forced_fumbles")),
+                    "safeties": clean_num(row.get("def_safeties")),
+                    "blocked_kicks": clean_num(row.get("def_blocked_kicks")),
+                    "def_tds": clean_num(row.get("def_def_tds")),
+                    "st_tds": clean_num(row.get("def_st_tds")),
+                    "st_ff": clean_num(row.get("def_st_ff")),
+                    "st_fr": clean_num(row.get("def_st_fr")),
+                    "points_allowed_per_game": clean_num(row.get("def_points_allowed_per_game")),
+                    "custom_adjusted_ppg": clean_num(row.get("def_custom_adjusted_ppg")),
+                    "pressure_rate_proxy": clean_num(row.get("def_pressure_rate_proxy")),
                 },
             }
-        )
-
-    # Apply manual analyst overrides: nudge value_score, tag/note the player,
-    # then recompute position_rank (and value_gap) within each position so
-    # the nudges actually move the rankings rather than just being cosmetic.
-    overrides = load_overrides()
-    for p in players:
-        entries = overrides.get(p["id"])
-        if not entries:
-            p["analyst_tag"] = None
-            p["analyst_note"] = None
-            continue
-        p["value_score"] = round(p["value_score"] + sum(e["score_nudge"] for e in entries), 4)
-        p["analyst_tag"] = "; ".join(e["tag"] for e in entries)
-        p["analyst_note"] = "; ".join(e["note"] for e in entries)
-
-    by_position = {}
-    for p in players:
-        by_position.setdefault(p["position"], []).append(p)
-    for pos, group in by_position.items():
-        group.sort(key=lambda p: p["value_score"], reverse=True)
-        for i, p in enumerate(group, start=1):
-            p["position_rank"] = i
-            p["value_gap"] = p["adp_position_rank"] - i
-
-    unmatched_override_ids = set(overrides.keys()) - {p["id"] for p in players}
-    if unmatched_override_ids:
-        print(
-            f"WARNING: {len(unmatched_override_ids)} override id(s) did not match "
-            f"any player in players.json (dropped, likely due to an ADP filter or "
-            f"an id typo): {sorted(unmatched_override_ids)}"
         )
 
     players.sort(key=lambda p: p["adp"])

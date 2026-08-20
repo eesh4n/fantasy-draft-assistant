@@ -7,10 +7,14 @@ Run it end to end:
 ```
 pip install nfl_data_py rapidfuzz requests pandas numpy
 python pull.py
+python build_defense_stats.py
 python join.py
 python score.py
 python build_json.py
 ```
+
+(`build_defense_stats.py` must run before `join.py`, since `join.py`
+merges its output, `data/defense_stats.csv`, onto DEF rows.)
 
 ## Data sources actually used (and why)
 
@@ -47,6 +51,9 @@ Important gap: `import_seasonal_data` only covers offensive skill
 positions with tracked play-by-play stats (QB/RB/WR/TE). It has **no
 rows for kickers or team defense/special teams units** -- those aren't
 part of that dataset at all. So `raw_stats.csv` has zero K or DEF rows.
+DEF gets its own real stats from a separate source (raw
+`nfl_data_py.import_pbp_data([2024])` play-by-play, not the seasonal
+aggregate table) -- see "Defense stats" below.
 
 **ADP / consensus rankings** -- FantasyPros' actual CSV export endpoint
 (`...ppr-cheatsheets.php?export=xls`) requires a logged-in session; hit
@@ -63,14 +70,15 @@ rankings specifically. Source URL:
 
 ## Handling positions with no 2024 stats
 
-Two groups end up in `joined.csv` without a real production signal:
+One group still ends up in `joined.csv` without a real production signal
+by default:
 
-1. **K and DEF** -- no per-player stats exist in `nfl_data_py` at all for
-   these positions. `score.py` falls back to a pure ADP-based
-   `value_score` (z-score of ADP, inverted) for both groups. `value_gap`
-   for K/DEF will therefore always be close to 0 -- there's no
-   independent signal to disagree with ADP, so don't read anything into
-   K/DEF value_gap.
+1. **K** -- no per-kicker stats exist in `nfl_data_py`'s seasonal
+   aggregate table. `score.py` falls back to a pure ADP-based
+   `value_score` (z-score of ADP, inverted) for any kicker with no
+   `kicker_stats.csv` match. `value_gap` for those kickers will therefore
+   stay close to 0 -- there's no independent signal to disagree with ADP.
+   (**DEF is no longer in this bucket** -- see "Defense stats" below.)
 2. **2025 draft rookies and other players with no 2024 stat line**
    (e.g. Ashton Jeanty, Omarion Hampton, Tetairoa McMillan) -- these are
    real, highly-drafted players this year but have nothing to measure
@@ -103,6 +111,102 @@ score was tried first and produced a false positive (matched rookie
 "Kevin Coleman" to established WR "Keon Coleman" -- different players,
 same surname) -- the stricter first/last split fixes that while still
 catching real nickname variants.
+
+## Defense stats (build_defense_stats.py)
+
+DEF used to be pure ADP-only, like K still is. It now has **real,
+systematically-computed per-team stats**, built by `build_defense_stats.py`
+from `nfl_data_py.import_pbp_data([2024])` (raw play-by-play, regular
+season only) plus `nfl_data_py.import_schedules([2024])` for final scores.
+This covers every 2024 team (32/32), not named-team overrides -- see that
+file's docstring for exact play-by-play attribution logic for each stat
+(sacks, INTs, forced fumbles, fumble recoveries, safeties, blocked kicks,
+defensive TDs, special-teams TDs/forced-fumbles/recoveries).
+
+This directly follows up on an analyst's video that identified four things
+that actually drive defense fantasy value:
+
+1. **Pressure rate** (drives sacks/turnovers) -- true pressure rate isn't
+   in public nflverse play-by-play data (no play-level "pressure" flag, no
+   pass-rush-snap counts by team). `pressure_rate_proxy` = sacks / opponent
+   pass attempts faced is used as the best available substitute. This is a
+   **proxy, not real pressure rate** -- documented as such everywhere it's
+   used.
+2. **An "adjusted" PPG that strips fluke special-teams/defensive TDs** --
+   implemented as `custom_adjusted_ppg`: this league's *exact* custom DEF
+   scoring rules (see table below), computed from real per-team component
+   stats and averaged per game. This supersedes the vague "subtract the
+   flukes" idea in the video with something more precise: every point in
+   `custom_adjusted_ppg` is tied to a specific, attributable defensive
+   event, not a generic fantasy-points column.
+3. **Strength of opposing offenses faced** (bad offenses grind the clock
+   instead of turning it over) -- **NOT implemented.** There's no
+   ready-made "opponent offensive strength" rating in nfl_data_py's pbp or
+   schedule data; building one (e.g. opponent's offensive EPA/play across
+   the season, excluding games against this defense) is a nontrivial
+   modeling project on its own. Flagged as a real, open gap -- not faked.
+4. **Offseason roster improvement/decline** -- **NOT implemented.** This
+   is fundamentally a 2025/2026-offseason signal (free agency, draft,
+   coaching change) that cannot be derived from 2024 play-by-play data at
+   all. Flagged as a real, open gap -- not faked.
+
+### League's exact custom DEF scoring rules
+
+| stat | points |
+|---|---|
+| Interception | 2 |
+| Fumble recovery | 2 |
+| Forced fumble | 1 |
+| Safety | 2 |
+| Blocked kick | 2 |
+| Defensive TD | 6 |
+| Sack | 1 |
+| Special teams TD | 6 |
+| Special teams forced fumble | 1 |
+| Special teams fumble recovery | 1 |
+
+**Points-allowed tiers** (per game):
+
+| points allowed | bonus |
+|---|---|
+| 0 | 10 |
+| 1-6 | 7 |
+| 7-13 | 4 |
+| 14-20 | 1 |
+| 21-27 | **0 -- ASSUMED, not user-confirmed (see below)** |
+| 28-34 | -1 |
+| 35+ | -4 |
+
+**The user did not provide the 21-27 points-allowed-tier value.** `0` is
+used as a standard-in-most-leagues default. **This is an assumption
+pending confirmation of the actual league rule -- get the real number from
+the user and update `POINTS_ALLOWED_TIERS` in `build_defense_stats.py`
+before trusting DEF rankings for a real draft.**
+
+`custom_adjusted_ppg` is computed **per game**, not from season totals,
+for the points-allowed-tier piece specifically -- the tiers are a
+nonlinear step function of a single game's points allowed, so averaging
+season-total points allowed into one tier lookup would give a different
+(wrong) number than averaging the correct per-game bonuses. All other
+components are linear counts, so season-total / games is equivalent.
+
+### DEF value_score composite (score.py)
+
+| component | weight | what it is |
+|---|---|---|
+| `def_custom_adjusted_ppg` | 0.60 | this league's exact custom DEF scoring, per game (dominant signal) |
+| `def_pressure_rate_proxy` | 0.20 | sacks per opponent pass attempt faced (pressure-rate proxy) |
+| `def_sacks + def_interceptions + def_forced_fumbles` | 0.20 | raw turnover/pressure event volume (secondary; smooths one-off bad points-allowed games) |
+
+Any team without a `defense_stats.csv` match falls back to the old
+pure-ADP `value_score` (z-score of ADP, inverted) -- in practice this
+should never happen once `build_defense_stats.py` has been run, since it
+covers all 32 teams.
+
+**Team abbreviation note:** nflverse pbp/schedule data uses `LA` (Rams)
+and `JAX` (Jaguars); this pipeline's ADP source (FantasyPros, via
+`raw_adp.csv`) uses `LAR` and `JAC`. `build_defense_stats.py` normalizes
+to the ADP convention so the `team`-based join in `join.py` works.
 
 ## Value model (score.py)
 

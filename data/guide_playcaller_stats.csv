@@ -1,0 +1,33 @@
+team,playcaller_rb_ppg_rank,playcaller_wr_ppg_rank,pct_rb1,pct_rb1_rank,personnel,pace_rank,run_scheme,motion_rank,formation_spread,rb_screen_rank
+CHI,1,7,0.630,16,High 12P,4,Zone,6,Even,11
+JAX,5,8,0.616,18,High 11P,21,Balanced,7,Condensed,1
+DAL,10,4,0.666,12,High 11P,2,Gap,12,Very Condensed,24
+CIN,15,3,0.751,4,--,11,Gap,20,Very Spread,15
+KC,19,16,0.546,27,--,9,Zone,22,Condensed,6
+SF,4,17,0.774,2,High 21P,8,Zone,3,Most Condensed,14
+PIT,27,1,0.691,8,--,1,Zone,25,Spread,9
+CLE,10,18,0.579,24,"High 12P, 21",30,Zone,16,Even,18
+NO,18,10,0.663,13,High 11P,1,Zone,5,Even,27
+LAR,24,2,0.759,3,High 13P,6,Gap,4,Very Condensed,21
+GB,13,9,0.667,11,High 12P,19,Balanced,8,Very Condensed,17
+LAC,3,11,0.663,13,High 21P,31,Zone,1,Very Condensed,28
+BUF,8,25,0.655,15,--,32,Gap,11,Very Spread,22
+LV,14,14,0.696,7,--,27,Zone,13,Even,19
+MIN,26,5,0.691,8,--,25,Balanced,23,Condensed,5
+HOU,28,12,0.523,28,High 11P,16,Gap,14,Even,26
+IND,17,19,0.691,8,--,20,Gap,10,Even,25
+MIA,22,6,0.732,6,--,24,Balanced,15,Condensed,7
+DEN,9,21,0.563,25,--,7,Gap,26,Most Spread,2
+TEN,23,21,0.588,23,High 12P,12,Balanced,28,Very Spread,13
+DET,20,27,0.620,17,--,3,Gap,24,Even,11
+NYJ,6,26,0.613,19,High 11P,10,Balanced,27,Spread,8
+NE,6,13,0.605,20,--,24,Gap,21,Spread,4
+TB,2,24,0.750,5,High 12P,13,Zone,2,Condensed,20
+NYG,12,21,0.558,26,--,21,Zone,17,Even,16
+CAR,24,15,0.794,1,High 11P,22,Balanced,19,Spread,23
+ATL,16,28,0.592,22,High 12P,10,Gap,18,Even,3
+ARI,21,19,0.596,21,--,5,Gap,9,Condensed,10
+PHI,,,,,,,,,
+SEA,,,,,,,,,
+WAS,,,,,,,,,
+BAL,,,,,,,,,

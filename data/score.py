@@ -147,6 +147,96 @@ For QB/RB/WR/TE (positions with real seasonal stats):
         didn't match the guide files -- same missing-data handling as
         everything else in this file.
 
+  RB-only playcaller/scheme additions, hand-transcribed from the
+  "Playcaller Table" page of Joel Smyth's Draft Guide 2026
+  (data/guide_playcaller_stats.csv), joined onto RB rows by team in
+  join.py:
+        0.04  playcaller_rb_ppg_rank -- REAL rank (1=best) of this team's
+                                    average fantasy RB PPG across the
+                                    current playcaller's tenure (up to their
+                                    last 5 seasons). A team-level offensive-
+                                    system signal, distinct from
+                                    ol_run_block_rank (blocking quality) and
+                                    proj_volume_rank (the analyst's player-
+                                    volume projection) -- this captures how
+                                    much the SCHEME itself has historically
+                                    fed the RB spot. Inverted before
+                                    z-scoring (lower/better rank -> higher
+                                    value) like every other rank column
+                                    here.
+        0.04  pct_rb1_rank        -- REAL rank (1=best) of %RB1, the share
+                                    of the team's RB fantasy points that go
+                                    to the starter (higher %RB1 = more of a
+                                    true bellcow role, lower = committee).
+                                    Rank 1 = highest %RB1 = most bellcow-
+                                    friendly, so a player on a high-%RB1
+                                    team should score BETTER -- inverted
+                                    before z-scoring the same direction as
+                                    playcaller_rb_ppg_rank above.
+        Both are kept to a small, modest weight (0.04 each) since they are
+        team-level context, not the player's own production, same
+        philosophy as ol_run_block_rank's 0.07.
+
+        Redistribution math: the previous RB weights (ppg .20,
+        rushing_ppg .10, receiving_ppg .13, red_zone_share .07,
+        snap_share .10, efficiency .07, guide_adj_ppg .15,
+        ol_run_block_rank .07, proj_volume_rank .11 -- sums to 1.0) are each
+        scaled down by a factor of (1 - 0.08) = 0.92 to free up exactly
+        0.08 of total weight (0.04 + 0.04) for the two new components,
+        preserving their relative proportions:
+          ppg:               .20 * .92 = .184
+          rushing_ppg:       .10 * .92 = .092
+          receiving_ppg:     .13 * .92 = .1196
+          red_zone_share:    .07 * .92 = .0644
+          snap_share:        .10 * .92 = .092
+          efficiency:        .07 * .92 = .0644
+          guide_adj_ppg:     .15 * .92 = .138
+          ol_run_block_rank: .07 * .92 = .0644
+          proj_volume_rank:  .11 * .92 = .1012
+          playcaller_rb_ppg_rank: .04
+          pct_rb1_rank:           .04
+          (sum = 0.92 + 0.08 = 1.0, confirmed by summing the scaled block:
+          .184+.092+.1196+.0644+.092+.0644+.138+.0644+.1012 = .92)
+        playcaller_rb_ppg_rank/pct_rb1_rank are null for non-RB rows and for
+        RBs whose team didn't match guide_playcaller_stats.csv (the four
+        teams with a brand-new, 0-season playcaller -- PHI/SEA/WAS/BAL --
+        which the guide itself leaves blank rather than assigning a made-up
+        rank) -- same missing-data threshold handling as everything else in
+        this file. personnel/run_scheme/motion_rank/formation_spread/
+        rb_screen_rank from the same guide file are NOT part of the
+        composite -- too qualitative/hard to weight confidently under time
+        pressure -- and are carried through to build_json.py purely as
+        informational/detail-view fields.
+
+  WR-only playcaller addition, same source file, joined onto WR rows by
+  team in join.py:
+        0.05  playcaller_wr_ppg_rank -- REAL rank (1=best) of this team's
+                                    average fantasy WR PPG across the
+                                    current playcaller's tenure. Inverted
+                                    before z-scoring like the RB version
+                                    above.
+        Redistribution math: the WR/TE weights (ppg .25, rushing_ppg .12,
+        receiving_ppg .16, red_zone_share .08, snap_share .12,
+        efficiency .08, guide_adj_ppg .19 -- sums to 1.0) are each scaled
+        down by a factor of (1 - 0.05) = 0.95 to free up 0.05 for
+        playcaller_wr_ppg_rank:
+          ppg:              .25 * .95 = .2375
+          rushing_ppg:      .12 * .95 = .114
+          receiving_ppg:    .16 * .95 = .152
+          red_zone_share:   .08 * .95 = .076
+          snap_share:       .12 * .95 = .114
+          efficiency:       .08 * .95 = .076
+          guide_adj_ppg:    .19 * .95 = .1805
+          playcaller_wr_ppg_rank: .05
+          (sum = 0.95 + 0.05 = 1.0, confirmed:
+          .2375+.114+.152+.076+.114+.076+.1805 = .95)
+        Applies to WR only -- TE keeps the original (unmodified) WR/TE
+        weights above, since guide_playcaller_stats.csv's WR PPG rank
+        column is specifically a WR-context signal, not joined onto TE
+        rows in join.py. playcaller_wr_ppg_rank is null for non-WR rows and
+        for WRs on the four brand-new-playcaller teams (same as the RB
+        case above), handled by the same missing-data threshold.
+
   If a component is missing (non-null) for less than 30% of a position
   group -- i.e. missing for >70% of it -- its weight is redistributed
   proportionally across the remaining available components, so weights
@@ -439,16 +529,46 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             # additional signal. Inverted like ol_run_block_rank above.
             df["proj_volume_rank"] = -df["guide_proj_volume_rank"]
 
+            # playcaller_rb_ppg_rank / pct_rb1_rank: REAL team-level
+            # playcaller/scheme context from data/guide_playcaller_stats.csv
+            # (joined by team in join.py) -- see module docstring "RB-only
+            # playcaller/scheme additions" for the full reasoning and
+            # redistribution math. Both are 1=best ranks, inverted before
+            # z-scoring so a lower/better rank scores higher, matching every
+            # other rank-based component here.
+            df["playcaller_rb_ppg_rank_inv"] = -df["playcaller_rb_ppg_rank"]
+            df["pct_rb1_rank_inv"] = -df["pct_rb1_rank"]
+
             components = {
-                "ppg": 0.20,
-                "rushing_ppg": 0.10,
-                "receiving_ppg": 0.13,
-                "red_zone_share": 0.07,
-                "snap_share": 0.10,
-                "efficiency": 0.07,
-                "guide_adj_ppg": 0.15,
-                "ol_run_block_rank": 0.07,
-                "proj_volume_rank": 0.11,
+                "ppg": 0.184,
+                "rushing_ppg": 0.092,
+                "receiving_ppg": 0.1196,
+                "red_zone_share": 0.0644,
+                "snap_share": 0.092,
+                "efficiency": 0.0644,
+                "guide_adj_ppg": 0.138,
+                "ol_run_block_rank": 0.0644,
+                "proj_volume_rank": 0.1012,
+                "playcaller_rb_ppg_rank_inv": 0.04,
+                "pct_rb1_rank_inv": 0.04,
+            }
+        elif pos == "WR":
+            # playcaller_wr_ppg_rank: REAL team-level playcaller context
+            # from data/guide_playcaller_stats.csv (joined by team in
+            # join.py) -- see module docstring "WR-only playcaller
+            # addition" for the redistribution math. Inverted before
+            # z-scoring like the RB version above.
+            df["playcaller_wr_ppg_rank_inv"] = -df["playcaller_wr_ppg_rank"]
+
+            components = {
+                "ppg": 0.2375,
+                "rushing_ppg": 0.114,
+                "receiving_ppg": 0.152,
+                "red_zone_share": 0.076,
+                "snap_share": 0.114,
+                "efficiency": 0.076,
+                "guide_adj_ppg": 0.1805,
+                "playcaller_wr_ppg_rank_inv": 0.05,
             }
         else:
             components = {

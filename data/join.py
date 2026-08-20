@@ -619,6 +619,68 @@ def main():
         for col in guide_vol_prefixed_cols:
             final[col] = pd.NA
 
+    # Bring in REAL playcaller/scheme context hand-transcribed from Joel
+    # Smyth's Draft Guide 2026 (data/guide_playcaller_stats.csv) -- per-team
+    # RB/WR fantasy-PPG-under-this-playcaller ranks (Table 1 of the guide's
+    # Playcaller Table page) plus %RB1 bellcow share, personnel, pace,
+    # run-scheme, motion, formation-spread, and RB-screen ranks (Table 2).
+    # Joined onto BOTH RB and WR rows by team (every NFL team is covered
+    # except the four with a brand-new, 0-season playcaller -- PHI, SEA,
+    # WAS, BAL -- whose guide rows are "via [previous playcaller]" with no
+    # real numbers, and are simply left null here rather than fabricated).
+    # RBs get the RB-specific columns (playcaller_rb_ppg_rank, pct_rb1,
+    # pct_rb1_rank, rb_screen_rank) plus the shared informational columns;
+    # WRs get only playcaller_wr_ppg_rank plus the shared informational
+    # columns -- see score.py's module docstring for how
+    # playcaller_rb_ppg_rank/pct_rb1_rank (RB) and playcaller_wr_ppg_rank
+    # (WR) are folded into value_score, and build_json.py for how the
+    # remaining columns (personnel, run_scheme, motion_rank,
+    # formation_spread, rb_screen_rank) are surfaced as informational-only
+    # fields.
+    guide_pc_path = DATA_DIR / "guide_playcaller_stats.csv"
+    guide_pc_cols = [
+        "playcaller_rb_ppg_rank", "playcaller_wr_ppg_rank", "pct_rb1",
+        "pct_rb1_rank", "personnel", "pace_rank", "run_scheme",
+        "motion_rank", "formation_spread", "rb_screen_rank",
+    ]
+    if guide_pc_path.exists():
+        guide_pc = pd.read_csv(guide_pc_path)
+        guide_pc["team"] = guide_pc["team"].replace(GUIDE_TEAM_CODE_FIXUP)
+        guide_pc = guide_pc.drop_duplicates("team", keep="first")
+
+        is_rb = final["position"] == "RB"
+        is_wr = final["position"] == "WR"
+
+        rb_rows_pc = final[is_rb].merge(
+            guide_pc[["team"] + guide_pc_cols], on="team", how="left"
+        )
+        # WR rows only need the WR-specific PPG rank column plus the two
+        # WR-relevant informational columns (personnel, motion_rank) --
+        # pct_rb1/pct_rb1_rank/rb_screen_rank/run_scheme/formation_spread/
+        # pace_rank are RB-specific/RB-scoped in build_json.py's schema and
+        # stay null for WR so they can never leak into the WR composite/
+        # display by accident.
+        wr_only_cols = ["playcaller_wr_ppg_rank", "personnel", "motion_rank"]
+        wr_rows_pc = final[is_wr].merge(
+            guide_pc[["team"] + wr_only_cols], on="team", how="left"
+        )
+        for col in ["playcaller_rb_ppg_rank", "pct_rb1", "pct_rb1_rank",
+                     "rb_screen_rank", "pace_rank", "run_scheme", "formation_spread"]:
+            wr_rows_pc[col] = pd.NA
+
+        other_rows_pc = final[~is_rb & ~is_wr].copy()
+        for col in guide_pc_cols:
+            other_rows_pc[col] = pd.NA
+
+        final = pd.concat(
+            [rb_rows_pc, wr_rows_pc, other_rows_pc], ignore_index=True, sort=False
+        )
+    else:
+        print(f"WARNING: {guide_pc_path} not found -- continuing without "
+              f"playcaller/scheme context columns (will be all-null).")
+        for col in guide_pc_cols:
+            final[col] = pd.NA
+
     out_path = DATA_DIR / "joined.csv"
     final.to_csv(out_path, index=False)
 
@@ -646,6 +708,11 @@ def main():
     print(f"Guide OL stats matched (RB, by team): {n_rb_ol} of {n_rb} rows")
     n_rb_vol = final.loc[final["position"] == "RB", "guide_proj_volume_rank"].notna().sum()
     print(f"Guide RB volume matched (RB, by name): {n_rb_vol} of {n_rb} rows")
+    n_rb_pc = final.loc[final["position"] == "RB", "playcaller_rb_ppg_rank"].notna().sum()
+    print(f"Guide playcaller stats matched (RB, by team): {n_rb_pc} of {n_rb} rows")
+    n_wr = (final["position"] == "WR").sum()
+    n_wr_pc = final.loc[final["position"] == "WR", "playcaller_wr_ppg_rank"].notna().sum()
+    print(f"Guide playcaller stats matched (WR, by team): {n_wr_pc} of {n_wr} rows")
     print(f"Wrote {len(final)} rows to {out_path}")
 
 

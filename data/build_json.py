@@ -140,6 +140,65 @@ UI. Schema (hard contract):
                                        // ("high"/"medium"/"low") in the
                                        // proj_volume_rank projection above.
                                        // NOT part of value_score.
+    "playcaller_rb_ppg_rank": number|null, // RB only. REAL rank (1=best)
+                                       // of this team's average fantasy RB
+                                       // PPG across the current
+                                       // playcaller's tenure, hand-
+                                       // transcribed from the Playcaller
+                                       // Table page of Joel Smyth's Draft
+                                       // Guide 2026
+                                       // (data/guide_playcaller_stats.csv,
+                                       // joined by team in join.py). A
+                                       // small-weight component of RB
+                                       // value_score (inverted internally
+                                       // -- see score.py). null for the
+                                       // four teams with a brand-new,
+                                       // 0-season playcaller (no track
+                                       // record to rank).
+    "pct_rb1_rank": number|null,      // RB only. REAL rank (1=best) of
+                                       // %RB1 -- the share of the team's RB
+                                       // fantasy points going to the
+                                       // starter (higher %RB1 = bellcow,
+                                       // lower = committee). Same source/
+                                       // join as playcaller_rb_ppg_rank. A
+                                       // small-weight component of RB
+                                       // value_score (inverted internally).
+    "rb_screen_rank": number|null,    // RB only. Informational -- 2025 RB
+                                       // screen-pass usage rank (1=most),
+                                       // same source file. NOT part of
+                                       // value_score (too qualitative to
+                                       // weight confidently).
+    "playcaller_wr_ppg_rank": number|null, // WR only. REAL rank (1=best)
+                                       // of this team's average fantasy WR
+                                       // PPG across the current
+                                       // playcaller's tenure, same source/
+                                       // join as playcaller_rb_ppg_rank
+                                       // above. A small-weight component of
+                                       // WR value_score (inverted
+                                       // internally -- see score.py). null
+                                       // for the four brand-new-playcaller
+                                       // teams.
+    "personnel": string|null,         // RB/WR. Informational -- the
+                                       // playcaller's preferred personnel
+                                       // grouping (e.g. "High 11P",
+                                       // "High 21P", "--" if no standout
+                                       // grouping), from
+                                       // data/guide_playcaller_stats.csv.
+                                       // NOT part of value_score.
+    "run_scheme": string|null,        // RB only. Informational -- "Gap",
+                                       // "Zone", or "Balanced" run-scheme
+                                       // lean, same source file. NOT part
+                                       // of value_score.
+    "motion_rank": number|null,       // RB/WR. Informational -- 2025
+                                       // pre-snap motion-usage rank
+                                       // (1=most), same source file. NOT
+                                       // part of value_score.
+    "formation_spread": string|null,  // RB only. Informational --
+                                       // condensed/even/spread formation
+                                       // tendency (e.g. "Very Condensed",
+                                       // "Even", "Very Spread"), same
+                                       // source file. NOT part of
+                                       // value_score.
     // -- DEF-only fields below (null for every other position). Sourced
     // from data/defense_stats.csv (built by data/build_defense_stats.py
     // from 2024 play-by-play data) -- see that file's docstring for exact
@@ -312,6 +371,26 @@ def main():
                         if pd.notna(row.get("guide_confidence"))
                         else None
                     ),
+                    "playcaller_rb_ppg_rank": clean_num(row.get("playcaller_rb_ppg_rank")),
+                    "pct_rb1_rank": clean_num(row.get("pct_rb1_rank")),
+                    "rb_screen_rank": clean_num(row.get("rb_screen_rank")),
+                    "run_scheme": (
+                        str(row.get("run_scheme"))
+                        if pd.notna(row.get("run_scheme"))
+                        else None
+                    ),
+                    "formation_spread": (
+                        str(row.get("formation_spread"))
+                        if pd.notna(row.get("formation_spread"))
+                        else None
+                    ),
+                    "playcaller_wr_ppg_rank": clean_num(row.get("playcaller_wr_ppg_rank")),
+                    "personnel": (
+                        str(row.get("personnel"))
+                        if pd.notna(row.get("personnel"))
+                        else None
+                    ),
+                    "motion_rank": clean_num(row.get("motion_rank")),
                     "chart_note": (
                         chart_notes[name][1] if name in chart_notes else None
                     ),

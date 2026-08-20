@@ -228,6 +228,15 @@ function buildRationale(player) {
         `Of that, ${fmtStat(s.rushing_ppg)} pts/game came from rushing — a real signal for dual-threat value beyond pure pass-attempt volume.`
       );
     }
+    if (player.position === "RB" && s.playcaller_rb_ppg_rank !== null && s.playcaller_rb_ppg_rank !== undefined) {
+      lines.push(
+        `Their offense's playcaller has historically produced the #${Math.round(s.playcaller_rb_ppg_rank)} RB PPG in the league — real system context on top of ${player.name}'s own numbers.`
+      );
+    } else if (player.position === "WR" && s.playcaller_wr_ppg_rank !== null && s.playcaller_wr_ppg_rank !== undefined) {
+      lines.push(
+        `Their offense's playcaller has historically produced the #${Math.round(s.playcaller_wr_ppg_rank)} WR PPG in the league — real system context on top of ${player.name}'s own numbers.`
+      );
+    }
     if (player.value_gap > 10) {
       lines.push(
         `That production ranks #${player.position_rank} among ${player.position}s, but ADP has them going like the #${player.adp_position_rank} — a gap of ${player.value_gap} spots. The market is pricing them behind what their own numbers support: a value pick.`

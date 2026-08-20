@@ -45,6 +45,12 @@ DATA_DIR = Path(__file__).resolve().parent
 
 SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 
+# The guide_*.csv files (hand-transcribed from Joel Smyth's Draft Guide
+# 2026) use "JAX" for Jacksonville, while the rest of this pipeline (ADP,
+# defense_stats.csv, kicker_stats.csv) uses "JAC". Normalize on read so the
+# team-code join below doesn't silently drop Jacksonville's DEF/K rows.
+GUIDE_TEAM_CODE_FIXUP = {"JAX": "JAC"}
+
 
 def normalize_name(name: str) -> str:
     if not isinstance(name, str):
@@ -358,6 +364,261 @@ def main():
         for col in def_prefixed_cols:
             final[col] = pd.NA
 
+    # Bring in REAL analyst DEF data hand-transcribed from Joel Smyth's
+    # Draft Guide 2026 (data/guide_def_stats.csv) -- pressure-rate rank and
+    # adjusted-PPG rank from an actual analyst's own numbers, not the
+    # play-by-play-derived proxy above. Joined on team, restricted to DEF
+    # rows, with a guide_ prefix so it never collides with the def_ columns
+    # already present. See score.py's module docstring for how this
+    # real data now dominates the DEF composite (real data beats proxy).
+    guide_def_path = DATA_DIR / "guide_def_stats.csv"
+    guide_def_cols = [
+        "pr_roe_rank", "adj_ppg_25_rank", "bottom10_offense", "trend",
+    ]
+    guide_def_prefixed_cols = [f"guide_{c}" for c in guide_def_cols]
+    if guide_def_path.exists():
+        guide_def = pd.read_csv(guide_def_path)
+        guide_def["team"] = guide_def["team"].replace(GUIDE_TEAM_CODE_FIXUP)
+        guide_def = guide_def.rename(columns={c: f"guide_{c}" for c in guide_def_cols})
+        is_def = final["position"] == "DEF"
+        def_rows_guided = final[is_def].merge(
+            guide_def[["team"] + guide_def_prefixed_cols], on="team", how="left"
+        )
+        non_def_rows2 = final[~is_def].copy()
+        for col in guide_def_prefixed_cols:
+            non_def_rows2[col] = pd.NA
+        final = pd.concat([def_rows_guided, non_def_rows2], ignore_index=True, sort=False)
+    else:
+        print(f"WARNING: {guide_def_path} not found -- DEF will fall back to the "
+              f"play-by-play proxy model only (will be all-null).")
+        for col in guide_def_prefixed_cols:
+            final[col] = pd.NA
+
+    # Bring in REAL analyst K data hand-transcribed from Joel Smyth's Draft
+    # Guide 2026 (data/guide_kicker_stats.csv) -- real 2025 PPG/FG% plus the
+    # analyst's own offense/aggressiveness/value judgments, not the
+    # play-by-play-derived proxy in kicker_stats.csv. Joined on normalized
+    # LAST name + team (not full normalized name -- the guide file's names
+    # sometimes differ in first-name spelling/nickname from raw_adp's, e.g.
+    # "Eddie Pineiro" (guide) vs "Eddy Pineiro" (ADP), "Andres Borregales"
+    # vs "Andy Borregales"; a full-name match would silently miss both and
+    # incorrectly fall them to the proxy-only path. Last name + team is safe
+    # here -- unlike the pbp-abbreviated-name case above, which needed a
+    # first-initial tiebreaker because pbp names are truncated, a roster has
+    # at most one kicker per team, so (last_name, team) alone is unambiguous.
+    # Restricted to K rows so a non-kicker with the same surname can never
+    # match. Kickers with no guide row (deep bench/practice squad, or a
+    # team mismatch such as a since-released FA) get nulls here and stay on
+    # the proxy-only composite in score.py.
+    guide_k_path = DATA_DIR / "guide_kicker_stats.csv"
+    guide_k_cols = [
+        "ppg_25", "fg_acc", "off_rank", "go_pct_rank", "is_50plus_good",
+        "is_dome", "is_value",
+    ]
+    guide_k_prefixed_cols = [f"guide_{c}" for c in guide_k_cols]
+
+    def last_name(norm_name: str) -> str:
+        toks = [t for t in norm_name.split(" ") if t]
+        return toks[-1] if toks else ""
+
+    if guide_k_path.exists():
+        guide_k = pd.read_csv(guide_k_path)
+        guide_k["team"] = guide_k["team"].replace(GUIDE_TEAM_CODE_FIXUP)
+        guide_k = guide_k.rename(columns={c: f"guide_{c}" for c in guide_k_cols})
+        guide_k["norm_name"] = guide_k["kicker_name"].apply(normalize_name)
+        guide_k["match_key"] = guide_k["norm_name"].apply(last_name) + "|" + guide_k["team"]
+        guide_k = guide_k.drop_duplicates("match_key", keep="first")
+
+        final["norm_name"] = final["player_name"].apply(normalize_name)
+        final["match_key"] = final["norm_name"].apply(last_name) + "|" + final["team"]
+
+        is_k = final["position"] == "K"
+        k_rows_guided = final[is_k].merge(
+            guide_k[["match_key"] + guide_k_prefixed_cols], on="match_key", how="left"
+        )
+        non_k_rows2 = final[~is_k].copy()
+        for col in guide_k_prefixed_cols:
+            non_k_rows2[col] = pd.NA
+        final = pd.concat([k_rows_guided, non_k_rows2], ignore_index=True, sort=False)
+        final = final.drop(columns=["norm_name", "match_key"])
+    else:
+        print(f"WARNING: {guide_k_path} not found -- K will fall back to the "
+              f"play-by-play proxy model only (will be all-null).")
+        for col in guide_k_prefixed_cols:
+            final[col] = pd.NA
+
+    # Bring in REAL analyst QB/RB/WR/TE production data hand-transcribed
+    # from Joel Smyth's Draft Guide 2026 (data/guide_adjusted_ppg.csv) --
+    # the analyst's own context-adjusted 2025 PPG estimate (e.g. stripping
+    # out backup-QB games, adding back missed-time production), a full
+    # season MORE RECENT than this pipeline's base 2024 play-by-play stats.
+    # Joined on normalized name + position: exact match first, then the
+    # SAME last-name-exact/first-name-partial-fuzzy fallback used for the
+    # raw_stats join above (reused here for consistency rather than a new
+    # matching scheme), restricted within each position so e.g. a WR and a
+    # TE with the same surname can never cross-match. The guide only covers
+    # ~30-50 players per position (a big-board preview, not every player)
+    # -- players with no match simply get null guide_rank/guide_adj_ppg/
+    # guide_reason, and score.py's existing missing-data redistribution
+    # logic treats that as missing (not a 0), same as every other optional
+    # component in this pipeline.
+    guide_ppg_path = DATA_DIR / "guide_adjusted_ppg.csv"
+    guide_ppg_cols = ["guide_rank", "guide_adj_ppg", "guide_reason"]
+    if guide_ppg_path.exists():
+        guide_ppg = pd.read_csv(guide_ppg_path)
+        guide_ppg["norm_name"] = guide_ppg["player_name"].apply(normalize_name)
+        guide_ppg["match_key"] = guide_ppg["norm_name"] + "|" + guide_ppg["position"]
+        guide_ppg = guide_ppg.drop_duplicates("match_key", keep="first")
+
+        final["norm_name"] = final["player_name"].apply(normalize_name)
+        final["match_key"] = final["norm_name"] + "|" + final["position"]
+
+        stat_pos_mask = final["position"].isin(["QB", "RB", "WR", "TE"])
+        stat_rows = final[stat_pos_mask].merge(
+            guide_ppg[["match_key"] + guide_ppg_cols], on="match_key", how="left"
+        )
+
+        # Fuzzy fallback for rows the exact name+position match missed --
+        # identical guardrail to the raw_stats fuzzy match above (last name
+        # must match exactly, first name must partial-match >= 85), just
+        # applied against the guide file instead of raw_stats, and scoped
+        # to the same position so cross-position surname collisions can't
+        # happen.
+        def _name_parts(norm_name):
+            toks = norm_name.split(" ") if isinstance(norm_name, str) else []
+            if not toks:
+                return "", ""
+            return toks[0], toks[-1]
+
+        guide_ppg["_first"] = guide_ppg["norm_name"].apply(lambda n: _name_parts(n)[0])
+        guide_ppg["_last"] = guide_ppg["norm_name"].apply(lambda n: _name_parts(n)[1])
+
+        unmatched_mask = stat_rows["guide_adj_ppg"].isna()
+        for idx in stat_rows[unmatched_mask].index:
+            row = stat_rows.loc[idx]
+            pos = row["position"]
+            target_first, target_last = _name_parts(row["norm_name"])
+            candidates = guide_ppg[guide_ppg["position"] == pos]
+            best = None
+            best_score = 0
+            for _, cand in candidates.iterrows():
+                if cand["_last"] != target_last:
+                    continue
+                s = fuzz.partial_ratio(target_first, cand["_first"])
+                if s >= 85 and s > best_score:
+                    best_score = s
+                    best = cand
+            if best is not None:
+                for col in guide_ppg_cols:
+                    stat_rows.loc[idx, col] = best[col]
+
+        non_stat_rows = final[~stat_pos_mask].copy()
+        for col in guide_ppg_cols:
+            non_stat_rows[col] = pd.NA
+        final = pd.concat([stat_rows, non_stat_rows], ignore_index=True, sort=False)
+        final = final.drop(columns=["norm_name", "match_key"])
+    else:
+        print(f"WARNING: {guide_ppg_path} not found -- continuing without "
+              f"guide_adj_ppg columns (will be all-null).")
+        for col in guide_ppg_cols:
+            final[col] = pd.NA
+
+    # Bring in REAL offensive-line context hand-transcribed from Joel
+    # Smyth's Draft Guide 2026 (data/guide_ol_stats.csv) -- 2025 run-block
+    # rank, trend, OL continuity/cohesion, and the analyst's 2026
+    # run-blocking projection, per team. Joined onto RB rows by team
+    # (every NFL team is covered, so this should match ~100% of RB rows
+    # with a known team). score.py inverts guide_ol_run_block_rank_2025
+    # (lower/better rank -> higher z-score) into the RB composite's
+    # ol_run_block_rank component -- see score.py's module docstring.
+    guide_ol_path = DATA_DIR / "guide_ol_stats.csv"
+    ol_cols = [
+        "ol_run_block_rank_2025", "ol_trend", "ol_cohesion",
+        "ol_rank_2026", "qb_designed_runs",
+    ]
+    guide_ol_prefixed_cols = [f"guide_{c}" for c in ol_cols]
+    if guide_ol_path.exists():
+        guide_ol = pd.read_csv(guide_ol_path)
+        guide_ol = guide_ol.rename(columns={c: f"guide_{c}" for c in ol_cols})
+        is_rb = final["position"] == "RB"
+        rb_rows_ol = final[is_rb].merge(
+            guide_ol[["team"] + guide_ol_prefixed_cols], on="team", how="left"
+        )
+        non_rb_rows_ol = final[~is_rb].copy()
+        for col in guide_ol_prefixed_cols:
+            non_rb_rows_ol[col] = pd.NA
+        final = pd.concat([rb_rows_ol, non_rb_rows_ol], ignore_index=True, sort=False)
+    else:
+        print(f"WARNING: {guide_ol_path} not found -- continuing without "
+              f"OL stat columns (will be all-null, RB composite drops "
+              f"ol_run_block_rank via the missing-data threshold).")
+        for col in guide_ol_prefixed_cols:
+            final[col] = pd.NA
+
+    # Bring in the analyst's REAL forward-looking RB volume projection,
+    # hand-transcribed from Joel Smyth's Draft Guide 2026
+    # (data/guide_rb_volume.csv) -- proj_volume_rank ("fully weighted with
+    # targets + goal-line attempts"), plus adj_volume_25_rank (a
+    # volume-only 2025 analogue of guide_adj_ppg, may be blank for
+    # rookies/small-sample players) and the analyst's own confidence label.
+    # Joined onto RB rows by name, exact match first then the same
+    # fuzzy fallback pattern used above, scoped to RB only. proj_volume_rank
+    # is genuinely distinct from red_zone_share (backward-looking, 2024
+    # play-by-play) since it's the analyst's forward 2026 projection -- see
+    # score.py's module docstring.
+    guide_vol_path = DATA_DIR / "guide_rb_volume.csv"
+    guide_vol_cols = ["proj_volume_rank", "adj_volume_25_rank", "confidence"]
+    guide_vol_prefixed_cols = [f"guide_{c}" for c in guide_vol_cols]
+    if guide_vol_path.exists():
+        guide_vol = pd.read_csv(guide_vol_path)
+        guide_vol = guide_vol.rename(columns={c: f"guide_{c}" for c in guide_vol_cols})
+        guide_vol["norm_name"] = guide_vol["player_name"].apply(normalize_name)
+        guide_vol = guide_vol.drop_duplicates("norm_name", keep="first")
+
+        final["norm_name"] = final["player_name"].apply(normalize_name)
+        is_rb = final["position"] == "RB"
+        rb_rows_vol = final[is_rb].merge(
+            guide_vol[["norm_name"] + guide_vol_prefixed_cols],
+            on="norm_name", how="left",
+        )
+
+        def _name_parts_vol(norm_name):
+            toks = norm_name.split(" ") if isinstance(norm_name, str) else []
+            if not toks:
+                return "", ""
+            return toks[0], toks[-1]
+
+        guide_vol["_first"] = guide_vol["norm_name"].apply(lambda n: _name_parts_vol(n)[0])
+        guide_vol["_last"] = guide_vol["norm_name"].apply(lambda n: _name_parts_vol(n)[1])
+
+        unmatched_vol_mask = rb_rows_vol["guide_proj_volume_rank"].isna()
+        for idx in rb_rows_vol[unmatched_vol_mask].index:
+            row = rb_rows_vol.loc[idx]
+            target_first, target_last = _name_parts_vol(row["norm_name"])
+            best = None
+            best_score = 0
+            for _, cand in guide_vol.iterrows():
+                if cand["_last"] != target_last:
+                    continue
+                s = fuzz.partial_ratio(target_first, cand["_first"])
+                if s >= 85 and s > best_score:
+                    best_score = s
+                    best = cand
+            if best is not None:
+                for col in guide_vol_prefixed_cols:
+                    rb_rows_vol.loc[idx, col] = best[col]
+
+        non_rb_rows_vol = final[~is_rb].copy()
+        for col in guide_vol_prefixed_cols:
+            non_rb_rows_vol[col] = pd.NA
+        final = pd.concat([rb_rows_vol, non_rb_rows_vol], ignore_index=True, sort=False)
+        final = final.drop(columns=["norm_name"])
+    else:
+        print(f"WARNING: {guide_vol_path} not found -- continuing without "
+              f"RB volume projection columns (will be all-null).")
+        for col in guide_vol_prefixed_cols:
+            final[col] = pd.NA
+
     out_path = DATA_DIR / "joined.csv"
     final.to_csv(out_path, index=False)
 
@@ -372,6 +633,19 @@ def main():
     n_def = (final["position"] == "DEF").sum()
     n_def_matched = final.loc[final["position"] == "DEF", "def_custom_adjusted_ppg"].notna().sum()
     print(f"Defense stats matched: {n_def_matched} of {n_def} DEF rows")
+    n_guide_def_matched = final.loc[final["position"] == "DEF", "guide_pr_roe_rank"].notna().sum()
+    print(f"Guide DEF stats matched: {n_guide_def_matched} of {n_def} DEF rows")
+    n_guide_k_matched = final.loc[final["position"] == "K", "guide_ppg_25"].notna().sum()
+    print(f"Guide K stats matched: {n_guide_k_matched} of {n_k} K rows")
+    for pos in ["QB", "RB", "WR", "TE"]:
+        sub = final[final["position"] == pos]
+        n = sub["guide_adj_ppg"].notna().sum()
+        print(f"Guide adjusted PPG matched ({pos}): {n} of {len(sub)} rows")
+    n_rb = (final["position"] == "RB").sum()
+    n_rb_ol = final.loc[final["position"] == "RB", "guide_ol_run_block_rank_2025"].notna().sum()
+    print(f"Guide OL stats matched (RB, by team): {n_rb_ol} of {n_rb} rows")
+    n_rb_vol = final.loc[final["position"] == "RB", "guide_proj_volume_rank"].notna().sum()
+    print(f"Guide RB volume matched (RB, by name): {n_rb_vol} of {n_rb} rows")
     print(f"Wrote {len(final)} rows to {out_path}")
 
 

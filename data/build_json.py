@@ -65,6 +65,81 @@ UI. Schema (hard contract):
                                        // (REG season, home+away), a proxy
                                        // for scoring-drive volume /
                                        // kick-attempt opportunity.
+    "guide_ppg_25": number|null,      // K only. REAL 2025 PPG for this
+                                       // kicker, hand-transcribed from Joel
+                                       // Smyth's Draft Guide 2026
+                                       // (data/guide_kicker_stats.csv,
+                                       // joined by last-name+team in
+                                       // join.py). Now the dominant input
+                                       // to K value_score for guide-matched
+                                       // kickers (see score.py). null for
+                                       // kickers with no guide match
+                                       // (deep bench/practice squad) or
+                                       // when the guide itself left it
+                                       // blank (e.g. an injury replacement
+                                       // with no 2025 games).
+    "guide_fg_acc": number|null,      // K only. REAL 2025 field-goal
+                                       // accuracy (0-1) from the same guide
+                                       // file. Co-dominant with
+                                       // guide_ppg_25 in value_score for
+                                       // guide-matched kickers. Same
+                                       // null-handling as guide_ppg_25.
+    "guide_is_value": boolean|null,   // K only. The analyst's own "this is
+                                       // a value pick" flag from the guide.
+                                       // A secondary input to value_score.
+    "guide_adj_ppg": number|null,     // QB/RB/WR/TE only. REAL analyst
+                                       // context-adjusted 2025 PPG estimate
+                                       // (e.g. stripping backup-QB games,
+                                       // adding back missed-time production)
+                                       // hand-transcribed from Joel Smyth's
+                                       // Draft Guide 2026
+                                       // (data/guide_adjusted_ppg.csv), a
+                                       // full season more recent than this
+                                       // pipeline's base 2024 stats. Now a
+                                       // meaningfully-weighted component of
+                                       // value_score (see score.py). null
+                                       // for the ~50-70% of players per
+                                       // position the guide doesn't cover
+                                       // (it's a big-board preview, not
+                                       // every player).
+    "guide_adj_ppg_reason": string|null, // QB/RB/WR/TE only. Short analyst
+                                       // note explaining the adjustment
+                                       // above (e.g. "in complete games",
+                                       // "with Joe Burrow") -- display-only,
+                                       // not parsed/used in scoring.
+    "ol_run_block_rank": number|null, // RB only. REAL 2025 offensive-line
+                                       // run-blocking rank for the RB's
+                                       // team (1 = best in the NFL), from
+                                       // data/guide_ol_stats.csv (joined by
+                                       // team in join.py). Lower is better.
+                                       // A modest-weight component of RB
+                                       // value_score (inverted internally --
+                                       // see score.py); shown here as the
+                                       // original 1-32 rank for readability.
+    "proj_volume_rank": number|null,  // RB only. The analyst's own
+                                       // projected 2026 RB volume rank
+                                       // (targets + goal-line attempts
+                                       // weighted), from
+                                       // data/guide_rb_volume.csv (joined
+                                       // by name in join.py). Lower is
+                                       // better. Forward-looking, distinct
+                                       // from the backward-looking
+                                       // red_zone_share above -- a
+                                       // meaningfully-weighted component of
+                                       // RB value_score (inverted
+                                       // internally -- see score.py).
+    "adj_volume_25_rank": number|null, // RB only. Informational -- the
+                                       // analyst's volume-only 2025 rank
+                                       // (a volume analogue of
+                                       // guide_adj_ppg). NOT part of
+                                       // value_score. May be null for
+                                       // rookies/small-sample players even
+                                       // when proj_volume_rank is present.
+    "guide_volume_confidence": string|null, // RB only. Informational --
+                                       // the analyst's own confidence
+                                       // ("high"/"medium"/"low") in the
+                                       // proj_volume_rank projection above.
+                                       // NOT part of value_score.
     // -- DEF-only fields below (null for every other position). Sourced
     // from data/defense_stats.csv (built by data/build_defense_stats.py
     // from 2024 play-by-play data) -- see that file's docstring for exact
@@ -87,11 +162,39 @@ UI. Schema (hard contract):
     "custom_adjusted_ppg": number|null, // this league's EXACT custom DEF
                                        // scoring, averaged per game -- the
                                        // dominant input to DEF value_score
-    "pressure_rate_proxy": number|null  // sacks per opponent pass attempt
+    "pressure_rate_proxy": number|null, // sacks per opponent pass attempt
                                        // faced; a PROXY for real pressure
                                        // rate, which isn't in public
                                        // nflverse data -- see
-                                       // build_defense_stats.py
+                                       // build_defense_stats.py. DE-WEIGHTED
+                                       // secondary/tie-breaking signal now
+                                       // that guide_pressure_rank exists.
+    "guide_pressure_rank": number|null, // DEF only. REAL Pressure Rate
+                                       // over Expected rank (1=best), hand-
+                                       // transcribed from Joel Smyth's
+                                       // Draft Guide 2026
+                                       // (data/guide_def_stats.csv, joined
+                                       // by team in join.py). This is the
+                                       // ACTUAL metric pressure_rate_proxy
+                                       // above could only approximate --
+                                       // now a co-primary input to DEF
+                                       // value_score (see score.py). null
+                                       // for a team not in the guide.
+    "guide_adj_ppg_rank": number|null, // DEF only. The analyst's own 2025
+                                       // adjusted-PPG rank (1=best), same
+                                       // source/join as guide_pressure_rank
+                                       // above. Co-primary with it in DEF
+                                       // value_score.
+    "guide_bottom10_offense": boolean|null, // DEF only. REAL analyst red
+                                       // flag: this defense faces a lot of
+                                       // bad offenses. Applied as a small
+                                       // malus in DEF value_score (see
+                                       // score.py).
+    "guide_trend": string|null        // DEF only. "up"/"down"/"flat" --
+                                       // the analyst's offseason roster
+                                       // improvement/decline read. Applied
+                                       // as a small bonus/penalty in DEF
+                                       // value_score (see score.py).
   }
 }
 """
@@ -167,6 +270,27 @@ def main():
                         else None
                     ),
                     "team_offense_ppg": clean_num(row.get("team_offense_ppg")),
+                    "guide_ppg_25": clean_num(row.get("guide_ppg_25")),
+                    "guide_fg_acc": clean_num(row.get("guide_fg_acc")),
+                    "guide_is_value": (
+                        bool(row.get("guide_is_value"))
+                        if pd.notna(row.get("guide_is_value"))
+                        else None
+                    ),
+                    "guide_adj_ppg": clean_num(row.get("guide_adj_ppg")),
+                    "guide_adj_ppg_reason": (
+                        str(row.get("guide_reason"))
+                        if pd.notna(row.get("guide_reason"))
+                        else None
+                    ),
+                    "ol_run_block_rank": clean_num(row.get("guide_ol_run_block_rank_2025")),
+                    "proj_volume_rank": clean_num(row.get("guide_proj_volume_rank")),
+                    "adj_volume_25_rank": clean_num(row.get("guide_adj_volume_25_rank")),
+                    "guide_volume_confidence": (
+                        str(row.get("guide_confidence"))
+                        if pd.notna(row.get("guide_confidence"))
+                        else None
+                    ),
                     "sacks": clean_num(row.get("def_sacks")),
                     "interceptions": clean_num(row.get("def_interceptions")),
                     "fumble_recoveries": clean_num(row.get("def_fumble_recoveries")),
@@ -180,6 +304,18 @@ def main():
                     "points_allowed_per_game": clean_num(row.get("def_points_allowed_per_game")),
                     "custom_adjusted_ppg": clean_num(row.get("def_custom_adjusted_ppg")),
                     "pressure_rate_proxy": clean_num(row.get("def_pressure_rate_proxy")),
+                    "guide_pressure_rank": clean_num(row.get("guide_pr_roe_rank")),
+                    "guide_adj_ppg_rank": clean_num(row.get("guide_adj_ppg_25_rank")),
+                    "guide_bottom10_offense": (
+                        bool(row.get("guide_bottom10_offense"))
+                        if pd.notna(row.get("guide_bottom10_offense"))
+                        else None
+                    ),
+                    "guide_trend": (
+                        str(row.get("guide_trend"))
+                        if pd.notna(row.get("guide_trend"))
+                        else None
+                    ),
                 },
             }
         )

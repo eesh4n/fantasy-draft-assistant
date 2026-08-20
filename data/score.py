@@ -72,16 +72,107 @@ For QB/RB/WR/TE (positions with real seasonal stats):
         0.15  snap_share     -- average offensive snap %
         0.10  efficiency     -- PPR points per opportunity (attempts+carries)
 
+  guide_adj_ppg (ALL FOUR positions -- QB/RB/WR/TE):
+        REAL analyst data hand-transcribed from Joel Smyth's Draft Guide
+        2026 (data/guide_adjusted_ppg.csv), joined onto joined.csv by name
+        (join.py, reusing the same normalize_name + last-name/first-name
+        fuzzy-match approach already used for the raw_stats join). This is
+        the analyst's own context-adjusted 2025 PPG estimate (e.g.
+        stripping out backup-QB games, adding back missed-time production)
+        -- a full season MORE RECENT than this pipeline's base 2024
+        play-by-play stats, and a human-refined production read rather
+        than a raw counting stat. Given both of those, it's arguably more
+        informative than the pipeline's own base `ppg` (stale 2024 raw
+        stats), so it's weighted meaningfully -- second only to `ppg`
+        itself for every position. The guide only covers ~30-50 players
+        per position (a big-board preview, not every player); for players
+        with no guide match, guide_adj_ppg is null and gets dropped by the
+        existing missing-data threshold below, same as any other missing
+        component -- NOT defaulted to 0 (which would wrongly penalize
+        players simply outside the guide's coverage).
+
+        New weights, redistributed proportionally FROM the original
+        weights above to make room for guide_adj_ppg while keeping every
+        group's total at 1.0:
+          QB:      ppg .38, volume .13, rushing_ppg .13, snap_share .13,
+                    efficiency .08, guide_adj_ppg .15
+          WR/TE:   ppg .25, rushing_ppg .12, receiving_ppg .16,
+                    red_zone_share .08, snap_share .12, efficiency .08,
+                    guide_adj_ppg .19
+          RB:      see below -- RB carves further room out of the WR/TE
+                    split to also fit its two guide-sourced components.
+
+  RB-only additions (on top of guide_adj_ppg above):
+        0.07  ol_run_block_rank -- REAL 2025 offensive-line run-blocking
+                                    rank for the RB's team (1 = best in the
+                                    NFL), from data/guide_ol_stats.csv,
+                                    joined onto RB rows by team in join.py.
+                                    Inverted before z-scoring (lower/better
+                                    rank -> higher z-score) so it points the
+                                    same direction as every other component
+                                    here. Real context for a runner's
+                                    efficiency/opportunity quality, but kept
+                                    to a modest weight since it's a team-
+                                    level signal, not the player's own
+                                    production.
+        0.11  proj_volume_rank    -- the analyst's own projected 2026 RB
+                                    volume rank (data/guide_rb_volume.csv,
+                                    joined by name in join.py), "fully
+                                    weighted with targets + goal-line
+                                    attempts" per the guide. This is
+                                    legitimately distinct from the existing
+                                    red_zone_share component: red_zone_share
+                                    is backward-looking (real 2024 red-zone
+                                    opportunity share from play-by-play),
+                                    while proj_volume_rank is the analyst's
+                                    forward-looking 2026 projection -- real
+                                    additional signal, not a duplicate.
+                                    Inverted before z-scoring (lower rank =
+                                    better) like ol_run_block_rank above.
+                                    Weighted just under guide_adj_ppg since
+                                    it's the analyst's own explicit "how
+                                    much volume will this back get" call,
+                                    but still meaningfully below it since
+                                    it's a rank (ordinal), not a rate.
+        Resulting RB weights: ppg .20, rushing_ppg .10, receiving_ppg .13,
+          red_zone_share .07, snap_share .10, efficiency .07,
+          guide_adj_ppg .15, ol_run_block_rank .07, proj_volume_rank .11
+          (sums to 1.0).
+        adj_volume_25_rank and confidence from guide_rb_volume.csv are NOT
+        part of the composite -- they're carried through to
+        stats.adj_volume_25_rank / stats.guide_volume_confidence in
+        build_json.py as informational/detail-view fields only.
+        ol_run_block_rank/proj_volume_rank are null for non-RB rows (WR/TE/
+        QB never get these columns populated) and for RBs whose team/name
+        didn't match the guide files -- same missing-data handling as
+        everything else in this file.
+
   If a component is missing (non-null) for less than 30% of a position
   group -- i.e. missing for >70% of it -- its weight is redistributed
   proportionally across the remaining available components, so weights
-  still sum to 1.0. (In practice this only ever fires for snap_share when
-  snap count data failed to pull.)
+  still sum to 1.0. (Previously this only ever fired for snap_share when
+  snap count data failed to pull; now it's also the normal path for
+  guide_adj_ppg/ol_run_block_rank/proj_volume_rank on the ~50-80% of
+  players per position who aren't covered by the guide.)
 
-For K (real per-kicker stats from 2024 play-by-play, via
-data/kicker_stats.csv / pull_kicker_stats.py -- nfl_data_py's seasonal
-aggregate table itself has zero kicker rows, so this is a systematic
-stats-based build, not named-player overrides):
+For K, there are now THREE tiers, checked in this order in main():
+  1. Guide-matched kickers (data/guide_kicker_stats.csv, hand-transcribed
+     REAL 2025 data from Joel Smyth's Draft Guide 2026 -- see
+     compute_kicker_scores_with_guide()): real data beats proxy, so these
+     kickers get a new composite where guide_ppg_25/guide_fg_acc dominate.
+  2. Kickers with a 2024 play-by-play proxy match (data/kicker_stats.csv)
+     but NO guide match: UNCHANGED from before -- same
+     compute_kicker_scores() / K_COMPONENTS as always. This is the "proxy
+     is a reasonable fallback for anyone the guide doesn't rank" case; the
+     old logic is deliberately left untouched (not de-weighted) here, only
+     de-weighted when it's blended alongside guide data in tier 1.
+  3. Neither: same ADP-only fallback as DEF/QB/RB/WR/TE's "without_stats"
+     path.
+
+  Tier 2, UNCHANGED (real per-kicker stats from 2024 play-by-play, via
+  data/kicker_stats.csv / pull_kicker_stats.py -- nfl_data_py's seasonal
+  aggregate table itself has zero kicker rows, so this is a systematic
+  stats-based build, not named-player overrides):
   An analyst's video identified what actually drives kicker fantasy value,
   in priority order: (1) overall FG accuracy, (2) FG accuracy from 50+
   yards specifically, (3) dome/weather-independent home stadium, (4) team
@@ -110,74 +201,106 @@ stats-based build, not named-player overrides):
                                  clearly secondary (0.10 each); ADP is a
                                  stabilizer, not the primary signal (unlike
                                  the pure-ADP fallback this replaces).
-  Kickers with no 2024 play-by-play match at all (no fg_pct) skip straight
-  to the same ADP-only fallback described below for DEF, same as
-  QB/RB/WR/TE's "without_stats" path.
+  Kickers with no 2024 play-by-play match at all (no fg_pct) AND no guide
+  match skip straight to the same ADP-only fallback described below for
+  DEF, same as QB/RB/WR/TE's "without_stats" path.
 
-For DEF (real per-team stats from 2024 play-by-play, via
-data/defense_stats.csv / build_defense_stats.py -- nfl_data_py's seasonal
-aggregate table has zero team-defense rows, so this is a systematic
-stats-based build joined in as def_-prefixed columns, not named-team
-overrides):
-  An analyst's video identified what actually drives defense fantasy
-  value: pressure rate (drives sacks/turnovers), an "adjusted" PPG that
-  strips fluke special-teams/defensive TDs, strength of opposing offenses
-  faced, and offseason roster change. Of those, this pipeline implements
-  the first two directly (a real pressure-rate proxy, and a proper
-  custom-scoring adjusted PPG built from real component stats rather than
-  a vague "subtract the TDs" heuristic); the last two (opponent-offense
-  strength faced, offseason roster improvement/decline) are NOT
-  implemented -- neither is derivable from 2024 play-by-play data alone,
-  and are flagged as real gaps in build_defense_stats.py and README.md
-  rather than faked. Composite:
-        0.60  def_custom_adjusted_ppg  -- this league's EXACT custom DEF
-                                           scoring rules (2/INT, 2/FR,
-                                           1/FF, 2/safety, 2/blocked kick,
-                                           6/def TD, 1/sack, 6/ST TD,
-                                           1/ST FF, 1/ST FR, plus the
-                                           points-allowed tier bonus),
-                                           averaged per game. Dominates
-                                           the weighting since it's the
-                                           single number that directly
-                                           reflects what this league
-                                           actually pays for defenses,
-                                           unlike a generic fantasy-points
-                                           column. See
-                                           build_defense_stats.py for the
-                                           full computation and the
-                                           documented 21-27-points-
-                                           allowed-tier assumption
-                                           (0, pending user confirmation).
-        0.20  def_pressure_rate_proxy  -- sacks per opponent pass attempt
-                                           faced. This IS the "pressure
-                                           rate" the analyst called out --
-                                           true pressure rate (pass-rush
-                                           snaps -> pressures) isn't in
-                                           public nflverse pbp data, so
-                                           this is the best available
-                                           substitute, weighted as a
-                                           secondary signal since it's
-                                           explicitly a proxy.
-        0.20  turnover/sack volume     -- z-score of def_sacks +
-                                           def_interceptions +
-                                           def_forced_fumbles (season
-                                           totals). A secondary signal on
-                                           raw turnover/pressure event
-                                           volume -- overlaps somewhat
-                                           with def_custom_adjusted_ppg by
-                                           construction (these events also
-                                           feed into it), but kept at low
-                                           weight so a defense that
-                                           generates events consistently
-                                           isn't fully penalized by one or
-                                           two bad points-allowed games
-                                           dragging the adjusted-PPG
-                                           number down.
-  If def_custom_adjusted_ppg is null for a team (e.g. defense_stats.csv
-  hasn't been generated yet -- build_defense_stats.py not run), that
-  team falls back to the pure ADP-based rank (inverted so lower ADP =
-  higher score) previously used for all of DEF. Documented in
-  data/README.md.
+  Tier 1 (real data beats proxy -- see compute_kicker_scores_with_guide()
+  and GUIDE_K_COMPONENTS below): guide_ppg_25 (real 2025 PPG) and
+  guide_fg_acc (real 2025 FG%) are REAL, more recent, human-verified
+  numbers -- not a 2024-pbp reconstruction -- so they take over as the
+  dominant signal (0.25 + 0.20 = 0.45 of the composite). The tier-2 proxy
+  components (fg_pct, fg_pct_50plus, is_dome, team_offense_ppg) are kept,
+  not deleted, but DE-WEIGHTED from their tier-2 weights (0.40/0.25/0.10/
+  0.10 -> 0.10/0.07/0.02/0.05) to a secondary/tie-breaking role in this
+  blended tier, since the guide doesn't cover 100% of kickers and this
+  proxy logic remains the fallback for whoever it misses (tier 2 above).
+  guide_off_rank (team's projected 2026 offensive rank, 1=best -- inverted
+  before z-scoring), guide_go_pct_rank (team's 4th-down go-for-it rate rank
+  in FG range; NOT inverted -- a HIGH rank number here means a
+  conservative team that kicks more field goals, which is good for a
+  kicker, per the guide file's own column semantics), guide_is_50plus_good,
+  and guide_is_value are secondary analyst-judgment signals. See
+  GUIDE_K_COMPONENTS for the exact weights (sums to 1.0 including the
+  de-weighted tier-2 proxy terms and a small adp_anchor stabilizer).
+
+For DEF (REAL analyst data from Joel Smyth's Draft Guide 2026, hand-
+transcribed into data/guide_def_stats.csv, now PRIMARY; the play-by-play-
+derived proxy in data/defense_stats.csv / build_defense_stats.py is kept
+as a SECONDARY/tie-breaking signal, not deleted, since the guide doesn't
+cover every situation the proxy could theoretically be regenerated for):
+  Real data beats proxy: pr_roe_rank (real Pressure Rate over Expected
+  rank -- the actual metric the old def_pressure_rate_proxy could only
+  approximate via sacks-per-dropback) and adj_ppg_25_rank (the analyst's
+  own 2025 adjusted-PPG rank, built from real box scores rather than this
+  pipeline's 2024-pbp custom-scoring reconstruction) are both REAL,
+  analyst-computed numbers now available from guide_def_stats.csv, so they
+  take over as the dominant signal. The old def_custom_adjusted_ppg /
+  def_pressure_rate_proxy pair is de-weighted (0.60+0.20 -> 0.15+0.10) to a
+  secondary/tie-breaking role rather than removed -- guide_def_stats.csv
+  only covers this season's 32 teams as ranked by one analyst, so keeping
+  the pbp-derived proxy alive is a reasonable fallback/blend, not dead
+  weight. bottom10_offense and trend are two additional REAL analyst
+  judgments (strength of opposing offenses faced, offseason roster
+  trajectory) that build_defense_stats.py's docstring explicitly flagged
+  as gaps it could NOT derive from play-by-play data alone -- the guide
+  fills both gaps directly, so they're folded in as a small flag-based
+  bonus/malus (not z-scored/weighted like the rank-based components, since
+  they're binary/categorical, not continuous). Composite:
+        0.35  guide_pr_roe_rank      -- REAL pressure-rate rank (1=best),
+                                         inverted (z-score of -rank) so a
+                                         lower/better rank scores higher.
+                                         Co-primary signal: this is the
+                                         actual metric the old proxy only
+                                         approximated.
+        0.35  guide_adj_ppg_25_rank  -- REAL analyst adjusted-PPG rank
+                                         (1=best), inverted the same way.
+                                         Co-primary signal alongside
+                                         pressure rank -- both come
+                                         straight from the analyst's own
+                                         published numbers, not a 2024-pbp
+                                         reconstruction.
+        0.15  def_custom_adjusted_ppg -- DE-WEIGHTED (was 0.60). Still
+                                         this league's exact custom
+                                         scoring rules averaged per game,
+                                         kept as a secondary/tie-breaking
+                                         signal and as the fallback engine
+                                         for any team the guide doesn't
+                                         cover.
+        0.10  def_pressure_rate_proxy -- DE-WEIGHTED (was 0.20). Sacks per
+                                         opponent pass attempt faced --
+                                         now redundant with the REAL
+                                         pr_roe_rank above, kept at low
+                                         weight purely as a tie-breaker.
+        0.05  turnover/sack volume    -- DE-WEIGHTED (was 0.20). Same
+                                         def_sacks + def_interceptions +
+                                         def_forced_fumbles z-score as
+                                         before, now a minor tie-breaker.
+  Plus two small additive (not z-scored) modifiers layered on top of the
+  weighted composite above, each on the same rough +/-1-z-unit scale so
+  neither dominates the rank-based signal:
+        -0.15  bottom10_offense flag -- REAL analyst red flag: this
+                                         defense faces a lot of bad
+                                         offenses, per Joel Smyth's Draft
+                                         Guide 2026 (their stated
+                                         reasoning, not re-derived here).
+                                         Applied when bottom10_offense==1.
+        +0.05 / -0.05  trend         -- REAL offseason-trajectory signal:
+                                         up = +0.05, down = -0.05,
+                                         flat = 0. Fills the "offseason
+                                         roster change" gap
+                                         build_defense_stats.py flagged
+                                         as undoable from pbp data alone.
+  If guide_pr_roe_rank is null for a team (not in guide_def_stats.csv),
+  that team's composite runs on def_custom_adjusted_ppg /
+  def_pressure_rate_proxy / turnover volume alone (their now-secondary
+  weights, renormalized) rather than losing the 0.70 of composite weight
+  the guide columns would otherwise own -- see compute_defense_scores().
+  If def_custom_adjusted_ppg is ALSO null for a team (e.g.
+  defense_stats.csv hasn't been generated -- build_defense_stats.py not
+  run), that team falls back further to the pure ADP-based rank (inverted
+  so lower ADP = higher score) previously used for all of DEF. Documented
+  in data/README.md.
 
 Output: joined.csv + value_score, position_rank, adp_position_rank,
 value_gap (adp_position_rank - position_rank; positive = sleeper /
@@ -254,11 +377,12 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         df["efficiency"] = (passing_pts + rushing_pts) / opportunities.replace(0, np.nan)
 
         components = {
-            "ppg": 0.45,
-            "volume": 0.15,
-            "rushing_ppg": 0.15,
-            "snap_share": 0.15,
-            "efficiency": 0.10,
+            "ppg": 0.38,
+            "volume": 0.13,
+            "rushing_ppg": 0.13,
+            "snap_share": 0.13,
+            "efficiency": 0.08,
+            "guide_adj_ppg": 0.15,
         }
     else:
         # Receiving-only fantasy production, per game -- kept separate from
@@ -295,14 +419,47 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         # red_zone_share is the broader, less noisy signal for volume-
         # weighted RB/WR/TE comparisons; goal_line_share is exposed for
         # detail views/spot-checking instead.
-        components = {
-            "ppg": 0.30,
-            "rushing_ppg": 0.15,
-            "receiving_ppg": 0.20,
-            "red_zone_share": 0.10,
-            "snap_share": 0.15,
-            "efficiency": 0.10,
-        }
+        if pos == "RB":
+            # RB carves out room for two RB-only guide-sourced components
+            # (ol_run_block_rank, proj_volume_rank) on top of guide_adj_ppg
+            # -- see module docstring "RB-only additions" for the full
+            # reasoning and the redistribution math.
+            #
+            # ol_run_block_rank: REAL 2025 team run-blocking rank (1=best),
+            # from data/guide_ol_stats.csv joined by team in join.py.
+            # Inverted (lower/better rank -> higher value) so it points the
+            # same direction as every other z-scored component.
+            df["ol_run_block_rank"] = -df["guide_ol_run_block_rank_2025"]
+
+            # proj_volume_rank: the analyst's own forward-looking 2026 RB
+            # volume projection (targets + goal-line attempts weighted),
+            # from data/guide_rb_volume.csv joined by name in join.py.
+            # Distinct from red_zone_share (backward-looking, from 2024
+            # play-by-play) -- this is a forward projection, genuinely
+            # additional signal. Inverted like ol_run_block_rank above.
+            df["proj_volume_rank"] = -df["guide_proj_volume_rank"]
+
+            components = {
+                "ppg": 0.20,
+                "rushing_ppg": 0.10,
+                "receiving_ppg": 0.13,
+                "red_zone_share": 0.07,
+                "snap_share": 0.10,
+                "efficiency": 0.07,
+                "guide_adj_ppg": 0.15,
+                "ol_run_block_rank": 0.07,
+                "proj_volume_rank": 0.11,
+            }
+        else:
+            components = {
+                "ppg": 0.25,
+                "rushing_ppg": 0.12,
+                "receiving_ppg": 0.16,
+                "red_zone_share": 0.08,
+                "snap_share": 0.12,
+                "efficiency": 0.08,
+                "guide_adj_ppg": 0.19,
+            }
 
     available = {}
     for col, weight in components.items():
@@ -415,15 +572,112 @@ def compute_kicker_scores(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-# DEF composite weights -- see module docstring for the full reasoning
-# behind each weight. def_custom_adjusted_ppg dominates because it's this
-# league's exact custom scoring; the other two are secondary/proxy
-# signals.
-DEF_COMPONENTS = {
-    "def_custom_adjusted_ppg": 0.60,
-    "def_pressure_rate_proxy": 0.20,
-    "def_turnover_volume": 0.20,
+# Guide-blended K composite weights -- see module docstring "Tier 1" for
+# the full reasoning. guide_ppg_25/guide_fg_acc (REAL 2025 numbers from
+# Joel Smyth's Draft Guide 2026) dominate; the tier-2 play-by-play proxy
+# terms (fg_pct/fg_pct_50plus/is_dome/team_offense_ppg) are kept but
+# DE-WEIGHTED to secondary/tie-breaking weight rather than removed, per
+# "real data beats proxy, but the proxy is a reasonable fallback." Sums to
+# 1.0.
+GUIDE_K_COMPONENTS = {
+    "guide_ppg_25": 0.25,
+    "guide_fg_acc": 0.20,
+    "guide_off_rank_inv": 0.08,
+    "guide_go_pct_rank": 0.05,
+    "guide_is_50plus_good": 0.05,
+    "guide_is_value": 0.05,
+    "guide_is_dome": 0.03,
+    "fg_pct": 0.10,           # de-weighted from 0.40 (tier 2)
+    "fg_pct_50plus": 0.07,    # de-weighted from 0.25 (tier 2)
+    "is_dome": 0.02,          # de-weighted from 0.10 (tier 2); mostly
+                               # redundant with guide_is_dome above
+    "team_offense_ppg": 0.05,  # de-weighted from 0.10 (tier 2)
+    "adp_anchor": 0.05,        # de-weighted from 0.15 (tier 2) -- still a
+                               # stabilizer, now a minor one since real
+                               # guide data is doing most of the work
 }
+
+
+def compute_kicker_scores_with_guide(df: pd.DataFrame) -> pd.DataFrame:
+    """Blended real-guide-data + play-by-play-proxy composite for K rows
+    matched in data/guide_kicker_stats.csv (guide_off_rank non-null; see
+    join.py). A kicker in this subset may or may not ALSO have a
+    kicker_stats.csv proxy match -- if not, the proxy components below are
+    simply null and get median-imputed via the same missing-data handling
+    used everywhere else in this file (compute_stat_group_scores'
+    fillna(median) + <30%-non-null weight redistribution pattern), so a
+    guide-only kicker's score still leans entirely on real guide signal
+    instead of being dragged toward a meaningless imputed proxy value.
+    """
+    df = df.copy()
+
+    # Same Bayesian shrinkage as the proxy-only path above, reused here so
+    # the de-weighted fg_pct/fg_pct_50plus terms are still stabilized
+    # against small samples the same way.
+    fg_pct_shrunk = _shrink_pct(df["fg_made"], df["fg_attempts"], FG_PCT_PRIOR_WEIGHT)
+    fg50_made = df["fg_made_50plus"].fillna(0)
+    fg50_attempts = df["fg_attempts_50plus"].fillna(0)
+    fg_pct_50plus_shrunk = _shrink_pct(fg50_made, fg50_attempts, FG50_PRIOR_WEIGHT)
+    fg_pct_50plus_shrunk = fg_pct_50plus_shrunk.where(fg50_attempts > 0, fg_pct_shrunk)
+    df["fg_pct"] = fg_pct_shrunk
+    df["fg_pct_50plus"] = fg_pct_50plus_shrunk
+
+    df["is_dome"] = df["is_dome"].astype(float)
+    df["guide_is_dome"] = df["guide_is_dome"].astype(float)
+    df["adp_anchor"] = -df["adp"]
+
+    # guide_off_rank: 1 = best projected 2026 offense. Invert so a better
+    # (lower-number) offense rank scores higher, matching every other
+    # z-scored component here.
+    df["guide_off_rank_inv"] = -df["guide_off_rank"]
+    # guide_go_pct_rank is used AS-IS, not inverted -- per
+    # guide_kicker_stats.csv's own column semantics, a HIGH rank number
+    # here means a conservative team that goes for the field goal more
+    # often in FG range, which is good for the kicker (more attempts).
+
+    available = {}
+    for col, weight in GUIDE_K_COMPONENTS.items():
+        non_null_frac = df[col].notna().mean()
+        if non_null_frac >= 0.3:
+            available[col] = weight
+
+    weight_sum = sum(available.values())
+    if weight_sum == 0:
+        available = {"guide_ppg_25": 1.0}
+        weight_sum = 1.0
+
+    composite = pd.Series(np.zeros(len(df)), index=df.index)
+    for col, weight in available.items():
+        z = zscore(df[col].fillna(df[col].median()))
+        composite += z * (weight / weight_sum)
+
+    df["value_score"] = composite
+    return df
+
+
+# DEF composite weights -- see module docstring for the full reasoning
+# behind each weight. guide_pr_roe_rank/guide_adj_ppg_25_rank (REAL analyst
+# data from Joel Smyth's Draft Guide 2026) are now co-primary; the old
+# play-by-play-derived proxy trio is kept but DE-WEIGHTED to a secondary/
+# tie-breaking role (real data beats proxy, but the proxy stays alive as a
+# fallback for any team the guide doesn't cover). Sums to 1.0.
+DEF_COMPONENTS = {
+    "guide_pr_roe_rank": 0.35,       # REAL pressure-rate rank (co-primary)
+    "guide_adj_ppg_25_rank": 0.35,   # REAL adjusted-PPG rank (co-primary)
+    "def_custom_adjusted_ppg": 0.15,  # de-weighted from 0.60
+    "def_pressure_rate_proxy": 0.10,  # de-weighted from 0.20
+    "def_turnover_volume": 0.05,      # de-weighted from 0.20
+}
+
+# Additive (not z-scored/weighted) modifiers layered on top of the
+# DEF_COMPONENTS composite -- both are REAL analyst judgments from the
+# guide that build_defense_stats.py's docstring flagged as gaps it could
+# NOT derive from 2024 play-by-play data alone (opponent-offense strength
+# faced, offseason roster trajectory). Binary/categorical, so they're
+# applied as flat bonuses/maluses on the same rough +/-1-z-unit scale as
+# the weighted components, rather than being z-scored themselves.
+DEF_BOTTOM10_OFFENSE_MALUS = -0.15
+DEF_TREND_MODIFIER = {"up": 0.05, "down": -0.05, "flat": 0.0}
 
 
 def compute_defense_scores(df: pd.DataFrame) -> pd.DataFrame:
@@ -431,7 +685,10 @@ def compute_defense_scores(df: pd.DataFrame) -> pd.DataFrame:
     fallback. Requires def_custom_adjusted_ppg to be non-null (i.e. the
     team had a defense_stats.csv row) -- callers should route teams
     without a match to the ADP-only fallback instead, same as
-    QB/RB/WR/TE's "without_stats" path.
+    QB/RB/WR/TE's "without_stats" path. guide_def_stats.csv columns
+    (guide_pr_roe_rank etc.) may be null for a team not in the guide --
+    handled the same way as any other missing component (median-imputed,
+    or its weight redistributed if missing for >70% of this group).
     """
     df = df.copy()
 
@@ -441,19 +698,44 @@ def compute_defense_scores(df: pd.DataFrame) -> pd.DataFrame:
         + df["def_forced_fumbles"].fillna(0)
     )
 
-    z_adjusted_ppg = zscore(
-        df["def_custom_adjusted_ppg"].fillna(df["def_custom_adjusted_ppg"].median())
-    )
-    z_pressure = zscore(
-        df["def_pressure_rate_proxy"].fillna(df["def_pressure_rate_proxy"].median())
-    )
-    z_turnover = zscore(df["def_turnover_volume"])
+    # guide_pr_roe_rank / guide_adj_ppg_25_rank: 1 = best. Invert so a
+    # better (lower-number) rank scores higher, matching every other
+    # z-scored component here.
+    df["guide_pr_roe_rank_inv"] = -df["guide_pr_roe_rank"]
+    df["guide_adj_ppg_25_rank_inv"] = -df["guide_adj_ppg_25_rank"]
 
-    composite = (
-        z_adjusted_ppg * DEF_COMPONENTS["def_custom_adjusted_ppg"]
-        + z_pressure * DEF_COMPONENTS["def_pressure_rate_proxy"]
-        + z_turnover * DEF_COMPONENTS["def_turnover_volume"]
-    )
+    components = {
+        "guide_pr_roe_rank_inv": DEF_COMPONENTS["guide_pr_roe_rank"],
+        "guide_adj_ppg_25_rank_inv": DEF_COMPONENTS["guide_adj_ppg_25_rank"],
+        "def_custom_adjusted_ppg": DEF_COMPONENTS["def_custom_adjusted_ppg"],
+        "def_pressure_rate_proxy": DEF_COMPONENTS["def_pressure_rate_proxy"],
+        "def_turnover_volume": DEF_COMPONENTS["def_turnover_volume"],
+    }
+
+    available = {}
+    for col, weight in components.items():
+        non_null_frac = df[col].notna().mean()
+        if non_null_frac >= 0.3:
+            available[col] = weight
+
+    weight_sum = sum(available.values())
+    if weight_sum == 0:
+        available = {"def_custom_adjusted_ppg": 1.0}
+        weight_sum = 1.0
+
+    composite = pd.Series(np.zeros(len(df)), index=df.index)
+    for col, weight in available.items():
+        z = zscore(df[col].fillna(df[col].median()))
+        composite += z * (weight / weight_sum)
+
+    # Flat additive modifiers -- see DEF_BOTTOM10_OFFENSE_MALUS /
+    # DEF_TREND_MODIFIER comments above. Teams with no guide match get 0
+    # for both (fillna(0) / unmapped trend -> 0), i.e. no modifier applied.
+    bottom10 = df["guide_bottom10_offense"].fillna(0)
+    composite = composite + bottom10 * DEF_BOTTOM10_OFFENSE_MALUS
+    trend_modifier = df["guide_trend"].map(DEF_TREND_MODIFIER).fillna(0.0)
+    composite = composite + trend_modifier
+
     df["value_score"] = composite
     return df
 
@@ -465,24 +747,41 @@ def main():
     for pos, group in df.groupby("position"):
         group = group.copy()
         if pos == "K":
-            # Real stats-based composite for kickers with a 2024
-            # play-by-play match (fg_pct non-null); everyone else (no
-            # match, e.g. an ADP-ranked replacement/rookie with 0 2024
-            # attempts) falls back to the same ADP-only treatment as
-            # QB/RB/WR/TE's "without_stats" path / DEF below.
+            # Three tiers -- see module docstring "For K, there are now
+            # THREE tiers":
+            #   1. guide-matched (guide_off_rank non-null): real-data-
+            #      dominant blended composite, regardless of whether a
+            #      proxy (fg_pct) match also exists.
+            #   2. proxy-only (fg_pct non-null, no guide match): UNCHANGED
+            #      compute_kicker_scores() -- the guide doesn't cover every
+            #      kicker, so this stays a reasonable fallback.
+            #   3. neither: ADP-only fallback, same as everywhere else.
+            has_guide = group["guide_off_rank"].notna()
             has_stats = group["fg_pct"].notna()
-            with_stats = group[has_stats]
-            without_stats = group[~has_stats]
 
-            if len(with_stats) > 0:
-                with_stats = compute_kicker_scores(with_stats)
-            if len(without_stats) > 0:
-                without_stats = without_stats.copy()
+            guide_rows = group[has_guide]
+            proxy_only_rows = group[~has_guide & has_stats]
+            no_stats_rows = group[~has_guide & ~has_stats]
+
+            scored_pieces = []
+            if len(guide_rows) > 0:
+                scored_pieces.append(compute_kicker_scores_with_guide(guide_rows))
+            if len(proxy_only_rows) > 0:
+                scored_pieces.append(compute_kicker_scores(proxy_only_rows))
+
+            with_stats = (
+                pd.concat(scored_pieces, ignore_index=True)
+                if scored_pieces
+                else proxy_only_rows.copy()
+            )
+
+            if len(no_stats_rows) > 0:
+                no_stats_rows = no_stats_rows.copy()
                 min_score = with_stats["value_score"].min() if len(with_stats) else 0
-                adp_rank = without_stats["adp"].rank(method="min", ascending=True)
-                without_stats["value_score"] = min_score - 0.01 * adp_rank
+                adp_rank = no_stats_rows["adp"].rank(method="min", ascending=True)
+                no_stats_rows["value_score"] = min_score - 0.01 * adp_rank
 
-            group = pd.concat([with_stats, without_stats], ignore_index=True)
+            group = pd.concat([with_stats, no_stats_rows], ignore_index=True)
         elif pos in STAT_POSITIONS:
             # fantasy_points_ppr is used ONLY as an existence check here --
             # "did this player have a 2024 stat row at all" -- not as a

@@ -1,0 +1,155 @@
+player_name,position,guide_rank,guide_adj_ppg,guide_reason
+Josh Allen,QB,1,23.2,
+Matthew Stafford,QB,2,20.6,
+Patrick Mahomes,QB,3,20.4,
+Jaxson Dart,QB,4,20.1,as starter
+Trevor Lawrence,QB,5,19.9,
+Drake Maye,QB,6,19.8,
+Dak Prescott,QB,7,19.6,
+Jacoby Brissett,QB,8,18.9,as starter
+Daniel Jones,QB,9,18.8,in complete games
+Caleb Williams,QB,10,18.7,
+Jalen Hurts,QB,11,18.3,
+Bo Nix,QB,11,18.3,
+Joe Burrow,QB,13,18.2,in complete games
+Brock Purdy,QB,14,18.1,
+Jared Goff,QB,15,17.6,
+Jayden Daniels,QB,15,17.6,excluding missed quarters
+Justin Herbert,QB,17,17.5,
+Lamar Jackson,QB,17,17.5,in complete games
+Jordan Love,QB,19,17.4,in complete games
+Tyler Shough,QB,20,17.1,as starter
+Baker Mayfield,QB,21,16.8,in complete games
+Kyler Murray,QB,22,15.5,
+C.J. Stroud,QB,23,14.5,in complete games
+Sam Darnold,QB,24,14.2,
+Bryce Young,QB,25,14.1,
+Aaron Rodgers,QB,26,13.7,in complete games
+Michael Penix,QB,27,13.3,
+Kirk Cousins,QB,28,12.5,in complete games
+Shedeur Sanders,QB,29,12.0,
+Geno Smith,QB,30,11.6,
+Tua Tagovailoa,QB,31,11.5,
+Cam Ward,QB,32,11.1,
+Trey McBride,TE,1,18.6,
+Brock Bowers,TE,2,16.4,when fully healthy
+Tucker Kraft,TE,3,16.2,in complete games
+George Kittle,TE,4,15.4,
+Tyler Warren,TE,5,13.1,with Daniel Jones
+Dalton Kincaid,TE,6,12.9,in complete games
+Colston Loveland,TE,6,12.9,with full snaps since week 7
+Travis Kelce,TE,8,12.8,with Patrick Mahomes
+Dallas Goedert,TE,9,12.3,
+Juwan Johnson,TE,10,12.0,with Tyler Shough
+Sam LaPorta,TE,11,11.9,in complete games
+Harold Fannin,TE,12,11.7,
+Dalton Schultz,TE,13,10.5,with C.J. Stroud
+Kyle Pitts,TE,14,10.0,with Drake London
+Zach Ertz,TE,14,10.0,
+Theo Johnson,TE,14,10.0,with Jaxson Dart
+Darren Waller,TE,17,9.9,
+Hunter Henry,TE,18,9.8,
+Brenton Strange,TE,18,9.8,in complete games
+Jake Ferguson,TE,20,9.5,with CeeDee Lamb
+Oronde Gadsden,TE,21,9.4,once playing full time
+Colby Parkinson,TE,22,8.8,
+AJ Barner,TE,23,8.7,in complete games
+Mark Andrews,TE,24,8.2,with Lamar Jackson
+T.J. Hockenson,TE,25,7.5,
+Chig Okonkwo,TE,26,7.3,
+David Njoku,TE,27,7.2,
+Isaiah Likely,TE,28,4.4,
+Christian McCaffrey,RB,1,24.8,
+Jahmyr Gibbs,RB,2,24.6,without Morton at OC
+Jonathan Taylor,RB,3,23.8,with Daniel Jones
+Bijan Robinson,RB,4,22.0,
+Chase Brown,RB,5,21.0,with Joe Burrow
+De'Von Achane,RB,6,20.4,in complete games
+Cam Skattebo,RB,7,19.1,in complete games
+Josh Jacobs,RB,8,18.0,in healthy games
+James Cook,RB,9,17.9,
+Derrick Henry,RB,10,16.9,
+Javonte Williams,RB,11,16.2,before week 15 injury
+Omarion Hampton,RB,11,16.2,with full snaps
+Travis Etienne,RB,13,15.4,
+Kyren Williams,RB,14,14.7,week 7 on with Corum
+Saquon Barkley,RB,15,14.6,
+Ashton Jeanty,RB,16,14.5,
+Bucky Irving,RB,17,14.0,
+Rhamondre Stevenson,RB,18,13.5,in full games
+Jaylen Warren,RB,19,13.4,in complete games
+Kenneth Walker,RB,20,13.3,
+Breece Hall,RB,21,13.1,
+D'Andre Swift,RB,22,12.9,with Monangai in 2nd half
+Quinshon Judkins,RB,23,12.5,in complete games
+Rico Dowdle,RB,24,11.7,with Hubbard returned
+J.K. Dobbins,RB,25,11.6,
+Rachaad White,RB,26,11.6,as starter
+Zach Charbonnet,RB,27,11.3,
+Tony Pollard,RB,28,10.8,in Spears' full games
+Chuba Hubbard,RB,28,10.8,with full snaps
+Woody Marks,RB,30,10.7,healthy post week 4
+Kenneth Gainwell,RB,31,10.6,with Warren healthy
+RJ Harvey,RB,32,10.0,with JK Dobbins
+Aaron Jones,RB,32,10.0,with Mason healthy
+David Montgomery,RB,34,9.9,
+Kimani Vidal,RB,35,9.7,
+Alvin Kamara,RB,35,9.7,in complete games
+TreVeyon Henderson,RB,37,9.5,2nd half with 2 healthy RBs
+Kyle Monangai,RB,37,9.5,2nd half with healthy Swift
+Tyjae Spears,RB,39,9.2,in complete games
+Blake Corum,RB,40,8.8,since week 7 full snaps
+Bill Croskey-Merritt,RB,41,8.4,
+Tyler Allgeier,RB,42,7.2,
+Kareem Hunt,RB,43,7.1,in games with Pacheco
+Isiah Pacheco,RB,44,6.7,
+Tyrone Tracy,RB,45,6.5,4 full games with Skattebo
+Jordan Mason,RB,46,6.3,full games with Mason
+Puka Nacua,WR,1,23.7,full games with Adams
+Jaxon Smith-Njigba,WR,2,20.4,
+Amon-Ra St. Brown,WR,3,20.3,in complete games
+Ja'Marr Chase,WR,4,20.1,with Joe Burrow
+Drake London,WR,5,19.7,with Penix and pre-injury
+Rashee Rice,WR,6,18.8,
+Chris Olave,WR,6,18.8,with Shough
+CeeDee Lamb,WR,8,16.6,in complete games
+George Pickens,WR,9,16.1,in games with Lamb
+Rome Odunze,WR,10,15.5,until week 9 foot injury
+Davante Adams,WR,11,15.3,healthy games with Puka
+Tee Higgins,WR,12,15.2,with Joe Burrow
+Nico Collins,WR,13,15.0,full games with Stroud
+Zay Flowers,WR,13,15.0,with Lamar Jackson
+A.J. Brown,WR,15,14.1,
+Michael Pittman,WR,15,14.1,with Daniel Jones
+Wan'Dale Robinson,WR,17,13.6,
+Emeka Egbuka,WR,18,13.1,pre week 16 snap count
+Michael Wilson,WR,19,13.0,with Marvin healthy
+Jaylen Waddle,WR,20,12.9,in complete games
+Courtland Sutton,WR,21,12.7,with Bo Nix
+Tetairoa McMillan,WR,22,12.5,
+Deebo Samuel,WR,23,12.3,
+Christian Watson,WR,23,12.3,with Jordan Love
+Marvin Harrison,WR,23,12.3,in complete games
+Parker Washington,WR,23,12.3,
+Jameson Williams,WR,27,12.1,with ARSB healthy
+DK Metcalf,WR,27,12.1,
+DeVonta Smith,WR,27,12.1,
+Mike Evans,WR,27,12.1,in complete games
+Justin Jefferson,WR,31,11.9,
+Jauan Jennings,WR,31,11.9,
+Quentin Johnston,WR,33,11.8,
+Stefon Diggs,WR,34,11.5,
+Alec Pierce,WR,34,11.5,with Daniel Jones
+Terry McLaurin,WR,36,11.4,small sample with QB
+Jakobi Meyers,WR,36,11.4,full games with Jacksonville
+Romeo Doubs,WR,36,11.4,with Jordan Love
+Khalil Shakir,WR,39,11.2,
+Ladd McConkey,WR,40,11.0,
+DJ Moore,WR,41,10.8,
+Troy Franklin,WR,42,10.5,
+Keenan Allen,WR,42,10.5,
+Luther Burden,WR,44,10.3,post-bye once full snaps
+Chris Godwin,WR,45,10.0,in complete games
+Brian Thomas,WR,46,9.9,
+Jordan Addison,WR,47,9.7,
+Tre Tucker,WR,48,9.5,

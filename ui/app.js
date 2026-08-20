@@ -160,11 +160,24 @@ function markMine(playerId) {
   renderAll();
 }
 
+// Two modals (reset-confirm, player-detail) share the same full-screen
+// overlay pattern. If both are ever open at once — e.g. Tab-key focus
+// reaching an element behind an open modal and Enter/Space activating it,
+// since neither modal traps focus — they stack, and the top one eats all
+// clicks meant for the one behind it, making everything look "broken".
+// closeAllOverlays() is called before opening any modal so only one can
+// ever be visible at a time.
+function closeAllOverlays() {
+  document.getElementById("resetConfirmOverlay").hidden = true;
+  document.getElementById("playerDetailOverlay").hidden = true;
+}
+
 // Native confirm() is unreliable here — some browsers/embedded webviews
 // silently suppress it (click does nothing, no error), which is exactly
 // what made the Reset button appear broken. Using an in-page overlay
 // instead removes that dependency entirely.
 function openResetConfirm() {
+  closeAllOverlays();
   document.getElementById("resetConfirmOverlay").hidden = false;
 }
 
@@ -220,6 +233,7 @@ function buildRationale(player) {
 }
 
 function openPlayerDetail(player) {
+  closeAllOverlays();
   const content = document.getElementById("playerDetailContent");
   const gapClass = player.value_gap > 0 ? "gap-positive" : (player.value_gap < 0 ? "gap-neg" : "");
   const gapText = player.value_gap > 0 ? `+${player.value_gap}` : `${player.value_gap}`;
@@ -542,11 +556,19 @@ function wireControls() {
   document.getElementById("resetBtn").addEventListener("click", openResetConfirm);
   document.getElementById("resetCancelBtn").addEventListener("click", closeResetConfirm);
   document.getElementById("resetConfirmBtn").addEventListener("click", resetDraft);
+  const resetOverlay = document.getElementById("resetConfirmOverlay");
+  resetOverlay.addEventListener("click", e => {
+    if (e.target === resetOverlay) closeResetConfirm();
+  });
 
   document.getElementById("playerDetailCloseBtn").addEventListener("click", closePlayerDetail);
   const detailOverlay = document.getElementById("playerDetailOverlay");
   detailOverlay.addEventListener("click", e => {
     if (e.target === detailOverlay) closePlayerDetail();
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeAllOverlays();
   });
 }
 

@@ -82,6 +82,37 @@ body{
   border:1px solid rgba(229,72,77,0.4);
 }
 
+.reset-confirm-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+
+.reset-confirm-box{
+  background:var(--bg-panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:20px 22px;
+  max-width:360px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+
+.reset-confirm-box p{
+  margin:0 0 16px;
+  font-size:14px;
+  line-height:1.4;
+}
+
+.reset-confirm-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
 .main-grid{
   flex:1;
   display:grid;

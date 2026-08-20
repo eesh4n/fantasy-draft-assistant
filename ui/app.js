@@ -160,11 +160,21 @@ function markMine(playerId) {
   renderAll();
 }
 
+// Native confirm() is unreliable here — some browsers/embedded webviews
+// silently suppress it (click does nothing, no error), which is exactly
+// what made the Reset button appear broken. Using an in-page overlay
+// instead removes that dependency entirely.
+function openResetConfirm() {
+  document.getElementById("resetConfirmOverlay").hidden = false;
+}
+
+function closeResetConfirm() {
+  document.getElementById("resetConfirmOverlay").hidden = true;
+}
+
 function resetDraft() {
-  if (!confirm("Reset the entire draft? This clears drafted players, your roster, and cannot be undone.")) {
-    return;
-  }
   clearState();
+  closeResetConfirm();
   renderAll();
 }
 
@@ -264,9 +274,18 @@ function renderTable() {
   const emptyState = document.getElementById("emptyState");
   tbody.innerHTML = "";
 
+  // Default (ALL) view sorts by overall ADP, like a normal draft board —
+  // interleaving by position_rank there produced a confusing round-robin
+  // (every position's #1, then every position's #2, ...). Within a single
+  // position filter, position_rank is more useful, so keep that sort there.
   const visible = allPlayers
     .filter(matchesFilters)
-    .sort((a, b) => a.position_rank - b.position_rank || b.value_score - a.value_score);
+    .sort((a, b) => {
+      if (activePosFilter === "ALL") {
+        return a.adp - b.adp;
+      }
+      return a.position_rank - b.position_rank || b.value_score - a.value_score;
+    });
 
   if (visible.length === 0) {
     emptyState.style.display = "block";
@@ -442,7 +461,9 @@ function wireControls() {
     renderTable();
   });
 
-  document.getElementById("resetBtn").addEventListener("click", resetDraft);
+  document.getElementById("resetBtn").addEventListener("click", openResetConfirm);
+  document.getElementById("resetCancelBtn").addEventListener("click", closeResetConfirm);
+  document.getElementById("resetConfirmBtn").addEventListener("click", resetDraft);
 }
 
 // ---------- Init ----------

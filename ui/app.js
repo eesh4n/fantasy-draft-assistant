@@ -203,6 +203,10 @@ function buildRationale(player) {
   const s = player.stats || {};
   const hasStats = s.ppg !== null && s.ppg !== undefined;
 
+  if (s.chart_note) {
+    lines.push(`Chart read (${s.chart_source}): ${s.chart_note}`);
+  }
+
   if (player.position === "K" || player.position === "DEF") {
     lines.push(
       `${player.position === "K" ? "Kickers" : "Team defenses"} don't have individual production stats to model, so this ranking is based on ADP alone — it just mirrors expert consensus rather than an independent read.`
@@ -426,6 +430,7 @@ function renderTable() {
       <td>#${player.position_rank}</td>
       <td>${player.adp}</td>
       <td class="gap-cell"><span class="${gapClass}">${gapText}</span></td>
+      <td>${player.stats && player.stats.guide_adj_ppg != null ? player.stats.guide_adj_ppg : "—"}</td>
       <td class="actions-cell"></td>
     `;
 

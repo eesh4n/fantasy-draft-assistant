@@ -222,8 +222,29 @@ def slugify(name: str, team: str) -> str:
     return base
 
 
+def load_chart_notes():
+    """data/guide_chart_notes.csv -- qualitative reads from the guide's
+    scatter-plot charts (QB volume vs ADP, RB/WR efficiency, QB rushing,
+    fantasy shootout, RB's dream QB). These charts have no labeled
+    per-player axis values, so they can't be digitized into value_score --
+    this is descriptive positioning ("elite in both rushing and receiving
+    efficiency"), not an opinion/target-fade call, kept purely as a display
+    note. Returns {player_name: (chart_source, chart_note)}, first match
+    wins if a player appears on multiple charts.
+    """
+    path = DATA_DIR / "guide_chart_notes.csv"
+    if not path.exists():
+        return {}
+    notes_df = pd.read_csv(path)
+    result = {}
+    for _, r in notes_df.iterrows():
+        result.setdefault(r["player_name"], (r["chart_source"], r["chart_note"]))
+    return result
+
+
 def main():
     df = pd.read_csv(DATA_DIR / "joined.csv")
+    chart_notes = load_chart_notes()
 
     # Only keep rows with a usable ADP (unranked players aren't useful for
     # a draft assistant) and a team.
@@ -290,6 +311,12 @@ def main():
                         str(row.get("guide_confidence"))
                         if pd.notna(row.get("guide_confidence"))
                         else None
+                    ),
+                    "chart_note": (
+                        chart_notes[name][1] if name in chart_notes else None
+                    ),
+                    "chart_source": (
+                        chart_notes[name][0] if name in chart_notes else None
                     ),
                     "sacks": clean_num(row.get("def_sacks")),
                     "interceptions": clean_num(row.get("def_interceptions")),

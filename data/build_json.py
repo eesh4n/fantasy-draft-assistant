@@ -16,7 +16,17 @@ UI. Schema (hard contract):
     "ppg": number|null,               // a "why this ranking" detail view.
     "volume": number|null,            // null for K/DEF (ADP-only model)
     "snap_share": number|null,        // and for rookies with no 2024 stats.
-    "efficiency": number|null
+    "efficiency": number|null,
+    "rushing_ppg": number|null,       // rushing-only fantasy pts/game
+                                       // (QB/RB/WR/TE)
+    "receiving_ppg": number|null,     // receiving-only fantasy pts/game
+                                       // (RB/WR/TE only; null for QB, who
+                                       // don't receive)
+    "td_rate": number|null            // TDs per opportunity, a red-zone
+                                       // proxy (RB/WR/TE only; see
+                                       // data/README.md for why this is
+                                       // an approximation, not real
+                                       // red-zone data)
   }
 }
 """
@@ -80,6 +90,9 @@ def main():
                     "volume": clean_num(row.get("volume")),
                     "snap_share": clean_num(row.get("snap_share")),
                     "efficiency": clean_num(row.get("efficiency")),
+                    "rushing_ppg": clean_num(row.get("rushing_ppg")),
+                    "receiving_ppg": clean_num(row.get("receiving_ppg")),
+                    "td_rate": clean_num(row.get("td_rate")),
                 },
             }
         )

@@ -15,11 +15,29 @@ python build_json.py
 ## Data sources actually used (and why)
 
 **Seasonal stats** -- `nfl_data_py.import_seasonal_data([2024])`.
-`import_seasonal_data([2025])` currently 404s: the nflverse hosted release
-that `nfl_data_py` reads from hasn't published a complete 2025 seasonal
-rollup yet, even though we're now into the 2026 preseason. So "last
-season" in this pipeline is **2024**, the latest season with a complete
-seasonal file. Player name/position/team come from
+
+This was re-verified on 2026-08-20 (well into 2026 preseason -- the 2025
+season, Sept 2025 through Feb 2026, is fully complete), specifically
+*because* "2025 isn't published yet" was the original reason for using
+2024 and that reason needed to actually be re-checked rather than assumed
+to still be true a year later. It's still true: `import_seasonal_data([2025])`
+still raises `HTTP Error 404: Not Found`. This isn't a stale-cache or
+timing fluke -- `import_seasonal_data` reads
+`player_stats_{year}.parquet` directly from the `player_stats` release at
+`github.com/nflverse/nflverse-data`, and hitting that release's asset
+list directly
+(`https://api.github.com/repos/nflverse/nflverse-data/releases/tags/player_stats`)
+confirms there is no `player_stats_2025.*` asset published there at all
+-- the file list tops out at `*_2024.*`. `import_weekly_data([2025])`
+was also tried directly as a second check and 404s the same way. So "last
+season" in this pipeline is still **2024**, the latest season with a
+complete seasonal file -- kept because it's still genuinely the latest
+available, not because it was left unchecked. **Re-run this same check
+before next season's draft** (`import_seasonal_data([2025])`, or list the
+release assets at the URL above) -- don't assume last year's "not
+published yet" still holds.
+
+Player name/position/team come from
 `import_seasonal_rosters([2024])` (seasonal data alone is stat columns
 keyed by `player_id` only, no name/team). Snap share comes from
 `import_snap_counts([2024])`, averaged per player across the season and
@@ -88,16 +106,76 @@ catching real nickname variants.
 
 ## Value model (score.py)
 
-Within each of QB/RB/WR/TE, four stats are z-scored (within position) and
-combined:
-- fantasy points/game (PPR) -- weight 0.5
-- volume/game: carries+targets for RB/WR/TE, attempts for QB -- weight 0.2
-- average offensive snap share -- weight 0.2
-- efficiency: PPR points per opportunity -- weight 0.1
+Within QB and within RB/WR/TE, a handful of per-game rate stats are
+z-scored (within position) and combined into `value_score`. The two
+groups use **different components**, not just different weights on the
+same numbers, because QBs don't receive and because RB/WR/TE touchdown
+equity and receiving work needed to become visible on their own instead
+of being averaged into one "volume" number (the old model's biggest
+blind spot -- it couldn't tell a receiving back from a between-the-tackles
+runner with the same total touches, or a dual-threat QB from a pure
+pocket passer with the same pass-attempt volume).
 
-If a component is missing for >70% of a position group, its weight is
-redistributed proportionally across the remaining components (keeps
-weights summing to 1.0 without ever silently zeroing a group out).
+**RB/WR/TE:**
+| component | weight | what it is |
+|---|---|---|
+| `ppg` | 0.30 | total PPR fantasy points/game (overall anchor) |
+| `rushing_ppg` | 0.15 | rushing-only fantasy pts/game (0.1/yd + 6/TD) |
+| `receiving_ppg` | 0.20 | receiving-only fantasy pts/game (1/rec + 0.1/yd + 6/TD) |
+| `td_rate` | 0.10 | (rush TD + rec TD) / (carries + targets) |
+| `snap_share` | 0.15 | average offensive snap % |
+| `efficiency` | 0.10 | PPR points per opportunity (carries+targets) |
+
+`receiving_ppg` is weighted above `rushing_ppg` on purpose -- this is a
+**PPR league**, so a unit of receiving work (which already includes the
+reception bonus in how it's calculated) is worth more than the same unit
+of rushing work, and a pass-catching back or slot receiver shouldn't get
+buried under a pure runner with similar total touches. This is the
+concrete fix for the "receiving back undervalued" problem: e.g. in the
+2024 data, Alvin Kamara's `receiving_ppg` (9.6) actually exceeds his
+`rushing_ppg` (9.4) -- the old single "volume" number couldn't show that
+split at all, and his overall touch count alone undersold how much of
+his value came from the more-valuable receiving side.
+
+`td_rate` is a **touchdown-rate proxy, not a real red-zone stat**.
+nfl_data_py's seasonal data has no red-zone-specific carries/targets
+column (no "red zone touches" or "goal-to-go carries" field exists in
+`import_seasonal_data`'s output) -- so this uses TDs scored per *total*
+opportunity as a rough stand-in for goal-line role. That's a real
+limitation: a back who scores efficiently because of a great offensive
+line or soft schedule will show the same `td_rate` as one who scores
+because he specifically gets goal-line work. Don't read `td_rate` as
+literal red-zone usage -- it's the closest available proxy, deliberately
+labeled as such rather than presented as something more precise than it
+is.
+
+**QB:**
+| component | weight | what it is |
+|---|---|---|
+| `ppg` | 0.45 | total PPR fantasy points/game |
+| `volume` | 0.15 | pass attempts/game |
+| `rushing_ppg` | 0.15 | rushing-only fantasy pts/game (0.1/yd + 6/TD) |
+| `snap_share` | 0.15 | average offensive snap % |
+| `efficiency` | 0.10 | PPR points per opportunity (attempts+carries) |
+
+`rushing_ppg` is new for QB and is the direct fix for the model
+previously missing rushing production entirely: two QBs with identical
+passing lines are not equal fantasy assets if one of them also runs for
+6+ points/game. In the 2024 data this is visible directly -- e.g. Lamar
+Jackson and Josh Allen both carry real `rushing_ppg` (6.8 and 7.8
+respectively) that a passing-only model would have completely missed.
+`rushing_ppg` is legitimately close to zero for most pocket passers (e.g.
+Patrick Mahomes: 2.7) -- that's a real, low value reflecting their actual
+role, not a data gap, so unlike other components it is never a candidate
+for the missing-data redistribution below (a QB position group is never
+going to be >70% null on this column, since every QB has *some*
+carries/rushing_yards value, even if it's small).
+
+If a component is missing (non-null for less than 30% of a position
+group -- i.e. missing for >70% of it), its weight is redistributed
+proportionally across the remaining components (keeps weights summing to
+1.0 without ever silently zeroing a group out). In practice this only
+ever fires for `snap_share`, if the snap-count pull fails.
 
 `position_rank` = rank by `value_score` within position (1 = best).
 `adp_position_rank` = rank by ADP within position (1 = earliest drafted).

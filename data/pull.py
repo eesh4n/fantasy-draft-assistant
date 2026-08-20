@@ -3,11 +3,18 @@ pull.py -- Pull raw data for the fantasy draft assistant.
 
 Sources:
 1. Seasonal per-player stats from `nfl_data_py` (nflverse data).
-   As of this run, nfl_data_py's hosted release only has *complete* seasonal
-   stats through the 2024 season (import_seasonal_data([2025]) 404s -- the
-   2025 season's final seasonal rollup hasn't been published to the
-   nflverse data repo yet). So "last season" here = 2024. This is
-   clearly documented in data/README.md.
+   Re-verified on this run (2026-08-20, well into 2026 preseason -- the
+   2025 season is fully complete): `import_seasonal_data([2025])` still
+   404s. This isn't a timing fluke -- `import_seasonal_data` reads
+   `player_stats_{year}.parquet` directly off the `player_stats` release
+   at github.com/nflverse/nflverse-data, and a GitHub API listing of that
+   release's assets confirms there is genuinely no `player_stats_2025.*`
+   file published there yet (the asset list tops out at `*_2024.*`).
+   So "last season" here is still **2024**, the latest season with a
+   complete seasonal file -- kept, not assumed. Re-check this the same
+   way (`import_seasonal_data([2025])`, or list release assets at
+   https://api.github.com/repos/nflverse/nflverse-data/releases/tags/player_stats)
+   before next season's draft. Fully documented in data/README.md.
 
 2. ADP / consensus rankings. FantasyPros' CSV export endpoint
    (`?export=xls` on the rankings pages) requires a logged-in session --
@@ -31,6 +38,7 @@ import requests
 
 DATA_DIR = Path(__file__).resolve().parent
 STATS_SEASON = 2024  # last season with complete seasonal data in nfl_data_py
+# (re-verified 2026-08-20 -- see module docstring; 2025 still isn't published)
 ADP_URL = "https://www.fantasypros.com/nfl/rankings/ppr-cheatsheets.php"
 HEADERS = {
     "User-Agent": (

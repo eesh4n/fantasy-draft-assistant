@@ -215,6 +215,15 @@ function buildRationale(player) {
     lines.push(
       `In 2024, ${player.name} averaged ${fmtStat(s.ppg)} PPR points/game on ${fmtStat(s.volume)} touches or targets/game, playing ${fmtStat(s.snap_share !== null ? Math.round(s.snap_share * 100) : null, "%")} of offensive snaps — producing ${fmtStat(s.efficiency)} points per opportunity.`
     );
+    if (s.rushing_ppg !== null && s.rushing_ppg !== undefined && s.receiving_ppg !== null && s.receiving_ppg !== undefined) {
+      lines.push(
+        `Of that, ${fmtStat(s.rushing_ppg)} pts/game came on the ground and ${fmtStat(s.receiving_ppg)} pts/game came through the air (receptions count extra in this PPR league) — with a ${fmtStat(s.td_rate !== null && s.td_rate !== undefined ? s.td_rate * 100 : null, "%")} touchdown rate per touch/target, a rough proxy for goal-line role.`
+      );
+    } else if (s.rushing_ppg !== null && s.rushing_ppg !== undefined) {
+      lines.push(
+        `Of that, ${fmtStat(s.rushing_ppg)} pts/game came from rushing — a real signal for dual-threat value beyond pure pass-attempt volume.`
+      );
+    }
     if (player.value_gap > 10) {
       lines.push(
         `That production ranks #${player.position_rank} among ${player.position}s, but ADP has them going like the #${player.adp_position_rank} — a gap of ${player.value_gap} spots. The market is pricing them behind what their own numbers support: a value pick.`
@@ -251,6 +260,9 @@ function openPlayerDetail(player) {
       <div class="detail-stat"><span class="detail-stat-label">Volume/game</span><span class="detail-stat-value">${fmtStat(s.volume)}</span></div>
       <div class="detail-stat"><span class="detail-stat-label">Snap share</span><span class="detail-stat-value">${fmtStat(s.snap_share !== null && s.snap_share !== undefined ? Math.round(s.snap_share * 100) : null, "%")}</span></div>
       <div class="detail-stat"><span class="detail-stat-label">Pts/opportunity</span><span class="detail-stat-value">${fmtStat(s.efficiency)}</span></div>
+      ${s.rushing_ppg !== null && s.rushing_ppg !== undefined ? `<div class="detail-stat"><span class="detail-stat-label">Rushing pts/game</span><span class="detail-stat-value">${fmtStat(s.rushing_ppg)}</span></div>` : ""}
+      ${s.receiving_ppg !== null && s.receiving_ppg !== undefined ? `<div class="detail-stat"><span class="detail-stat-label">Receiving pts/game</span><span class="detail-stat-value">${fmtStat(s.receiving_ppg)}</span></div>` : ""}
+      ${s.td_rate !== null && s.td_rate !== undefined ? `<div class="detail-stat"><span class="detail-stat-label">TD rate/opportunity</span><span class="detail-stat-value">${fmtStat(s.td_rate * 100, "%")}</span></div>` : ""}
     </div>
 
     <div class="detail-rationale">

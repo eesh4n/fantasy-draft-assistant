@@ -1,0 +1,80 @@
+[
+  {
+    "id": "amon-ra-st-brown-det",
+    "tag": "undervalued",
+    "note": "If you set aside the one game he exited early with a concussion, his per-game scoring last season was elite (north of 20 fantasy points/game), meaningfully stronger than his full-season average implies.",
+    "score_nudge": 0.4
+  },
+  {
+    "id": "amon-ra-st-brown-det",
+    "tag": "schedule-boost",
+    "note": "Detroit's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "tee-higgins-cin",
+    "tag": "undervalued",
+    "note": "His full-season line reads as a solid WR1-fringe option, but in the games Joe Burrow was healthy and under center, his per-game output was true top-tier WR1 level, suggesting his real talent ceiling is a tier above his season average.",
+    "score_nudge": 0.4
+  },
+  {
+    "id": "rome-odunze-chi",
+    "tag": "sleeper",
+    "note": "His per-target efficiency over the back half of last season was on par with some of the league's top receivers, pointing to breakout upside that his season-long counting stats don't reflect.",
+    "score_nudge": 0.35
+  },
+  {
+    "id": "josh-downs-ind",
+    "tag": "sleeper",
+    "note": "When he's played full slot-receiver snaps and stayed on the field, he's produced like a solid WR2, so a return to a normal role would make him a value at his current price.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "devonta-smith-phi",
+    "tag": "schedule-boost",
+    "note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "jalen-hurts-phi",
+    "tag": "schedule-boost",
+    "note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "dallas-goedert-phi",
+    "tag": "schedule-boost",
+    "note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "jameson-williams-det",
+    "tag": "schedule-boost",
+    "note": "Detroit's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "sam-laporta-det",
+    "tag": "schedule-boost",
+    "note": "Detroit's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "lamar-jackson-bal",
+    "tag": "schedule-boost",
+    "note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "zay-flowers-bal",
+    "tag": "schedule-boost",
+    "note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "mark-andrews-bal",
+    "tag": "schedule-boost",
+    "note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season.",
+    "score_nudge": 0.3
+  }
+]

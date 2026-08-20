@@ -1,0 +1,56 @@
+[
+  {
+    "id": "houston-texans-hou",
+    "tag": "target",
+    "note": "Houston's defensive line generates consistent pressure, which typically translates into sacks and takeaways over a full season.",
+    "score_nudge": 0.5
+  },
+  {
+    "id": "los-angeles-rams-lar",
+    "tag": "target",
+    "note": "The Rams added notable pass-rush pieces this offseason, boosting their sack and turnover upside beyond last year's baseline.",
+    "score_nudge": 0.5
+  },
+  {
+    "id": "seattle-seahawks-sea",
+    "tag": "target",
+    "note": "Seattle's defense combines a favorable schedule against weaker offenses with real pressure ability, setting up for extended possessions and more takeaway chances.",
+    "score_nudge": 0.5
+  },
+  {
+    "id": "denver-broncos-den",
+    "tag": "target",
+    "note": "Denver's unit trended upward this offseason and pairs an efficient scoring profile with the disruptive ability to force turnovers.",
+    "score_nudge": 0.5
+  },
+  {
+    "id": "philadelphia-eagles-phi",
+    "tag": "fade",
+    "note": "Philadelphia's fantasy output last season was middling once non-defensive scoring is excluded, and a tougher slate of opponents this year makes a repeat harder.",
+    "score_nudge": -0.4
+  },
+  {
+    "id": "baltimore-ravens-bal",
+    "tag": "value",
+    "note": "Baltimore's scheme is difficult for opposing offenses to prepare for and the roster gained an established edge rusher, making this unit a bargain given where it's typically being drafted.",
+    "score_nudge": 0.3
+  },
+  {
+    "id": "jacksonville-jaguars-jac",
+    "tag": "streamer",
+    "note": "Worth rostering on a week-to-week basis when the schedule sets up a soft matchup rather than drafting outright.",
+    "score_nudge": 0.2
+  },
+  {
+    "id": "pittsburgh-steelers-pit",
+    "tag": "streamer",
+    "note": "A solid matchup-based pickup for favorable weeks rather than a locked-in weekly starter from draft day.",
+    "score_nudge": 0.2
+  },
+  {
+    "id": "los-angeles-chargers-lac",
+    "tag": "streamer",
+    "note": "Best used opportunistically off the wire against weaker opposing offenses rather than drafted as a season-long starter.",
+    "score_nudge": 0.2
+  }
+]

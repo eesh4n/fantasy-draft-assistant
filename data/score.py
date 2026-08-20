@@ -217,6 +217,11 @@ def main():
     for pos, group in df.groupby("position"):
         group = group.copy()
         if pos in STAT_POSITIONS:
+            # fantasy_points_ppr is used ONLY as an existence check here --
+            # "did this player have a 2024 stat row at all" -- not as a
+            # points value. Every actual point calculation in this file
+            # uses the league's custom scoring (compute_passing_pts, plus
+            # the rushing/receiving math above), never this column's value.
             has_stats = group["fantasy_points_ppr"].notna() & (group["games"] > 0)
             with_stats = group[has_stats]
             without_stats = group[~has_stats]

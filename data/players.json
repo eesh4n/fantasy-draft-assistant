@@ -5,10 +5,10 @@
     "position": "WR",
     "team": "CIN",
     "value_score": 1.855,
-    "position_rank": 1,
+    "position_rank": 2,
     "adp": 1.51,
     "adp_position_rank": 1,
-    "value_gap": 0,
+    "value_gap": -1,
     "stats": {
       "ppg": 23.7059,
       "volume": 10.4706,
@@ -17,7 +17,9 @@
       "rushing_ppg": 0.1882,
       "receiving_ppg": 23.5176,
       "td_rate": 0.0955
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jahmyr-gibbs-det",
@@ -37,7 +39,9 @@
       "rushing_ppg": 13.9529,
       "receiving_ppg": 7.0412,
       "td_rate": 0.0607
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "puka-nacua-lar",
@@ -45,10 +49,10 @@
     "position": "WR",
     "team": "LAR",
     "value_score": 1.2768,
-    "position_rank": 3,
+    "position_rank": 6,
     "adp": 3.48,
     "adp_position_rank": 2,
-    "value_gap": -1,
+    "value_gap": -4,
     "stats": {
       "ppg": 18.7818,
       "volume": 10.6364,
@@ -57,7 +61,9 @@
       "rushing_ppg": 0.9636,
       "receiving_ppg": 17.8182,
       "td_rate": 0.0342
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bijan-robinson-atl",
@@ -77,7 +83,9 @@
       "rushing_ppg": 13.5059,
       "receiving_ppg": 6.4765,
       "td_rate": 0.0399
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaxon-smith-njigba-sea",
@@ -97,18 +105,20 @@
       "rushing_ppg": 0.1529,
       "receiving_ppg": 14.6471,
       "td_rate": 0.0423
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "amon-ra-st-brown-det",
     "name": "Amon-Ra St. Brown",
     "position": "WR",
     "team": "DET",
-    "value_score": 1.1924,
-    "position_rank": 5,
+    "value_score": 1.8924,
+    "position_rank": 1,
     "adp": 5.48,
     "adp_position_rank": 4,
-    "value_gap": -1,
+    "value_gap": 3,
     "stats": {
       "ppg": 18.4647,
       "volume": 8.4118,
@@ -117,7 +127,9 @@
       "rushing_ppg": 0.0353,
       "receiving_ppg": 18.4294,
       "td_rate": 0.0839
-    }
+    },
+    "analyst_tag": "undervalued; schedule-boost",
+    "analyst_note": "If you set aside the one game he exited early with a concussion, his per-game scoring last season was elite (north of 20 fantasy points/game), meaningfully stronger than his full-season average implies.; Detroit's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "ceedee-lamb-dal",
@@ -125,10 +137,10 @@
     "position": "WR",
     "team": "DAL",
     "value_score": 0.9527,
-    "position_rank": 13,
+    "position_rank": 14,
     "adp": 8.85,
     "adp_position_rank": 5,
-    "value_gap": -8,
+    "value_gap": -9,
     "stats": {
       "ppg": 17.56,
       "volume": 11.0667,
@@ -137,7 +149,9 @@
       "rushing_ppg": 0.4667,
       "receiving_ppg": 17.0933,
       "td_rate": 0.0361
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "justin-jefferson-min",
@@ -145,10 +159,10 @@
     "position": "WR",
     "team": "MIN",
     "value_score": 1.1461,
-    "position_rank": 6,
+    "position_rank": 9,
     "adp": 9.1,
     "adp_position_rank": 6,
-    "value_gap": 0,
+    "value_gap": -3,
     "stats": {
       "ppg": 18.6235,
       "volume": 9.1176,
@@ -157,7 +171,9 @@
       "rushing_ppg": 0.0176,
       "receiving_ppg": 18.6059,
       "td_rate": 0.0645
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "christian-mccaffrey-sf",
@@ -177,7 +193,9 @@
       "rushing_ppg": 5.05,
       "receiving_ppg": 7.4,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "drake-london-atl",
@@ -197,7 +215,9 @@
       "rushing_ppg": -0.0176,
       "receiving_ppg": 16.5353,
       "td_rate": 0.0566
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jonathan-taylor-ind",
@@ -205,10 +225,10 @@
     "position": "RB",
     "team": "IND",
     "value_score": 1.0275,
-    "position_rank": 13,
+    "position_rank": 12,
     "adp": 12.73,
     "adp_position_rank": 4,
-    "value_gap": -9,
+    "value_gap": -8,
     "stats": {
       "ppg": 17.6214,
       "volume": 23.8571,
@@ -217,7 +237,9 @@
       "rushing_ppg": 14.9357,
       "receiving_ppg": 2.6857,
       "td_rate": 0.0359
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "a-j-brown-ne",
@@ -225,10 +247,10 @@
     "position": "WR",
     "team": "NE",
     "value_score": 0.9757,
-    "position_rank": 10,
+    "position_rank": 11,
     "adp": 13.94,
     "adp_position_rank": 8,
-    "value_gap": -2,
+    "value_gap": -3,
     "stats": {
       "ppg": 16.6846,
       "volume": 7.4615,
@@ -237,18 +259,20 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 16.6846,
       "td_rate": 0.0722
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ashton-jeanty-lv",
     "name": "Ashton Jeanty",
     "position": "RB",
     "team": "LV",
-    "value_score": -1.6896,
-    "position_rank": 86,
+    "value_score": -1.2896,
+    "position_rank": 84,
     "adp": 16.61,
     "adp_position_rank": 5,
-    "value_gap": -81,
+    "value_gap": -79,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -257,7 +281,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "He looks like the clear focal point of a Raiders offense that's expected to take a step forward this year."
   },
   {
     "id": "nico-collins-hou",
@@ -265,10 +291,10 @@
     "position": "WR",
     "team": "HOU",
     "value_score": 0.8946,
-    "position_rank": 17,
+    "position_rank": 18,
     "adp": 16.75,
     "adp_position_rank": 9,
-    "value_gap": -8,
+    "value_gap": -9,
     "stats": {
       "ppg": 17.55,
       "volume": 8.25,
@@ -277,18 +303,20 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 17.55,
       "td_rate": 0.0707
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "james-cook-iii-buf",
     "name": "James Cook III",
     "position": "RB",
     "team": "BUF",
-    "value_score": 1.1222,
-    "position_rank": 8,
+    "value_score": 1.4222,
+    "position_rank": 6,
     "adp": 17.58,
     "adp_position_rank": 6,
-    "value_gap": -2,
+    "value_gap": 0,
     "stats": {
       "ppg": 16.6687,
       "volume": 15.3125,
@@ -297,7 +325,9 @@
       "rushing_ppg": 12.3063,
       "receiving_ppg": 4.3625,
       "td_rate": 0.0735
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Could produce above what his current projected workload suggests based on how the Bills backfield is trending."
   },
   {
     "id": "brock-bowers-lv",
@@ -317,18 +347,20 @@
       "rushing_ppg": 0.0765,
       "receiving_ppg": 15.3765,
       "td_rate": 0.0316
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chase-brown-cin",
     "name": "Chase Brown",
     "position": "RB",
     "team": "CIN",
-    "value_score": 1.0418,
-    "position_rank": 11,
+    "value_score": 1.4418,
+    "position_rank": 4,
     "adp": 18.13,
     "adp_position_rank": 7,
-    "value_gap": -4,
+    "value_gap": 3,
     "stats": {
       "ppg": 15.9375,
       "volume": 18.375,
@@ -337,7 +369,9 @@
       "rushing_ppg": 8.8125,
       "receiving_ppg": 7.125,
       "td_rate": 0.0374
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "His touchdowns have been clustering in recent games with Burrow back under center, suggesting he's a good bet to keep seeing that volume."
   },
   {
     "id": "chris-olave-no",
@@ -345,10 +379,10 @@
     "position": "WR",
     "team": "NO",
     "value_score": -0.1068,
-    "position_rank": 61,
+    "position_rank": 62,
     "adp": 18.97,
     "adp_position_rank": 10,
-    "value_gap": -51,
+    "value_gap": -52,
     "stats": {
       "ppg": 9.8375,
       "volume": 5.625,
@@ -357,7 +391,9 @@
       "rushing_ppg": 0.0875,
       "receiving_ppg": 9.75,
       "td_rate": 0.0222
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "george-pickens-dal",
@@ -365,10 +401,10 @@
     "position": "WR",
     "team": "DAL",
     "value_score": 0.1446,
-    "position_rank": 48,
+    "position_rank": 49,
     "adp": 20.1,
     "adp_position_rank": 11,
-    "value_gap": -37,
+    "value_gap": -38,
     "stats": {
       "ppg": 11.8857,
       "volume": 7.5,
@@ -377,7 +413,9 @@
       "rushing_ppg": -0.0429,
       "receiving_ppg": 11.9286,
       "td_rate": 0.0286
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trey-mcbride-ari",
@@ -397,7 +435,9 @@
       "rushing_ppg": 0.3875,
       "receiving_ppg": 14.85,
       "td_rate": 0.0203
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "de-von-achane-mia",
@@ -405,10 +445,10 @@
     "position": "RB",
     "team": "MIA",
     "value_score": 1.4306,
-    "position_rank": 4,
+    "position_rank": 5,
     "adp": 22.1,
     "adp_position_rank": 8,
-    "value_gap": 4,
+    "value_gap": 3,
     "stats": {
       "ppg": 17.6412,
       "volume": 17.0588,
@@ -417,7 +457,9 @@
       "rushing_ppg": 7.4529,
       "receiving_ppg": 10.1882,
       "td_rate": 0.0414
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rashee-rice-kc",
@@ -425,10 +467,10 @@
     "position": "WR",
     "team": "KC",
     "value_score": 1.2562,
-    "position_rank": 4,
+    "position_rank": 7,
     "adp": 22.19,
     "adp_position_rank": 12,
-    "value_gap": 8,
+    "value_gap": 5,
     "stats": {
       "ppg": 21.6333,
       "volume": 10.0,
@@ -437,18 +479,20 @@
       "rushing_ppg": 0.0333,
       "receiving_ppg": 21.6,
       "td_rate": 0.0667
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "devonta-smith-phi",
     "name": "DeVonta Smith",
     "position": "WR",
     "team": "PHI",
-    "value_score": 0.877,
-    "position_rank": 19,
+    "value_score": 1.177,
+    "position_rank": 8,
     "adp": 24.07,
     "adp_position_rank": 13,
-    "value_gap": -6,
+    "value_gap": 5,
     "stats": {
       "ppg": 15.3385,
       "volume": 6.9231,
@@ -457,7 +501,9 @@
       "rushing_ppg": 0.0077,
       "receiving_ppg": 15.3308,
       "td_rate": 0.0889
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "malik-nabers-nyg",
@@ -465,10 +511,10 @@
     "position": "WR",
     "team": "NYG",
     "value_score": 0.8861,
-    "position_rank": 18,
+    "position_rank": 19,
     "adp": 24.9,
     "adp_position_rank": 14,
-    "value_gap": -4,
+    "value_gap": -5,
     "stats": {
       "ppg": 18.1067,
       "volume": 11.6667,
@@ -477,7 +523,9 @@
       "rushing_ppg": 0.0133,
       "receiving_ppg": 18.0933,
       "td_rate": 0.04
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "saquon-barkley-phi",
@@ -497,7 +545,9 @@
       "rushing_ppg": 17.4062,
       "receiving_ppg": 4.55,
       "td_rate": 0.0387
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "josh-allen-buf",
@@ -505,10 +555,10 @@
     "position": "QB",
     "team": "BUF",
     "value_score": 1.2761,
-    "position_rank": 2,
+    "position_rank": 3,
     "adp": 25.91,
     "adp_position_rank": 1,
-    "value_gap": -1,
+    "value_gap": -2,
     "stats": {
       "ppg": 23.7712,
       "volume": 30.1875,
@@ -517,7 +567,9 @@
       "rushing_ppg": 7.8187,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "omarion-hampton-lac",
@@ -537,18 +589,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kenneth-walker-iii-kc",
     "name": "Kenneth Walker III",
     "position": "RB",
     "team": "KC",
-    "value_score": 1.1209,
-    "position_rank": 9,
+    "value_score": 0.8209,
+    "position_rank": 18,
     "adp": 28.08,
     "adp_position_rank": 11,
-    "value_gap": 2,
+    "value_gap": -7,
     "stats": {
       "ppg": 16.4727,
       "volume": 18.7273,
@@ -557,7 +611,9 @@
       "rushing_ppg": 9.0273,
       "receiving_ppg": 7.4455,
       "td_rate": 0.0388
-    }
+    },
+    "analyst_tag": "risk",
+    "analyst_note": "Even with a solid offensive line and offense around him, he's historically lost goal-line work and receiving snaps whenever the other backfield piece is healthy, so treat last year's role as somewhat unreliable."
   },
   {
     "id": "garrett-wilson-nyj",
@@ -577,18 +633,20 @@
       "rushing_ppg": 0.0294,
       "receiving_ppg": 14.9059,
       "td_rate": 0.0452
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zay-flowers-bal",
     "name": "Zay Flowers",
     "position": "WR",
     "team": "BAL",
-    "value_score": 0.3427,
-    "position_rank": 42,
+    "value_score": 0.6427,
+    "position_rank": 27,
     "adp": 29.99,
     "adp_position_rank": 16,
-    "value_gap": -26,
+    "value_gap": -11,
     "stats": {
       "ppg": 12.3235,
       "volume": 7.3529,
@@ -597,14 +655,16 @@
       "rushing_ppg": 0.3294,
       "receiving_ppg": 11.9941,
       "td_rate": 0.032
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "lamar-jackson-bal",
     "name": "Lamar Jackson",
     "position": "QB",
     "team": "BAL",
-    "value_score": 1.4933,
+    "value_score": 1.7933,
     "position_rank": 1,
     "adp": 33.55,
     "adp_position_rank": 2,
@@ -617,7 +677,9 @@
       "rushing_ppg": 6.7941,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "tetairoa-mcmillan-car",
@@ -637,7 +699,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ladd-mcconkey-lac",
@@ -657,18 +721,20 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 14.9313,
       "td_rate": 0.0625
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tee-higgins-cin",
     "name": "Tee Higgins",
     "position": "WR",
     "team": "CIN",
-    "value_score": 1.1105,
-    "position_rank": 7,
+    "value_score": 1.5105,
+    "position_rank": 3,
     "adp": 36.29,
     "adp_position_rank": 19,
-    "value_gap": 12,
+    "value_gap": 16,
     "stats": {
       "ppg": 18.675,
       "volume": 9.0833,
@@ -677,7 +743,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 18.675,
       "td_rate": 0.0917
-    }
+    },
+    "analyst_tag": "undervalued",
+    "analyst_note": "His full-season line reads as a solid WR1-fringe option, but in the games Joe Burrow was healthy and under center, his per-game output was true top-tier WR1 level, suggesting his real talent ceiling is a tier above his season average."
   },
   {
     "id": "jaylen-waddle-den",
@@ -685,10 +753,10 @@
     "position": "WR",
     "team": "DEN",
     "value_score": -0.0202,
-    "position_rank": 56,
+    "position_rank": 57,
     "adp": 36.35,
     "adp_position_rank": 20,
-    "value_gap": -36,
+    "value_gap": -37,
     "stats": {
       "ppg": 9.7067,
       "volume": 5.8,
@@ -697,7 +765,9 @@
       "rushing_ppg": 0.08,
       "receiving_ppg": 9.6267,
       "td_rate": 0.023
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "derrick-henry-bal",
@@ -705,10 +775,10 @@
     "position": "RB",
     "team": "BAL",
     "value_score": 1.2558,
-    "position_rank": 6,
+    "position_rank": 8,
     "adp": 38.15,
     "adp_position_rank": 12,
-    "value_gap": 6,
+    "value_gap": 4,
     "stats": {
       "ppg": 19.9059,
       "volume": 20.4118,
@@ -717,7 +787,9 @@
       "rushing_ppg": 16.9471,
       "receiving_ppg": 2.9588,
       "td_rate": 0.0519
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "drake-maye-ne",
@@ -737,7 +809,9 @@
       "rushing_ppg": 4.1615,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "colston-loveland-chi",
@@ -757,7 +831,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "emeka-egbuka-tb",
@@ -777,7 +853,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jeremiyah-love-ari",
@@ -797,7 +875,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "breece-hall-nyj",
@@ -805,10 +885,10 @@
     "position": "RB",
     "team": "NYJ",
     "value_score": 1.0058,
-    "position_rank": 15,
+    "position_rank": 14,
     "adp": 40.54,
     "adp_position_rank": 14,
-    "value_gap": -1,
+    "value_gap": 0,
     "stats": {
       "ppg": 15.0563,
       "volume": 17.8125,
@@ -817,7 +897,9 @@
       "rushing_ppg": 7.35,
       "receiving_ppg": 7.7063,
       "td_rate": 0.0281
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyren-williams-lar",
@@ -825,10 +907,10 @@
     "position": "RB",
     "team": "LAR",
     "value_score": 1.183,
-    "position_rank": 7,
+    "position_rank": 9,
     "adp": 42.46,
     "adp_position_rank": 15,
-    "value_gap": 8,
+    "value_gap": 6,
     "stats": {
       "ppg": 17.3813,
       "volume": 22.25,
@@ -837,18 +919,20 @@
       "rushing_ppg": 13.3688,
       "receiving_ppg": 4.0125,
       "td_rate": 0.0449
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "javonte-williams-dal",
     "name": "Javonte Williams",
     "position": "RB",
     "team": "DAL",
-    "value_score": 0.1797,
-    "position_rank": 38,
+    "value_score": 0.4797,
+    "position_rank": 27,
     "adp": 44.97,
     "adp_position_rank": 16,
-    "value_gap": -22,
+    "value_gap": -11,
     "stats": {
       "ppg": 9.5235,
       "volume": 12.2941,
@@ -857,7 +941,9 @@
       "rushing_ppg": 4.4294,
       "receiving_ppg": 5.0941,
       "td_rate": 0.0191
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Light on targets, but he's consistently getting the goal-line and short-yardage carries, which keeps his touchdown upside intact."
   },
   {
     "id": "josh-jacobs-gb",
@@ -877,7 +963,9 @@
       "rushing_ppg": 13.1118,
       "receiving_ppg": 4.4824,
       "td_rate": 0.0465
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "terry-mclaurin-was",
@@ -885,10 +973,10 @@
     "position": "WR",
     "team": "WAS",
     "value_score": 0.9473,
-    "position_rank": 14,
+    "position_rank": 15,
     "adp": 46.03,
     "adp_position_rank": 22,
-    "value_gap": 8,
+    "value_gap": 7,
     "stats": {
       "ppg": 15.8706,
       "volume": 7.0,
@@ -897,7 +985,9 @@
       "rushing_ppg": 0.0118,
       "receiving_ppg": 15.8588,
       "td_rate": 0.1092
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joe-burrow-cin",
@@ -917,7 +1007,9 @@
       "rushing_ppg": 1.8882,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "luther-burden-iii-chi",
@@ -937,7 +1029,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "travis-etienne-jr-no",
@@ -957,7 +1051,9 @@
       "rushing_ppg": 4.52,
       "receiving_ppg": 4.2933,
       "td_rate": 0.0099
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "davante-adams-lar",
@@ -977,7 +1073,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 17.0929,
       "td_rate": 0.0567
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dj-moore-buf",
@@ -997,7 +1095,9 @@
       "rushing_ppg": 0.4412,
       "receiving_ppg": 13.5647,
       "td_rate": 0.039
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mike-evans-sf",
@@ -1005,10 +1105,10 @@
     "position": "WR",
     "team": "SF",
     "value_score": 0.9643,
-    "position_rank": 11,
+    "position_rank": 12,
     "adp": 54.18,
     "adp_position_rank": 26,
-    "value_gap": 15,
+    "value_gap": 14,
     "stats": {
       "ppg": 17.1714,
       "volume": 7.8571,
@@ -1017,7 +1117,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 17.1714,
       "td_rate": 0.1
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-warren-ind",
@@ -1037,7 +1139,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jayden-daniels-was",
@@ -1057,18 +1161,20 @@
       "rushing_ppg": 7.3588,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jameson-williams-det",
     "name": "Jameson Williams",
     "position": "WR",
     "team": "DET",
-    "value_score": 0.987,
-    "position_rank": 8,
+    "value_score": 1.287,
+    "position_rank": 4,
     "adp": 54.94,
     "adp_position_rank": 27,
-    "value_gap": 19,
+    "value_gap": 23,
     "stats": {
       "ppg": 14.1467,
       "volume": 6.8,
@@ -1077,7 +1183,9 @@
       "rushing_ppg": 0.8067,
       "receiving_ppg": 13.34,
       "td_rate": 0.0784
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Detroit's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "cam-skattebo-nyg",
@@ -1097,18 +1205,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rome-odunze-chi",
     "name": "Rome Odunze",
     "position": "WR",
     "team": "CHI",
-    "value_score": -0.1441,
-    "position_rank": 64,
+    "value_score": 0.2059,
+    "position_rank": 47,
     "adp": 57.22,
     "adp_position_rank": 28,
-    "value_gap": -36,
+    "value_gap": -19,
     "stats": {
       "ppg": 8.6412,
       "volume": 6.1176,
@@ -1117,7 +1227,9 @@
       "rushing_ppg": 0.0882,
       "receiving_ppg": 8.5529,
       "td_rate": 0.0288
-    }
+    },
+    "analyst_tag": "sleeper",
+    "analyst_note": "His per-target efficiency over the back half of last season was on par with some of the league's top receivers, pointing to breakout upside that his season-long counting stats don't reflect."
   },
   {
     "id": "d-andre-swift-chi",
@@ -1137,7 +1249,9 @@
       "rushing_ppg": 7.7588,
       "receiving_ppg": 4.7412,
       "td_rate": 0.0197
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "christian-watson-gb",
@@ -1157,18 +1271,20 @@
       "rushing_ppg": 0.1643,
       "receiving_ppg": 7.3571,
       "td_rate": 0.0351
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-hurts-phi",
     "name": "Jalen Hurts",
     "position": "QB",
     "team": "PHI",
-    "value_score": 1.11,
-    "position_rank": 3,
+    "value_score": 1.41,
+    "position_rank": 2,
     "adp": 57.96,
     "adp_position_rank": 6,
-    "value_gap": 3,
+    "value_gap": 4,
     "stats": {
       "ppg": 22.008,
       "volume": 24.0667,
@@ -1177,7 +1293,9 @@
       "rushing_ppg": 9.8,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "bucky-irving-tb",
@@ -1197,7 +1315,9 @@
       "rushing_ppg": 9.4235,
       "receiving_ppg": 5.0706,
       "td_rate": 0.0309
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "david-montgomery-hou",
@@ -1205,10 +1325,10 @@
     "position": "RB",
     "team": "HOU",
     "value_score": 0.8839,
-    "position_rank": 18,
+    "position_rank": 17,
     "adp": 61.27,
     "adp_position_rank": 22,
-    "value_gap": 4,
+    "value_gap": 5,
     "stats": {
       "ppg": 15.6857,
       "volume": 15.9286,
@@ -1217,18 +1337,20 @@
       "rushing_ppg": 10.6786,
       "receiving_ppg": 5.0071,
       "td_rate": 0.0538
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "quinshon-judkins-cle",
     "name": "Quinshon Judkins",
     "position": "RB",
     "team": "CLE",
-    "value_score": -1.7296,
-    "position_rank": 90,
+    "value_score": -2.0296,
+    "position_rank": 119,
     "adp": 61.3,
     "adp_position_rank": 23,
-    "value_gap": -67,
+    "value_gap": -96,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -1237,7 +1359,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "risk",
+    "analyst_note": "As a rookie sharing the Browns backfield with fellow rookie Dylan Sampson, there's real doubt about how much this offense will actually feed him."
   },
   {
     "id": "carnell-tate-ten",
@@ -1257,7 +1381,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "parker-washington-jac",
@@ -1277,7 +1403,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.8462,
       "td_rate": 0.0588
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "caleb-williams-chi",
@@ -1297,7 +1425,9 @@
       "rushing_ppg": 2.8765,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "treveyon-henderson-ne",
@@ -1305,10 +1435,10 @@
     "position": "RB",
     "team": "NE",
     "value_score": -1.7396,
-    "position_rank": 91,
+    "position_rank": 90,
     "adp": 67.61,
     "adp_position_rank": 24,
-    "value_gap": -67,
+    "value_gap": -66,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -1317,7 +1447,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marvin-harrison-jr-ari",
@@ -1325,10 +1457,10 @@
     "position": "WR",
     "team": "ARI",
     "value_score": 0.26,
-    "position_rank": 45,
+    "position_rank": 46,
     "adp": 69.23,
     "adp_position_rank": 32,
-    "value_gap": -13,
+    "value_gap": -14,
     "stats": {
       "ppg": 11.6765,
       "volume": 6.8235,
@@ -1337,7 +1469,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 11.6765,
       "td_rate": 0.069
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bhayshul-tuten-jac",
@@ -1345,10 +1479,10 @@
     "position": "RB",
     "team": "JAC",
     "value_score": -1.7496,
-    "position_rank": 92,
+    "position_rank": 91,
     "adp": 69.36,
     "adp_position_rank": 25,
-    "value_gap": -67,
+    "value_gap": -66,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -1357,7 +1491,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "justin-herbert-lac",
@@ -1377,7 +1513,9 @@
       "rushing_ppg": 2.5059,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jadarian-price-sea",
@@ -1385,10 +1523,10 @@
     "position": "RB",
     "team": "SEA",
     "value_score": -1.7596,
-    "position_rank": 93,
+    "position_rank": 92,
     "adp": 74.52,
     "adp_position_rank": 26,
-    "value_gap": -67,
+    "value_gap": -66,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -1397,7 +1535,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "harold-fannin-jr-cle",
@@ -1417,7 +1557,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brian-thomas-jr-jac",
@@ -1425,10 +1567,10 @@
     "position": "WR",
     "team": "JAC",
     "value_score": 0.9558,
-    "position_rank": 12,
+    "position_rank": 13,
     "adp": 75.79,
     "adp_position_rank": 33,
-    "value_gap": 21,
+    "value_gap": 20,
     "stats": {
       "ppg": 16.4706,
       "volume": 8.1765,
@@ -1437,7 +1579,9 @@
       "rushing_ppg": 0.2824,
       "receiving_ppg": 16.1882,
       "td_rate": 0.0719
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaylen-warren-pit",
@@ -1457,7 +1601,9 @@
       "rushing_ppg": 3.8067,
       "receiving_ppg": 4.6,
       "td_rate": 0.006
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tucker-kraft-gb",
@@ -1465,10 +1611,10 @@
     "position": "TE",
     "team": "GB",
     "value_score": 0.7373,
-    "position_rank": 10,
+    "position_rank": 11,
     "adp": 76.75,
     "adp_position_rank": 6,
-    "value_gap": -4,
+    "value_gap": -5,
     "stats": {
       "ppg": 9.6059,
       "volume": 4.2941,
@@ -1477,7 +1623,9 @@
       "rushing_ppg": 0.0353,
       "receiving_ppg": 9.5706,
       "td_rate": 0.0959
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trevor-lawrence-jac",
@@ -1497,7 +1645,9 @@
       "rushing_ppg": 2.99,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-godwin-jr-tb",
@@ -1505,10 +1655,10 @@
     "position": "WR",
     "team": "TB",
     "value_score": 1.2869,
-    "position_rank": 2,
+    "position_rank": 5,
     "adp": 78.19,
     "adp_position_rank": 34,
-    "value_gap": 32,
+    "value_gap": 29,
     "stats": {
       "ppg": 19.6857,
       "volume": 9.0,
@@ -1517,7 +1667,9 @@
       "rushing_ppg": 0.0286,
       "receiving_ppg": 19.6571,
       "td_rate": 0.0794
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dk-metcalf-pit",
@@ -1525,10 +1677,10 @@
     "position": "WR",
     "team": "PIT",
     "value_score": 0.4196,
-    "position_rank": 38,
+    "position_rank": 40,
     "adp": 79.06,
     "adp_position_rank": 35,
-    "value_gap": -3,
+    "value_gap": -5,
     "stats": {
       "ppg": 13.0133,
       "volume": 7.2,
@@ -1537,7 +1689,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 13.0133,
       "td_rate": 0.0463
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyle-pitts-sr-atl",
@@ -1557,7 +1711,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.7176,
       "td_rate": 0.0541
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dak-prescott-dal",
@@ -1577,7 +1733,9 @@
       "rushing_ppg": 1.425,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rhamondre-stevenson-ne",
@@ -1585,10 +1743,10 @@
     "position": "RB",
     "team": "NE",
     "value_score": 0.4153,
-    "position_rank": 29,
+    "position_rank": 30,
     "adp": 80.24,
     "adp_position_rank": 28,
-    "value_gap": -1,
+    "value_gap": -2,
     "stats": {
       "ppg": 11.86,
       "volume": 16.5333,
@@ -1597,7 +1755,9 @@
       "rushing_ppg": 8.14,
       "receiving_ppg": 3.72,
       "td_rate": 0.0323
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-pittman-jr-pit",
@@ -1605,10 +1765,10 @@
     "position": "WR",
     "team": "PIT",
     "value_score": 0.0572,
-    "position_rank": 51,
+    "position_rank": 52,
     "adp": 81.74,
     "adp_position_rank": 36,
-    "value_gap": -15,
+    "value_gap": -16,
     "stats": {
       "ppg": 10.4875,
       "volume": 6.9375,
@@ -1617,7 +1777,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.4875,
       "td_rate": 0.027
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "courtland-sutton-den",
@@ -1625,10 +1787,10 @@
     "position": "WR",
     "team": "DEN",
     "value_score": 0.617,
-    "position_rank": 27,
+    "position_rank": 28,
     "adp": 82.83,
     "adp_position_rank": 37,
-    "value_gap": 10,
+    "value_gap": 9,
     "stats": {
       "ppg": 14.8187,
       "volume": 8.4375,
@@ -1637,7 +1799,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 14.8187,
       "td_rate": 0.0593
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tony-pollard-ten",
@@ -1645,10 +1809,10 @@
     "position": "RB",
     "team": "TEN",
     "value_score": 0.436,
-    "position_rank": 28,
+    "position_rank": 29,
     "adp": 83.23,
     "adp_position_rank": 29,
-    "value_gap": 1,
+    "value_gap": 0,
     "stats": {
       "ppg": 12.6687,
       "volume": 19.8125,
@@ -1657,18 +1821,20 @@
       "rushing_ppg": 8.6188,
       "receiving_ppg": 4.05,
       "td_rate": 0.0158
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "sam-laporta-det",
     "name": "Sam LaPorta",
     "position": "TE",
     "team": "DET",
-    "value_score": 0.8515,
-    "position_rank": 7,
+    "value_score": 1.1515,
+    "position_rank": 6,
     "adp": 83.34,
     "adp_position_rank": 8,
-    "value_gap": 1,
+    "value_gap": 2,
     "stats": {
       "ppg": 10.9125,
       "volume": 5.1875,
@@ -1677,7 +1843,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.9125,
       "td_rate": 0.0843
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Detroit's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "wan-dale-robinson-ten",
@@ -1685,10 +1853,10 @@
     "position": "WR",
     "team": "TEN",
     "value_score": -0.0346,
-    "position_rank": 57,
+    "position_rank": 58,
     "adp": 86.26,
     "adp_position_rank": 38,
-    "value_gap": -19,
+    "value_gap": -20,
     "stats": {
       "ppg": 10.7471,
       "volume": 8.4118,
@@ -1697,18 +1865,20 @@
       "rushing_ppg": 0.1059,
       "receiving_ppg": 10.6412,
       "td_rate": 0.021
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "josh-downs-ind",
     "name": "Josh Downs",
     "position": "WR",
     "team": "IND",
-    "value_score": 0.2299,
-    "position_rank": 46,
+    "value_score": 0.5299,
+    "position_rank": 32,
     "adp": 86.47,
     "adp_position_rank": 39,
-    "value_gap": -7,
+    "value_gap": 7,
     "stats": {
       "ppg": 13.0143,
       "volume": 7.7143,
@@ -1717,7 +1887,9 @@
       "rushing_ppg": -0.0071,
       "receiving_ppg": 13.0214,
       "td_rate": 0.0463
-    }
+    },
+    "analyst_tag": "sleeper",
+    "analyst_note": "When he's played full slot-receiver snaps and stayed on the field, he's produced like a solid WR2, so a return to a normal role would make him a value at his current price."
   },
   {
     "id": "rico-dowdle-pit",
@@ -1725,10 +1897,10 @@
     "position": "RB",
     "team": "PIT",
     "value_score": 0.4507,
-    "position_rank": 27,
+    "position_rank": 28,
     "adp": 87.49,
     "adp_position_rank": 30,
-    "value_gap": 3,
+    "value_gap": 2,
     "stats": {
       "ppg": 12.6125,
       "volume": 17.75,
@@ -1737,7 +1909,9 @@
       "rushing_ppg": 7.4938,
       "receiving_ppg": 5.1188,
       "td_rate": 0.0176
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-wilson-ari",
@@ -1745,10 +1919,10 @@
     "position": "WR",
     "team": "ARI",
     "value_score": -0.1113,
-    "position_rank": 62,
+    "position_rank": 63,
     "adp": 88.23,
     "adp_position_rank": 40,
-    "value_gap": -22,
+    "value_gap": -23,
     "stats": {
       "ppg": 7.9063,
       "volume": 4.5,
@@ -1757,7 +1931,9 @@
       "rushing_ppg": 0.0437,
       "receiving_ppg": 7.8625,
       "td_rate": 0.0556
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rj-harvey-den",
@@ -1765,10 +1941,10 @@
     "position": "RB",
     "team": "DEN",
     "value_score": -1.7696,
-    "position_rank": 94,
+    "position_rank": 93,
     "adp": 93.58,
     "adp_position_rank": 31,
-    "value_gap": -63,
+    "value_gap": -62,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -1777,7 +1953,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brock-purdy-sf",
@@ -1797,7 +1975,9 @@
       "rushing_ppg": 4.1533,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jonathon-brooks-car",
@@ -1817,7 +1997,9 @@
       "rushing_ppg": 0.7333,
       "receiving_ppg": 1.7667,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chuba-hubbard-car",
@@ -1825,10 +2007,10 @@
     "position": "RB",
     "team": "CAR",
     "value_score": 1.0128,
-    "position_rank": 14,
+    "position_rank": 13,
     "adp": 97.25,
     "adp_position_rank": 33,
-    "value_gap": 19,
+    "value_gap": 20,
     "stats": {
       "ppg": 16.3733,
       "volume": 20.2667,
@@ -1837,7 +2019,9 @@
       "rushing_ppg": 11.9667,
       "receiving_ppg": 4.4067,
       "td_rate": 0.0362
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaxson-dart-nyg",
@@ -1857,7 +2041,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "alec-pierce-ind",
@@ -1865,10 +2051,10 @@
     "position": "WR",
     "team": "IND",
     "value_score": 0.3549,
-    "position_rank": 41,
+    "position_rank": 43,
     "adp": 98.45,
     "adp_position_rank": 41,
-    "value_gap": 0,
+    "value_gap": -2,
     "stats": {
       "ppg": 10.0875,
       "volume": 4.3125,
@@ -1877,7 +2063,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.0875,
       "td_rate": 0.1014
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "travis-kelce-kc",
@@ -1885,10 +2073,10 @@
     "position": "TE",
     "team": "KC",
     "value_score": 0.7522,
-    "position_rank": 9,
+    "position_rank": 10,
     "adp": 99.11,
     "adp_position_rank": 9,
-    "value_gap": 0,
+    "value_gap": -1,
     "stats": {
       "ppg": 12.3375,
       "volume": 8.375,
@@ -1897,7 +2085,9 @@
       "rushing_ppg": 0.0063,
       "receiving_ppg": 12.3313,
       "td_rate": 0.0224
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "quentin-johnston-lac",
@@ -1905,10 +2095,10 @@
     "position": "WR",
     "team": "LAC",
     "value_score": 0.3015,
-    "position_rank": 44,
+    "position_rank": 45,
     "adp": 99.75,
     "adp_position_rank": 42,
-    "value_gap": -2,
+    "value_gap": -3,
     "stats": {
       "ppg": 11.6467,
       "volume": 6.2667,
@@ -1917,7 +2107,9 @@
       "rushing_ppg": 0.04,
       "receiving_ppg": 11.6067,
       "td_rate": 0.0851
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "patrick-mahomes-ii-kc",
@@ -1937,7 +2129,9 @@
       "rushing_ppg": 2.6688,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "stefon-diggs-was",
@@ -1945,10 +2139,10 @@
     "position": "WR",
     "team": "WAS",
     "value_score": 0.9813,
-    "position_rank": 9,
+    "position_rank": 10,
     "adp": 100.53,
     "adp_position_rank": 43,
-    "value_gap": 34,
+    "value_gap": 33,
     "stats": {
       "ppg": 15.175,
       "volume": 8.375,
@@ -1957,7 +2151,9 @@
       "rushing_ppg": 0.85,
       "receiving_ppg": 14.325,
       "td_rate": 0.0597
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kenny-gainwell-tb",
@@ -1977,7 +2173,9 @@
       "rushing_ppg": 2.1875,
       "receiving_ppg": 1.725,
       "td_rate": 0.0103
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bo-nix-den",
@@ -1997,7 +2195,9 @@
       "rushing_ppg": 3.9412,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "george-kittle-sf",
@@ -2017,7 +2217,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 15.7733,
       "td_rate": 0.0851
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jakobi-meyers-jac",
@@ -2025,10 +2227,10 @@
     "position": "WR",
     "team": "JAC",
     "value_score": 0.5862,
-    "position_rank": 28,
+    "position_rank": 29,
     "adp": 101.64,
     "adp_position_rank": 44,
-    "value_gap": 16,
+    "value_gap": 15,
     "stats": {
       "ppg": 14.4,
       "volume": 8.7333,
@@ -2037,7 +2239,9 @@
       "rushing_ppg": 0.1533,
       "receiving_ppg": 14.2467,
       "td_rate": 0.0305
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "j-k-dobbins-den",
@@ -2057,7 +2261,9 @@
       "rushing_ppg": 11.1154,
       "receiving_ppg": 3.6385,
       "td_rate": 0.0386
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "matthew-stafford-lar",
@@ -2077,7 +2283,9 @@
       "rushing_ppg": 0.2562,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jayden-reed-gb",
@@ -2097,7 +2305,9 @@
       "rushing_ppg": 1.3118,
       "receiving_ppg": 10.3941,
       "td_rate": 0.0737
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-addison-min",
@@ -2105,10 +2315,10 @@
     "position": "WR",
     "team": "MIN",
     "value_score": 0.9344,
-    "position_rank": 15,
+    "position_rank": 16,
     "adp": 106.3,
     "adp_position_rank": 46,
-    "value_gap": 31,
+    "value_gap": 30,
     "stats": {
       "ppg": 14.1667,
       "volume": 6.8,
@@ -2117,7 +2327,9 @@
       "rushing_ppg": 0.5333,
       "receiving_ppg": 13.6333,
       "td_rate": 0.098
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "makai-lemon-phi",
@@ -2137,7 +2349,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jared-goff-det",
@@ -2157,7 +2371,9 @@
       "rushing_ppg": 0.3294,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rachaad-white-was",
@@ -2165,10 +2381,10 @@
     "position": "RB",
     "team": "WAS",
     "value_score": 0.9562,
-    "position_rank": 16,
+    "position_rank": 15,
     "adp": 109.08,
     "adp_position_rank": 36,
-    "value_gap": 20,
+    "value_gap": 21,
     "stats": {
       "ppg": 13.7067,
       "volume": 13.4,
@@ -2177,7 +2393,9 @@
       "rushing_ppg": 5.2867,
       "receiving_ppg": 8.42,
       "td_rate": 0.0448
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "blake-corum-lar",
@@ -2197,7 +2415,9 @@
       "rushing_ppg": 1.4786,
       "receiving_ppg": 0.9143,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyle-monangai-chi",
@@ -2205,10 +2425,10 @@
     "position": "RB",
     "team": "CHI",
     "value_score": -1.7796,
-    "position_rank": 95,
+    "position_rank": 94,
     "adp": 111.59,
     "adp_position_rank": 38,
-    "value_gap": -57,
+    "value_gap": -56,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -2217,7 +2437,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyler-murray-min",
@@ -2237,7 +2459,9 @@
       "rushing_ppg": 5.1294,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dalton-kincaid-buf",
@@ -2257,7 +2481,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.7538,
       "td_rate": 0.0267
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "aaron-jones-sr-min",
@@ -2277,7 +2503,9 @@
       "rushing_ppg": 8.4588,
       "receiving_ppg": 6.1059,
       "td_rate": 0.0221
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jake-ferguson-dal",
@@ -2297,7 +2525,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.7429,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jacory-croskey-merritt-was",
@@ -2305,10 +2535,10 @@
     "position": "RB",
     "team": "WAS",
     "value_score": -1.7896,
-    "position_rank": 96,
+    "position_rank": 95,
     "adp": 117.14,
     "adp_position_rank": 40,
-    "value_gap": -56,
+    "value_gap": -55,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -2317,7 +2547,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "baker-mayfield-tb",
@@ -2337,7 +2569,9 @@
       "rushing_ppg": 3.2824,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-mason-min",
@@ -2357,7 +2591,9 @@
       "rushing_ppg": 8.075,
       "receiving_ppg": 1.675,
       "td_rate": 0.018
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-love-gb",
@@ -2377,7 +2613,9 @@
       "rushing_ppg": 0.9533,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaiah-likely-nyg",
@@ -2397,7 +2635,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.38,
       "td_rate": 0.1034
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "khalil-shakir-buf",
@@ -2405,10 +2645,10 @@
     "position": "WR",
     "team": "BUF",
     "value_score": 0.1536,
-    "position_rank": 47,
+    "position_rank": 48,
     "adp": 120.14,
     "adp_position_rank": 48,
-    "value_gap": 1,
+    "value_gap": 0,
     "stats": {
       "ppg": 12.1667,
       "volume": 6.8,
@@ -2417,18 +2657,20 @@
       "rushing_ppg": 0.0267,
       "receiving_ppg": 12.14,
       "td_rate": 0.0392
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dallas-goedert-phi",
     "name": "Dallas Goedert",
     "position": "TE",
     "team": "PHI",
-    "value_score": 0.5276,
-    "position_rank": 14,
+    "value_score": 0.8276,
+    "position_rank": 9,
     "adp": 120.66,
     "adp_position_rank": 14,
-    "value_gap": 0,
+    "value_gap": 5,
     "stats": {
       "ppg": 10.36,
       "volume": 5.2,
@@ -2437,7 +2679,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.36,
       "td_rate": 0.0385
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Philadelphia's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "kc-concepcion-cle",
@@ -2457,7 +2701,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-shough-no",
@@ -2477,7 +2723,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-coker-car",
@@ -2485,10 +2733,10 @@
     "position": "WR",
     "team": "CAR",
     "value_score": -0.1194,
-    "position_rank": 63,
+    "position_rank": 64,
     "adp": 124.5,
     "adp_position_rank": 50,
-    "value_gap": -13,
+    "value_gap": -14,
     "stats": {
       "ppg": 8.3455,
       "volume": 4.1818,
@@ -2497,7 +2745,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.3455,
       "td_rate": 0.0435
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordyn-tyson-no",
@@ -2517,7 +2767,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "xavier-worthy-kc",
@@ -2525,10 +2777,10 @@
     "position": "WR",
     "team": "KC",
     "value_score": 0.9312,
-    "position_rank": 16,
+    "position_rank": 17,
     "adp": 127.51,
     "adp_position_rank": 52,
-    "value_gap": 36,
+    "value_gap": 35,
     "stats": {
       "ppg": 11.7,
       "volume": 7.375,
@@ -2537,7 +2789,9 @@
       "rushing_ppg": 1.775,
       "receiving_ppg": 9.925,
       "td_rate": 0.0763
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "matthew-golden-gb",
@@ -2557,14 +2811,16 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mark-andrews-bal",
     "name": "Mark Andrews",
     "position": "TE",
     "team": "BAL",
-    "value_score": 0.9502,
+    "value_score": 1.2502,
     "position_rank": 5,
     "adp": 129.97,
     "adp_position_rank": 15,
@@ -2577,7 +2833,9 @@
       "rushing_ppg": 0.0294,
       "receiving_ppg": 11.0765,
       "td_rate": 0.1507
-    }
+    },
+    "analyst_tag": "schedule-boost",
+    "analyst_note": "Baltimore's skill-position players are expected to see an easier-than-average schedule this season."
   },
   {
     "id": "romeo-doubs-ne",
@@ -2585,10 +2843,10 @@
     "position": "WR",
     "team": "NE",
     "value_score": 0.0672,
-    "position_rank": 50,
+    "position_rank": 51,
     "adp": 131.54,
     "adp_position_rank": 54,
-    "value_gap": 4,
+    "value_gap": 3,
     "stats": {
       "ppg": 10.0077,
       "volume": 5.5385,
@@ -2597,7 +2855,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.0077,
       "td_rate": 0.0556
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "malik-willis-mia",
@@ -2617,7 +2877,9 @@
       "rushing_ppg": 3.3,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "juwan-johnson-no",
@@ -2637,7 +2899,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.1867,
       "td_rate": 0.0455
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-rodriguez-jr-jac",
@@ -2657,7 +2921,9 @@
       "rushing_ppg": 4.8833,
       "receiving_ppg": 0.3667,
       "td_rate": 0.0556
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "woody-marks-hou",
@@ -2665,10 +2931,10 @@
     "position": "RB",
     "team": "HOU",
     "value_score": -1.7996,
-    "position_rank": 97,
+    "position_rank": 96,
     "adp": 139.6,
     "adp_position_rank": 43,
-    "value_gap": -54,
+    "value_gap": -53,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -2677,7 +2943,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "deebo-samuel-sr-sf",
@@ -2685,10 +2953,10 @@
     "position": "WR",
     "team": "SF",
     "value_score": 0.5645,
-    "position_rank": 30,
+    "position_rank": 31,
     "adp": 140.12,
     "adp_position_rank": 55,
-    "value_gap": 25,
+    "value_gap": 24,
     "stats": {
       "ppg": 11.1143,
       "volume": 8.7857,
@@ -2697,7 +2965,9 @@
       "rushing_ppg": 1.4,
       "receiving_ppg": 9.7143,
       "td_rate": 0.0325
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-allgeier-ari",
@@ -2717,7 +2987,9 @@
       "rushing_ppg": 4.8471,
       "receiving_ppg": 1.2824,
       "td_rate": 0.02
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyjae-spears-ten",
@@ -2725,10 +2997,10 @@
     "position": "RB",
     "team": "TEN",
     "value_score": 0.2709,
-    "position_rank": 34,
+    "position_rank": 35,
     "adp": 140.97,
     "adp_position_rank": 45,
-    "value_gap": 11,
+    "value_gap": 10,
     "stats": {
       "ppg": 9.4667,
       "volume": 9.9167,
@@ -2737,7 +3009,9 @@
       "rushing_ppg": 4.6,
       "receiving_ppg": 4.8667,
       "td_rate": 0.042
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyrone-tracy-jr-nyg",
@@ -2745,10 +3019,10 @@
     "position": "RB",
     "team": "NYG",
     "value_score": 0.3122,
-    "position_rank": 32,
+    "position_rank": 33,
     "adp": 141.04,
     "adp_position_rank": 46,
-    "value_gap": 14,
+    "value_gap": 13,
     "stats": {
       "ppg": 10.9588,
       "volume": 14.4118,
@@ -2757,7 +3031,9 @@
       "rushing_ppg": 6.7,
       "receiving_ppg": 4.2588,
       "td_rate": 0.0245
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "sam-darnold-sea",
@@ -2777,7 +3053,9 @@
       "rushing_ppg": 1.6,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "c-j-stroud-hou",
@@ -2797,7 +3075,9 @@
       "rushing_ppg": 1.3706,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zach-charbonnet-sea",
@@ -2817,7 +3097,9 @@
       "rushing_ppg": 6.1706,
       "receiving_ppg": 4.6353,
       "td_rate": 0.0481
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dylan-sampson-cle",
@@ -2825,10 +3107,10 @@
     "position": "RB",
     "team": "CLE",
     "value_score": -1.8096,
-    "position_rank": 98,
+    "position_rank": 97,
     "adp": 147.93,
     "adp_position_rank": 48,
-    "value_gap": -50,
+    "value_gap": -49,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -2837,7 +3119,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rashid-shaheed-sea",
@@ -2845,10 +3129,10 @@
     "position": "WR",
     "team": "SEA",
     "value_score": 0.5053,
-    "position_rank": 31,
+    "position_rank": 33,
     "adp": 149.99,
     "adp_position_rank": 56,
-    "value_gap": 25,
+    "value_gap": 23,
     "stats": {
       "ppg": 12.6333,
       "volume": 7.8333,
@@ -2857,7 +3141,9 @@
       "rushing_ppg": 0.4833,
       "receiving_ppg": 12.15,
       "td_rate": 0.0638
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "de-zhaun-stribling-sf",
@@ -2877,7 +3163,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "keaton-mitchell-lac",
@@ -2897,7 +3185,9 @@
       "rushing_ppg": 1.5,
       "receiving_ppg": 1.9,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "denzel-boston-cle",
@@ -2917,7 +3207,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "daniel-jones-ind",
@@ -2937,14 +3229,16 @@
       "rushing_ppg": 3.85,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "houston-texans-hou",
     "name": "Houston Texans",
     "position": "DEF",
     "team": "HOU",
-    "value_score": 1.5838,
+    "value_score": 2.0838,
     "position_rank": 1,
     "adp": 153.74,
     "adp_position_rank": 1,
@@ -2957,7 +3251,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Houston's defensive line generates consistent pressure, which typically translates into sacks and takeaways over a full season."
   },
   {
     "id": "alvin-kamara-no",
@@ -2965,10 +3261,10 @@
     "position": "RB",
     "team": "NO",
     "value_score": 1.4194,
-    "position_rank": 5,
+    "position_rank": 7,
     "adp": 155.39,
     "adp_position_rank": 50,
-    "value_gap": 45,
+    "value_gap": 43,
     "stats": {
       "ppg": 18.95,
       "volume": 22.6429,
@@ -2977,7 +3273,9 @@
       "rushing_ppg": 9.3571,
       "receiving_ppg": 9.5929,
       "td_rate": 0.0252
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brenton-strange-jac",
@@ -2997,7 +3295,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.65,
       "td_rate": 0.0377
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cam-ward-ten",
@@ -3017,7 +3317,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chig-okonkwo-was",
@@ -3037,7 +3339,9 @@
       "rushing_ppg": 0.1062,
       "receiving_ppg": 6.9938,
       "td_rate": 0.0282
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jonah-coleman-den",
@@ -3045,10 +3349,10 @@
     "position": "RB",
     "team": "DEN",
     "value_score": -1.8196,
-    "position_rank": 99,
+    "position_rank": 98,
     "adp": 159.31,
     "adp_position_rank": 51,
-    "value_gap": -48,
+    "value_gap": -47,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3057,7 +3361,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isiah-pacheco-det",
@@ -3077,7 +3383,9 @@
       "rushing_ppg": 5.2857,
       "receiving_ppg": 2.8429,
       "td_rate": 0.0101
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jauan-jennings-min",
@@ -3085,10 +3393,10 @@
     "position": "WR",
     "team": "MIN",
     "value_score": 0.4695,
-    "position_rank": 34,
+    "position_rank": 36,
     "adp": 161.92,
     "adp_position_rank": 59,
-    "value_gap": 25,
+    "value_gap": 23,
     "stats": {
       "ppg": 14.0333,
       "volume": 7.5333,
@@ -3097,14 +3405,16 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 14.0333,
       "td_rate": 0.0531
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "denver-broncos-den",
     "name": "Denver Broncos",
     "position": "DEF",
     "team": "DEN",
-    "value_score": 1.404,
+    "value_score": 1.904,
     "position_rank": 2,
     "adp": 163.1,
     "adp_position_rank": 2,
@@ -3117,7 +3427,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Denver's unit trended upward this offseason and pairs an efficient scoring profile with the disruptive ability to force turnovers."
   },
   {
     "id": "hunter-henry-ne",
@@ -3137,7 +3449,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 9.0875,
       "td_rate": 0.0206
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jerry-jeudy-cle",
@@ -3145,10 +3459,10 @@
     "position": "WR",
     "team": "CLE",
     "value_score": 0.4485,
-    "position_rank": 36,
+    "position_rank": 38,
     "adp": 165.37,
     "adp_position_rank": 60,
-    "value_gap": 24,
+    "value_gap": 22,
     "stats": {
       "ppg": 13.9353,
       "volume": 8.5294,
@@ -3157,14 +3471,16 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 13.9353,
       "td_rate": 0.0276
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "los-angeles-rams-lar",
     "name": "Los Angeles Rams",
     "position": "DEF",
     "team": "LAR",
-    "value_score": 1.3239,
+    "value_score": 1.8239,
     "position_rank": 3,
     "adp": 167.27,
     "adp_position_rank": 3,
@@ -3177,14 +3493,16 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "The Rams added notable pass-rush pieces this offseason, boosting their sack and turnover upside beyond last year's baseline."
   },
   {
     "id": "seattle-seahawks-sea",
     "name": "Seattle Seahawks",
     "position": "DEF",
     "team": "SEA",
-    "value_score": 1.3195,
+    "value_score": 1.8195,
     "position_rank": 4,
     "adp": 167.5,
     "adp_position_rank": 4,
@@ -3197,7 +3515,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Seattle's defense combines a favorable schedule against weaker offenses with real pressure ability, setting up for extended possessions and more takeaway chances."
   },
   {
     "id": "tank-bigsby-phi",
@@ -3217,7 +3537,9 @@
       "rushing_ppg": 7.9067,
       "receiving_ppg": 0.8267,
       "td_rate": 0.0389
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bryce-young-car",
@@ -3237,7 +3559,9 @@
       "rushing_ppg": 4.35,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "adonai-mitchell-nyj",
@@ -3257,7 +3581,9 @@
       "rushing_ppg": 0.0353,
       "receiving_ppg": 3.1882,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-mcmillan-tb",
@@ -3265,10 +3591,10 @@
     "position": "WR",
     "team": "TB",
     "value_score": 0.4975,
-    "position_rank": 32,
+    "position_rank": 34,
     "adp": 171.42,
     "adp_position_rank": 62,
-    "value_gap": 30,
+    "value_gap": 28,
     "stats": {
       "ppg": 10.4154,
       "volume": 4.7692,
@@ -3277,7 +3603,9 @@
       "rushing_ppg": 0.3308,
       "receiving_ppg": 10.0846,
       "td_rate": 0.129
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dalton-schultz-hou",
@@ -3297,7 +3625,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.9529,
       "td_rate": 0.0235
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tre-tucker-lv",
@@ -3305,10 +3635,10 @@
     "position": "WR",
     "team": "LV",
     "value_score": 0.0473,
-    "position_rank": 52,
+    "position_rank": 53,
     "adp": 173.55,
     "adp_position_rank": 63,
-    "value_gap": 11,
+    "value_gap": 10,
     "stats": {
       "ppg": 7.6059,
       "volume": 5.2941,
@@ -3317,7 +3647,9 @@
       "rushing_ppg": 0.6118,
       "receiving_ppg": 6.9941,
       "td_rate": 0.0444
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brian-robinson-jr-atl",
@@ -3325,10 +3657,10 @@
     "position": "RB",
     "team": "ATL",
     "value_score": 0.3213,
-    "position_rank": 31,
+    "position_rank": 32,
     "adp": 174.34,
     "adp_position_rank": 54,
-    "value_gap": 23,
+    "value_gap": 22,
     "stats": {
       "ppg": 11.7,
       "volume": 15.1429,
@@ -3337,7 +3669,9 @@
       "rushing_ppg": 9.1357,
       "receiving_ppg": 2.5643,
       "td_rate": 0.0377
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "braelon-allen-nyj",
@@ -3357,18 +3691,20 @@
       "rushing_ppg": 2.6706,
       "receiving_ppg": 2.3412,
       "td_rate": 0.0252
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "philadelphia-eagles-phi",
     "name": "Philadelphia Eagles",
     "position": "DEF",
     "team": "PHI",
-    "value_score": 1.1732,
-    "position_rank": 5,
+    "value_score": 0.7732,
+    "position_rank": 11,
     "adp": 175.12,
     "adp_position_rank": 5,
-    "value_gap": 0,
+    "value_gap": -6,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3377,7 +3713,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "fade",
+    "analyst_note": "Philadelphia's fantasy output last season was middling once non-defensive scoring is excluded, and a tougher slate of opponents this year makes a repeat harder."
   },
   {
     "id": "travis-hunter-jac",
@@ -3397,7 +3735,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tre-harris-lac",
@@ -3417,7 +3757,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "omar-cooper-jr-nyj",
@@ -3437,7 +3779,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ryan-flournoy-dal",
@@ -3457,7 +3801,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.8857,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "new-england-patriots-ne",
@@ -3465,10 +3811,10 @@
     "position": "DEF",
     "team": "NE",
     "value_score": 0.9761,
-    "position_rank": 6,
+    "position_rank": 9,
     "adp": 185.38,
     "adp_position_rank": 6,
-    "value_gap": 0,
+    "value_gap": -3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3477,14 +3823,16 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brandon-aubrey-dal",
     "name": "Brandon Aubrey",
     "position": "K",
     "team": "DAL",
-    "value_score": 1.5598,
+    "value_score": 1.9598,
     "position_rank": 1,
     "adp": 185.85,
     "adp_position_rank": 1,
@@ -3497,7 +3845,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Analyst flagged him as one of the top-tier kickers this year, consistent with his usual profile of a reliable long-range leg on a productive offense."
   },
   {
     "id": "minnesota-vikings-min",
@@ -3505,10 +3855,10 @@
     "position": "DEF",
     "team": "MIN",
     "value_score": 0.9636,
-    "position_rank": 7,
+    "position_rank": 10,
     "adp": 186.03,
     "adp_position_rank": 7,
-    "value_gap": 0,
+    "value_gap": -3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3517,18 +3867,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "pittsburgh-steelers-pit",
     "name": "Pittsburgh Steelers",
     "position": "DEF",
     "team": "PIT",
-    "value_score": 0.9386,
-    "position_rank": 8,
+    "value_score": 1.1386,
+    "position_rank": 5,
     "adp": 187.33,
     "adp_position_rank": 8,
-    "value_gap": 0,
+    "value_gap": 3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3537,7 +3889,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "streamer",
+    "analyst_note": "A solid matchup-based pickup for favorable weeks rather than a locked-in weekly starter from draft day."
   },
   {
     "id": "jalen-nailor-lv",
@@ -3545,10 +3899,10 @@
     "position": "WR",
     "team": "LV",
     "value_score": -0.0861,
-    "position_rank": 60,
+    "position_rank": 61,
     "adp": 187.74,
     "adp_position_rank": 68,
-    "value_gap": 8,
+    "value_gap": 7,
     "stats": {
       "ppg": 7.0,
       "volume": 3.0,
@@ -3557,7 +3911,9 @@
       "rushing_ppg": -0.0267,
       "receiving_ppg": 7.0267,
       "td_rate": 0.1333
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "oronde-gadsden-ii-lac",
@@ -3577,18 +3933,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jacksonville-jaguars-jac",
     "name": "Jacksonville Jaguars",
     "position": "DEF",
     "team": "JAC",
-    "value_score": 0.8795,
-    "position_rank": 9,
+    "value_score": 1.0795,
+    "position_rank": 6,
     "adp": 190.41,
     "adp_position_rank": 9,
-    "value_gap": 0,
+    "value_gap": 3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3597,7 +3955,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "streamer",
+    "analyst_note": "Worth rostering on a week-to-week basis when the schedule sets up a soft matchup rather than drafting outright."
   },
   {
     "id": "malik-washington-mia",
@@ -3617,7 +3977,9 @@
       "rushing_ppg": 0.7083,
       "receiving_ppg": 4.025,
       "td_rate": 0.0244
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "t-j-hockenson-min",
@@ -3637,14 +3999,16 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.65,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ka-imi-fairbairn-hou",
     "name": "Ka'imi Fairbairn",
     "position": "K",
     "team": "HOU",
-    "value_score": 1.4165,
+    "value_score": 1.9165,
     "position_rank": 2,
     "adp": 192.42,
     "adp_position_rank": 2,
@@ -3657,7 +4021,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Singled out by the analyst as an especially strong value among the top kicker group, likely benefiting from Houston's offensive volume."
   },
   {
     "id": "jacoby-brissett-ari",
@@ -3677,18 +4043,20 @@
       "rushing_ppg": 0.8857,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "los-angeles-chargers-lac",
     "name": "Los Angeles Chargers",
     "position": "DEF",
     "team": "LAC",
-    "value_score": 0.8389,
-    "position_rank": 10,
+    "value_score": 1.0389,
+    "position_rank": 7,
     "adp": 192.52,
     "adp_position_rank": 10,
-    "value_gap": 0,
+    "value_gap": 3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3697,14 +4065,16 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "streamer",
+    "analyst_note": "Best used opportunistically off the wire against weaker opposing offenses rather than drafted as a season-long starter."
   },
   {
     "id": "cameron-dicker-lac",
     "name": "Cameron Dicker",
     "position": "K",
     "team": "LAC",
-    "value_score": 1.3825,
+    "value_score": 1.7825,
     "position_rank": 3,
     "adp": 193.98,
     "adp_position_rank": 3,
@@ -3717,7 +4087,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Grouped by the analyst among the safest early kicker picks based on leg strength and offensive support."
   },
   {
     "id": "pat-bryant-den",
@@ -3737,7 +4109,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dontayvion-wicks-phi",
@@ -3757,7 +4131,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.5,
       "td_rate": 0.0658
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaylin-noel-hou",
@@ -3777,7 +4153,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ray-davis-buf",
@@ -3797,7 +4175,9 @@
       "rushing_ppg": 3.8875,
       "receiving_ppg": 3.3688,
       "td_rate": 0.0455
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marshawn-lloyd-gb",
@@ -3817,7 +4197,9 @@
       "rushing_ppg": 1.5,
       "receiving_ppg": 1.3,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "sean-tucker-tb",
@@ -3837,14 +4219,16 @@
       "rushing_ppg": 3.8909,
       "receiving_ppg": 2.3545,
       "td_rate": 0.0484
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cam-little-jac",
     "name": "Cam Little",
     "position": "K",
     "team": "JAC",
-    "value_score": 1.2825,
+    "value_score": 1.6825,
     "position_rank": 4,
     "adp": 198.56,
     "adp_position_rank": 4,
@@ -3857,7 +4241,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Praised specifically for elite leg strength, with the analyst noting he can reliably convert from near-70-yard range."
   },
   {
     "id": "emmett-johnson-kc",
@@ -3865,10 +4251,10 @@
     "position": "RB",
     "team": "KC",
     "value_score": -1.8296,
-    "position_rank": 100,
+    "position_rank": 99,
     "adp": 198.98,
     "adp_position_rank": 59,
-    "value_gap": -41,
+    "value_gap": -40,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3877,7 +4263,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kayshon-boutte-ne",
@@ -3897,18 +4285,20 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.9933,
       "td_rate": 0.0441
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "baltimore-ravens-bal",
     "name": "Baltimore Ravens",
     "position": "DEF",
     "team": "BAL",
-    "value_score": 0.7018,
-    "position_rank": 11,
+    "value_score": 1.0018,
+    "position_rank": 8,
     "adp": 199.66,
     "adp_position_rank": 11,
-    "value_gap": 0,
+    "value_gap": 3,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3917,14 +4307,16 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "value",
+    "analyst_note": "Baltimore's scheme is difficult for opposing offenses to prepare for and the roster gained an established edge rusher, making this unit a bargain given where it's typically being drafted."
   },
   {
     "id": "jason-myers-sea",
     "name": "Jason Myers",
     "position": "K",
     "team": "SEA",
-    "value_score": 1.2461,
+    "value_score": 1.6461,
     "position_rank": 5,
     "adp": 200.23,
     "adp_position_rank": 5,
@@ -3937,7 +4329,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "target",
+    "analyst_note": "Included in the analyst's top tier of kickers worth drafting confidently this season."
   },
   {
     "id": "james-conner-ari",
@@ -3945,10 +4339,10 @@
     "position": "RB",
     "team": "ARI",
     "value_score": 0.9135,
-    "position_rank": 17,
+    "position_rank": 16,
     "adp": 200.91,
     "adp_position_rank": 60,
-    "value_gap": 43,
+    "value_gap": 44,
     "stats": {
       "ppg": 15.7375,
       "volume": 18.1875,
@@ -3957,7 +4351,9 @@
       "rushing_ppg": 9.8375,
       "receiving_ppg": 5.9,
       "td_rate": 0.0309
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kimani-vidal-lac",
@@ -3977,7 +4373,9 @@
       "rushing_ppg": 1.7222,
       "receiving_ppg": 1.9111,
       "td_rate": 0.0192
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mike-washington-jr-lv",
@@ -3985,10 +4383,10 @@
     "position": "RB",
     "team": "LV",
     "value_score": -1.8396,
-    "position_rank": 101,
+    "position_rank": 100,
     "adp": 203.34,
     "adp_position_rank": 62,
-    "value_gap": -39,
+    "value_gap": -38,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -3997,7 +4395,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "greg-dulcich-mia",
@@ -4017,7 +4417,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.6,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "green-bay-packers-gb",
@@ -4037,7 +4439,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tank-dell-hou",
@@ -4045,10 +4449,10 @@
     "position": "WR",
     "team": "HOU",
     "value_score": 0.0302,
-    "position_rank": 53,
+    "position_rank": 54,
     "adp": 205.24,
     "adp_position_rank": 74,
-    "value_gap": 21,
+    "value_gap": 20,
     "stats": {
       "ppg": 10.0,
       "volume": 6.4286,
@@ -4057,7 +4461,9 @@
       "rushing_ppg": 0.3071,
       "receiving_ppg": 9.6929,
       "td_rate": 0.0333
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "aj-barner-sea",
@@ -4077,7 +4483,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.6071,
       "td_rate": 0.1053
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "calvin-ridley-ten",
@@ -4085,10 +4493,10 @@
     "position": "WR",
     "team": "TEN",
     "value_score": 0.4801,
-    "position_rank": 33,
+    "position_rank": 35,
     "adp": 207.59,
     "adp_position_rank": 75,
-    "value_gap": 42,
+    "value_gap": 40,
     "stats": {
       "ppg": 11.8353,
       "volume": 7.5294,
@@ -4097,7 +4505,9 @@
       "rushing_ppg": 0.6765,
       "receiving_ppg": 11.1588,
       "td_rate": 0.0391
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "eddy-pineiro-sf",
@@ -4117,7 +4527,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "troy-franklin-den",
@@ -4137,7 +4549,9 @@
       "rushing_ppg": 0.05,
       "receiving_ppg": 4.1437,
       "td_rate": 0.0364
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-loop-bal",
@@ -4157,7 +4571,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kansas-city-chiefs-kc",
@@ -4177,7 +4593,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "nicholas-singleton-ten",
@@ -4185,10 +4603,10 @@
     "position": "RB",
     "team": "TEN",
     "value_score": -1.8496,
-    "position_rank": 102,
+    "position_rank": 101,
     "adp": 211.55,
     "adp_position_rank": 63,
-    "value_gap": -39,
+    "value_gap": -38,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4197,7 +4615,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaac-teslaa-det",
@@ -4217,7 +4637,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "keenan-allen-ind",
@@ -4225,10 +4647,10 @@
     "position": "WR",
     "team": "IND",
     "value_score": 0.3225,
-    "position_rank": 43,
+    "position_rank": 44,
     "adp": 215.11,
     "adp_position_rank": 78,
-    "value_gap": 35,
+    "value_gap": 34,
     "stats": {
       "ppg": 12.4267,
       "volume": 8.0667,
@@ -4237,7 +4659,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 12.4267,
       "td_rate": 0.0579
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "evan-mcpherson-cin",
@@ -4257,7 +4681,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cairo-santos-chi",
@@ -4277,7 +4703,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "darnell-mooney-nyg",
@@ -4285,10 +4713,10 @@
     "position": "WR",
     "team": "NYG",
     "value_score": 0.3801,
-    "position_rank": 40,
+    "position_rank": 42,
     "adp": 217.57,
     "adp_position_rank": 79,
-    "value_gap": 39,
+    "value_gap": 37,
     "stats": {
       "ppg": 12.075,
       "volume": 6.625,
@@ -4297,7 +4725,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 12.075,
       "td_rate": 0.0472
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "gunnar-helm-ten",
@@ -4317,7 +4747,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rashod-bateman-bal",
@@ -4325,10 +4757,10 @@
     "position": "WR",
     "team": "BAL",
     "value_score": 0.4266,
-    "position_rank": 37,
+    "position_rank": 39,
     "adp": 220.32,
     "adp_position_rank": 80,
-    "value_gap": 43,
+    "value_gap": 41,
     "stats": {
       "ppg": 10.9125,
       "volume": 4.5,
@@ -4337,7 +4769,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.9125,
       "td_rate": 0.125
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "emanuel-wilson-sea",
@@ -4357,7 +4791,9 @@
       "rushing_ppg": 4.3647,
       "receiving_ppg": 1.2824,
       "td_rate": 0.0427
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaydon-blue-dal",
@@ -4365,10 +4801,10 @@
     "position": "RB",
     "team": "DAL",
     "value_score": -1.8596,
-    "position_rank": 103,
+    "position_rank": 102,
     "adp": 220.69,
     "adp_position_rank": 65,
-    "value_gap": -38,
+    "value_gap": -37,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4377,18 +4813,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jake-bates-det",
     "name": "Jake Bates",
     "position": "K",
     "team": "DET",
-    "value_score": 0.785,
-    "position_rank": 10,
+    "value_score": 0.385,
+    "position_rank": 14,
     "adp": 221.36,
     "adp_position_rank": 10,
-    "value_gap": 0,
+    "value_gap": -4,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4397,7 +4835,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "fade",
+    "analyst_note": "Analyst downgraded him because Detroit's aggressive fourth-down tendencies in field-goal range cut into his attempt volume and easy scoring chances."
   },
   {
     "id": "detroit-lions-det",
@@ -4417,7 +4857,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "aaron-rodgers-pit",
@@ -4437,7 +4879,9 @@
       "rushing_ppg": 0.6294,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cleveland-browns-cle",
@@ -4457,7 +4901,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kenyon-sadiq-nyj",
@@ -4477,7 +4923,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "terrance-ferguson-lar",
@@ -4497,7 +4945,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "andy-borregales-ne",
@@ -4505,10 +4955,10 @@
     "position": "K",
     "team": "NE",
     "value_score": 0.7268,
-    "position_rank": 11,
+    "position_rank": 10,
     "adp": 224.03,
     "adp_position_rank": 11,
-    "value_gap": 0,
+    "value_gap": 1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4517,7 +4967,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "harrison-mevis-lar",
@@ -4525,10 +4977,10 @@
     "position": "K",
     "team": "LAR",
     "value_score": 0.6967,
-    "position_rank": 12,
+    "position_rank": 11,
     "adp": 225.41,
     "adp_position_rank": 12,
-    "value_gap": 0,
+    "value_gap": 1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4537,7 +4989,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "caleb-douglas-mia",
@@ -4557,7 +5011,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chase-mclaughlin-tb",
@@ -4565,10 +5021,10 @@
     "position": "K",
     "team": "TB",
     "value_score": 0.6864,
-    "position_rank": 13,
+    "position_rank": 12,
     "adp": 225.88,
     "adp_position_rank": 13,
-    "value_gap": 0,
+    "value_gap": 1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4577,7 +5033,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "buffalo-bills-buf",
@@ -4597,7 +5055,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cooper-kupp-sea",
@@ -4605,10 +5065,10 @@
     "position": "WR",
     "team": "SEA",
     "value_score": 0.5795,
-    "position_rank": 29,
+    "position_rank": 30,
     "adp": 226.68,
     "adp_position_rank": 82,
-    "value_gap": 53,
+    "value_gap": 52,
     "stats": {
       "ppg": 14.5833,
       "volume": 8.5,
@@ -4617,7 +5077,9 @@
       "rushing_ppg": 0.0833,
       "receiving_ppg": 14.5,
       "td_rate": 0.0588
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "geno-smith-nyj",
@@ -4637,7 +5099,9 @@
       "rushing_ppg": 2.3059,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cyrus-allen-kc",
@@ -4657,7 +5121,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zachariah-branch-atl",
@@ -4677,7 +5143,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kaytron-allen-was",
@@ -4685,10 +5153,10 @@
     "position": "RB",
     "team": "WAS",
     "value_score": -1.8696,
-    "position_rank": 104,
+    "position_rank": 103,
     "adp": 229.36,
     "adp_position_rank": 66,
-    "value_gap": -38,
+    "value_gap": -37,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4697,7 +5165,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "antonio-williams-was",
@@ -4717,7 +5187,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaylen-wright-mia",
@@ -4737,7 +5209,9 @@
       "rushing_ppg": 1.9154,
       "receiving_ppg": 0.2923,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "germie-bernard-pit",
@@ -4757,7 +5231,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "justice-hill-bal",
@@ -4765,10 +5241,10 @@
     "position": "RB",
     "team": "BAL",
     "value_score": 0.3852,
-    "position_rank": 30,
+    "position_rank": 31,
     "adp": 236.69,
     "adp_position_rank": 68,
-    "value_gap": 38,
+    "value_gap": 37,
     "stats": {
       "ppg": 8.4733,
       "volume": 6.5333,
@@ -4777,7 +5253,9 @@
       "rushing_ppg": 1.92,
       "receiving_ppg": 6.5533,
       "td_rate": 0.0408
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "pat-freiermuth-pit",
@@ -4785,10 +5263,10 @@
     "position": "TE",
     "team": "PIT",
     "value_score": 0.6414,
-    "position_rank": 11,
+    "position_rank": 12,
     "adp": 237.89,
     "adp_position_rank": 28,
-    "value_gap": 17,
+    "value_gap": 16,
     "stats": {
       "ppg": 10.1353,
       "volume": 4.5882,
@@ -4797,7 +5275,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.1353,
       "td_rate": 0.0897
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chimere-dike-ten",
@@ -4817,7 +5297,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jack-bech-lv",
@@ -4837,7 +5319,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-boswell-pit",
@@ -4845,10 +5329,10 @@
     "position": "K",
     "team": "PIT",
     "value_score": 0.3753,
-    "position_rank": 14,
+    "position_rank": 15,
     "adp": 240.14,
     "adp_position_rank": 14,
-    "value_gap": 0,
+    "value_gap": -1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4857,7 +5341,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ollie-gordon-ii-mia",
@@ -4865,10 +5351,10 @@
     "position": "RB",
     "team": "MIA",
     "value_score": -1.8796,
-    "position_rank": 105,
+    "position_rank": 104,
     "adp": 241.66,
     "adp_position_rank": 69,
-    "value_gap": -36,
+    "value_gap": -35,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4877,7 +5363,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cade-otton-tb",
@@ -4885,10 +5373,10 @@
     "position": "TE",
     "team": "TB",
     "value_score": 0.6034,
-    "position_rank": 12,
+    "position_rank": 13,
     "adp": 241.68,
     "adp_position_rank": 29,
-    "value_gap": 17,
+    "value_gap": 16,
     "stats": {
       "ppg": 10.1857,
       "volume": 6.2857,
@@ -4897,7 +5385,9 @@
       "rushing_ppg": -0.0286,
       "receiving_ppg": 10.2143,
       "td_rate": 0.0455
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ted-hurst-iii-tb",
@@ -4917,7 +5407,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "harrison-butker-kc",
@@ -4925,10 +5417,10 @@
     "position": "K",
     "team": "KC",
     "value_score": 0.3028,
-    "position_rank": 15,
+    "position_rank": 16,
     "adp": 243.46,
     "adp_position_rank": 15,
-    "value_gap": 0,
+    "value_gap": -1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4937,7 +5429,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "demond-claiborne-min",
@@ -4945,10 +5439,10 @@
     "position": "RB",
     "team": "MIN",
     "value_score": -1.8896,
-    "position_rank": 106,
+    "position_rank": 105,
     "adp": 244.05,
     "adp_position_rank": 70,
-    "value_gap": -36,
+    "value_gap": -35,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -4957,7 +5451,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "malachi-fields-nyg",
@@ -4977,7 +5473,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "keon-coleman-buf",
@@ -4985,10 +5483,10 @@
     "position": "WR",
     "team": "BUF",
     "value_score": -0.0476,
-    "position_rank": 58,
+    "position_rank": 59,
     "adp": 246.7,
     "adp_position_rank": 91,
-    "value_gap": 33,
+    "value_gap": 32,
     "stats": {
       "ppg": 8.4231,
       "volume": 4.4615,
@@ -4997,7 +5495,9 @@
       "rushing_ppg": 0.0692,
       "receiving_ppg": 8.3538,
       "td_rate": 0.069
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ja-kobi-lane-bal",
@@ -5017,7 +5517,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "george-holani-sea",
@@ -5037,7 +5539,9 @@
       "rushing_ppg": 0.5,
       "receiving_ppg": 0.45,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-bell-mia",
@@ -5057,7 +5561,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elic-ayomanor-ten",
@@ -5077,7 +5583,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dallas-cowboys-dal",
@@ -5097,7 +5605,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "drew-stevens-was",
@@ -5105,10 +5615,10 @@
     "position": "K",
     "team": "WAS",
     "value_score": 0.1274,
-    "position_rank": 16,
+    "position_rank": 17,
     "adp": 251.5,
     "adp_position_rank": 16,
-    "value_gap": 0,
+    "value_gap": -1,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5117,7 +5627,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "david-njoku-lac",
@@ -5137,7 +5649,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 13.1364,
       "td_rate": 0.0515
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaiah-davis-nyj",
@@ -5157,7 +5671,9 @@
       "rushing_ppg": 2.6,
       "receiving_ppg": 2.5,
       "td_rate": 0.0476
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "evan-engram-den",
@@ -5177,7 +5693,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 9.9444,
       "td_rate": 0.0156
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tory-horton-sea",
@@ -5197,7 +5715,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kaelon-black-sf",
@@ -5205,10 +5725,10 @@
     "position": "RB",
     "team": "SF",
     "value_score": -1.8996,
-    "position_rank": 107,
+    "position_rank": 106,
     "adp": 255.46,
     "adp_position_rank": 73,
-    "value_gap": -34,
+    "value_gap": -33,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5217,18 +5737,20 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "will-reichard-min",
     "name": "Will Reichard",
     "position": "K",
     "team": "MIN",
-    "value_score": 0.0157,
-    "position_rank": 17,
+    "value_score": 0.6157,
+    "position_rank": 13,
     "adp": 256.62,
     "adp_position_rank": 17,
-    "value_gap": 0,
+    "value_gap": 4,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5237,7 +5759,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": "sleeper",
+    "analyst_note": "Late-round sleeper call: strong 50-plus-yard accuracy last year (most makes from that distance among all kickers), a dome environment removing weather risk, and an improving Vikings offense that should boost his opportunities."
   },
   {
     "id": "christian-kirk-sf",
@@ -5257,7 +5781,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.8625,
       "td_rate": 0.0213
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "san-francisco-49ers-sf",
@@ -5277,7 +5803,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ty-johnson-buf",
@@ -5297,7 +5825,9 @@
       "rushing_ppg": 1.6059,
       "receiving_ppg": 3.7882,
       "td_rate": 0.0606
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "fernando-mendoza-lv",
@@ -5317,7 +5847,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chicago-bears-chi",
@@ -5337,7 +5869,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "devaughn-vele-no",
@@ -5357,7 +5891,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.1923,
       "td_rate": 0.0545
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elijah-sarratt-bal",
@@ -5377,7 +5913,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trey-benson-ari",
@@ -5397,7 +5935,9 @@
       "rushing_ppg": 2.925,
       "receiving_ppg": 0.9917,
       "td_rate": 0.0145
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tennessee-titans-ten",
@@ -5417,7 +5957,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "blake-grupe-ind",
@@ -5437,7 +5979,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tampa-bay-buccaneers-tb",
@@ -5457,7 +6001,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brandon-aiyuk-sf",
@@ -5477,7 +6023,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.9143,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "xavier-legette-car",
@@ -5497,7 +6045,9 @@
       "rushing_ppg": 0.16,
       "receiving_ppg": 8.18,
       "td_rate": 0.0444
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-james-sf",
@@ -5505,10 +6055,10 @@
     "position": "RB",
     "team": "SF",
     "value_score": -1.9096,
-    "position_rank": 108,
+    "position_rank": 107,
     "adp": 263.07,
     "adp_position_rank": 76,
-    "value_gap": -32,
+    "value_gap": -31,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5517,7 +6067,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cincinnati-bengals-cin",
@@ -5537,7 +6089,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "colby-parkinson-lar",
@@ -5557,7 +6111,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.36,
       "td_rate": 0.0204
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "lequint-allen-jr-jac",
@@ -5565,10 +6121,10 @@
     "position": "RB",
     "team": "JAC",
     "value_score": -1.9196,
-    "position_rank": 109,
+    "position_rank": 108,
     "adp": 264.85,
     "adp_position_rank": 77,
-    "value_gap": -32,
+    "value_gap": -31,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5577,7 +6133,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marvin-mims-jr-den",
@@ -5597,7 +6155,9 @@
       "rushing_ppg": 0.2625,
       "receiving_ppg": 7.8313,
       "td_rate": 0.0923
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyquan-thornton-kc",
@@ -5617,7 +6177,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.175,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "new-orleans-saints-no",
@@ -5637,7 +6199,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "wil-lutz-den",
@@ -5657,7 +6221,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dj-giddens-ind",
@@ -5665,10 +6231,10 @@
     "position": "RB",
     "team": "IND",
     "value_score": -1.9296,
-    "position_rank": 110,
+    "position_rank": 109,
     "adp": 267.05,
     "adp_position_rank": 78,
-    "value_gap": -32,
+    "value_gap": -31,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5677,7 +6243,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-brooks-gb",
@@ -5697,7 +6265,9 @@
       "rushing_ppg": 2.2091,
       "receiving_ppg": 1.6273,
       "td_rate": 0.0204
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "samaje-perine-cin",
@@ -5717,7 +6287,9 @@
       "rushing_ppg": 0.8941,
       "receiving_ppg": 3.8941,
       "td_rate": 0.0364
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "darius-slayton-nyg",
@@ -5737,7 +6309,9 @@
       "rushing_ppg": 0.1062,
       "receiving_ppg": 6.7688,
       "td_rate": 0.0274
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaiah-williams-nyj",
@@ -5757,7 +6331,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.6,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tua-tagovailoa-atl",
@@ -5777,7 +6353,9 @@
       "rushing_ppg": 0.4455,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "najee-harris-nyg",
@@ -5785,10 +6363,10 @@
     "position": "RB",
     "team": "NYG",
     "value_score": 0.2658,
-    "position_rank": 35,
+    "position_rank": 36,
     "adp": 270.15,
     "adp_position_rank": 81,
-    "value_gap": 46,
+    "value_gap": 45,
     "stats": {
       "ppg": 12.0353,
       "volume": 18.2941,
@@ -5797,7 +6375,9 @@
       "rushing_ppg": 8.2529,
       "receiving_ppg": 3.7824,
       "td_rate": 0.0193
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "atlanta-falcons-atl",
@@ -5817,7 +6397,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "new-york-giants-nyg",
@@ -5837,7 +6419,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mason-taylor-nyj",
@@ -5857,7 +6441,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "devin-neal-no",
@@ -5865,10 +6451,10 @@
     "position": "RB",
     "team": "NO",
     "value_score": -1.9396,
-    "position_rank": 111,
+    "position_rank": 110,
     "adp": 272.64,
     "adp_position_rank": 82,
-    "value_gap": -29,
+    "value_gap": -28,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5877,7 +6463,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "darren-waller-car",
@@ -5897,7 +6485,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trey-smack-gb",
@@ -5917,7 +6507,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "khalil-herbert-fa",
@@ -5937,7 +6529,9 @@
       "rushing_ppg": 2.375,
       "receiving_ppg": 1.5625,
       "td_rate": 0.0213
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyreek-hill-fa",
@@ -5945,10 +6539,10 @@
     "position": "WR",
     "team": "FA",
     "value_score": 0.4578,
-    "position_rank": 35,
+    "position_rank": 37,
     "adp": 274.12,
     "adp_position_rank": 105,
-    "value_gap": 70,
+    "value_gap": 68,
     "stats": {
       "ppg": 12.8353,
       "volume": 7.6471,
@@ -5957,7 +6551,9 @@
       "rushing_ppg": 0.3118,
       "receiving_ppg": 12.5235,
       "td_rate": 0.0462
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mike-gesicki-cin",
@@ -5977,7 +6573,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.9688,
       "td_rate": 0.0241
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brashard-smith-kc",
@@ -5985,10 +6583,10 @@
     "position": "RB",
     "team": "KC",
     "value_score": -1.9496,
-    "position_rank": 112,
+    "position_rank": 111,
     "adp": 277.59,
     "adp_position_rank": 84,
-    "value_gap": -28,
+    "value_gap": -27,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -5997,7 +6595,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "andrei-iosivas-cin",
@@ -6005,10 +6605,10 @@
     "position": "WR",
     "team": "CIN",
     "value_score": -0.068,
-    "position_rank": 59,
+    "position_rank": 60,
     "adp": 277.74,
     "adp_position_rank": 106,
-    "value_gap": 47,
+    "value_gap": 46,
     "stats": {
       "ppg": 7.0529,
       "volume": 3.5882,
@@ -6017,7 +6617,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.0529,
       "td_rate": 0.0984
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "indianapolis-colts-ind",
@@ -6037,7 +6639,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyle-williams-ne",
@@ -6057,7 +6661,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mack-hollins-ne",
@@ -6077,7 +6683,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.175,
       "td_rate": 0.1
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "nick-folk-atl",
@@ -6097,7 +6705,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "eli-stowers-phi",
@@ -6117,7 +6727,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kaleb-johnson-pit",
@@ -6125,10 +6737,10 @@
     "position": "RB",
     "team": "PIT",
     "value_score": -1.9596,
-    "position_rank": 113,
+    "position_rank": 112,
     "adp": 279.01,
     "adp_position_rank": 85,
-    "value_gap": -28,
+    "value_gap": -27,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6137,7 +6749,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "theo-johnson-nyg",
@@ -6157,7 +6771,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.81,
       "td_rate": 0.0233
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "malik-davis-dal",
@@ -6165,10 +6781,10 @@
     "position": "RB",
     "team": "DAL",
     "value_score": -1.9696,
-    "position_rank": 114,
+    "position_rank": 113,
     "adp": 279.61,
     "adp_position_rank": 86,
-    "value_gap": -28,
+    "value_gap": -27,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6177,7 +6793,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "las-vegas-raiders-lv",
@@ -6197,7 +6815,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ty-chandler-no",
@@ -6217,7 +6837,9 @@
       "rushing_ppg": 1.82,
       "receiving_ppg": 1.02,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jake-moody-fa",
@@ -6237,7 +6859,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "carolina-panthers-car",
@@ -6257,7 +6881,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "charlie-smyth-no",
@@ -6277,7 +6903,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jahan-dotson-atl",
@@ -6297,7 +6925,9 @@
       "rushing_ppg": 0.0929,
       "receiving_ppg": 2.9,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "seth-mcgowan-ind",
@@ -6305,10 +6935,10 @@
     "position": "RB",
     "team": "IND",
     "value_score": -1.9796,
-    "position_rank": 115,
+    "position_rank": 114,
     "adp": 285.73,
     "adp_position_rank": 88,
-    "value_gap": -27,
+    "value_gap": -26,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6317,7 +6947,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "roman-hemby-lv",
@@ -6325,10 +6957,10 @@
     "position": "RB",
     "team": "LV",
     "value_score": -1.9896,
-    "position_rank": 116,
+    "position_rank": 115,
     "adp": 286.0,
     "adp_position_rank": 89,
-    "value_gap": -27,
+    "value_gap": -26,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6337,7 +6969,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "adam-randall-bal",
@@ -6345,10 +6979,10 @@
     "position": "RB",
     "team": "BAL",
     "value_score": -1.9996,
-    "position_rank": 117,
+    "position_rank": 116,
     "adp": 287.56,
     "adp_position_rank": 90,
-    "value_gap": -27,
+    "value_gap": -26,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6357,7 +6991,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jake-tonges-sf",
@@ -6377,7 +7013,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "hollywood-brown-phi",
@@ -6397,7 +7035,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-tolbert-mia",
@@ -6405,10 +7045,10 @@
     "position": "WR",
     "team": "MIA",
     "value_score": 0.0684,
-    "position_rank": 49,
+    "position_rank": 50,
     "adp": 288.47,
     "adp_position_rank": 111,
-    "value_gap": 62,
+    "value_gap": 61,
     "stats": {
       "ppg": 8.9412,
       "volume": 4.6471,
@@ -6417,7 +7057,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.9412,
       "td_rate": 0.0886
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-bass-buf",
@@ -6437,7 +7079,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "skyler-bell-buf",
@@ -6457,7 +7101,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-penix-jr-atl",
@@ -6477,7 +7123,9 @@
       "rushing_ppg": 1.42,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jake-elliott-phi",
@@ -6497,7 +7145,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kirk-cousins-lv",
@@ -6517,7 +7167,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kendre-miller-no",
@@ -6537,7 +7189,9 @@
       "rushing_ppg": 3.4667,
       "receiving_ppg": 1.3833,
       "td_rate": 0.0213
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "emari-demercado-kc",
@@ -6557,7 +7211,9 @@
       "rushing_ppg": 2.1769,
       "receiving_ppg": 2.0308,
       "td_rate": 0.0227
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brandon-mcmanus-fa",
@@ -6577,7 +7233,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chris-brazzell-ii-car",
@@ -6597,7 +7255,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaiah-bond-cle",
@@ -6617,7 +7277,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "deshaun-watson-cle",
@@ -6637,7 +7299,9 @@
       "rushing_ppg": 2.9714,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "devin-singletary-nyg",
@@ -6657,7 +7321,9 @@
       "rushing_ppg": 4.5133,
       "receiving_ppg": 2.1933,
       "td_rate": 0.0292
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "daniel-carlson-lv",
@@ -6677,7 +7343,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kyle-juszczyk-sf",
@@ -6685,10 +7353,10 @@
     "position": "RB",
     "team": "SF",
     "value_score": 0.2642,
-    "position_rank": 36,
+    "position_rank": 37,
     "adp": 295.22,
     "adp_position_rank": 94,
-    "value_gap": 58,
+    "value_gap": 57,
     "stats": {
       "ppg": 4.2571,
       "volume": 2.5714,
@@ -6697,7 +7365,9 @@
       "rushing_ppg": 0.6143,
       "receiving_ppg": 3.6429,
       "td_rate": 0.0833
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "spencer-shrader-ind",
@@ -6717,7 +7387,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jerome-ford-was",
@@ -6725,10 +7397,10 @@
     "position": "RB",
     "team": "WAS",
     "value_score": 0.203,
-    "position_rank": 37,
+    "position_rank": 38,
     "adp": 295.58,
     "adp_position_rank": 95,
-    "value_gap": 58,
+    "value_gap": 57,
     "stats": {
       "ppg": 9.5714,
       "volume": 10.5,
@@ -6737,7 +7409,9 @@
       "rushing_ppg": 5.3214,
       "receiving_ppg": 4.25,
       "td_rate": 0.0204
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "demario-douglas-ne",
@@ -6757,7 +7431,9 @@
       "rushing_ppg": 0.1,
       "receiving_ppg": 9.1312,
       "td_rate": 0.0333
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zane-gonzalez-fa",
@@ -6777,7 +7453,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "darnell-washington-pit",
@@ -6797,7 +7475,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.4615,
       "td_rate": 0.04
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "xavier-smith-lar",
@@ -6817,7 +7497,9 @@
       "rushing_ppg": 1.2,
       "receiving_ppg": 0.8667,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "shedeur-sanders-cle",
@@ -6837,7 +7519,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "washington-commanders-was",
@@ -6857,7 +7541,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "oscar-delp-no",
@@ -6877,7 +7563,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jeremy-mcnichols-was",
@@ -6897,7 +7585,9 @@
       "rushing_ppg": 3.5786,
       "receiving_ppg": 0.8357,
       "td_rate": 0.0597
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "konata-mumpfield-lar",
@@ -6917,7 +7607,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaleel-mclaughlin-den",
@@ -6937,7 +7629,9 @@
       "rushing_ppg": 3.475,
       "receiving_ppg": 2.725,
       "td_rate": 0.0214
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tahj-brooks-cin",
@@ -6945,10 +7639,10 @@
     "position": "RB",
     "team": "CIN",
     "value_score": -2.0096,
-    "position_rank": 118,
+    "position_rank": 117,
     "adp": 301.32,
     "adp_position_rank": 98,
-    "value_gap": -20,
+    "value_gap": -19,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6957,7 +7651,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bam-knight-ari",
@@ -6965,10 +7661,10 @@
     "position": "RB",
     "team": "ARI",
     "value_score": -2.0196,
-    "position_rank": 119,
+    "position_rank": 118,
     "adp": 301.44,
     "adp_position_rank": 99,
-    "value_gap": -20,
+    "value_gap": -19,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -6977,7 +7673,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "isaac-guerendo-sf",
@@ -6997,7 +7695,9 @@
       "rushing_ppg": 5.0769,
       "receiving_ppg": 2.3231,
       "td_rate": 0.04
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trevor-etienne-car",
@@ -7017,7 +7717,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "bryce-lance-no",
@@ -7037,7 +7739,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "xavier-hutchinson-hou",
@@ -7057,7 +7761,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 1.6929,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "eli-heidenreich-pit",
@@ -7077,7 +7783,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-mayer-lv",
@@ -7097,7 +7805,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.3273,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "charlie-kolar-lac",
@@ -7117,7 +7827,9 @@
       "rushing_ppg": 0.0286,
       "receiving_ppg": 4.0143,
       "td_rate": 0.0833
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "audric-estime-no",
@@ -7137,7 +7849,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joe-mixon-fa",
@@ -7145,10 +7859,10 @@
     "position": "RB",
     "team": "FA",
     "value_score": 1.0389,
-    "position_rank": 12,
+    "position_rank": 11,
     "adp": 305.5,
     "adp_position_rank": 104,
-    "value_gap": 92,
+    "value_gap": 93,
     "stats": {
       "ppg": 17.1786,
       "volume": 21.2143,
@@ -7157,7 +7871,9 @@
       "rushing_ppg": 11.9714,
       "receiving_ppg": 5.2071,
       "td_rate": 0.0404
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "chad-ryland-ari",
@@ -7177,7 +7893,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ryan-fitzgerald-car",
@@ -7197,7 +7915,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-reagor-mia",
@@ -7217,7 +7937,9 @@
       "rushing_ppg": -0.0429,
       "receiving_ppg": 2.4286,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kendrick-bourne-ari",
@@ -7237,7 +7959,9 @@
       "rushing_ppg": 0.05,
       "receiving_ppg": 5.375,
       "td_rate": 0.0256
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jarquez-hunter-lar",
@@ -7257,7 +7981,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cash-jones-atl",
@@ -7277,7 +8003,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "hunter-luepke-dal",
@@ -7297,7 +8025,9 @@
       "rushing_ppg": 0.2923,
       "receiving_ppg": 1.7769,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "roman-wilson-pit",
@@ -7317,7 +8047,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "barion-brown-no",
@@ -7337,7 +8069,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joshua-palmer-buf",
@@ -7357,7 +8091,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.8933,
       "td_rate": 0.0154
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "raheim-sanders-cle",
@@ -7377,7 +8113,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "olamide-zaccheaus-atl",
@@ -7397,7 +8135,9 @@
       "rushing_ppg": 0.0533,
       "receiving_ppg": 7.5733,
       "td_rate": 0.0462
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kavontae-turpin-dal",
@@ -7417,7 +8157,9 @@
       "rushing_ppg": 0.6133,
       "receiving_ppg": 5.6667,
       "td_rate": 0.0294
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elijah-arroyo-sea",
@@ -7437,7 +8179,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tez-johnson-tb",
@@ -7457,7 +8201,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brandin-cooks-fa",
@@ -7477,7 +8223,9 @@
       "rushing_ppg": -0.03,
       "receiving_ppg": 6.99,
       "td_rate": 0.0526
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "calvin-austin-iii-nyg",
@@ -7497,7 +8245,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.7529,
       "td_rate": 0.069
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-royals-kc",
@@ -7517,7 +8267,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "will-shipley-phi",
@@ -7537,7 +8289,9 @@
       "rushing_ppg": 1.64,
       "receiving_ppg": 1.5,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaret-patterson-lac",
@@ -7557,7 +8311,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cedric-tillman-cle",
@@ -7577,7 +8333,9 @@
       "rushing_ppg": -0.0556,
       "receiving_ppg": 8.9889,
       "td_rate": 0.06
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ashton-dulin-ind",
@@ -7597,7 +8355,9 @@
       "rushing_ppg": 0.5,
       "receiving_ppg": 1.6333,
       "td_rate": 0.0769
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "brenen-thompson-lac",
@@ -7617,7 +8377,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kalif-raymond-chi",
@@ -7637,7 +8399,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.05,
       "td_rate": 0.0833
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "phil-mafah-dal",
@@ -7657,7 +8421,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "noah-whittington-hou",
@@ -7677,7 +8443,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kareem-hunt-fa",
@@ -7685,10 +8453,10 @@
     "position": "RB",
     "team": "FA",
     "value_score": 0.2834,
-    "position_rank": 33,
+    "position_rank": 34,
     "adp": 316.46,
     "adp_position_rank": 113,
-    "value_gap": 80,
+    "value_gap": 79,
     "stats": {
       "ppg": 11.9538,
       "volume": 17.8462,
@@ -7697,7 +8465,9 @@
       "rushing_ppg": 8.8308,
       "receiving_ppg": 3.1231,
       "td_rate": 0.0302
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joey-slye-ten",
@@ -7717,7 +8487,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "nick-westbrook-ikhine-ind",
@@ -7725,10 +8497,10 @@
     "position": "WR",
     "team": "IND",
     "value_score": 0.4107,
-    "position_rank": 39,
+    "position_rank": 41,
     "adp": 318.2,
     "adp_position_rank": 135,
-    "value_gap": 96,
+    "value_gap": 94,
     "stats": {
       "ppg": 10.4385,
       "volume": 4.6154,
@@ -7737,7 +8509,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.4385,
       "td_rate": 0.15
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-goodson-atl",
@@ -7757,7 +8531,9 @@
       "rushing_ppg": 2.3667,
       "receiving_ppg": 2.5667,
       "td_rate": 0.0426
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "will-kacmarek-mia",
@@ -7777,7 +8553,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "erick-all-jr-cin",
@@ -7797,7 +8575,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.475,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "devontez-walker-bal",
@@ -7805,10 +8585,10 @@
     "position": "WR",
     "team": "BAL",
     "value_score": 0.0166,
-    "position_rank": 54,
+    "position_rank": 55,
     "adp": 319.91,
     "adp_position_rank": 136,
-    "value_gap": 82,
+    "value_gap": 81,
     "stats": {
       "ppg": 4.55,
       "volume": 1.5,
@@ -7817,7 +8597,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.55,
       "td_rate": 0.3333
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "carson-beck-ari",
@@ -7837,7 +8619,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "new-york-jets-nyj",
@@ -7857,7 +8641,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cedrick-wilson-jr-det",
@@ -7877,7 +8663,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.71,
       "td_rate": 0.037
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "reggie-virgil-ari",
@@ -7897,7 +8685,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "luke-mccaffrey-was",
@@ -7917,7 +8707,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.9,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zavier-scott-min",
@@ -7937,7 +8729,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-higbee-lar",
@@ -7957,7 +8751,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.8667,
       "td_rate": 0.1667
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "malik-benson-lv",
@@ -7977,7 +8773,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kevin-coleman-jr-mia",
@@ -7997,7 +8795,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "scotty-miller-chi",
@@ -8017,7 +8817,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.975,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "sione-vaki-det",
@@ -8037,7 +8839,9 @@
       "rushing_ppg": 0.35,
       "receiving_ppg": 1.675,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tutu-atwell-mia",
@@ -8057,7 +8861,9 @@
       "rushing_ppg": 0.0467,
       "receiving_ppg": 6.5467,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "j-j-mccarthy-min",
@@ -8077,7 +8883,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jawhar-jordan-hou",
@@ -8097,7 +8905,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "eli-raridon-ne",
@@ -8117,7 +8927,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dylan-laube-lv",
@@ -8125,10 +8937,10 @@
     "position": "RB",
     "team": "LV",
     "value_score": -1.6796,
-    "position_rank": 85,
+    "position_rank": 86,
     "adp": 324.0,
     "adp_position_rank": 118,
-    "value_gap": 33,
+    "value_gap": 32,
     "stats": {
       "ppg": 0.0,
       "volume": 1.0,
@@ -8137,7 +8949,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 0.0,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cole-kmet-chi",
@@ -8157,7 +8971,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 8.4571,
       "td_rate": 0.0727
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "john-metchie-iii-car",
@@ -8177,7 +8993,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.54,
       "td_rate": 0.027
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "treylon-burks-was",
@@ -8197,7 +9015,9 @@
       "rushing_ppg": 0.02,
       "receiving_ppg": 1.48,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jam-miller-ne",
@@ -8217,7 +9037,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "rasheen-ali-bal",
@@ -8225,10 +9047,10 @@
     "position": "RB",
     "team": "BAL",
     "value_score": -1.4617,
-    "position_rank": 84,
+    "position_rank": 85,
     "adp": 325.5,
     "adp_position_rank": 120,
-    "value_gap": 36,
+    "value_gap": 35,
     "stats": {
       "ppg": 0.775,
       "volume": 3.0,
@@ -8237,7 +9059,9 @@
       "rushing_ppg": 0.775,
       "receiving_ppg": 0.0,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "miami-dolphins-mia",
@@ -8257,7 +9081,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "john-bates-was",
@@ -8277,7 +9103,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 1.64,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "noah-gray-kc",
@@ -8297,7 +9125,9 @@
       "rushing_ppg": -0.025,
       "receiving_ppg": 7.1063,
       "td_rate": 0.1
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mitch-tinsley-cin",
@@ -8317,7 +9147,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-carter-ten",
@@ -8337,7 +9169,9 @@
       "rushing_ppg": 6.3667,
       "receiving_ppg": 5.5667,
       "td_rate": 0.0217
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dont-e-thornton-jr-lv",
@@ -8357,7 +9191,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "j-mari-taylor-jac",
@@ -8377,7 +9213,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ben-sauls-nyg",
@@ -8397,7 +9235,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "max-klare-lar",
@@ -8417,7 +9257,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "robert-henry-jr-was",
@@ -8437,7 +9279,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "nick-chubb-fa",
@@ -8457,7 +9301,9 @@
       "rushing_ppg": 6.4,
       "receiving_ppg": 1.7625,
       "td_rate": 0.0354
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ja-tavion-sanders-car",
@@ -8477,7 +9323,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.88,
       "td_rate": 0.0233
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dawson-knox-buf",
@@ -8497,7 +9345,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.2214,
       "td_rate": 0.0303
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-watkins-sf",
@@ -8517,7 +9367,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "demarcus-robinson-sf",
@@ -8525,10 +9377,10 @@
     "position": "WR",
     "team": "SF",
     "value_score": -0.0074,
-    "position_rank": 55,
+    "position_rank": 56,
     "adp": 333.3,
     "adp_position_rank": 149,
-    "value_gap": 94,
+    "value_gap": 93,
     "stats": {
       "ppg": 7.2647,
       "volume": 3.7647,
@@ -8537,7 +9389,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.2647,
       "td_rate": 0.1094
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "donovan-edwards-mia",
@@ -8557,7 +9411,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "odell-beckham-jr-nyg",
@@ -8577,7 +9433,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 1.8125,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jahdae-walker-chi",
@@ -8597,7 +9455,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mac-jones-sf",
@@ -8617,7 +9477,9 @@
       "rushing_ppg": 1.52,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cj-daniels-lar",
@@ -8637,7 +9499,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zavion-thomas-chi",
@@ -8657,7 +9521,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "reggie-gilliam-ne",
@@ -8677,7 +9543,9 @@
       "rushing_ppg": 0.35,
       "receiving_ppg": 0.0,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tommy-myers-fa",
@@ -8697,7 +9565,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "frank-gore-jr-buf",
@@ -8717,7 +9587,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elijah-moore-phi",
@@ -8737,7 +9609,9 @@
       "rushing_ppg": 0.0059,
       "receiving_ppg": 7.1059,
       "td_rate": 0.0097
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "xavier-restrepo-ten",
@@ -8757,7 +9631,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "justin-joly-den",
@@ -8777,7 +9653,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "theo-wease-jr-mia",
@@ -8797,7 +9675,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-woods-ii-den",
@@ -8805,10 +9685,10 @@
     "position": "WR",
     "team": "DEN",
     "value_score": -2.0917,
-    "position_rank": 168,
+    "position_rank": 169,
     "adp": 338.0,
     "adp_position_rank": 156,
-    "value_gap": -12,
+    "value_gap": -13,
     "stats": {
       "ppg": null,
       "volume": null,
@@ -8817,7 +9697,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "greg-dortch-det",
@@ -8837,7 +9719,9 @@
       "rushing_ppg": 0.1824,
       "receiving_ppg": 5.2471,
       "td_rate": 0.0545
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "savion-williams-gb",
@@ -8857,7 +9741,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaydn-ott-kc",
@@ -8877,7 +9763,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "van-jefferson-was",
@@ -8897,7 +9785,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.24,
       "td_rate": 0.05
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "colbie-young-cin",
@@ -8917,7 +9807,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jeremy-ruckert-nyj",
@@ -8937,7 +9829,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.1923,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ronnie-rivers-lar",
@@ -8957,7 +9851,9 @@
       "rushing_ppg": 1.98,
       "receiving_ppg": 1.68,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "justin-fields-kc",
@@ -8977,7 +9873,9 @@
       "rushing_ppg": 5.89,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "roschon-johnson-chi",
@@ -8997,7 +9895,9 @@
       "rushing_ppg": 4.25,
       "receiving_ppg": 2.2,
       "td_rate": 0.08
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "anthony-richardson-sr-ind",
@@ -9017,7 +9917,9 @@
       "rushing_ppg": 7.8091,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "noah-fant-no",
@@ -9037,7 +9939,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.4286,
       "td_rate": 0.0156
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joe-flacco-cin",
@@ -9057,7 +9961,9 @@
       "rushing_ppg": 0.3714,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ty-simpson-lar",
@@ -9077,7 +9983,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marlin-klein-hou",
@@ -9097,7 +10005,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "travis-homer-pit",
@@ -9117,7 +10027,9 @@
       "rushing_ppg": 0.575,
       "receiving_ppg": 1.025,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jaylin-lane-was",
@@ -9137,7 +10049,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dameon-pierce-phi",
@@ -9157,7 +10071,9 @@
       "rushing_ppg": 4.5889,
       "receiving_ppg": 0.2444,
       "td_rate": 0.0455
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tommy-tremble-car",
@@ -9177,7 +10093,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.84,
       "td_rate": 0.0625
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "david-sills-v-tb",
@@ -9197,7 +10115,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "austin-ekeler-fa",
@@ -9217,7 +10137,9 @@
       "rushing_ppg": 5.0583,
       "receiving_ppg": 5.9667,
       "td_rate": 0.0339
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "myles-montgomery-fa",
@@ -9237,7 +10159,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jameis-winston-nyg",
@@ -9257,7 +10181,9 @@
       "rushing_ppg": 1.3,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jordan-whittington-lar",
@@ -9277,7 +10203,9 @@
       "rushing_ppg": 0.2,
       "receiving_ppg": 8.55,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "miles-davis-car",
@@ -9297,7 +10225,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tai-felton-min",
@@ -9317,7 +10247,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "juice-wells-jr-atl",
@@ -9337,7 +10269,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "terrell-jennings-fa",
@@ -9357,7 +10291,9 @@
       "rushing_ppg": 1.65,
       "receiving_ppg": 0.0,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "quinn-ewers-mia",
@@ -9377,7 +10313,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marcus-mariota-was",
@@ -9397,7 +10335,9 @@
       "rushing_ppg": 5.0667,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jonnu-smith-fa",
@@ -9405,10 +10345,10 @@
     "position": "TE",
     "team": "FA",
     "value_score": 0.8559,
-    "position_rank": 6,
+    "position_rank": 7,
     "adp": 352.2,
     "adp_position_rank": 60,
-    "value_gap": 54,
+    "value_gap": 53,
     "stats": {
       "ppg": 13.1941,
       "volume": 6.6471,
@@ -9417,7 +10357,9 @@
       "rushing_ppg": -0.0059,
       "receiving_ppg": 13.2,
       "td_rate": 0.0708
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-lockett-lv",
@@ -9437,7 +10379,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.1176,
       "td_rate": 0.027
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "cade-klubnik-nyj",
@@ -9457,7 +10401,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "miles-sanders-fa",
@@ -9477,7 +10423,9 @@
       "rushing_ppg": 2.9545,
       "receiving_ppg": 4.0727,
       "td_rate": 0.0353
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "austin-hooper-atl",
@@ -9497,7 +10445,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.5059,
       "td_rate": 0.0508
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "joe-milton-iii-dal",
@@ -9517,7 +10467,9 @@
       "rushing_ppg": 7.6,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tanner-koziol-jac",
@@ -9537,7 +10489,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jacob-cowing-sf",
@@ -9557,7 +10511,9 @@
       "rushing_ppg": 0.2333,
       "receiving_ppg": 4.0,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tim-patrick-nyj",
@@ -9577,7 +10533,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 6.0267,
       "td_rate": 0.0682
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "luke-musgrave-gb",
@@ -9597,7 +10555,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 1.6429,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "riley-leonard-ind",
@@ -9617,7 +10577,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "gardner-minshew-ii-ari",
@@ -9637,7 +10599,9 @@
       "rushing_ppg": 0.58,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "ben-sinnott-was",
@@ -9657,7 +10621,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.45,
       "td_rate": 0.2
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jimmy-horn-jr-car",
@@ -9677,7 +10643,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "daniel-bellinger-ten",
@@ -9697,7 +10665,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.7857,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "arizona-cardinals-ari",
@@ -9717,7 +10687,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mason-rudolph-pit",
@@ -9737,7 +10709,9 @@
       "rushing_ppg": 2.075,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "matt-hibner-bal",
@@ -9757,7 +10731,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mitchell-evans-car",
@@ -9777,7 +10753,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "mo-alie-cox-ind",
@@ -9797,7 +10775,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 2.725,
       "td_rate": 0.0455
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elijah-mitchell-fa",
@@ -9817,7 +10797,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "josh-oliver-min",
@@ -9837,7 +10819,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.9818,
       "td_rate": 0.1071
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "sam-roush-chi",
@@ -9857,7 +10841,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "deion-burks-ind",
@@ -9877,7 +10863,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "damien-martinez-gb",
@@ -9897,7 +10885,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "zach-ertz-fa",
@@ -9905,10 +10895,10 @@
     "position": "TE",
     "team": "FA",
     "value_score": 0.5363,
-    "position_rank": 13,
+    "position_rank": 14,
     "adp": 365.67,
     "adp_position_rank": 71,
-    "value_gap": 58,
+    "value_gap": 57,
     "stats": {
       "ppg": 10.2,
       "volume": 5.3529,
@@ -9917,7 +10907,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 10.2,
       "td_rate": 0.0769
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "deandre-hopkins-bal",
@@ -9937,7 +10929,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 9.1875,
       "td_rate": 0.0625
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jalen-milroe-sea",
@@ -9957,7 +10951,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "antonio-gibson-fa",
@@ -9977,7 +10973,9 @@
       "rushing_ppg": 3.5176,
       "receiving_ppg": 2.5647,
       "td_rate": 0.0067
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "taysom-hill-fa",
@@ -9997,7 +10995,9 @@
       "rushing_ppg": 7.975,
       "receiving_ppg": 5.2125,
       "td_rate": 0.0857
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "elijah-higgins-ari",
@@ -10017,7 +11017,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.5143,
       "td_rate": 0.0833
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "nate-boerkircher-jac",
@@ -10037,7 +11039,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jackson-hawes-buf",
@@ -10057,7 +11061,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "adam-trautman-den",
@@ -10077,7 +11083,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.3692,
       "td_rate": 0.0909
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyrod-taylor-gb",
@@ -10097,7 +11105,9 @@
       "rushing_ppg": 0.65,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "marquez-valdes-scantling-dal",
@@ -10117,7 +11127,9 @@
       "rushing_ppg": 0.0308,
       "receiving_ppg": 6.4692,
       "td_rate": 0.0889
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "josh-cameron-jac",
@@ -10137,7 +11149,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "tyler-conklin-det",
@@ -10157,7 +11171,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 7.4938,
       "td_rate": 0.0548
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "drew-sample-cin",
@@ -10177,7 +11193,9 @@
       "rushing_ppg": -0.0364,
       "receiving_ppg": 3.3545,
       "td_rate": 0.0435
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "luke-schoonmaker-dal",
@@ -10197,7 +11215,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 5.71,
       "td_rate": 0.0278
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "kendrick-law-det",
@@ -10217,7 +11237,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jason-sanders-nyj",
@@ -10237,7 +11259,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "trey-lance-lac",
@@ -10257,7 +11281,9 @@
       "rushing_ppg": 1.025,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dean-connors-lar",
@@ -10277,7 +11303,9 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "juju-smith-schuster-fa",
@@ -10297,7 +11325,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.8273,
       "td_rate": 0.0769
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "dyami-brown-was",
@@ -10317,7 +11347,9 @@
       "rushing_ppg": 0.1733,
       "receiving_ppg": 4.4533,
       "td_rate": 0.0233
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "lil-jordan-humphrey-den",
@@ -10337,7 +11369,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 4.7357,
       "td_rate": 0.0222
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "jermaine-burton-fa",
@@ -10357,7 +11391,9 @@
       "rushing_ppg": 0.0,
       "receiving_ppg": 3.675,
       "td_rate": 0.0
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   },
   {
     "id": "michael-trigg-dal",
@@ -10377,6 +11413,8 @@
       "rushing_ppg": null,
       "receiving_ppg": null,
       "td_rate": null
-    }
+    },
+    "analyst_tag": null,
+    "analyst_note": null
   }
 ]

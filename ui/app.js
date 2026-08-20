@@ -300,15 +300,18 @@ function positionNeedScore(position, openCounts) {
 //                   slots are weighted much higher than ones already
 //                   filled (bench-only need gets a small bump too).
 function computeRecommendationScore(player, openCounts) {
-  // value_score is a small z-score (~-2..+2), but value_gap can swing into
-  // the hundreds for deep-bench/FA-adjacent players (see data/README.md —
-  // it's rank-distance, not points). Weighting them equally let huge gaps
-  // on low-value players (e.g. WR rank #70 with a +100 gap) outrank clear
-  // elite talent (e.g. a #1-ranked player with gap 0) at the top of the
-  // draft. Scale value_score up and clamp value_gap's swing so gap acts as
-  // a tiebreaker/boost among comparable players, not the dominant term.
+  // Recommendations must track overall draft order first (ADP), with
+  // value_gap as a small nudge — not the reverse. An earlier version
+  // scaled value_score/value_gap directly, which let a round-6/7 sleeper
+  // (e.g. WR rank #3 with a +31 gap) outscore the actual #1 overall pick
+  // (gap 0, since ADP already prices them correctly) — nonsense advice at
+  // the top of a draft, since you'd never draft a round-7 player 1st
+  // overall for a "value" argument. Anchoring on -adp keeps recommendations
+  // in realistic draft order; value_gap only breaks ties/nudges within a
+  // similar tier, clamped so it can never flip the order across rounds.
+  const adpScore = 600 - Math.min(player.adp, 600); // higher = earlier ADP
   const clampedGap = Math.max(-20, Math.min(20, player.value_gap));
-  const base = player.value_score * 8 + clampedGap * 0.4;
+  const base = adpScore + clampedGap * 2;
   const needScore = positionNeedScore(player.position, openCounts);
   let needMultiplier;
   if (needScore > 0) {

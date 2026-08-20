@@ -64,6 +64,14 @@ body{
   border-radius:20px;
 }
 
+/* Build/version badge — see BUILD_VERSION comment in index.html.
+   Bump the version text here (and in index.html) on every app.js/style.css change. */
+.badge-build{
+  color:var(--accent);
+  border-color:var(--accent-dim);
+  opacity:0.85;
+}
+
 .btn{
   border:none;
   border-radius:var(--radius);
@@ -90,6 +98,18 @@ body{
   align-items:center;
   justify-content:center;
   z-index:100;
+}
+
+/* The [hidden] attribute alone is not enough here: the UA stylesheet's
+   `[hidden] { display: none }` rule has the same specificity as the
+   `.reset-confirm-overlay` class rule above, and author-origin CSS always
+   wins over user-agent-origin CSS at equal specificity — so without this
+   explicit override, setting `.hidden = true` in JS does NOT actually hide
+   the overlay; it stays rendered as `display:flex` and keeps intercepting
+   clicks (and sits on top of / behind the other overlay), which is exactly
+   what makes Cancel/×/backdrop-click/Escape all appear to silently fail. */
+.reset-confirm-overlay[hidden]{
+  display:none !important;
 }
 
 .reset-confirm-box{

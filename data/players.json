@@ -8,7 +8,13 @@
     "position_rank": 1,
     "adp": 1.52,
     "adp_position_rank": 1,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 23.7059,
+      "volume": 10.4706,
+      "snap_share": 0.9229,
+      "efficiency": 2.264
+    }
   },
   {
     "id": "jahmyr-gibbs-det",
@@ -19,7 +25,13 @@
     "position_rank": 5,
     "adp": 2.89,
     "adp_position_rank": 1,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 20.8765,
+      "volume": 18.4118,
+      "snap_share": 0.5639,
+      "efficiency": 1.1339
+    }
   },
   {
     "id": "puka-nacua-lar",
@@ -30,7 +42,13 @@
     "position_rank": 7,
     "adp": 3.51,
     "adp_position_rank": 2,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 18.7818,
+      "volume": 10.6364,
+      "snap_share": 0.7238,
+      "efficiency": 1.7658
+    }
   },
   {
     "id": "bijan-robinson-atl",
@@ -41,7 +59,13 @@
     "position_rank": 2,
     "adp": 3.81,
     "adp_position_rank": 2,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 20.1,
+      "volume": 22.1176,
+      "snap_share": 0.7535,
+      "efficiency": 0.9088
+    }
   },
   {
     "id": "jaxon-smith-njigba-sea",
@@ -52,7 +76,13 @@
     "position_rank": 21,
     "adp": 4.79,
     "adp_position_rank": 3,
-    "value_gap": -18
+    "value_gap": -18,
+    "stats": {
+      "ppg": 14.8824,
+      "volume": 8.3529,
+      "snap_share": 0.8641,
+      "efficiency": 1.7817
+    }
   },
   {
     "id": "amon-ra-st-brown-det",
@@ -63,7 +93,13 @@
     "position_rank": 6,
     "adp": 5.46,
     "adp_position_rank": 4,
-    "value_gap": -2
+    "value_gap": -2,
+    "stats": {
+      "ppg": 18.5988,
+      "volume": 8.4118,
+      "snap_share": 0.8872,
+      "efficiency": 2.211
+    }
   },
   {
     "id": "ceedee-lamb-dal",
@@ -74,7 +110,13 @@
     "position_rank": 10,
     "adp": 8.86,
     "adp_position_rank": 5,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 17.56,
+      "volume": 11.0667,
+      "snap_share": 0.802,
+      "efficiency": 1.5867
+    }
   },
   {
     "id": "justin-jefferson-min",
@@ -85,7 +127,13 @@
     "position_rank": 5,
     "adp": 9.15,
     "adp_position_rank": 6,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 18.6753,
+      "volume": 9.1176,
+      "snap_share": 0.9311,
+      "efficiency": 2.0483
+    }
   },
   {
     "id": "christian-mccaffrey-sf",
@@ -96,7 +144,13 @@
     "position_rank": 22,
     "adp": 10.21,
     "adp_position_rank": 3,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 11.95,
+      "volume": 17.25,
+      "snap_share": 0.7225,
+      "efficiency": 0.6928
+    }
   },
   {
     "id": "drake-london-atl",
@@ -107,7 +161,13 @@
     "position_rank": 11,
     "adp": 12.21,
     "adp_position_rank": 7,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 16.5176,
+      "volume": 9.3529,
+      "snap_share": 0.8971,
+      "efficiency": 1.766
+    }
   },
   {
     "id": "jonathan-taylor-ind",
@@ -118,7 +178,13 @@
     "position_rank": 4,
     "adp": 12.73,
     "adp_position_rank": 4,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 17.6214,
+      "volume": 23.8571,
+      "snap_share": 0.8029,
+      "efficiency": 0.7386
+    }
   },
   {
     "id": "a-j-brown-ne",
@@ -129,7 +195,13 @@
     "position_rank": 12,
     "adp": 14.08,
     "adp_position_rank": 8,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 16.6846,
+      "volume": 7.4615,
+      "snap_share": 0.8782,
+      "efficiency": 2.2361
+    }
   },
   {
     "id": "ashton-jeanty-lv",
@@ -140,7 +212,13 @@
     "position_rank": 86,
     "adp": 16.52,
     "adp_position_rank": 5,
-    "value_gap": -81
+    "value_gap": -81,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "nico-collins-hou",
@@ -151,7 +229,13 @@
     "position_rank": 13,
     "adp": 16.93,
     "adp_position_rank": 9,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 17.55,
+      "volume": 8.25,
+      "snap_share": 0.6893,
+      "efficiency": 2.1273
+    }
   },
   {
     "id": "james-cook-iii-buf",
@@ -162,7 +246,13 @@
     "position_rank": 16,
     "adp": 17.76,
     "adp_position_rank": 6,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": 16.6687,
+      "volume": 15.3125,
+      "snap_share": 0.4763,
+      "efficiency": 1.0886
+    }
   },
   {
     "id": "chase-brown-cin",
@@ -173,7 +263,13 @@
     "position_rank": 13,
     "adp": 18.02,
     "adp_position_rank": 7,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": 15.9375,
+      "volume": 18.375,
+      "snap_share": 0.6275,
+      "efficiency": 0.8673
+    }
   },
   {
     "id": "brock-bowers-lv",
@@ -184,7 +280,13 @@
     "position_rank": 2,
     "adp": 18.08,
     "adp_position_rank": 1,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 15.4529,
+      "volume": 9.2941,
+      "snap_share": 0.8494,
+      "efficiency": 1.6627
+    }
   },
   {
     "id": "chris-olave-no",
@@ -195,7 +297,13 @@
     "position_rank": 57,
     "adp": 19.1,
     "adp_position_rank": 10,
-    "value_gap": -47
+    "value_gap": -47,
+    "stats": {
+      "ppg": 9.5875,
+      "volume": 5.625,
+      "snap_share": 0.6175,
+      "efficiency": 1.7044
+    }
   },
   {
     "id": "george-pickens-dal",
@@ -206,7 +314,13 @@
     "position_rank": 38,
     "adp": 20.08,
     "adp_position_rank": 11,
-    "value_gap": -27
+    "value_gap": -27,
+    "stats": {
+      "ppg": 11.7429,
+      "volume": 7.5,
+      "snap_share": 0.8007,
+      "efficiency": 1.5657
+    }
   },
   {
     "id": "trey-mcbride-ari",
@@ -217,7 +331,13 @@
     "position_rank": 1,
     "adp": 20.98,
     "adp_position_rank": 2,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 15.2375,
+      "volume": 9.25,
+      "snap_share": 0.8981,
+      "efficiency": 1.6473
+    }
   },
   {
     "id": "rashee-rice-kc",
@@ -228,7 +348,13 @@
     "position_rank": 2,
     "adp": 21.99,
     "adp_position_rank": 12,
-    "value_gap": 10
+    "value_gap": 10,
+    "stats": {
+      "ppg": 21.6333,
+      "volume": 10.0,
+      "snap_share": 0.6025,
+      "efficiency": 2.1633
+    }
   },
   {
     "id": "de-von-achane-mia",
@@ -239,7 +365,13 @@
     "position_rank": 11,
     "adp": 22.16,
     "adp_position_rank": 8,
-    "value_gap": -3
+    "value_gap": -3,
+    "stats": {
+      "ppg": 17.6412,
+      "volume": 17.0588,
+      "snap_share": 0.6241,
+      "efficiency": 1.0341
+    }
   },
   {
     "id": "devonta-smith-phi",
@@ -250,7 +382,13 @@
     "position_rank": 17,
     "adp": 23.98,
     "adp_position_rank": 13,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 15.3385,
+      "volume": 6.9231,
+      "snap_share": 0.8771,
+      "efficiency": 2.2156
+    }
   },
   {
     "id": "malik-nabers-nyg",
@@ -261,7 +399,13 @@
     "position_rank": 4,
     "adp": 24.65,
     "adp_position_rank": 14,
-    "value_gap": 10
+    "value_gap": 10,
+    "stats": {
+      "ppg": 18.24,
+      "volume": 11.6667,
+      "snap_share": 0.906,
+      "efficiency": 1.5634
+    }
   },
   {
     "id": "saquon-barkley-phi",
@@ -272,7 +416,13 @@
     "position_rank": 1,
     "adp": 25.12,
     "adp_position_rank": 9,
-    "value_gap": 8
+    "value_gap": 8,
+    "stats": {
+      "ppg": 22.2063,
+      "volume": 24.25,
+      "snap_share": 0.751,
+      "efficiency": 0.9157
+    }
   },
   {
     "id": "josh-allen-buf",
@@ -283,7 +433,13 @@
     "position_rank": 3,
     "adp": 25.89,
     "adp_position_rank": 1,
-    "value_gap": -2
+    "value_gap": -2,
+    "stats": {
+      "ppg": 23.2712,
+      "volume": 30.1875,
+      "snap_share": 0.9035,
+      "efficiency": 0.7709
+    }
   },
   {
     "id": "omarion-hampton-lac",
@@ -294,7 +450,13 @@
     "position_rank": 87,
     "adp": 26.11,
     "adp_position_rank": 10,
-    "value_gap": -77
+    "value_gap": -77,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kenneth-walker-iii-kc",
@@ -305,7 +467,13 @@
     "position_rank": 12,
     "adp": 28.39,
     "adp_position_rank": 11,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 16.4727,
+      "volume": 18.7273,
+      "snap_share": 0.6327,
+      "efficiency": 0.8796
+    }
   },
   {
     "id": "garrett-wilson-nyj",
@@ -316,7 +484,13 @@
     "position_rank": 16,
     "adp": 29.87,
     "adp_position_rank": 15,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 14.8176,
+      "volume": 9.1176,
+      "snap_share": 0.9629,
+      "efficiency": 1.6252
+    }
   },
   {
     "id": "zay-flowers-bal",
@@ -327,7 +501,13 @@
     "position_rank": 36,
     "adp": 29.98,
     "adp_position_rank": 16,
-    "value_gap": -20
+    "value_gap": -20,
+    "stats": {
+      "ppg": 12.3235,
+      "volume": 7.3529,
+      "snap_share": 0.7465,
+      "efficiency": 1.676
+    }
   },
   {
     "id": "lamar-jackson-bal",
@@ -338,7 +518,13 @@
     "position_rank": 1,
     "adp": 33.42,
     "adp_position_rank": 2,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 25.3165,
+      "volume": 27.8824,
+      "snap_share": 0.9689,
+      "efficiency": 0.908
+    }
   },
   {
     "id": "tetairoa-mcmillan-car",
@@ -349,7 +535,13 @@
     "position_rank": 116,
     "adp": 34.0,
     "adp_position_rank": 17,
-    "value_gap": -99
+    "value_gap": -99,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ladd-mcconkey-lac",
@@ -360,7 +552,13 @@
     "position_rank": 26,
     "adp": 36.23,
     "adp_position_rank": 18,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": 15.0563,
+      "volume": 7.0,
+      "snap_share": 0.7412,
+      "efficiency": 2.1509
+    }
   },
   {
     "id": "jaylen-waddle-den",
@@ -371,7 +569,13 @@
     "position_rank": 52,
     "adp": 36.44,
     "adp_position_rank": 19,
-    "value_gap": -33
+    "value_gap": -33,
+    "stats": {
+      "ppg": 9.9733,
+      "volume": 5.8,
+      "snap_share": 0.7867,
+      "efficiency": 1.7195
+    }
   },
   {
     "id": "tee-higgins-cin",
@@ -382,7 +586,13 @@
     "position_rank": 8,
     "adp": 36.46,
     "adp_position_rank": 20,
-    "value_gap": 12
+    "value_gap": 12,
+    "stats": {
+      "ppg": 18.5083,
+      "volume": 9.0833,
+      "snap_share": 0.7908,
+      "efficiency": 2.0376
+    }
   },
   {
     "id": "derrick-henry-bal",
@@ -393,7 +603,13 @@
     "position_rank": 7,
     "adp": 38.04,
     "adp_position_rank": 12,
-    "value_gap": 5
+    "value_gap": 5,
+    "stats": {
+      "ppg": 19.7882,
+      "volume": 20.4118,
+      "snap_share": 0.5768,
+      "efficiency": 0.9695
+    }
   },
   {
     "id": "colston-loveland-chi",
@@ -404,7 +620,13 @@
     "position_rank": 55,
     "adp": 38.31,
     "adp_position_rank": 3,
-    "value_gap": -52
+    "value_gap": -52,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "drake-maye-ne",
@@ -415,7 +637,13 @@
     "position_rank": 29,
     "adp": 38.76,
     "adp_position_rank": 3,
-    "value_gap": -26
+    "value_gap": -26,
+    "stats": {
+      "ppg": 13.6262,
+      "volume": 26.0,
+      "snap_share": 0.8046,
+      "efficiency": 0.5241
+    }
   },
   {
     "id": "emeka-egbuka-tb",
@@ -426,7 +654,13 @@
     "position_rank": 117,
     "adp": 39.49,
     "adp_position_rank": 21,
-    "value_gap": -96
+    "value_gap": -96,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jeremiyah-love-ari",
@@ -437,7 +671,13 @@
     "position_rank": 88,
     "adp": 40.28,
     "adp_position_rank": 13,
-    "value_gap": -75
+    "value_gap": -75,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "breece-hall-nyj",
@@ -448,7 +688,13 @@
     "position_rank": 14,
     "adp": 40.76,
     "adp_position_rank": 14,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 15.0563,
+      "volume": 17.8125,
+      "snap_share": 0.7238,
+      "efficiency": 0.8453
+    }
   },
   {
     "id": "kyren-williams-lar",
@@ -459,7 +705,13 @@
     "position_rank": 6,
     "adp": 42.41,
     "adp_position_rank": 15,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 17.0063,
+      "volume": 22.25,
+      "snap_share": 0.8717,
+      "efficiency": 0.7643
+    }
   },
   {
     "id": "josh-jacobs-gb",
@@ -470,7 +722,13 @@
     "position_rank": 9,
     "adp": 44.89,
     "adp_position_rank": 16,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 17.2412,
+      "volume": 20.2353,
+      "snap_share": 0.6333,
+      "efficiency": 0.852
+    }
   },
   {
     "id": "javonte-williams-dal",
@@ -481,7 +739,13 @@
     "position_rank": 36,
     "adp": 45.18,
     "adp_position_rank": 17,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 9.2882,
+      "volume": 12.2941,
+      "snap_share": 0.5339,
+      "efficiency": 0.7555
+    }
   },
   {
     "id": "terry-mclaurin-was",
@@ -492,7 +756,13 @@
     "position_rank": 18,
     "adp": 46.14,
     "adp_position_rank": 22,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 15.7529,
+      "volume": 7.0,
+      "snap_share": 0.8125,
+      "efficiency": 2.2504
+    }
   },
   {
     "id": "joe-burrow-cin",
@@ -503,7 +773,13 @@
     "position_rank": 2,
     "adp": 46.34,
     "adp_position_rank": 4,
-    "value_gap": 2
+    "value_gap": 2,
+    "stats": {
+      "ppg": 21.9306,
+      "volume": 38.3529,
+      "snap_share": 0.9953,
+      "efficiency": 0.5718
+    }
   },
   {
     "id": "luther-burden-iii-chi",
@@ -514,7 +790,13 @@
     "position_rank": 118,
     "adp": 47.35,
     "adp_position_rank": 23,
-    "value_gap": -95
+    "value_gap": -95,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "travis-etienne-jr-no",
@@ -525,7 +807,13 @@
     "position_rank": 37,
     "adp": 49.59,
     "adp_position_rank": 18,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 8.68,
+      "volume": 13.4667,
+      "snap_share": 0.5393,
+      "efficiency": 0.6446
+    }
   },
   {
     "id": "davante-adams-lar",
@@ -536,7 +824,13 @@
     "position_rank": 9,
     "adp": 50.92,
     "adp_position_rank": 24,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 17.2357,
+      "volume": 10.0714,
+      "snap_share": 0.9179,
+      "efficiency": 1.7113
+    }
   },
   {
     "id": "dj-moore-buf",
@@ -547,7 +841,13 @@
     "position_rank": 22,
     "adp": 51.99,
     "adp_position_rank": 25,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 14.0059,
+      "volume": 9.0588,
+      "snap_share": 0.9382,
+      "efficiency": 1.5461
+    }
   },
   {
     "id": "tyler-warren-ind",
@@ -558,7 +858,13 @@
     "position_rank": 56,
     "adp": 54.33,
     "adp_position_rank": 4,
-    "value_gap": -52
+    "value_gap": -52,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mike-evans-sf",
@@ -569,7 +875,13 @@
     "position_rank": 15,
     "adp": 54.48,
     "adp_position_rank": 26,
-    "value_gap": 11
+    "value_gap": 11,
+    "stats": {
+      "ppg": 17.1714,
+      "volume": 7.8571,
+      "snap_share": 0.722,
+      "efficiency": 2.1855
+    }
   },
   {
     "id": "jayden-daniels-was",
@@ -580,7 +892,13 @@
     "position_rank": 5,
     "adp": 55.1,
     "adp_position_rank": 5,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 20.9306,
+      "volume": 28.2353,
+      "snap_share": 0.92,
+      "efficiency": 0.7413
+    }
   },
   {
     "id": "jameson-williams-det",
@@ -591,7 +909,13 @@
     "position_rank": 28,
     "adp": 55.22,
     "adp_position_rank": 27,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 14.1467,
+      "volume": 6.8,
+      "snap_share": 0.8006,
+      "efficiency": 2.0804
+    }
   },
   {
     "id": "cam-skattebo-nyg",
@@ -602,7 +926,13 @@
     "position_rank": 89,
     "adp": 56.09,
     "adp_position_rank": 19,
-    "value_gap": -70
+    "value_gap": -70,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "rome-odunze-chi",
@@ -613,7 +943,13 @@
     "position_rank": 54,
     "adp": 57.36,
     "adp_position_rank": 28,
-    "value_gap": -26
+    "value_gap": -26,
+    "stats": {
+      "ppg": 8.5235,
+      "volume": 6.1176,
+      "snap_share": 0.8359,
+      "efficiency": 1.3933
+    }
   },
   {
     "id": "d-andre-swift-chi",
@@ -624,7 +960,13 @@
     "position_rank": 21,
     "adp": 57.39,
     "adp_position_rank": 20,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 12.6176,
+      "volume": 17.9412,
+      "snap_share": 0.6682,
+      "efficiency": 0.7033
+    }
   },
   {
     "id": "christian-watson-gb",
@@ -635,7 +977,13 @@
     "position_rank": 77,
     "adp": 57.79,
     "adp_position_rank": 29,
-    "value_gap": -48
+    "value_gap": -48,
+    "stats": {
+      "ppg": 7.5214,
+      "volume": 4.0714,
+      "snap_share": 0.5907,
+      "efficiency": 1.8474
+    }
   },
   {
     "id": "jalen-hurts-phi",
@@ -646,7 +994,13 @@
     "position_rank": 6,
     "adp": 57.88,
     "adp_position_rank": 6,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": 21.008,
+      "volume": 24.0667,
+      "snap_share": 0.9253,
+      "efficiency": 0.8729
+    }
   },
   {
     "id": "bucky-irving-tb",
@@ -657,7 +1011,13 @@
     "position_rank": 23,
     "adp": 59.16,
     "adp_position_rank": 21,
-    "value_gap": -2
+    "value_gap": -2,
+    "stats": {
+      "ppg": 14.3765,
+      "volume": 15.2353,
+      "snap_share": 0.4578,
+      "efficiency": 0.9436
+    }
   },
   {
     "id": "david-montgomery-hou",
@@ -668,7 +1028,13 @@
     "position_rank": 19,
     "adp": 61.31,
     "adp_position_rank": 22,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 15.8371,
+      "volume": 15.9286,
+      "snap_share": 0.4073,
+      "efficiency": 0.9943
+    }
   },
   {
     "id": "quinshon-judkins-cle",
@@ -679,7 +1045,13 @@
     "position_rank": 90,
     "adp": 61.41,
     "adp_position_rank": 23,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "parker-washington-jac",
@@ -690,7 +1062,13 @@
     "position_rank": 78,
     "adp": 66.42,
     "adp_position_rank": 30,
-    "value_gap": -48
+    "value_gap": -48,
+    "stats": {
+      "ppg": 7.4615,
+      "volume": 3.9231,
+      "snap_share": 0.5529,
+      "efficiency": 1.902
+    }
   },
   {
     "id": "carnell-tate-ten",
@@ -701,7 +1079,13 @@
     "position_rank": 119,
     "adp": 66.5,
     "adp_position_rank": 31,
-    "value_gap": -88
+    "value_gap": -88,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "caleb-williams-chi",
@@ -712,7 +1096,13 @@
     "position_rank": 18,
     "adp": 66.86,
     "adp_position_rank": 7,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": 14.9729,
+      "volume": 33.0588,
+      "snap_share": 0.9876,
+      "efficiency": 0.4529
+    }
   },
   {
     "id": "treveyon-henderson-ne",
@@ -723,7 +1113,13 @@
     "position_rank": 91,
     "adp": 67.71,
     "adp_position_rank": 24,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "bhayshul-tuten-jac",
@@ -734,7 +1130,13 @@
     "position_rank": 92,
     "adp": 69.5,
     "adp_position_rank": 25,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "marvin-harrison-jr-ari",
@@ -745,7 +1147,13 @@
     "position_rank": 39,
     "adp": 69.57,
     "adp_position_rank": 32,
-    "value_gap": -7
+    "value_gap": -7,
+    "stats": {
+      "ppg": 11.5588,
+      "volume": 6.8235,
+      "snap_share": 0.7859,
+      "efficiency": 1.694
+    }
   },
   {
     "id": "justin-herbert-lac",
@@ -756,7 +1164,13 @@
     "position_rank": 15,
     "adp": 71.22,
     "adp_position_rank": 8,
-    "value_gap": -7
+    "value_gap": -7,
+    "stats": {
+      "ppg": 16.7882,
+      "volume": 29.6471,
+      "snap_share": 0.9783,
+      "efficiency": 0.5663
+    }
   },
   {
     "id": "harold-fannin-jr-cle",
@@ -767,7 +1181,13 @@
     "position_rank": 57,
     "adp": 74.5,
     "adp_position_rank": 5,
-    "value_gap": -52
+    "value_gap": -52,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jadarian-price-sea",
@@ -778,7 +1198,13 @@
     "position_rank": 93,
     "adp": 74.65,
     "adp_position_rank": 26,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brian-thomas-jr-jac",
@@ -789,7 +1215,13 @@
     "position_rank": 14,
     "adp": 75.97,
     "adp_position_rank": 33,
-    "value_gap": 19
+    "value_gap": 19,
+    "stats": {
+      "ppg": 16.7059,
+      "volume": 8.1765,
+      "snap_share": 0.7935,
+      "efficiency": 2.0432
+    }
   },
   {
     "id": "jaylen-warren-pit",
@@ -800,7 +1232,13 @@
     "position_rank": 40,
     "adp": 76.17,
     "adp_position_rank": 27,
-    "value_gap": -13
+    "value_gap": -13,
+    "stats": {
+      "ppg": 8.2733,
+      "volume": 11.1333,
+      "snap_share": 0.455,
+      "efficiency": 0.7431
+    }
   },
   {
     "id": "tucker-kraft-gb",
@@ -811,7 +1249,13 @@
     "position_rank": 11,
     "adp": 76.63,
     "adp_position_rank": 6,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 9.6059,
+      "volume": 4.2941,
+      "snap_share": 0.8639,
+      "efficiency": 2.237
+    }
   },
   {
     "id": "trevor-lawrence-jac",
@@ -822,7 +1266,13 @@
     "position_rank": 24,
     "adp": 77.83,
     "adp_position_rank": 9,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": 14.57,
+      "volume": 28.4,
+      "snap_share": 0.902,
+      "efficiency": 0.513
+    }
   },
   {
     "id": "chris-godwin-jr-tb",
@@ -833,7 +1283,13 @@
     "position_rank": 3,
     "adp": 78.47,
     "adp_position_rank": 34,
-    "value_gap": 31
+    "value_gap": 31,
+    "stats": {
+      "ppg": 19.6857,
+      "volume": 9.0,
+      "snap_share": 0.87,
+      "efficiency": 2.1873
+    }
   },
   {
     "id": "kyle-pitts-sr-atl",
@@ -844,7 +1300,13 @@
     "position_rank": 26,
     "adp": 79.4,
     "adp_position_rank": 7,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 7.7176,
+      "volume": 4.3529,
+      "snap_share": 0.62,
+      "efficiency": 1.773
+    }
   },
   {
     "id": "dk-metcalf-pit",
@@ -855,7 +1317,13 @@
     "position_rank": 31,
     "adp": 79.45,
     "adp_position_rank": 35,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 12.7467,
+      "volume": 7.2,
+      "snap_share": 0.86,
+      "efficiency": 1.7704
+    }
   },
   {
     "id": "dak-prescott-dal",
@@ -866,7 +1334,13 @@
     "position_rank": 19,
     "adp": 79.64,
     "adp_position_rank": 10,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": 14.565,
+      "volume": 35.75,
+      "snap_share": 0.9113,
+      "efficiency": 0.4074
+    }
   },
   {
     "id": "rhamondre-stevenson-ne",
@@ -877,7 +1351,13 @@
     "position_rank": 26,
     "adp": 79.97,
     "adp_position_rank": 28,
-    "value_gap": 2
+    "value_gap": 2,
+    "stats": {
+      "ppg": 11.7267,
+      "volume": 16.5333,
+      "snap_share": 0.6153,
+      "efficiency": 0.7093
+    }
   },
   {
     "id": "michael-pittman-jr-pit",
@@ -888,7 +1368,13 @@
     "position_rank": 42,
     "adp": 81.65,
     "adp_position_rank": 36,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": 10.3625,
+      "volume": 6.9375,
+      "snap_share": 0.8806,
+      "efficiency": 1.4937
+    }
   },
   {
     "id": "tony-pollard-ten",
@@ -899,7 +1385,13 @@
     "position_rank": 20,
     "adp": 83.01,
     "adp_position_rank": 29,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 12.5437,
+      "volume": 19.8125,
+      "snap_share": 0.6781,
+      "efficiency": 0.6331
+    }
   },
   {
     "id": "courtland-sutton-den",
@@ -910,7 +1402,13 @@
     "position_rank": 19,
     "adp": 83.06,
     "adp_position_rank": 37,
-    "value_gap": 18
+    "value_gap": 18,
+    "stats": {
+      "ppg": 15.0188,
+      "volume": 8.4375,
+      "snap_share": 0.8594,
+      "efficiency": 1.78
+    }
   },
   {
     "id": "sam-laporta-det",
@@ -921,7 +1419,13 @@
     "position_rank": 7,
     "adp": 83.16,
     "adp_position_rank": 8,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 10.9125,
+      "volume": 5.1875,
+      "snap_share": 0.8559,
+      "efficiency": 2.1036
+    }
   },
   {
     "id": "wan-dale-robinson-ten",
@@ -932,7 +1436,13 @@
     "position_rank": 45,
     "adp": 85.71,
     "adp_position_rank": 38,
-    "value_gap": -7
+    "value_gap": -7,
+    "stats": {
+      "ppg": 10.7471,
+      "volume": 8.4118,
+      "snap_share": 0.7594,
+      "efficiency": 1.2776
+    }
   },
   {
     "id": "josh-downs-ind",
@@ -943,7 +1453,13 @@
     "position_rank": 35,
     "adp": 86.2,
     "adp_position_rank": 39,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 13.0143,
+      "volume": 7.7143,
+      "snap_share": 0.6443,
+      "efficiency": 1.687
+    }
   },
   {
     "id": "rico-dowdle-pit",
@@ -954,7 +1470,13 @@
     "position_rank": 25,
     "adp": 87.34,
     "adp_position_rank": 30,
-    "value_gap": 5
+    "value_gap": 5,
+    "stats": {
+      "ppg": 12.3625,
+      "volume": 17.75,
+      "snap_share": 0.575,
+      "efficiency": 0.6965
+    }
   },
   {
     "id": "michael-wilson-ari",
@@ -965,7 +1487,13 @@
     "position_rank": 64,
     "adp": 87.57,
     "adp_position_rank": 40,
-    "value_gap": -24
+    "value_gap": -24,
+    "stats": {
+      "ppg": 7.7812,
+      "volume": 4.5,
+      "snap_share": 0.7956,
+      "efficiency": 1.7292
+    }
   },
   {
     "id": "rj-harvey-den",
@@ -976,7 +1504,13 @@
     "position_rank": 94,
     "adp": 93.54,
     "adp_position_rank": 31,
-    "value_gap": -63
+    "value_gap": -63,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brock-purdy-sf",
@@ -987,7 +1521,13 @@
     "position_rank": 12,
     "adp": 96.21,
     "adp_position_rank": 11,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 17.7907,
+      "volume": 30.3333,
+      "snap_share": 0.9893,
+      "efficiency": 0.5865
+    }
   },
   {
     "id": "chuba-hubbard-car",
@@ -998,7 +1538,13 @@
     "position_rank": 8,
     "adp": 96.78,
     "adp_position_rank": 32,
-    "value_gap": 24
+    "value_gap": 24,
+    "stats": {
+      "ppg": 16.1067,
+      "volume": 20.2667,
+      "snap_share": 0.7733,
+      "efficiency": 0.7947
+    }
   },
   {
     "id": "jaxson-dart-nyg",
@@ -1009,7 +1555,13 @@
     "position_rank": 42,
     "adp": 97.77,
     "adp_position_rank": 12,
-    "value_gap": -30
+    "value_gap": -30,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "alec-pierce-ind",
@@ -1020,7 +1572,13 @@
     "position_rank": 48,
     "adp": 98.73,
     "adp_position_rank": 41,
-    "value_gap": -7
+    "value_gap": -7,
+    "stats": {
+      "ppg": 10.0875,
+      "volume": 4.3125,
+      "snap_share": 0.8006,
+      "efficiency": 2.3391
+    }
   },
   {
     "id": "jonathon-brooks-car",
@@ -1031,7 +1589,13 @@
     "position_rank": 79,
     "adp": 98.94,
     "adp_position_rank": 33,
-    "value_gap": -46
+    "value_gap": -46,
+    "stats": {
+      "ppg": 2.5,
+      "volume": 4.0,
+      "snap_share": 0.11,
+      "efficiency": 0.625
+    }
   },
   {
     "id": "travis-kelce-kc",
@@ -1042,7 +1606,13 @@
     "position_rank": 5,
     "adp": 99.14,
     "adp_position_rank": 9,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 12.2125,
+      "volume": 8.375,
+      "snap_share": 0.8505,
+      "efficiency": 1.4582
+    }
   },
   {
     "id": "quentin-johnston-lac",
@@ -1053,7 +1623,13 @@
     "position_rank": 41,
     "adp": 99.51,
     "adp_position_rank": 42,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 11.6467,
+      "volume": 6.2667,
+      "snap_share": 0.7163,
+      "efficiency": 1.8585
+    }
   },
   {
     "id": "patrick-mahomes-ii-kc",
@@ -1064,7 +1640,13 @@
     "position_rank": 10,
     "adp": 100.35,
     "adp_position_rank": 13,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 17.6887,
+      "volume": 36.3125,
+      "snap_share": 0.9942,
+      "efficiency": 0.4871
+    }
   },
   {
     "id": "stefon-diggs-was",
@@ -1075,7 +1657,13 @@
     "position_rank": 23,
     "adp": 100.49,
     "adp_position_rank": 43,
-    "value_gap": 20
+    "value_gap": 20,
+    "stats": {
+      "ppg": 15.24,
+      "volume": 8.375,
+      "snap_share": 0.7838,
+      "efficiency": 1.8197
+    }
   },
   {
     "id": "kenny-gainwell-tb",
@@ -1086,7 +1674,13 @@
     "position_rank": 66,
     "adp": 100.72,
     "adp_position_rank": 34,
-    "value_gap": -32
+    "value_gap": -32,
+    "stats": {
+      "ppg": 3.9125,
+      "volume": 6.0625,
+      "snap_share": 0.2405,
+      "efficiency": 0.6454
+    }
   },
   {
     "id": "bo-nix-den",
@@ -1097,7 +1691,13 @@
     "position_rank": 8,
     "adp": 100.91,
     "adp_position_rank": 14,
-    "value_gap": 6
+    "value_gap": 6,
+    "stats": {
+      "ppg": 18.6588,
+      "volume": 33.3529,
+      "snap_share": 0.9889,
+      "efficiency": 0.5594
+    }
   },
   {
     "id": "jakobi-meyers-jac",
@@ -1108,7 +1708,13 @@
     "position_rank": 20,
     "adp": 101.16,
     "adp_position_rank": 44,
-    "value_gap": 24
+    "value_gap": 24,
+    "stats": {
+      "ppg": 14.5333,
+      "volume": 8.7333,
+      "snap_share": 0.9167,
+      "efficiency": 1.6641
+    }
   },
   {
     "id": "j-k-dobbins-den",
@@ -1119,7 +1725,13 @@
     "position_rank": 17,
     "adp": 102.55,
     "adp_position_rank": 35,
-    "value_gap": 18
+    "value_gap": 18,
+    "stats": {
+      "ppg": 14.7538,
+      "volume": 17.9231,
+      "snap_share": 0.6321,
+      "efficiency": 0.8232
+    }
   },
   {
     "id": "george-kittle-sf",
@@ -1130,7 +1742,13 @@
     "position_rank": 3,
     "adp": 102.65,
     "adp_position_rank": 10,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 15.7733,
+      "volume": 6.2667,
+      "snap_share": 0.866,
+      "efficiency": 2.517
+    }
   },
   {
     "id": "matthew-stafford-lar",
@@ -1141,7 +1759,13 @@
     "position_rank": 23,
     "adp": 104.43,
     "adp_position_rank": 15,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": 13.4113,
+      "volume": 32.3125,
+      "snap_share": 1.0,
+      "efficiency": 0.415
+    }
   },
   {
     "id": "jayden-reed-gb",
@@ -1152,7 +1776,13 @@
     "position_rank": 46,
     "adp": 106.41,
     "adp_position_rank": 45,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 11.5882,
+      "volume": 5.5882,
+      "snap_share": 0.6272,
+      "efficiency": 2.0737
+    }
   },
   {
     "id": "jared-goff-det",
@@ -1163,7 +1793,13 @@
     "position_rank": 7,
     "adp": 106.7,
     "adp_position_rank": 16,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 19.0859,
+      "volume": 31.7059,
+      "snap_share": 0.9706,
+      "efficiency": 0.602
+    }
   },
   {
     "id": "makai-lemon-phi",
@@ -1174,7 +1810,13 @@
     "position_rank": 120,
     "adp": 106.79,
     "adp_position_rank": 46,
-    "value_gap": -74
+    "value_gap": -74,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jordan-addison-min",
@@ -1185,7 +1827,13 @@
     "position_rank": 27,
     "adp": 106.84,
     "adp_position_rank": 47,
-    "value_gap": 20
+    "value_gap": 20,
+    "stats": {
+      "ppg": 14.1667,
+      "volume": 6.8,
+      "snap_share": 0.8237,
+      "efficiency": 2.0833
+    }
   },
   {
     "id": "rachaad-white-was",
@@ -1196,7 +1844,13 @@
     "position_rank": 24,
     "adp": 108.92,
     "adp_position_rank": 36,
-    "value_gap": 12
+    "value_gap": 12,
+    "stats": {
+      "ppg": 13.3067,
+      "volume": 13.4,
+      "snap_share": 0.5547,
+      "efficiency": 0.993
+    }
   },
   {
     "id": "blake-corum-lar",
@@ -1207,7 +1861,13 @@
     "position_rank": 80,
     "adp": 110.56,
     "adp_position_rank": 37,
-    "value_gap": -43
+    "value_gap": -43,
+    "stats": {
+      "ppg": 2.3929,
+      "volume": 4.7143,
+      "snap_share": 0.1118,
+      "efficiency": 0.5076
+    }
   },
   {
     "id": "kyle-monangai-chi",
@@ -1218,7 +1878,13 @@
     "position_rank": 95,
     "adp": 111.84,
     "adp_position_rank": 38,
-    "value_gap": -57
+    "value_gap": -57,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kyler-murray-min",
@@ -1229,7 +1895,13 @@
     "position_rank": 13,
     "adp": 112.64,
     "adp_position_rank": 17,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 17.4847,
+      "volume": 31.8235,
+      "snap_share": 0.9712,
+      "efficiency": 0.5494
+    }
   },
   {
     "id": "dalton-kincaid-buf",
@@ -1240,7 +1912,13 @@
     "position_rank": 29,
     "adp": 113.48,
     "adp_position_rank": 11,
-    "value_gap": -18
+    "value_gap": -18,
+    "stats": {
+      "ppg": 7.7538,
+      "volume": 5.7692,
+      "snap_share": 0.5469,
+      "efficiency": 1.344
+    }
   },
   {
     "id": "jake-ferguson-dal",
@@ -1251,7 +1929,13 @@
     "position_rank": 24,
     "adp": 113.95,
     "adp_position_rank": 12,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": 7.4571,
+      "volume": 6.1429,
+      "snap_share": 0.6529,
+      "efficiency": 1.214
+    }
   },
   {
     "id": "aaron-jones-sr-min",
@@ -1262,7 +1946,13 @@
     "position_rank": 18,
     "adp": 114.02,
     "adp_position_rank": 39,
-    "value_gap": 21
+    "value_gap": 21,
+    "stats": {
+      "ppg": 14.2118,
+      "volume": 18.6471,
+      "snap_share": 0.6372,
+      "efficiency": 0.7621
+    }
   },
   {
     "id": "jacory-croskey-merritt-was",
@@ -1273,7 +1963,13 @@
     "position_rank": 96,
     "adp": 117.36,
     "adp_position_rank": 40,
-    "value_gap": -56
+    "value_gap": -56,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "baker-mayfield-tb",
@@ -1284,7 +1980,13 @@
     "position_rank": 4,
     "adp": 117.88,
     "adp_position_rank": 18,
-    "value_gap": 14
+    "value_gap": 14,
+    "stats": {
+      "ppg": 21.5176,
+      "volume": 33.5294,
+      "snap_share": 0.9861,
+      "efficiency": 0.6418
+    }
   },
   {
     "id": "isaiah-likely-nyg",
@@ -1295,7 +1997,13 @@
     "position_rank": 21,
     "adp": 119.29,
     "adp_position_rank": 13,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": 8.2467,
+      "volume": 3.8667,
+      "snap_share": 0.6167,
+      "efficiency": 2.1328
+    }
   },
   {
     "id": "jordan-love-gb",
@@ -1306,7 +2014,13 @@
     "position_rank": 20,
     "adp": 119.49,
     "adp_position_rank": 19,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 15.5907,
+      "volume": 28.3333,
+      "snap_share": 0.9225,
+      "efficiency": 0.5503
+    }
   },
   {
     "id": "khalil-shakir-buf",
@@ -1317,7 +2031,13 @@
     "position_rank": 43,
     "adp": 119.57,
     "adp_position_rank": 48,
-    "value_gap": 5
+    "value_gap": 5,
+    "stats": {
+      "ppg": 12.1667,
+      "volume": 6.8,
+      "snap_share": 0.6211,
+      "efficiency": 1.7892
+    }
   },
   {
     "id": "jordan-mason-min",
@@ -1328,7 +2048,13 @@
     "position_rank": 34,
     "adp": 119.77,
     "adp_position_rank": 41,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 9.5833,
+      "volume": 13.9167,
+      "snap_share": 0.4867,
+      "efficiency": 0.6886
+    }
   },
   {
     "id": "dallas-goedert-phi",
@@ -1339,7 +2065,13 @@
     "position_rank": 12,
     "adp": 121.11,
     "adp_position_rank": 14,
-    "value_gap": 2
+    "value_gap": 2,
+    "stats": {
+      "ppg": 10.36,
+      "volume": 5.2,
+      "snap_share": 0.7164,
+      "efficiency": 1.9923
+    }
   },
   {
     "id": "kc-concepcion-cle",
@@ -1350,7 +2082,13 @@
     "position_rank": 121,
     "adp": 122.57,
     "adp_position_rank": 49,
-    "value_gap": -72
+    "value_gap": -72,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyler-shough-no",
@@ -1361,7 +2099,13 @@
     "position_rank": 43,
     "adp": 123.68,
     "adp_position_rank": 20,
-    "value_gap": -23
+    "value_gap": -23,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jordyn-tyson-no",
@@ -1372,7 +2116,13 @@
     "position_rank": 122,
     "adp": 124.15,
     "adp_position_rank": 50,
-    "value_gap": -72
+    "value_gap": -72,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jalen-coker-car",
@@ -1383,7 +2133,13 @@
     "position_rank": 63,
     "adp": 124.46,
     "adp_position_rank": 51,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": 8.4145,
+      "volume": 4.1818,
+      "snap_share": null,
+      "efficiency": 2.0122
+    }
   },
   {
     "id": "xavier-worthy-kc",
@@ -1394,7 +2150,13 @@
     "position_rank": 44,
     "adp": 127.45,
     "adp_position_rank": 52,
-    "value_gap": 8
+    "value_gap": 8,
+    "stats": {
+      "ppg": 11.7,
+      "volume": 7.375,
+      "snap_share": 0.6725,
+      "efficiency": 1.5864
+    }
   },
   {
     "id": "matthew-golden-gb",
@@ -1405,7 +2167,13 @@
     "position_rank": 123,
     "adp": 129.46,
     "adp_position_rank": 53,
-    "value_gap": -70
+    "value_gap": -70,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mark-andrews-bal",
@@ -1416,7 +2184,13 @@
     "position_rank": 10,
     "adp": 130.23,
     "adp_position_rank": 15,
-    "value_gap": 5
+    "value_gap": 5,
+    "stats": {
+      "ppg": 11.1059,
+      "volume": 4.2941,
+      "snap_share": 0.6153,
+      "efficiency": 2.5863
+    }
   },
   {
     "id": "romeo-doubs-ne",
@@ -1427,7 +2201,13 @@
     "position_rank": 51,
     "adp": 131.36,
     "adp_position_rank": 54,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 10.1615,
+      "volume": 5.5385,
+      "snap_share": 0.7586,
+      "efficiency": 1.8347
+    }
   },
   {
     "id": "malik-willis-mia",
@@ -1438,7 +2218,13 @@
     "position_rank": 40,
     "adp": 133.2,
     "adp_position_rank": 21,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 8.6333,
+      "volume": 9.0,
+      "snap_share": 0.4643,
+      "efficiency": 0.9593
+    }
   },
   {
     "id": "juwan-johnson-no",
@@ -1449,7 +2235,13 @@
     "position_rank": 20,
     "adp": 136.1,
     "adp_position_rank": 16,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 8.1867,
+      "volume": 4.4,
+      "snap_share": 0.6418,
+      "efficiency": 1.8606
+    }
   },
   {
     "id": "woody-marks-hou",
@@ -1460,7 +2252,13 @@
     "position_rank": 97,
     "adp": 139.41,
     "adp_position_rank": 42,
-    "value_gap": -55
+    "value_gap": -55,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chris-rodriguez-jr-jac",
@@ -1471,7 +2269,13 @@
     "position_rank": 62,
     "adp": 139.46,
     "adp_position_rank": 43,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": 5.25,
+      "volume": 6.0,
+      "snap_share": 0.1178,
+      "efficiency": 0.875
+    }
   },
   {
     "id": "tyler-allgeier-ari",
@@ -1482,7 +2286,13 @@
     "position_rank": 52,
     "adp": 140.02,
     "adp_position_rank": 44,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": 6.2471,
+      "volume": 8.8235,
+      "snap_share": 0.2494,
+      "efficiency": 0.708
+    }
   },
   {
     "id": "deebo-samuel-sr-sf",
@@ -1493,7 +2303,13 @@
     "position_rank": 40,
     "adp": 140.09,
     "adp_position_rank": 55,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 11.1143,
+      "volume": 8.7857,
+      "snap_share": 0.7313,
+      "efficiency": 1.265
+    }
   },
   {
     "id": "tyrone-tracy-jr-nyg",
@@ -1504,7 +2320,13 @@
     "position_rank": 31,
     "adp": 140.46,
     "adp_position_rank": 45,
-    "value_gap": 14
+    "value_gap": 14,
+    "stats": {
+      "ppg": 10.7235,
+      "volume": 14.4118,
+      "snap_share": 0.5735,
+      "efficiency": 0.7441
+    }
   },
   {
     "id": "tyjae-spears-ten",
@@ -1515,7 +2337,13 @@
     "position_rank": 38,
     "adp": 140.82,
     "adp_position_rank": 46,
-    "value_gap": 8
+    "value_gap": 8,
+    "stats": {
+      "ppg": 9.4667,
+      "volume": 9.9167,
+      "snap_share": 0.4275,
+      "efficiency": 0.9546
+    }
   },
   {
     "id": "sam-darnold-sea",
@@ -1526,7 +2354,13 @@
     "position_rank": 11,
     "adp": 142.01,
     "adp_position_rank": 22,
-    "value_gap": 11
+    "value_gap": 11,
+    "stats": {
+      "ppg": 18.1153,
+      "volume": 32.0588,
+      "snap_share": 0.9944,
+      "efficiency": 0.5651
+    }
   },
   {
     "id": "c-j-stroud-hou",
@@ -1537,7 +2371,13 @@
     "position_rank": 27,
     "adp": 143.3,
     "adp_position_rank": 23,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 12.9635,
+      "volume": 31.2941,
+      "snap_share": 0.9379,
+      "efficiency": 0.4142
+    }
   },
   {
     "id": "zach-charbonnet-sea",
@@ -1548,7 +2388,13 @@
     "position_rank": 33,
     "adp": 147.82,
     "adp_position_rank": 47,
-    "value_gap": 14
+    "value_gap": 14,
+    "stats": {
+      "ppg": 10.8059,
+      "volume": 11.0,
+      "snap_share": 0.5271,
+      "efficiency": 0.9824
+    }
   },
   {
     "id": "dylan-sampson-cle",
@@ -1559,7 +2405,13 @@
     "position_rank": 98,
     "adp": 148.52,
     "adp_position_rank": 48,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "rashid-shaheed-sea",
@@ -1570,7 +2422,13 @@
     "position_rank": 30,
     "adp": 149.86,
     "adp_position_rank": 56,
-    "value_gap": 26
+    "value_gap": 26,
+    "stats": {
+      "ppg": 13.6333,
+      "volume": 7.8333,
+      "snap_share": 0.7567,
+      "efficiency": 1.7404
+    }
   },
   {
     "id": "de-zhaun-stribling-sf",
@@ -1581,7 +2439,13 @@
     "position_rank": 124,
     "adp": 151.31,
     "adp_position_rank": 57,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "keaton-mitchell-lac",
@@ -1592,7 +2456,13 @@
     "position_rank": 73,
     "adp": 152.16,
     "adp_position_rank": 49,
-    "value_gap": -24
+    "value_gap": -24,
+    "stats": {
+      "ppg": 3.4,
+      "volume": 8.0,
+      "snap_share": 0.0771,
+      "efficiency": 0.425
+    }
   },
   {
     "id": "denzel-boston-cle",
@@ -1603,7 +2473,13 @@
     "position_rank": 125,
     "adp": 152.65,
     "adp_position_rank": 58,
-    "value_gap": -67
+    "value_gap": -67,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "houston-texans-hou",
@@ -1614,7 +2490,13 @@
     "position_rank": 1,
     "adp": 153.71,
     "adp_position_rank": 1,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "daniel-jones-ind",
@@ -1625,7 +2507,13 @@
     "position_rank": 21,
     "adp": 154.53,
     "adp_position_rank": 24,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 13.53,
+      "volume": 34.1,
+      "snap_share": 0.979,
+      "efficiency": 0.3968
+    }
   },
   {
     "id": "alvin-kamara-no",
@@ -1636,7 +2524,13 @@
     "position_rank": 3,
     "adp": 154.91,
     "adp_position_rank": 50,
-    "value_gap": 47
+    "value_gap": 47,
+    "stats": {
+      "ppg": 18.95,
+      "volume": 22.6429,
+      "snap_share": 0.7086,
+      "efficiency": 0.8369
+    }
   },
   {
     "id": "brenton-strange-jac",
@@ -1647,7 +2541,13 @@
     "position_rank": 32,
     "adp": 156.95,
     "adp_position_rank": 17,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": 6.5071,
+      "volume": 3.7857,
+      "snap_share": 0.5424,
+      "efficiency": 1.7189
+    }
   },
   {
     "id": "cam-ward-ten",
@@ -1658,7 +2558,13 @@
     "position_rank": 44,
     "adp": 157.34,
     "adp_position_rank": 25,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chig-okonkwo-was",
@@ -1669,7 +2575,13 @@
     "position_rank": 30,
     "adp": 158.32,
     "adp_position_rank": 18,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": 7.1,
+      "volume": 4.4375,
+      "snap_share": 0.6053,
+      "efficiency": 1.6
+    }
   },
   {
     "id": "jonah-coleman-den",
@@ -1680,7 +2592,13 @@
     "position_rank": 99,
     "adp": 159.19,
     "adp_position_rank": 51,
-    "value_gap": -48
+    "value_gap": -48,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "isiah-pacheco-det",
@@ -1691,7 +2609,13 @@
     "position_rank": 39,
     "adp": 159.88,
     "adp_position_rank": 52,
-    "value_gap": 13
+    "value_gap": 13,
+    "stats": {
+      "ppg": 8.1286,
+      "volume": 14.1429,
+      "snap_share": 0.434,
+      "efficiency": 0.5747
+    }
   },
   {
     "id": "jauan-jennings-min",
@@ -1702,7 +2626,13 @@
     "position_rank": 29,
     "adp": 162.04,
     "adp_position_rank": 59,
-    "value_gap": 30
+    "value_gap": 30,
+    "stats": {
+      "ppg": 14.0333,
+      "volume": 7.5333,
+      "snap_share": 0.744,
+      "efficiency": 1.8628
+    }
   },
   {
     "id": "denver-broncos-den",
@@ -1713,7 +2643,13 @@
     "position_rank": 2,
     "adp": 163.2,
     "adp_position_rank": 2,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "hunter-henry-ne",
@@ -1724,7 +2660,13 @@
     "position_rank": 15,
     "adp": 163.83,
     "adp_position_rank": 19,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 9.0875,
+      "volume": 6.0625,
+      "snap_share": 0.8063,
+      "efficiency": 1.499
+    }
   },
   {
     "id": "jerry-jeudy-cle",
@@ -1735,7 +2677,13 @@
     "position_rank": 24,
     "adp": 165.21,
     "adp_position_rank": 60,
-    "value_gap": 36
+    "value_gap": 36,
+    "stats": {
+      "ppg": 14.1706,
+      "volume": 8.5294,
+      "snap_share": 0.8971,
+      "efficiency": 1.6614
+    }
   },
   {
     "id": "los-angeles-rams-lar",
@@ -1746,7 +2694,13 @@
     "position_rank": 3,
     "adp": 167.24,
     "adp_position_rank": 3,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "seattle-seahawks-sea",
@@ -1757,7 +2711,13 @@
     "position_rank": 4,
     "adp": 167.45,
     "adp_position_rank": 4,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tank-bigsby-phi",
@@ -1768,7 +2728,13 @@
     "position_rank": 43,
     "adp": 168.53,
     "adp_position_rank": 53,
-    "value_gap": 10
+    "value_gap": 10,
+    "stats": {
+      "ppg": 8.6,
+      "volume": 12.0,
+      "snap_share": 0.3613,
+      "efficiency": 0.7167
+    }
   },
   {
     "id": "bryce-young-car",
@@ -1779,7 +2745,13 @@
     "position_rank": 28,
     "adp": 168.94,
     "adp_position_rank": 26,
-    "value_gap": -2
+    "value_gap": -2,
+    "stats": {
+      "ppg": 13.93,
+      "volume": 27.4286,
+      "snap_share": 0.8671,
+      "efficiency": 0.5079
+    }
   },
   {
     "id": "adonai-mitchell-nyj",
@@ -1790,7 +2762,13 @@
     "position_rank": 105,
     "adp": 170.71,
     "adp_position_rank": 61,
-    "value_gap": -44
+    "value_gap": -44,
+    "stats": {
+      "ppg": 3.1624,
+      "volume": 3.4706,
+      "snap_share": 0.3618,
+      "efficiency": 0.9112
+    }
   },
   {
     "id": "jalen-mcmillan-tb",
@@ -1801,7 +2779,13 @@
     "position_rank": 49,
     "adp": 171.57,
     "adp_position_rank": 62,
-    "value_gap": 13
+    "value_gap": 13,
+    "stats": {
+      "ppg": 10.4154,
+      "volume": 4.7692,
+      "snap_share": 0.7221,
+      "efficiency": 2.1839
+    }
   },
   {
     "id": "tre-tucker-lv",
@@ -1812,7 +2796,13 @@
     "position_rank": 60,
     "adp": 173.26,
     "adp_position_rank": 63,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 7.6059,
+      "volume": 5.2941,
+      "snap_share": 0.8724,
+      "efficiency": 1.4367
+    }
   },
   {
     "id": "dalton-schultz-hou",
@@ -1823,7 +2813,13 @@
     "position_rank": 23,
     "adp": 173.44,
     "adp_position_rank": 20,
-    "value_gap": -3
+    "value_gap": -3,
+    "stats": {
+      "ppg": 6.9529,
+      "volume": 5.0,
+      "snap_share": 0.7789,
+      "efficiency": 1.3906
+    }
   },
   {
     "id": "brian-robinson-jr-atl",
@@ -1834,7 +2830,13 @@
     "position_rank": 30,
     "adp": 173.48,
     "adp_position_rank": 54,
-    "value_gap": 24
+    "value_gap": 24,
+    "stats": {
+      "ppg": 11.4143,
+      "volume": 15.1429,
+      "snap_share": 0.5165,
+      "efficiency": 0.7538
+    }
   },
   {
     "id": "braelon-allen-nyj",
@@ -1845,7 +2847,13 @@
     "position_rank": 60,
     "adp": 173.95,
     "adp_position_rank": 55,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 5.0118,
+      "volume": 7.0,
+      "snap_share": 0.26,
+      "efficiency": 0.716
+    }
   },
   {
     "id": "philadelphia-eagles-phi",
@@ -1856,7 +2864,13 @@
     "position_rank": 5,
     "adp": 174.93,
     "adp_position_rank": 5,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "travis-hunter-jac",
@@ -1867,7 +2881,13 @@
     "position_rank": 126,
     "adp": 178.11,
     "adp_position_rank": 64,
-    "value_gap": -62
+    "value_gap": -62,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tre-harris-lac",
@@ -1878,7 +2898,13 @@
     "position_rank": 127,
     "adp": 179.15,
     "adp_position_rank": 65,
-    "value_gap": -62
+    "value_gap": -62,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "omar-cooper-jr-nyj",
@@ -1889,7 +2915,13 @@
     "position_rank": 128,
     "adp": 180.52,
     "adp_position_rank": 66,
-    "value_gap": -62
+    "value_gap": -62,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ryan-flournoy-dal",
@@ -1900,7 +2932,13 @@
     "position_rank": 111,
     "adp": 183.81,
     "adp_position_rank": 67,
-    "value_gap": -44
+    "value_gap": -44,
+    "stats": {
+      "ppg": 2.6,
+      "volume": 2.0,
+      "snap_share": 0.2,
+      "efficiency": 1.3
+    }
   },
   {
     "id": "new-england-patriots-ne",
@@ -1911,7 +2949,13 @@
     "position_rank": 6,
     "adp": 185.09,
     "adp_position_rank": 6,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "minnesota-vikings-min",
@@ -1922,7 +2966,13 @@
     "position_rank": 7,
     "adp": 185.86,
     "adp_position_rank": 7,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brandon-aubrey-dal",
@@ -1933,7 +2983,13 @@
     "position_rank": 1,
     "adp": 185.86,
     "adp_position_rank": 1,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "pittsburgh-steelers-pit",
@@ -1944,7 +3000,13 @@
     "position_rank": 8,
     "adp": 187.28,
     "adp_position_rank": 8,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jalen-nailor-lv",
@@ -1955,7 +3017,13 @@
     "position_rank": 79,
     "adp": 187.78,
     "adp_position_rank": 68,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": 7.0,
+      "volume": 3.0,
+      "snap_share": 0.5311,
+      "efficiency": 2.3333
+    }
   },
   {
     "id": "oronde-gadsden-ii-lac",
@@ -1966,7 +3034,13 @@
     "position_rank": 58,
     "adp": 189.52,
     "adp_position_rank": 21,
-    "value_gap": -37
+    "value_gap": -37,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jacksonville-jaguars-jac",
@@ -1977,7 +3051,13 @@
     "position_rank": 9,
     "adp": 190.1,
     "adp_position_rank": 9,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "malik-washington-mia",
@@ -1988,7 +3068,13 @@
     "position_rank": 98,
     "adp": 190.88,
     "adp_position_rank": 69,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": 4.7333,
+      "volume": 3.4167,
+      "snap_share": 0.4471,
+      "efficiency": 1.3854
+    }
   },
   {
     "id": "t-j-hockenson-min",
@@ -1999,7 +3085,13 @@
     "position_rank": 18,
     "adp": 191.19,
     "adp_position_rank": 22,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 8.65,
+      "volume": 6.2,
+      "snap_share": 0.6127,
+      "efficiency": 1.3952
+    }
   },
   {
     "id": "ka-imi-fairbairn-hou",
@@ -2010,7 +3102,13 @@
     "position_rank": 2,
     "adp": 192.4,
     "adp_position_rank": 2,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "los-angeles-chargers-lac",
@@ -2021,7 +3119,13 @@
     "position_rank": 10,
     "adp": 192.58,
     "adp_position_rank": 10,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jacoby-brissett-ari",
@@ -2032,7 +3136,13 @@
     "position_rank": 39,
     "adp": 192.72,
     "adp_position_rank": 27,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": 6.4629,
+      "volume": 23.0,
+      "snap_share": 0.6987,
+      "efficiency": 0.281
+    }
   },
   {
     "id": "pat-bryant-den",
@@ -2043,7 +3153,13 @@
     "position_rank": 129,
     "adp": 193.93,
     "adp_position_rank": 70,
-    "value_gap": -59
+    "value_gap": -59,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "dontayvion-wicks-phi",
@@ -2054,7 +3170,13 @@
     "position_rank": 87,
     "adp": 195.11,
     "adp_position_rank": 71,
-    "value_gap": -16
+    "value_gap": -16,
+    "stats": {
+      "ppg": 6.5,
+      "volume": 4.4706,
+      "snap_share": 0.5594,
+      "efficiency": 1.4539
+    }
   },
   {
     "id": "ray-davis-buf",
@@ -2065,7 +3187,13 @@
     "position_rank": 47,
     "adp": 195.41,
     "adp_position_rank": 56,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 7.2562,
+      "volume": 8.25,
+      "snap_share": 0.2225,
+      "efficiency": 0.8795
+    }
   },
   {
     "id": "cameron-dicker-lac",
@@ -2076,7 +3204,13 @@
     "position_rank": 3,
     "adp": 195.54,
     "adp_position_rank": 3,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jaylin-noel-hou",
@@ -2087,7 +3221,13 @@
     "position_rank": 130,
     "adp": 197.06,
     "adp_position_rank": 72,
-    "value_gap": -58
+    "value_gap": -58,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "emmett-johnson-kc",
@@ -2098,7 +3238,13 @@
     "position_rank": 100,
     "adp": 198.45,
     "adp_position_rank": 57,
-    "value_gap": -43
+    "value_gap": -43,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "sean-tucker-tb",
@@ -2109,7 +3255,13 @@
     "position_rank": 57,
     "adp": 198.48,
     "adp_position_rank": 58,
-    "value_gap": 1
+    "value_gap": 1,
+    "stats": {
+      "ppg": 6.2455,
+      "volume": 5.6364,
+      "snap_share": 0.0872,
+      "efficiency": 1.1081
+    }
   },
   {
     "id": "cam-little-jac",
@@ -2120,7 +3272,13 @@
     "position_rank": 4,
     "adp": 198.52,
     "adp_position_rank": 4,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "marshawn-lloyd-gb",
@@ -2131,7 +3289,13 @@
     "position_rank": 74,
     "adp": 199.3,
     "adp_position_rank": 59,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": 2.8,
+      "volume": 7.0,
+      "snap_share": 0.14,
+      "efficiency": 0.4
+    }
   },
   {
     "id": "baltimore-ravens-bal",
@@ -2142,7 +3306,13 @@
     "position_rank": 11,
     "adp": 199.56,
     "adp_position_rank": 11,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kayshon-boutte-ne",
@@ -2153,7 +3323,13 @@
     "position_rank": 62,
     "adp": 199.62,
     "adp_position_rank": 73,
-    "value_gap": 11
+    "value_gap": 11,
+    "stats": {
+      "ppg": 8.1267,
+      "volume": 4.5333,
+      "snap_share": 0.7807,
+      "efficiency": 1.7926
+    }
   },
   {
     "id": "jason-myers-sea",
@@ -2164,7 +3340,13 @@
     "position_rank": 5,
     "adp": 200.21,
     "adp_position_rank": 5,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "james-conner-ari",
@@ -2175,7 +3357,13 @@
     "position_rank": 15,
     "adp": 200.67,
     "adp_position_rank": 60,
-    "value_gap": 45
+    "value_gap": 45,
+    "stats": {
+      "ppg": 15.8625,
+      "volume": 18.1875,
+      "snap_share": 0.6062,
+      "efficiency": 0.8722
+    }
   },
   {
     "id": "kimani-vidal-lac",
@@ -2186,7 +3374,13 @@
     "position_rank": 67,
     "adp": 201.45,
     "adp_position_rank": 61,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": 3.6333,
+      "volume": 5.7778,
+      "snap_share": 0.277,
+      "efficiency": 0.6288
+    }
   },
   {
     "id": "green-bay-packers-gb",
@@ -2197,7 +3391,13 @@
     "position_rank": 12,
     "adp": 203.69,
     "adp_position_rank": 12,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mike-washington-jr-lv",
@@ -2208,7 +3408,13 @@
     "position_rank": 101,
     "adp": 204.09,
     "adp_position_rank": 62,
-    "value_gap": -39
+    "value_gap": -39,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "greg-dulcich-mia",
@@ -2219,7 +3425,13 @@
     "position_rank": 51,
     "adp": 204.25,
     "adp_position_rank": 23,
-    "value_gap": -28
+    "value_gap": -28,
+    "stats": {
+      "ppg": 2.6,
+      "volume": 4.0,
+      "snap_share": 0.2567,
+      "efficiency": 0.65
+    }
   },
   {
     "id": "tank-dell-hou",
@@ -2230,7 +3442,13 @@
     "position_rank": 53,
     "adp": 205.64,
     "adp_position_rank": 74,
-    "value_gap": 21
+    "value_gap": 21,
+    "stats": {
+      "ppg": 10.0,
+      "volume": 6.4286,
+      "snap_share": 0.6893,
+      "efficiency": 1.5556
+    }
   },
   {
     "id": "calvin-ridley-ten",
@@ -2241,7 +3459,13 @@
     "position_rank": 37,
     "adp": 207.02,
     "adp_position_rank": 75,
-    "value_gap": 38
+    "value_gap": 38,
+    "stats": {
+      "ppg": 11.7176,
+      "volume": 7.5294,
+      "snap_share": 0.8129,
+      "efficiency": 1.5562
+    }
   },
   {
     "id": "aj-barner-sea",
@@ -2252,7 +3476,13 @@
     "position_rank": 36,
     "adp": 207.73,
     "adp_position_rank": 24,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": 5.6071,
+      "volume": 2.7143,
+      "snap_share": 0.4506,
+      "efficiency": 2.0658
+    }
   },
   {
     "id": "troy-franklin-den",
@@ -2263,7 +3493,13 @@
     "position_rank": 101,
     "adp": 208.65,
     "adp_position_rank": 76,
-    "value_gap": -25
+    "value_gap": -25,
+    "stats": {
+      "ppg": 4.1937,
+      "volume": 3.4375,
+      "snap_share": 0.3765,
+      "efficiency": 1.22
+    }
   },
   {
     "id": "eddy-pineiro-sf",
@@ -2274,7 +3510,13 @@
     "position_rank": 6,
     "adp": 208.7,
     "adp_position_rank": 6,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyler-loop-bal",
@@ -2285,7 +3527,13 @@
     "position_rank": 7,
     "adp": 209.49,
     "adp_position_rank": 7,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kansas-city-chiefs-kc",
@@ -2296,7 +3544,13 @@
     "position_rank": 13,
     "adp": 210.61,
     "adp_position_rank": 13,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "nicholas-singleton-ten",
@@ -2307,7 +3561,13 @@
     "position_rank": 102,
     "adp": 212.02,
     "adp_position_rank": 63,
-    "value_gap": -39
+    "value_gap": -39,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "isaac-teslaa-det",
@@ -2318,7 +3578,13 @@
     "position_rank": 131,
     "adp": 212.3,
     "adp_position_rank": 77,
-    "value_gap": -54
+    "value_gap": -54,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "evan-mcpherson-cin",
@@ -2329,7 +3595,13 @@
     "position_rank": 8,
     "adp": 216.0,
     "adp_position_rank": 8,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cairo-santos-chi",
@@ -2340,7 +3612,13 @@
     "position_rank": 9,
     "adp": 216.53,
     "adp_position_rank": 9,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "keenan-allen-ind",
@@ -2351,7 +3629,13 @@
     "position_rank": 32,
     "adp": 217.23,
     "adp_position_rank": 78,
-    "value_gap": 46
+    "value_gap": 46,
+    "stats": {
+      "ppg": 12.2933,
+      "volume": 8.0667,
+      "snap_share": 0.868,
+      "efficiency": 1.524
+    }
   },
   {
     "id": "darnell-mooney-nyg",
@@ -2362,7 +3646,13 @@
     "position_rank": 33,
     "adp": 217.46,
     "adp_position_rank": 79,
-    "value_gap": 46
+    "value_gap": 46,
+    "stats": {
+      "ppg": 12.075,
+      "volume": 6.625,
+      "snap_share": 0.9275,
+      "efficiency": 1.8226
+    }
   },
   {
     "id": "gunnar-helm-ten",
@@ -2373,7 +3663,13 @@
     "position_rank": 59,
     "adp": 217.81,
     "adp_position_rank": 25,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "emanuel-wilson-sea",
@@ -2384,7 +3680,13 @@
     "position_rank": 56,
     "adp": 219.4,
     "adp_position_rank": 64,
-    "value_gap": 8
+    "value_gap": 8,
+    "stats": {
+      "ppg": 5.6471,
+      "volume": 6.8824,
+      "snap_share": 0.2306,
+      "efficiency": 0.8205
+    }
   },
   {
     "id": "rashod-bateman-bal",
@@ -2395,7 +3697,13 @@
     "position_rank": 47,
     "adp": 220.39,
     "adp_position_rank": 80,
-    "value_gap": 33
+    "value_gap": 33,
+    "stats": {
+      "ppg": 10.9125,
+      "volume": 4.5,
+      "snap_share": 0.6763,
+      "efficiency": 2.425
+    }
   },
   {
     "id": "jaydon-blue-dal",
@@ -2406,7 +3714,13 @@
     "position_rank": 103,
     "adp": 220.41,
     "adp_position_rank": 65,
-    "value_gap": -38
+    "value_gap": -38,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "aaron-rodgers-pit",
@@ -2417,7 +3731,13 @@
     "position_rank": 17,
     "adp": 220.92,
     "adp_position_rank": 28,
-    "value_gap": 11
+    "value_gap": 11,
+    "stats": {
+      "ppg": 15.0929,
+      "volume": 34.3529,
+      "snap_share": 0.9635,
+      "efficiency": 0.4393
+    }
   },
   {
     "id": "detroit-lions-det",
@@ -2428,7 +3748,13 @@
     "position_rank": 14,
     "adp": 221.05,
     "adp_position_rank": 14,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jake-bates-det",
@@ -2439,7 +3765,13 @@
     "position_rank": 10,
     "adp": 221.69,
     "adp_position_rank": 10,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kenyon-sadiq-nyj",
@@ -2450,7 +3782,13 @@
     "position_rank": 60,
     "adp": 222.63,
     "adp_position_rank": 26,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "terrance-ferguson-lar",
@@ -2461,7 +3799,13 @@
     "position_rank": 61,
     "adp": 223.36,
     "adp_position_rank": 27,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cleveland-browns-cle",
@@ -2472,7 +3816,13 @@
     "position_rank": 15,
     "adp": 223.49,
     "adp_position_rank": 15,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "andy-borregales-ne",
@@ -2483,7 +3833,13 @@
     "position_rank": 11,
     "adp": 224.32,
     "adp_position_rank": 11,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "caleb-douglas-mia",
@@ -2494,7 +3850,13 @@
     "position_rank": 132,
     "adp": 225.23,
     "adp_position_rank": 81,
-    "value_gap": -51
+    "value_gap": -51,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cooper-kupp-sea",
@@ -2505,7 +3867,13 @@
     "position_rank": 25,
     "adp": 225.99,
     "adp_position_rank": 82,
-    "value_gap": 57
+    "value_gap": 57,
+    "stats": {
+      "ppg": 14.5833,
+      "volume": 8.5,
+      "snap_share": 0.8064,
+      "efficiency": 1.7157
+    }
   },
   {
     "id": "chase-mclaughlin-tb",
@@ -2516,7 +3884,13 @@
     "position_rank": 12,
     "adp": 226.0,
     "adp_position_rank": 12,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "harrison-mevis-lar",
@@ -2527,7 +3901,13 @@
     "position_rank": 13,
     "adp": 226.02,
     "adp_position_rank": 13,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "buffalo-bills-buf",
@@ -2538,7 +3918,13 @@
     "position_rank": 16,
     "adp": 226.78,
     "adp_position_rank": 16,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "zachariah-branch-atl",
@@ -2549,7 +3935,13 @@
     "position_rank": 133,
     "adp": 226.88,
     "adp_position_rank": 83,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "geno-smith-nyj",
@@ -2560,7 +3952,13 @@
     "position_rank": 16,
     "adp": 227.82,
     "adp_position_rank": 29,
-    "value_gap": 13
+    "value_gap": 13,
+    "stats": {
+      "ppg": 15.6471,
+      "volume": 34.0,
+      "snap_share": 0.9747,
+      "efficiency": 0.4602
+    }
   },
   {
     "id": "cyrus-allen-kc",
@@ -2571,7 +3969,13 @@
     "position_rank": 134,
     "adp": 228.7,
     "adp_position_rank": 84,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "antonio-williams-was",
@@ -2582,7 +3986,13 @@
     "position_rank": 135,
     "adp": 229.11,
     "adp_position_rank": 85,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kaytron-allen-was",
@@ -2593,7 +4003,13 @@
     "position_rank": 104,
     "adp": 229.77,
     "adp_position_rank": 66,
-    "value_gap": -38
+    "value_gap": -38,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jaylen-wright-mia",
@@ -2604,7 +4020,13 @@
     "position_rank": 78,
     "adp": 231.79,
     "adp_position_rank": 67,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": 2.0538,
+      "volume": 5.6923,
+      "snap_share": 0.17,
+      "efficiency": 0.3608
+    }
   },
   {
     "id": "germie-bernard-pit",
@@ -2615,7 +4037,13 @@
     "position_rank": 136,
     "adp": 233.87,
     "adp_position_rank": 86,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "justice-hill-bal",
@@ -2626,7 +4054,13 @@
     "position_rank": 41,
     "adp": 236.61,
     "adp_position_rank": 68,
-    "value_gap": 27
+    "value_gap": 27,
+    "stats": {
+      "ppg": 8.4733,
+      "volume": 6.5333,
+      "snap_share": 0.4153,
+      "efficiency": 1.2969
+    }
   },
   {
     "id": "pat-freiermuth-pit",
@@ -2637,7 +4071,13 @@
     "position_rank": 16,
     "adp": 237.21,
     "adp_position_rank": 28,
-    "value_gap": 12
+    "value_gap": 12,
+    "stats": {
+      "ppg": 9.9,
+      "volume": 4.5882,
+      "snap_share": 0.6872,
+      "efficiency": 2.1577
+    }
   },
   {
     "id": "jack-bech-lv",
@@ -2648,7 +4088,13 @@
     "position_rank": 137,
     "adp": 238.44,
     "adp_position_rank": 87,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chimere-dike-ten",
@@ -2659,7 +4105,13 @@
     "position_rank": 138,
     "adp": 238.49,
     "adp_position_rank": 88,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chris-boswell-pit",
@@ -2670,7 +4122,13 @@
     "position_rank": 14,
     "adp": 240.31,
     "adp_position_rank": 14,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ollie-gordon-ii-mia",
@@ -2681,7 +4139,13 @@
     "position_rank": 105,
     "adp": 241.27,
     "adp_position_rank": 69,
-    "value_gap": -36
+    "value_gap": -36,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cade-otton-tb",
@@ -2692,7 +4156,13 @@
     "position_rank": 9,
     "adp": 241.86,
     "adp_position_rank": 29,
-    "value_gap": 20
+    "value_gap": 20,
+    "stats": {
+      "ppg": 10.0429,
+      "volume": 6.2857,
+      "snap_share": 0.9307,
+      "efficiency": 1.5977
+    }
   },
   {
     "id": "ted-hurst-iii-tb",
@@ -2703,7 +4173,13 @@
     "position_rank": 139,
     "adp": 243.02,
     "adp_position_rank": 89,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "harrison-butker-kc",
@@ -2714,7 +4190,13 @@
     "position_rank": 15,
     "adp": 243.42,
     "adp_position_rank": 15,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "demond-claiborne-min",
@@ -2725,7 +4207,13 @@
     "position_rank": 106,
     "adp": 245.15,
     "adp_position_rank": 70,
-    "value_gap": -36
+    "value_gap": -36,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "malachi-fields-nyg",
@@ -2736,7 +4224,13 @@
     "position_rank": 140,
     "adp": 246.59,
     "adp_position_rank": 90,
-    "value_gap": -50
+    "value_gap": -50,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "keon-coleman-buf",
@@ -2747,7 +4241,13 @@
     "position_rank": 61,
     "adp": 246.78,
     "adp_position_rank": 91,
-    "value_gap": 30
+    "value_gap": 30,
+    "stats": {
+      "ppg": 8.5769,
+      "volume": 4.4615,
+      "snap_share": 0.7044,
+      "efficiency": 1.9224
+    }
   },
   {
     "id": "george-holani-sea",
@@ -2758,7 +4258,13 @@
     "position_rank": 76,
     "adp": 248.01,
     "adp_position_rank": 71,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 0.95,
+      "volume": 2.0,
+      "snap_share": null,
+      "efficiency": 0.475
+    }
   },
   {
     "id": "ja-kobi-lane-bal",
@@ -2769,7 +4275,13 @@
     "position_rank": 141,
     "adp": 248.04,
     "adp_position_rank": 92,
-    "value_gap": -49
+    "value_gap": -49,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "elic-ayomanor-ten",
@@ -2780,7 +4292,13 @@
     "position_rank": 142,
     "adp": 248.54,
     "adp_position_rank": 93,
-    "value_gap": -49
+    "value_gap": -49,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "dallas-cowboys-dal",
@@ -2791,7 +4309,13 @@
     "position_rank": 17,
     "adp": 249.23,
     "adp_position_rank": 17,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chris-bell-mia",
@@ -2802,7 +4326,13 @@
     "position_rank": 143,
     "adp": 249.49,
     "adp_position_rank": 94,
-    "value_gap": -49
+    "value_gap": -49,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "drew-stevens-was",
@@ -2813,7 +4343,13 @@
     "position_rank": 16,
     "adp": 251.5,
     "adp_position_rank": 16,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "david-njoku-lac",
@@ -2824,7 +4360,13 @@
     "position_rank": 4,
     "adp": 252.7,
     "adp_position_rank": 30,
-    "value_gap": 26
+    "value_gap": 26,
+    "stats": {
+      "ppg": 13.5,
+      "volume": 8.8182,
+      "snap_share": 0.7491,
+      "efficiency": 1.5309
+    }
   },
   {
     "id": "isaiah-davis-nyj",
@@ -2835,7 +4377,13 @@
     "position_rank": 65,
     "adp": 254.09,
     "adp_position_rank": 72,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 5.1,
+      "volume": 4.6667,
+      "snap_share": 0.1,
+      "efficiency": 1.0929
+    }
   },
   {
     "id": "tennessee-titans-ten",
@@ -2846,7 +4394,13 @@
     "position_rank": 18,
     "adp": 254.1,
     "adp_position_rank": 18,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "evan-engram-den",
@@ -2857,7 +4411,13 @@
     "position_rank": 13,
     "adp": 254.94,
     "adp_position_rank": 31,
-    "value_gap": 18
+    "value_gap": 18,
+    "stats": {
+      "ppg": 9.9444,
+      "volume": 7.1111,
+      "snap_share": 0.72,
+      "efficiency": 1.3984
+    }
   },
   {
     "id": "tory-horton-sea",
@@ -2868,7 +4428,13 @@
     "position_rank": 144,
     "adp": 255.22,
     "adp_position_rank": 95,
-    "value_gap": -49
+    "value_gap": -49,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "blake-grupe-ind",
@@ -2879,7 +4445,13 @@
     "position_rank": 17,
     "adp": 255.63,
     "adp_position_rank": 17,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "will-reichard-min",
@@ -2890,7 +4462,13 @@
     "position_rank": 18,
     "adp": 256.19,
     "adp_position_rank": 18,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kaelon-black-sf",
@@ -2901,7 +4479,13 @@
     "position_rank": 107,
     "adp": 256.2,
     "adp_position_rank": 73,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "christian-kirk-sf",
@@ -2912,7 +4496,13 @@
     "position_rank": 58,
     "adp": 257.26,
     "adp_position_rank": 96,
-    "value_gap": 38
+    "value_gap": 38,
+    "stats": {
+      "ppg": 8.8625,
+      "volume": 5.875,
+      "snap_share": 0.7,
+      "efficiency": 1.5085
+    }
   },
   {
     "id": "san-francisco-49ers-sf",
@@ -2923,7 +4513,13 @@
     "position_rank": 19,
     "adp": 257.65,
     "adp_position_rank": 19,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ty-johnson-buf",
@@ -2934,7 +4530,13 @@
     "position_rank": 53,
     "adp": 258.5,
     "adp_position_rank": 74,
-    "value_gap": 21
+    "value_gap": 21,
+    "stats": {
+      "ppg": 5.3941,
+      "volume": 3.8824,
+      "snap_share": 0.3045,
+      "efficiency": 1.3894
+    }
   },
   {
     "id": "fernando-mendoza-lv",
@@ -2945,7 +4547,13 @@
     "position_rank": 45,
     "adp": 259.14,
     "adp_position_rank": 30,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chicago-bears-chi",
@@ -2956,7 +4564,13 @@
     "position_rank": 20,
     "adp": 259.38,
     "adp_position_rank": 20,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "elijah-sarratt-bal",
@@ -2967,7 +4581,13 @@
     "position_rank": 145,
     "adp": 259.66,
     "adp_position_rank": 97,
-    "value_gap": -48
+    "value_gap": -48,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "devaughn-vele-no",
@@ -2978,7 +4598,13 @@
     "position_rank": 72,
     "adp": 260.19,
     "adp_position_rank": 98,
-    "value_gap": 26
+    "value_gap": 26,
+    "stats": {
+      "ppg": 8.1923,
+      "volume": 4.2308,
+      "snap_share": 0.5307,
+      "efficiency": 1.9364
+    }
   },
   {
     "id": "trey-benson-ari",
@@ -2989,7 +4615,13 @@
     "position_rank": 68,
     "adp": 261.78,
     "adp_position_rank": 75,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 3.9167,
+      "volume": 5.75,
+      "snap_share": 0.1669,
+      "efficiency": 0.6812
+    }
   },
   {
     "id": "jordan-james-sf",
@@ -3000,7 +4632,13 @@
     "position_rank": 108,
     "adp": 262.44,
     "adp_position_rank": 76,
-    "value_gap": -32
+    "value_gap": -32,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "xavier-legette-car",
@@ -3011,7 +4649,13 @@
     "position_rank": 65,
     "adp": 263.07,
     "adp_position_rank": 99,
-    "value_gap": 34
+    "value_gap": 34,
+    "stats": {
+      "ppg": 8.34,
+      "volume": 6.0,
+      "snap_share": 0.6981,
+      "efficiency": 1.39
+    }
   },
   {
     "id": "cincinnati-bengals-cin",
@@ -3022,7 +4666,13 @@
     "position_rank": 21,
     "adp": 263.46,
     "adp_position_rank": 21,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "colby-parkinson-lar",
@@ -3033,7 +4683,13 @@
     "position_rank": 40,
     "adp": 263.93,
     "adp_position_rank": 32,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": 4.36,
+      "volume": 3.2667,
+      "snap_share": 0.5268,
+      "efficiency": 1.3347
+    }
   },
   {
     "id": "lequint-allen-jr-jac",
@@ -3044,7 +4700,13 @@
     "position_rank": 109,
     "adp": 264.27,
     "adp_position_rank": 77,
-    "value_gap": -32
+    "value_gap": -32,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brandon-aiyuk-sf",
@@ -3055,7 +4717,13 @@
     "position_rank": 55,
     "adp": 265.0,
     "adp_position_rank": 100,
-    "value_gap": 45
+    "value_gap": 45,
+    "stats": {
+      "ppg": 8.9143,
+      "volume": 6.7143,
+      "snap_share": 0.7614,
+      "efficiency": 1.3277
+    }
   },
   {
     "id": "marvin-mims-jr-den",
@@ -3066,7 +4734,13 @@
     "position_rank": 86,
     "adp": 265.33,
     "adp_position_rank": 101,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 8.0938,
+      "volume": 4.0625,
+      "snap_share": 0.2928,
+      "efficiency": 1.9923
+    }
   },
   {
     "id": "tyquan-thornton-kc",
@@ -3077,7 +4751,13 @@
     "position_rank": 112,
     "adp": 265.55,
     "adp_position_rank": 102,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": 2.175,
+      "volume": 2.0,
+      "snap_share": 0.295,
+      "efficiency": 1.0875
+    }
   },
   {
     "id": "new-orleans-saints-no",
@@ -3088,7 +4768,13 @@
     "position_rank": 22,
     "adp": 265.6,
     "adp_position_rank": 22,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chris-brooks-gb",
@@ -3099,7 +4785,13 @@
     "position_rank": 59,
     "adp": 266.6,
     "adp_position_rank": 78,
-    "value_gap": 19
+    "value_gap": 19,
+    "stats": {
+      "ppg": 3.8364,
+      "volume": 4.4545,
+      "snap_share": null,
+      "efficiency": 0.8612
+    }
   },
   {
     "id": "dj-giddens-ind",
@@ -3110,7 +4802,13 @@
     "position_rank": 110,
     "adp": 266.78,
     "adp_position_rank": 79,
-    "value_gap": -31
+    "value_gap": -31,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "wil-lutz-den",
@@ -3121,7 +4819,13 @@
     "position_rank": 19,
     "adp": 266.94,
     "adp_position_rank": 19,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "samaje-perine-cin",
@@ -3132,7 +4836,13 @@
     "position_rank": 55,
     "adp": 267.29,
     "adp_position_rank": 80,
-    "value_gap": 25
+    "value_gap": 25,
+    "stats": {
+      "ppg": 4.7882,
+      "volume": 3.2353,
+      "snap_share": 0.2575,
+      "efficiency": 1.48
+    }
   },
   {
     "id": "darius-slayton-nyg",
@@ -3143,7 +4853,13 @@
     "position_rank": 69,
     "adp": 267.47,
     "adp_position_rank": 103,
-    "value_gap": 34
+    "value_gap": 34,
+    "stats": {
+      "ppg": 6.875,
+      "volume": 4.5625,
+      "snap_share": 0.8306,
+      "efficiency": 1.5068
+    }
   },
   {
     "id": "trey-smack-gb",
@@ -3154,7 +4870,13 @@
     "position_rank": 20,
     "adp": 267.6,
     "adp_position_rank": 20,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "isaiah-williams-nyj",
@@ -3165,7 +4887,13 @@
     "position_rank": 100,
     "adp": 268.0,
     "adp_position_rank": 104,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 2.6,
+      "volume": 3.0,
+      "snap_share": null,
+      "efficiency": 0.8667
+    }
   },
   {
     "id": "tampa-bay-buccaneers-tb",
@@ -3176,7 +4904,13 @@
     "position_rank": 23,
     "adp": 268.41,
     "adp_position_rank": 23,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tua-tagovailoa-atl",
@@ -3187,7 +4921,13 @@
     "position_rank": 14,
     "adp": 268.65,
     "adp_position_rank": 31,
-    "value_gap": 17
+    "value_gap": 17,
+    "stats": {
+      "ppg": 16.5073,
+      "volume": 36.2727,
+      "snap_share": 0.9718,
+      "efficiency": 0.4551
+    }
   },
   {
     "id": "jake-moody-fa",
@@ -3198,7 +4938,13 @@
     "position_rank": 21,
     "adp": 268.8,
     "adp_position_rank": 21,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "atlanta-falcons-atl",
@@ -3209,7 +4955,13 @@
     "position_rank": 24,
     "adp": 269.77,
     "adp_position_rank": 24,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "new-york-giants-nyg",
@@ -3220,7 +4972,13 @@
     "position_rank": 25,
     "adp": 270.7,
     "adp_position_rank": 25,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "nick-folk-atl",
@@ -3231,7 +4989,13 @@
     "position_rank": 22,
     "adp": 270.8,
     "adp_position_rank": 22,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mason-taylor-nyj",
@@ -3242,7 +5006,13 @@
     "position_rank": 62,
     "adp": 271.01,
     "adp_position_rank": 33,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "najee-harris-nyg",
@@ -3253,7 +5023,13 @@
     "position_rank": 28,
     "adp": 271.52,
     "adp_position_rank": 81,
-    "value_gap": 53
+    "value_gap": 53,
+    "stats": {
+      "ppg": 12.0353,
+      "volume": 18.2941,
+      "snap_share": 0.4978,
+      "efficiency": 0.6579
+    }
   },
   {
     "id": "darren-waller-car",
@@ -3264,7 +5040,13 @@
     "position_rank": 63,
     "adp": 272.35,
     "adp_position_rank": 34,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "devin-neal-no",
@@ -3275,7 +5057,13 @@
     "position_rank": 111,
     "adp": 272.59,
     "adp_position_rank": 82,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "spencer-shrader-ind",
@@ -3286,7 +5074,13 @@
     "position_rank": 23,
     "adp": 274.25,
     "adp_position_rank": 23,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyreek-hill-fa",
@@ -3297,7 +5091,13 @@
     "position_rank": 34,
     "adp": 275.26,
     "adp_position_rank": 105,
-    "value_gap": 71
+    "value_gap": 71,
+    "stats": {
+      "ppg": 12.8353,
+      "volume": 7.6471,
+      "snap_share": 0.7988,
+      "efficiency": 1.6785
+    }
   },
   {
     "id": "indianapolis-colts-ind",
@@ -3308,7 +5108,13 @@
     "position_rank": 26,
     "adp": 275.79,
     "adp_position_rank": 26,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mike-gesicki-cin",
@@ -3319,7 +5125,13 @@
     "position_rank": 25,
     "adp": 275.94,
     "adp_position_rank": 35,
-    "value_gap": 10
+    "value_gap": 10,
+    "stats": {
+      "ppg": 8.8438,
+      "volume": 5.1875,
+      "snap_share": 0.4476,
+      "efficiency": 1.7048
+    }
   },
   {
     "id": "brashard-smith-kc",
@@ -3330,7 +5142,13 @@
     "position_rank": 112,
     "adp": 277.71,
     "adp_position_rank": 83,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "eli-stowers-phi",
@@ -3341,7 +5159,13 @@
     "position_rank": 64,
     "adp": 278.1,
     "adp_position_rank": 36,
-    "value_gap": -28
+    "value_gap": -28,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "andrei-iosivas-cin",
@@ -3352,7 +5176,13 @@
     "position_rank": 68,
     "adp": 278.45,
     "adp_position_rank": 106,
-    "value_gap": 38
+    "value_gap": 38,
+    "stats": {
+      "ppg": 7.0529,
+      "volume": 3.5882,
+      "snap_share": 0.7841,
+      "efficiency": 1.9656
+    }
   },
   {
     "id": "theo-johnson-nyg",
@@ -3363,7 +5193,13 @@
     "position_rank": 22,
     "adp": 278.95,
     "adp_position_rank": 37,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 6.81,
+      "volume": 4.3,
+      "snap_share": 0.8417,
+      "efficiency": 1.5837
+    }
   },
   {
     "id": "mack-hollins-ne",
@@ -3374,7 +5210,13 @@
     "position_rank": 81,
     "adp": 278.99,
     "adp_position_rank": 107,
-    "value_gap": 26
+    "value_gap": 26,
+    "stats": {
+      "ppg": 6.175,
+      "volume": 3.125,
+      "snap_share": 0.66,
+      "efficiency": 1.976
+    }
   },
   {
     "id": "kyle-williams-ne",
@@ -3385,7 +5227,13 @@
     "position_rank": 146,
     "adp": 279.14,
     "adp_position_rank": 108,
-    "value_gap": -38
+    "value_gap": -38,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kaleb-johnson-pit",
@@ -3396,7 +5244,13 @@
     "position_rank": 113,
     "adp": 279.53,
     "adp_position_rank": 84,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "malik-davis-dal",
@@ -3407,7 +5261,13 @@
     "position_rank": 114,
     "adp": 279.83,
     "adp_position_rank": 85,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "carolina-panthers-car",
@@ -3418,7 +5278,13 @@
     "position_rank": 27,
     "adp": 282.18,
     "adp_position_rank": 27,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "charlie-smyth-no",
@@ -3429,7 +5295,13 @@
     "position_rank": 24,
     "adp": 282.63,
     "adp_position_rank": 24,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jahan-dotson-atl",
@@ -3440,7 +5312,13 @@
     "position_rank": 102,
     "adp": 283.88,
     "adp_position_rank": 109,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 2.9929,
+      "volume": 2.4286,
+      "snap_share": 0.5824,
+      "efficiency": 1.2324
+    }
   },
   {
     "id": "jake-tonges-sf",
@@ -3451,7 +5329,13 @@
     "position_rank": 65,
     "adp": 285.9,
     "adp_position_rank": 38,
-    "value_gap": -27
+    "value_gap": -27,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "roman-hemby-lv",
@@ -3462,7 +5346,13 @@
     "position_rank": 115,
     "adp": 286.0,
     "adp_position_rank": 86,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "seth-mcgowan-ind",
@@ -3473,7 +5363,13 @@
     "position_rank": 116,
     "adp": 286.33,
     "adp_position_rank": 87,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "daniel-carlson-lv",
@@ -3484,7 +5380,13 @@
     "position_rank": 25,
     "adp": 287.14,
     "adp_position_rank": 25,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "adam-randall-bal",
@@ -3495,7 +5397,13 @@
     "position_rank": 117,
     "adp": 287.44,
     "adp_position_rank": 88,
-    "value_gap": -29
+    "value_gap": -29,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "hollywood-brown-phi",
@@ -3506,7 +5414,13 @@
     "position_rank": 147,
     "adp": 288.18,
     "adp_position_rank": 110,
-    "value_gap": -37
+    "value_gap": -37,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "las-vegas-raiders-lv",
@@ -3517,7 +5431,13 @@
     "position_rank": 28,
     "adp": 288.2,
     "adp_position_rank": 28,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyler-bass-buf",
@@ -3528,7 +5448,13 @@
     "position_rank": 26,
     "adp": 288.9,
     "adp_position_rank": 26,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jalen-tolbert-mia",
@@ -3539,7 +5465,13 @@
     "position_rank": 56,
     "adp": 289.51,
     "adp_position_rank": 111,
-    "value_gap": 55
+    "value_gap": 55,
+    "stats": {
+      "ppg": 8.9412,
+      "volume": 4.6471,
+      "snap_share": 0.7576,
+      "efficiency": 1.9241
+    }
   },
   {
     "id": "michael-penix-jr-atl",
@@ -3550,7 +5482,13 @@
     "position_rank": 37,
     "adp": 289.71,
     "adp_position_rank": 32,
-    "value_gap": -5
+    "value_gap": -5,
+    "stats": {
+      "ppg": 8.82,
+      "volume": 21.0,
+      "snap_share": 0.664,
+      "efficiency": 0.42
+    }
   },
   {
     "id": "skyler-bell-buf",
@@ -3561,7 +5499,13 @@
     "position_rank": 148,
     "adp": 289.97,
     "adp_position_rank": 112,
-    "value_gap": -36
+    "value_gap": -36,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jake-elliott-phi",
@@ -3572,7 +5516,13 @@
     "position_rank": 27,
     "adp": 290.22,
     "adp_position_rank": 27,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kirk-cousins-lv",
@@ -3583,7 +5533,13 @@
     "position_rank": 26,
     "adp": 290.46,
     "adp_position_rank": 33,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 12.5943,
+      "volume": 32.3571,
+      "snap_share": 0.9771,
+      "efficiency": 0.3892
+    }
   },
   {
     "id": "chad-ryland-ari",
@@ -3594,7 +5550,13 @@
     "position_rank": 28,
     "adp": 290.86,
     "adp_position_rank": 28,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kendre-miller-no",
@@ -3605,7 +5567,13 @@
     "position_rank": 58,
     "adp": 291.03,
     "adp_position_rank": 89,
-    "value_gap": 31
+    "value_gap": 31,
+    "stats": {
+      "ppg": 4.85,
+      "volume": 7.8333,
+      "snap_share": 0.28,
+      "efficiency": 0.6191
+    }
   },
   {
     "id": "emari-demercado-kc",
@@ -3616,7 +5584,13 @@
     "position_rank": 61,
     "adp": 291.08,
     "adp_position_rank": 90,
-    "value_gap": 29
+    "value_gap": 29,
+    "stats": {
+      "ppg": 4.2077,
+      "volume": 3.3846,
+      "snap_share": 0.2031,
+      "efficiency": 1.2432
+    }
   },
   {
     "id": "zane-gonzalez-fa",
@@ -3627,7 +5601,13 @@
     "position_rank": 29,
     "adp": 291.71,
     "adp_position_rank": 29,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ryan-fitzgerald-car",
@@ -3638,7 +5618,13 @@
     "position_rank": 30,
     "adp": 291.86,
     "adp_position_rank": 30,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brandon-mcmanus-fa",
@@ -3649,7 +5635,13 @@
     "position_rank": 31,
     "adp": 292.0,
     "adp_position_rank": 31,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "isaiah-bond-cle",
@@ -3660,7 +5652,13 @@
     "position_rank": 149,
     "adp": 292.0,
     "adp_position_rank": 113,
-    "value_gap": -36
+    "value_gap": -36,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "chris-brazzell-ii-car",
@@ -3671,7 +5669,13 @@
     "position_rank": 150,
     "adp": 292.47,
     "adp_position_rank": 114,
-    "value_gap": -36
+    "value_gap": -36,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "devin-singletary-nyg",
@@ -3682,7 +5686,13 @@
     "position_rank": 45,
     "adp": 293.33,
     "adp_position_rank": 91,
-    "value_gap": 46
+    "value_gap": 46,
+    "stats": {
+      "ppg": 6.44,
+      "volume": 9.1333,
+      "snap_share": 0.3893,
+      "efficiency": 0.7051
+    }
   },
   {
     "id": "deshaun-watson-cle",
@@ -3693,7 +5703,13 @@
     "position_rank": 31,
     "adp": 293.53,
     "adp_position_rank": 34,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 10.96,
+      "volume": 30.8571,
+      "snap_share": 0.8886,
+      "efficiency": 0.3552
+    }
   },
   {
     "id": "jerome-ford-was",
@@ -3704,7 +5720,13 @@
     "position_rank": 35,
     "adp": 295.96,
     "adp_position_rank": 92,
-    "value_gap": 57
+    "value_gap": 57,
+    "stats": {
+      "ppg": 9.5714,
+      "volume": 10.5,
+      "snap_share": 0.54,
+      "efficiency": 0.9116
+    }
   },
   {
     "id": "demario-douglas-ne",
@@ -3715,7 +5737,13 @@
     "position_rank": 59,
     "adp": 297.15,
     "adp_position_rank": 115,
-    "value_gap": 56
+    "value_gap": 56,
+    "stats": {
+      "ppg": 9.2312,
+      "volume": 5.625,
+      "snap_share": 0.6265,
+      "efficiency": 1.6411
+    }
   },
   {
     "id": "darnell-washington-pit",
@@ -3726,7 +5754,13 @@
     "position_rank": 45,
     "adp": 297.77,
     "adp_position_rank": 39,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": 3.4615,
+      "volume": 1.9231,
+      "snap_share": 0.5094,
+      "efficiency": 1.8
+    }
   },
   {
     "id": "shedeur-sanders-cle",
@@ -3737,7 +5771,13 @@
     "position_rank": 46,
     "adp": 298.81,
     "adp_position_rank": 35,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "xavier-smith-lar",
@@ -3748,7 +5788,13 @@
     "position_rank": 103,
     "adp": 299.0,
     "adp_position_rank": 116,
-    "value_gap": 13
+    "value_gap": 13,
+    "stats": {
+      "ppg": 2.0667,
+      "volume": 2.0,
+      "snap_share": null,
+      "efficiency": 1.0333
+    }
   },
   {
     "id": "khalil-herbert-fa",
@@ -3759,7 +5805,13 @@
     "position_rank": 69,
     "adp": 299.75,
     "adp_position_rank": 93,
-    "value_gap": 24
+    "value_gap": 24,
+    "stats": {
+      "ppg": 3.9375,
+      "volume": 5.875,
+      "snap_share": 0.135,
+      "efficiency": 0.6702
+    }
   },
   {
     "id": "oscar-delp-no",
@@ -3770,7 +5822,13 @@
     "position_rank": 66,
     "adp": 299.87,
     "adp_position_rank": 40,
-    "value_gap": -26
+    "value_gap": -26,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "washington-commanders-was",
@@ -3781,7 +5839,13 @@
     "position_rank": 29,
     "adp": 300.2,
     "adp_position_rank": 29,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kyle-juszczyk-sf",
@@ -3792,7 +5856,13 @@
     "position_rank": 48,
     "adp": 301.1,
     "adp_position_rank": 94,
-    "value_gap": 46
+    "value_gap": 46,
+    "stats": {
+      "ppg": 4.1143,
+      "volume": 2.5714,
+      "snap_share": 0.4947,
+      "efficiency": 1.6
+    }
   },
   {
     "id": "isaac-guerendo-sf",
@@ -3803,7 +5873,13 @@
     "position_rank": 46,
     "adp": 301.12,
     "adp_position_rank": 95,
-    "value_gap": 49
+    "value_gap": 49,
+    "stats": {
+      "ppg": 7.4,
+      "volume": 7.6923,
+      "snap_share": 0.2294,
+      "efficiency": 0.962
+    }
   },
   {
     "id": "bam-knight-ari",
@@ -3814,7 +5890,13 @@
     "position_rank": 118,
     "adp": 301.19,
     "adp_position_rank": 96,
-    "value_gap": -22
+    "value_gap": -22,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tahj-brooks-cin",
@@ -3825,7 +5907,13 @@
     "position_rank": 119,
     "adp": 301.48,
     "adp_position_rank": 97,
-    "value_gap": -22
+    "value_gap": -22,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "konata-mumpfield-lar",
@@ -3836,7 +5924,13 @@
     "position_rank": 151,
     "adp": 301.77,
     "adp_position_rank": 117,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "trevor-etienne-car",
@@ -3847,7 +5941,13 @@
     "position_rank": 120,
     "adp": 301.87,
     "adp_position_rank": 98,
-    "value_gap": -22
+    "value_gap": -22,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jaleel-mclaughlin-den",
@@ -3858,7 +5958,13 @@
     "position_rank": 51,
     "adp": 301.97,
     "adp_position_rank": 99,
-    "value_gap": 48
+    "value_gap": 48,
+    "stats": {
+      "ppg": 6.075,
+      "volume": 8.75,
+      "snap_share": 0.2765,
+      "efficiency": 0.6943
+    }
   },
   {
     "id": "michael-mayer-lv",
@@ -3869,7 +5975,13 @@
     "position_rank": 42,
     "adp": 302.91,
     "adp_position_rank": 41,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": 3.3273,
+      "volume": 2.9091,
+      "snap_share": 0.63,
+      "efficiency": 1.1438
+    }
   },
   {
     "id": "joey-slye-ten",
@@ -3880,7 +5992,13 @@
     "position_rank": 32,
     "adp": 303.0,
     "adp_position_rank": 32,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "audric-estime-no",
@@ -3891,7 +6009,13 @@
     "position_rank": 121,
     "adp": 303.2,
     "adp_position_rank": 100,
-    "value_gap": -21
+    "value_gap": -21,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "bryce-lance-no",
@@ -3902,7 +6026,13 @@
     "position_rank": 152,
     "adp": 303.25,
     "adp_position_rank": 118,
-    "value_gap": -34
+    "value_gap": -34,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "eli-heidenreich-pit",
@@ -3913,7 +6043,13 @@
     "position_rank": 122,
     "adp": 304.41,
     "adp_position_rank": 101,
-    "value_gap": -21
+    "value_gap": -21,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "xavier-hutchinson-hou",
@@ -3924,7 +6060,13 @@
     "position_rank": 109,
     "adp": 305.5,
     "adp_position_rank": 119,
-    "value_gap": 10
+    "value_gap": 10,
+    "stats": {
+      "ppg": 1.6929,
+      "volume": 1.8571,
+      "snap_share": 0.4739,
+      "efficiency": 0.9115
+    }
   },
   {
     "id": "jalen-reagor-mia",
@@ -3935,7 +6077,13 @@
     "position_rank": 113,
     "adp": 306.0,
     "adp_position_rank": 120,
-    "value_gap": 7
+    "value_gap": 7,
+    "stats": {
+      "ppg": 2.1,
+      "volume": 2.1429,
+      "snap_share": 0.2825,
+      "efficiency": 0.98
+    }
   },
   {
     "id": "joe-mixon-fa",
@@ -3946,7 +6094,13 @@
     "position_rank": 10,
     "adp": 306.23,
     "adp_position_rank": 102,
-    "value_gap": 92
+    "value_gap": 92,
+    "stats": {
+      "ppg": 17.1786,
+      "volume": 21.2143,
+      "snap_share": 0.6175,
+      "efficiency": 0.8098
+    }
   },
   {
     "id": "ty-chandler-no",
@@ -3957,7 +6111,13 @@
     "position_rank": 75,
     "adp": 306.25,
     "adp_position_rank": 103,
-    "value_gap": 28
+    "value_gap": 28,
+    "stats": {
+      "ppg": 2.84,
+      "volume": 6.2,
+      "snap_share": 0.1344,
+      "efficiency": 0.4581
+    }
   },
   {
     "id": "charlie-kolar-lac",
@@ -3968,7 +6128,13 @@
     "position_rank": 46,
     "adp": 306.35,
     "adp_position_rank": 42,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 4.0429,
+      "volume": 1.7143,
+      "snap_share": 0.294,
+      "efficiency": 2.3583
+    }
   },
   {
     "id": "cash-jones-atl",
@@ -3979,7 +6145,13 @@
     "position_rank": 123,
     "adp": 308.0,
     "adp_position_rank": 104,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "barion-brown-no",
@@ -3990,7 +6162,13 @@
     "position_rank": 153,
     "adp": 309.0,
     "adp_position_rank": 121,
-    "value_gap": -32
+    "value_gap": -32,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jarquez-hunter-lar",
@@ -4001,7 +6179,13 @@
     "position_rank": 124,
     "adp": 309.29,
     "adp_position_rank": 105,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "arizona-cardinals-ari",
@@ -4012,7 +6196,13 @@
     "position_rank": 30,
     "adp": 309.33,
     "adp_position_rank": 30,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "olamide-zaccheaus-atl",
@@ -4023,7 +6213,13 @@
     "position_rank": 83,
     "adp": 309.81,
     "adp_position_rank": 122,
-    "value_gap": 39
+    "value_gap": 39,
+    "stats": {
+      "ppg": 7.6267,
+      "volume": 4.3333,
+      "snap_share": 0.4495,
+      "efficiency": 1.76
+    }
   },
   {
     "id": "kendrick-bourne-ari",
@@ -4034,7 +6230,13 @@
     "position_rank": 88,
     "adp": 309.96,
     "adp_position_rank": 123,
-    "value_gap": 35
+    "value_gap": 35,
+    "stats": {
+      "ppg": 5.425,
+      "volume": 3.25,
+      "snap_share": 0.5833,
+      "efficiency": 1.6692
+    }
   },
   {
     "id": "roman-wilson-pit",
@@ -4045,7 +6247,13 @@
     "position_rank": 154,
     "adp": 310.15,
     "adp_position_rank": 124,
-    "value_gap": -30
+    "value_gap": -30,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "elijah-arroyo-sea",
@@ -4056,7 +6264,13 @@
     "position_rank": 67,
     "adp": 310.6,
     "adp_position_rank": 43,
-    "value_gap": -24
+    "value_gap": -24,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "raheim-sanders-cle",
@@ -4067,7 +6281,13 @@
     "position_rank": 125,
     "adp": 311.58,
     "adp_position_rank": 106,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tez-johnson-tb",
@@ -4078,7 +6298,13 @@
     "position_rank": 155,
     "adp": 311.58,
     "adp_position_rank": 125,
-    "value_gap": -30
+    "value_gap": -30,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ben-sauls-nyg",
@@ -4089,7 +6315,13 @@
     "position_rank": 33,
     "adp": 311.71,
     "adp_position_rank": 33,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "joshua-palmer-buf",
@@ -4100,7 +6332,13 @@
     "position_rank": 76,
     "adp": 311.92,
     "adp_position_rank": 126,
-    "value_gap": 50
+    "value_gap": 50,
+    "stats": {
+      "ppg": 7.16,
+      "volume": 4.3333,
+      "snap_share": 0.66,
+      "efficiency": 1.6523
+    }
   },
   {
     "id": "brandin-cooks-fa",
@@ -4111,7 +6349,13 @@
     "position_rank": 74,
     "adp": 312.5,
     "adp_position_rank": 127,
-    "value_gap": 53
+    "value_gap": 53,
+    "stats": {
+      "ppg": 6.96,
+      "volume": 5.7,
+      "snap_share": 0.698,
+      "efficiency": 1.2211
+    }
   },
   {
     "id": "calvin-austin-iii-nyg",
@@ -4122,7 +6366,13 @@
     "position_rank": 80,
     "adp": 313.03,
     "adp_position_rank": 128,
-    "value_gap": 48
+    "value_gap": 48,
+    "stats": {
+      "ppg": 7.1059,
+      "volume": 3.4118,
+      "snap_share": 0.5467,
+      "efficiency": 2.0828
+    }
   },
   {
     "id": "will-shipley-phi",
@@ -4133,7 +6383,13 @@
     "position_rank": 77,
     "adp": 313.18,
     "adp_position_rank": 107,
-    "value_gap": 30
+    "value_gap": 30,
+    "stats": {
+      "ppg": 3.14,
+      "volume": 6.8,
+      "snap_share": 0.055,
+      "efficiency": 0.4618
+    }
   },
   {
     "id": "jaret-patterson-lac",
@@ -4144,7 +6400,13 @@
     "position_rank": 126,
     "adp": 313.5,
     "adp_position_rank": 108,
-    "value_gap": -18
+    "value_gap": -18,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jalen-royals-kc",
@@ -4155,7 +6417,13 @@
     "position_rank": 156,
     "adp": 313.53,
     "adp_position_rank": 129,
-    "value_gap": -27
+    "value_gap": -27,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cedric-tillman-cle",
@@ -4166,7 +6434,13 @@
     "position_rank": 67,
     "adp": 313.72,
     "adp_position_rank": 130,
-    "value_gap": 63
+    "value_gap": 63,
+    "stats": {
+      "ppg": 8.9333,
+      "volume": 5.5556,
+      "snap_share": 0.5491,
+      "efficiency": 1.608
+    }
   },
   {
     "id": "miami-dolphins-mia",
@@ -4177,7 +6451,13 @@
     "position_rank": 31,
     "adp": 314.2,
     "adp_position_rank": 31,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ashton-dulin-ind",
@@ -4188,7 +6468,13 @@
     "position_rank": 114,
     "adp": 314.4,
     "adp_position_rank": 131,
-    "value_gap": 17
+    "value_gap": 17,
+    "stats": {
+      "ppg": 2.1333,
+      "volume": 1.4444,
+      "snap_share": 0.1987,
+      "efficiency": 1.4769
+    }
   },
   {
     "id": "kavontae-turpin-dal",
@@ -4199,7 +6485,13 @@
     "position_rank": 75,
     "adp": 314.94,
     "adp_position_rank": 132,
-    "value_gap": 57
+    "value_gap": 57,
+    "stats": {
+      "ppg": 6.9467,
+      "volume": 4.5333,
+      "snap_share": null,
+      "efficiency": 1.5324
+    }
   },
   {
     "id": "noah-whittington-hou",
@@ -4210,7 +6502,13 @@
     "position_rank": 127,
     "adp": 315.33,
     "adp_position_rank": 109,
-    "value_gap": -18
+    "value_gap": -18,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kareem-hunt-fa",
@@ -4221,7 +6519,13 @@
     "position_rank": 29,
     "adp": 315.37,
     "adp_position_rank": 110,
-    "value_gap": 81
+    "value_gap": 81,
+    "stats": {
+      "ppg": 11.9538,
+      "volume": 17.8462,
+      "snap_share": 0.4981,
+      "efficiency": 0.6698
+    }
   },
   {
     "id": "phil-mafah-dal",
@@ -4232,7 +6536,13 @@
     "position_rank": 128,
     "adp": 315.63,
     "adp_position_rank": 111,
-    "value_gap": -17
+    "value_gap": -17,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "brenen-thompson-lac",
@@ -4243,7 +6553,13 @@
     "position_rank": 157,
     "adp": 315.71,
     "adp_position_rank": 133,
-    "value_gap": -24
+    "value_gap": -24,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kalif-raymond-chi",
@@ -4254,7 +6570,13 @@
     "position_rank": 93,
     "adp": 318.56,
     "adp_position_rank": 134,
-    "value_gap": 41
+    "value_gap": 41,
+    "stats": {
+      "ppg": 5.65,
+      "volume": 2.4,
+      "snap_share": 0.2823,
+      "efficiency": 2.3542
+    }
   },
   {
     "id": "malik-benson-lv",
@@ -4265,7 +6587,13 @@
     "position_rank": 158,
     "adp": 318.67,
     "adp_position_rank": 135,
-    "value_gap": -23
+    "value_gap": -23,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "will-kacmarek-mia",
@@ -4276,7 +6604,13 @@
     "position_rank": 68,
     "adp": 319.0,
     "adp_position_rank": 44,
-    "value_gap": -24
+    "value_gap": -24,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyler-goodson-atl",
@@ -4287,7 +6621,13 @@
     "position_rank": 54,
     "adp": 319.75,
     "adp_position_rank": 112,
-    "value_gap": 58
+    "value_gap": 58,
+    "stats": {
+      "ppg": 4.9333,
+      "volume": 5.2222,
+      "snap_share": null,
+      "efficiency": 0.9447
+    }
   },
   {
     "id": "new-york-jets-nyj",
@@ -4298,7 +6638,13 @@
     "position_rank": 32,
     "adp": 320.2,
     "adp_position_rank": 32,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cedrick-wilson-jr-det",
@@ -4309,7 +6655,13 @@
     "position_rank": 94,
     "adp": 320.5,
     "adp_position_rank": 136,
-    "value_gap": 42
+    "value_gap": 42,
+    "stats": {
+      "ppg": 5.194,
+      "volume": 2.7,
+      "snap_share": 0.396,
+      "efficiency": 1.9237
+    }
   },
   {
     "id": "reggie-virgil-ari",
@@ -4320,7 +6672,13 @@
     "position_rank": 159,
     "adp": 320.5,
     "adp_position_rank": 136,
-    "value_gap": -23
+    "value_gap": -23,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "erick-all-jr-cin",
@@ -4331,7 +6689,13 @@
     "position_rank": 41,
     "adp": 320.69,
     "adp_position_rank": 45,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 4.475,
+      "volume": 2.75,
+      "snap_share": 0.4189,
+      "efficiency": 1.6273
+    }
   },
   {
     "id": "luke-mccaffrey-was",
@@ -4342,7 +6706,13 @@
     "position_rank": 106,
     "adp": 321.03,
     "adp_position_rank": 138,
-    "value_gap": 32
+    "value_gap": 32,
+    "stats": {
+      "ppg": 2.9,
+      "volume": 2.0,
+      "snap_share": 0.3355,
+      "efficiency": 1.45
+    }
   },
   {
     "id": "tyler-higbee-lar",
@@ -4353,7 +6723,13 @@
     "position_rank": 27,
     "adp": 321.22,
     "adp_position_rank": 46,
-    "value_gap": 19
+    "value_gap": 19,
+    "stats": {
+      "ppg": 8.8667,
+      "volume": 4.0,
+      "snap_share": 0.406,
+      "efficiency": 2.2167
+    }
   },
   {
     "id": "nick-westbrook-ikhine-ind",
@@ -4364,7 +6740,13 @@
     "position_rank": 50,
     "adp": 321.44,
     "adp_position_rank": 139,
-    "value_gap": 89
+    "value_gap": 89,
+    "stats": {
+      "ppg": 10.4385,
+      "volume": 4.6154,
+      "snap_share": 0.6994,
+      "efficiency": 2.2617
+    }
   },
   {
     "id": "carson-beck-ari",
@@ -4375,7 +6757,13 @@
     "position_rank": 47,
     "adp": 321.48,
     "adp_position_rank": 36,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "scotty-miller-chi",
@@ -4386,7 +6774,13 @@
     "position_rank": 107,
     "adp": 322.5,
     "adp_position_rank": 140,
-    "value_gap": 33
+    "value_gap": 33,
+    "stats": {
+      "ppg": 2.975,
+      "volume": 2.25,
+      "snap_share": 0.25,
+      "efficiency": 1.3222
+    }
   },
   {
     "id": "hunter-luepke-dal",
@@ -4397,7 +6791,13 @@
     "position_rank": 71,
     "adp": 322.6,
     "adp_position_rank": 113,
-    "value_gap": 42
+    "value_gap": 42,
+    "stats": {
+      "ppg": 2.0692,
+      "volume": 2.1538,
+      "snap_share": 0.3025,
+      "efficiency": 0.9607
+    }
   },
   {
     "id": "j-j-mccarthy-min",
@@ -4408,7 +6808,13 @@
     "position_rank": 48,
     "adp": 323.27,
     "adp_position_rank": 37,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cole-kmet-chi",
@@ -4419,7 +6825,13 @@
     "position_rank": 17,
     "adp": 323.32,
     "adp_position_rank": 47,
-    "value_gap": 30
+    "value_gap": 30,
+    "stats": {
+      "ppg": 8.6,
+      "volume": 3.9286,
+      "snap_share": 0.8724,
+      "efficiency": 2.1891
+    }
   },
   {
     "id": "dylan-laube-lv",
@@ -4430,7 +6842,13 @@
     "position_rank": 85,
     "adp": 324.0,
     "adp_position_rank": 114,
-    "value_gap": 29
+    "value_gap": 29,
+    "stats": {
+      "ppg": -2.0,
+      "volume": 1.0,
+      "snap_share": 0.004,
+      "efficiency": -2.0
+    }
   },
   {
     "id": "zavier-scott-min",
@@ -4441,7 +6859,13 @@
     "position_rank": 129,
     "adp": 324.67,
     "adp_position_rank": 115,
-    "value_gap": -14
+    "value_gap": -14,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jam-miller-ne",
@@ -4452,7 +6876,13 @@
     "position_rank": 130,
     "adp": 324.8,
     "adp_position_rank": 116,
-    "value_gap": -14
+    "value_gap": -14,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "kevin-coleman-jr-mia",
@@ -4463,7 +6893,13 @@
     "position_rank": 160,
     "adp": 325.1,
     "adp_position_rank": 141,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "treylon-burks-was",
@@ -4474,7 +6910,13 @@
     "position_rank": 110,
     "adp": 325.44,
     "adp_position_rank": 142,
-    "value_gap": 32
+    "value_gap": 32,
+    "stats": {
+      "ppg": 1.5,
+      "volume": 2.0,
+      "snap_share": 0.474,
+      "efficiency": 0.75
+    }
   },
   {
     "id": "eli-raridon-ne",
@@ -4485,7 +6927,13 @@
     "position_rank": 69,
     "adp": 325.63,
     "adp_position_rank": 48,
-    "value_gap": -21
+    "value_gap": -21,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jawhar-jordan-hou",
@@ -4496,7 +6944,13 @@
     "position_rank": 131,
     "adp": 325.76,
     "adp_position_rank": 117,
-    "value_gap": -14
+    "value_gap": -14,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tutu-atwell-mia",
@@ -4507,7 +6961,13 @@
     "position_rank": 89,
     "adp": 326.21,
     "adp_position_rank": 143,
-    "value_gap": 54
+    "value_gap": 54,
+    "stats": {
+      "ppg": 6.5933,
+      "volume": 4.2667,
+      "snap_share": 0.3516,
+      "efficiency": 1.5453
+    }
   },
   {
     "id": "john-bates-was",
@@ -4518,7 +6978,13 @@
     "position_rank": 53,
     "adp": 326.22,
     "adp_position_rank": 49,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": 1.44,
+      "volume": 1.3,
+      "snap_share": 0.4365,
+      "efficiency": 1.1077
+    }
   },
   {
     "id": "john-metchie-iii-car",
@@ -4529,7 +6995,13 @@
     "position_rank": 90,
     "adp": 326.47,
     "adp_position_rank": 144,
-    "value_gap": 54
+    "value_gap": 54,
+    "stats": {
+      "ppg": 5.54,
+      "volume": 3.7,
+      "snap_share": 0.472,
+      "efficiency": 1.4973
+    }
   },
   {
     "id": "sione-vaki-det",
@@ -4540,7 +7012,13 @@
     "position_rank": 83,
     "adp": 326.6,
     "adp_position_rank": 118,
-    "value_gap": 35
+    "value_gap": 35,
+    "stats": {
+      "ppg": 2.025,
+      "volume": 2.25,
+      "snap_share": 0.0206,
+      "efficiency": 0.9
+    }
   },
   {
     "id": "devontez-walker-bal",
@@ -4551,7 +7029,13 @@
     "position_rank": 99,
     "adp": 326.75,
     "adp_position_rank": 145,
-    "value_gap": 46
+    "value_gap": 46,
+    "stats": {
+      "ppg": 4.55,
+      "volume": 1.5,
+      "snap_share": 0.0864,
+      "efficiency": 3.0333
+    }
   },
   {
     "id": "noah-gray-kc",
@@ -4562,7 +7046,13 @@
     "position_rank": 31,
     "adp": 327.15,
     "adp_position_rank": 50,
-    "value_gap": 19
+    "value_gap": 19,
+    "stats": {
+      "ppg": 7.0812,
+      "volume": 3.125,
+      "snap_share": 0.5455,
+      "efficiency": 2.266
+    }
   },
   {
     "id": "jeremy-mcnichols-was",
@@ -4573,7 +7063,13 @@
     "position_rank": 64,
     "adp": 327.8,
     "adp_position_rank": 119,
-    "value_gap": 55
+    "value_gap": 55,
+    "stats": {
+      "ppg": 4.5571,
+      "volume": 4.7857,
+      "snap_share": 0.198,
+      "efficiency": 0.9522
+    }
   },
   {
     "id": "mitch-tinsley-cin",
@@ -4584,7 +7080,13 @@
     "position_rank": 161,
     "adp": 328.0,
     "adp_position_rank": 146,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "michael-carter-ten",
@@ -4595,7 +7097,13 @@
     "position_rank": 27,
     "adp": 329.5,
     "adp_position_rank": 120,
-    "value_gap": 93
+    "value_gap": 93,
+    "stats": {
+      "ppg": 11.9333,
+      "volume": 15.3333,
+      "snap_share": 0.6167,
+      "efficiency": 0.7783
+    }
   },
   {
     "id": "max-klare-lar",
@@ -4606,7 +7114,13 @@
     "position_rank": 70,
     "adp": 329.84,
     "adp_position_rank": 51,
-    "value_gap": -19
+    "value_gap": -19,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "dont-e-thornton-jr-lv",
@@ -4617,7 +7131,13 @@
     "position_rank": 162,
     "adp": 330.65,
     "adp_position_rank": 147,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "nick-chubb-fa",
@@ -4628,7 +7148,13 @@
     "position_rank": 42,
     "adp": 330.71,
     "adp_position_rank": 121,
-    "value_gap": 79
+    "value_gap": 79,
+    "stats": {
+      "ppg": 7.9125,
+      "volume": 14.125,
+      "snap_share": 0.4125,
+      "efficiency": 0.5602
+    }
   },
   {
     "id": "rasheen-ali-bal",
@@ -4639,7 +7165,13 @@
     "position_rank": 84,
     "adp": 330.89,
     "adp_position_rank": 122,
-    "value_gap": 38
+    "value_gap": 38,
+    "stats": {
+      "ppg": 0.775,
+      "volume": 3.0,
+      "snap_share": 0.0783,
+      "efficiency": 0.2583
+    }
   },
   {
     "id": "robert-henry-jr-was",
@@ -4650,7 +7182,13 @@
     "position_rank": 132,
     "adp": 331.0,
     "adp_position_rank": 123,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ja-tavion-sanders-car",
@@ -4661,7 +7199,13 @@
     "position_rank": 37,
     "adp": 331.13,
     "adp_position_rank": 52,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 4.88,
+      "volume": 2.8667,
+      "snap_share": 0.5613,
+      "efficiency": 1.7023
+    }
   },
   {
     "id": "j-mari-taylor-jac",
@@ -4672,7 +7216,13 @@
     "position_rank": 133,
     "adp": 331.71,
     "adp_position_rank": 124,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "dawson-knox-buf",
@@ -4683,7 +7233,13 @@
     "position_rank": 38,
     "adp": 331.8,
     "adp_position_rank": 53,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 4.2214,
+      "volume": 2.3571,
+      "snap_share": 0.5995,
+      "efficiency": 1.7909
+    }
   },
   {
     "id": "jordan-watkins-sf",
@@ -4694,7 +7250,13 @@
     "position_rank": 163,
     "adp": 333.0,
     "adp_position_rank": 148,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "demarcus-robinson-sf",
@@ -4705,7 +7267,13 @@
     "position_rank": 66,
     "adp": 333.3,
     "adp_position_rank": 149,
-    "value_gap": 83
+    "value_gap": 83,
+    "stats": {
+      "ppg": 7.2647,
+      "volume": 3.7647,
+      "snap_share": 0.8163,
+      "efficiency": 1.9297
+    }
   },
   {
     "id": "donovan-edwards-mia",
@@ -4716,7 +7284,13 @@
     "position_rank": 134,
     "adp": 333.33,
     "adp_position_rank": 125,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jahdae-walker-chi",
@@ -4727,7 +7301,13 @@
     "position_rank": 164,
     "adp": 334.0,
     "adp_position_rank": 150,
-    "value_gap": -14
+    "value_gap": -14,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mac-jones-sf",
@@ -4738,7 +7318,13 @@
     "position_rank": 35,
     "adp": 334.85,
     "adp_position_rank": 38,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 9.608,
+      "volume": 26.2,
+      "snap_share": 0.798,
+      "efficiency": 0.3667
+    }
   },
   {
     "id": "odell-beckham-jr-nyg",
@@ -4749,7 +7335,13 @@
     "position_rank": 115,
     "adp": 335.2,
     "adp_position_rank": 151,
-    "value_gap": 36
+    "value_gap": 36,
+    "stats": {
+      "ppg": 1.8125,
+      "volume": 2.375,
+      "snap_share": 0.2022,
+      "efficiency": 0.7632
+    }
   },
   {
     "id": "reggie-gilliam-ne",
@@ -4760,7 +7352,13 @@
     "position_rank": 81,
     "adp": 335.25,
     "adp_position_rank": 126,
-    "value_gap": 45
+    "value_gap": 45,
+    "stats": {
+      "ppg": 0.35,
+      "volume": 1.5,
+      "snap_share": null,
+      "efficiency": 0.2333
+    }
   },
   {
     "id": "tommy-myers-fa",
@@ -4771,7 +7369,13 @@
     "position_rank": 71,
     "adp": 335.33,
     "adp_position_rank": 54,
-    "value_gap": -17
+    "value_gap": -17,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "frank-gore-jr-buf",
@@ -4782,7 +7386,13 @@
     "position_rank": 135,
     "adp": 335.75,
     "adp_position_rank": 127,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "elijah-moore-phi",
@@ -4793,7 +7403,13 @@
     "position_rank": 71,
     "adp": 336.0,
     "adp_position_rank": 152,
-    "value_gap": 81
+    "value_gap": 81,
+    "stats": {
+      "ppg": 7.1118,
+      "volume": 6.0588,
+      "snap_share": 0.7571,
+      "efficiency": 1.1738
+    }
   },
   {
     "id": "xavier-restrepo-ten",
@@ -4804,7 +7420,13 @@
     "position_rank": 165,
     "adp": 336.0,
     "adp_position_rank": 152,
-    "value_gap": -13
+    "value_gap": -13,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "justin-joly-den",
@@ -4815,7 +7437,13 @@
     "position_rank": 72,
     "adp": 336.67,
     "adp_position_rank": 55,
-    "value_gap": -17
+    "value_gap": -17,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "zavion-thomas-chi",
@@ -4826,7 +7454,13 @@
     "position_rank": 166,
     "adp": 337.06,
     "adp_position_rank": 154,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "cj-daniels-lar",
@@ -4837,7 +7471,13 @@
     "position_rank": 167,
     "adp": 337.54,
     "adp_position_rank": 155,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "theo-wease-jr-mia",
@@ -4848,7 +7488,13 @@
     "position_rank": 168,
     "adp": 338.0,
     "adp_position_rank": 156,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "michael-woods-ii-den",
@@ -4859,7 +7505,13 @@
     "position_rank": 168,
     "adp": 338.0,
     "adp_position_rank": 156,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "greg-dortch-det",
@@ -4870,7 +7522,13 @@
     "position_rank": 95,
     "adp": 339.14,
     "adp_position_rank": 158,
-    "value_gap": 63
+    "value_gap": 63,
+    "stats": {
+      "ppg": 5.3118,
+      "volume": 3.2353,
+      "snap_share": 0.4024,
+      "efficiency": 1.6418
+    }
   },
   {
     "id": "savion-williams-gb",
@@ -4881,7 +7539,13 @@
     "position_rank": 170,
     "adp": 340.0,
     "adp_position_rank": 159,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jeremy-ruckert-nyj",
@@ -4892,7 +7556,13 @@
     "position_rank": 52,
     "adp": 341.0,
     "adp_position_rank": 56,
-    "value_gap": 4
+    "value_gap": 4,
+    "stats": {
+      "ppg": 2.1923,
+      "volume": 2.1538,
+      "snap_share": 0.3676,
+      "efficiency": 1.0179
+    }
   },
   {
     "id": "van-jefferson-was",
@@ -4903,7 +7573,13 @@
     "position_rank": 91,
     "adp": 341.0,
     "adp_position_rank": 160,
-    "value_gap": 69
+    "value_gap": 69,
+    "stats": {
+      "ppg": 4.24,
+      "volume": 2.6667,
+      "snap_share": 0.6522,
+      "efficiency": 1.59
+    }
   },
   {
     "id": "colbie-young-cin",
@@ -4914,7 +7590,13 @@
     "position_rank": 171,
     "adp": 341.0,
     "adp_position_rank": 160,
-    "value_gap": -11
+    "value_gap": -11,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ronnie-rivers-lar",
@@ -4925,7 +7607,13 @@
     "position_rank": 72,
     "adp": 341.25,
     "adp_position_rank": 128,
-    "value_gap": 56
+    "value_gap": 56,
+    "stats": {
+      "ppg": 3.66,
+      "volume": 5.6,
+      "snap_share": 0.0726,
+      "efficiency": 0.6536
+    }
   },
   {
     "id": "roschon-johnson-chi",
@@ -4936,7 +7624,13 @@
     "position_rank": 50,
     "adp": 342.15,
     "adp_position_rank": 129,
-    "value_gap": 79
+    "value_gap": 79,
+    "stats": {
+      "ppg": 6.45,
+      "volume": 6.25,
+      "snap_share": 0.2814,
+      "efficiency": 1.032
+    }
   },
   {
     "id": "justin-fields-kc",
@@ -4947,7 +7641,13 @@
     "position_rank": 36,
     "adp": 342.77,
     "adp_position_rank": 39,
-    "value_gap": 3
+    "value_gap": 3,
+    "stats": {
+      "ppg": 11.914,
+      "volume": 16.1,
+      "snap_share": 0.5636,
+      "efficiency": 0.74
+    }
   },
   {
     "id": "noah-fant-no",
@@ -4958,7 +7658,13 @@
     "position_rank": 28,
     "adp": 344.05,
     "adp_position_rank": 57,
-    "value_gap": 29
+    "value_gap": 29,
+    "stats": {
+      "ppg": 7.4286,
+      "volume": 4.5714,
+      "snap_share": 0.6329,
+      "efficiency": 1.625
+    }
   },
   {
     "id": "anthony-richardson-sr-ind",
@@ -4969,7 +7675,13 @@
     "position_rank": 25,
     "adp": 344.63,
     "adp_position_rank": 40,
-    "value_gap": 15
+    "value_gap": 15,
+    "stats": {
+      "ppg": 14.8509,
+      "volume": 24.0,
+      "snap_share": 0.9255,
+      "efficiency": 0.6188
+    }
   },
   {
     "id": "marlin-klein-hou",
@@ -4980,7 +7692,13 @@
     "position_rank": 73,
     "adp": 345.75,
     "adp_position_rank": 58,
-    "value_gap": -15
+    "value_gap": -15,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "ty-simpson-lar",
@@ -4991,7 +7709,13 @@
     "position_rank": 49,
     "adp": 346.13,
     "adp_position_rank": 41,
-    "value_gap": -8
+    "value_gap": -8,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "joe-flacco-cin",
@@ -5002,7 +7726,13 @@
     "position_rank": 22,
     "adp": 346.4,
     "adp_position_rank": 42,
-    "value_gap": 20
+    "value_gap": 20,
+    "stats": {
+      "ppg": 14.1486,
+      "volume": 35.4286,
+      "snap_share": 0.8525,
+      "efficiency": 0.3994
+    }
   },
   {
     "id": "travis-homer-pit",
@@ -5013,7 +7743,13 @@
     "position_rank": 82,
     "adp": 346.5,
     "adp_position_rank": 130,
-    "value_gap": 48
+    "value_gap": 48,
+    "stats": {
+      "ppg": 1.6,
+      "volume": 2.25,
+      "snap_share": 0.116,
+      "efficiency": 0.7111
+    }
   },
   {
     "id": "jaylin-lane-was",
@@ -5024,7 +7760,13 @@
     "position_rank": 172,
     "adp": 347.16,
     "adp_position_rank": 162,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tommy-tremble-car",
@@ -5035,7 +7777,13 @@
     "position_rank": 33,
     "adp": 348.75,
     "adp_position_rank": 59,
-    "value_gap": 26
+    "value_gap": 26,
+    "stats": {
+      "ppg": 5.64,
+      "volume": 3.2,
+      "snap_share": 0.6725,
+      "efficiency": 1.7625
+    }
   },
   {
     "id": "david-sills-v-tb",
@@ -5046,7 +7794,13 @@
     "position_rank": 173,
     "adp": 349.0,
     "adp_position_rank": 163,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "austin-ekeler-fa",
@@ -5057,7 +7811,13 @@
     "position_rank": 32,
     "adp": 349.07,
     "adp_position_rank": 131,
-    "value_gap": 99
+    "value_gap": 99,
+    "stats": {
+      "ppg": 11.025,
+      "volume": 9.8333,
+      "snap_share": 0.5167,
+      "efficiency": 1.1212
+    }
   },
   {
     "id": "myles-montgomery-fa",
@@ -5068,7 +7828,13 @@
     "position_rank": 136,
     "adp": 349.5,
     "adp_position_rank": 132,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jameis-winston-nyg",
@@ -5079,7 +7845,13 @@
     "position_rank": 34,
     "adp": 349.59,
     "adp_position_rank": 43,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 11.9218,
+      "volume": 26.9091,
+      "snap_share": 0.585,
+      "efficiency": 0.443
+    }
   },
   {
     "id": "dameon-pierce-phi",
@@ -5090,7 +7862,13 @@
     "position_rank": 63,
     "adp": 349.75,
     "adp_position_rank": 133,
-    "value_gap": 70
+    "value_gap": 70,
+    "stats": {
+      "ppg": 4.8333,
+      "volume": 4.8889,
+      "snap_share": 0.1608,
+      "efficiency": 0.9886
+    }
   },
   {
     "id": "miles-davis-car",
@@ -5101,7 +7879,13 @@
     "position_rank": 137,
     "adp": 350.5,
     "adp_position_rank": 134,
-    "value_gap": -3
+    "value_gap": -3,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tai-felton-min",
@@ -5112,7 +7896,13 @@
     "position_rank": 174,
     "adp": 350.6,
     "adp_position_rank": 164,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "juice-wells-jr-atl",
@@ -5123,7 +7913,13 @@
     "position_rank": 175,
     "adp": 351.0,
     "adp_position_rank": 165,
-    "value_gap": -10
+    "value_gap": -10,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "terrell-jennings-fa",
@@ -5134,7 +7930,13 @@
     "position_rank": 70,
     "adp": 351.67,
     "adp_position_rank": 135,
-    "value_gap": 65
+    "value_gap": 65,
+    "stats": {
+      "ppg": 1.65,
+      "volume": 7.0,
+      "snap_share": null,
+      "efficiency": 0.2357
+    }
   },
   {
     "id": "quinn-ewers-mia",
@@ -5145,7 +7947,13 @@
     "position_rank": 50,
     "adp": 351.75,
     "adp_position_rank": 44,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jonnu-smith-fa",
@@ -5156,7 +7964,13 @@
     "position_rank": 6,
     "adp": 352.2,
     "adp_position_rank": 60,
-    "value_gap": 54
+    "value_gap": 54,
+    "stats": {
+      "ppg": 13.0765,
+      "volume": 6.6471,
+      "snap_share": 0.5488,
+      "efficiency": 1.9673
+    }
   },
   {
     "id": "tyler-lockett-lv",
@@ -5167,7 +7981,13 @@
     "position_rank": 73,
     "adp": 352.33,
     "adp_position_rank": 166,
-    "value_gap": 93
+    "value_gap": 93,
+    "stats": {
+      "ppg": 7.1176,
+      "volume": 4.3529,
+      "snap_share": 0.6906,
+      "efficiency": 1.6351
+    }
   },
   {
     "id": "cade-klubnik-nyj",
@@ -5178,7 +7998,13 @@
     "position_rank": 51,
     "adp": 352.4,
     "adp_position_rank": 45,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "miles-sanders-fa",
@@ -5189,7 +8015,13 @@
     "position_rank": 44,
     "adp": 352.67,
     "adp_position_rank": 136,
-    "value_gap": 92
+    "value_gap": 92,
+    "stats": {
+      "ppg": 7.0273,
+      "volume": 7.7273,
+      "snap_share": 0.3336,
+      "efficiency": 0.9094
+    }
   },
   {
     "id": "jordan-whittington-lar",
@@ -5200,7 +8032,13 @@
     "position_rank": 82,
     "adp": 353.08,
     "adp_position_rank": 167,
-    "value_gap": 85
+    "value_gap": 85,
+    "stats": {
+      "ppg": 8.75,
+      "volume": 5.0,
+      "snap_share": 0.2788,
+      "efficiency": 1.75
+    }
   },
   {
     "id": "austin-hooper-atl",
@@ -5211,7 +8049,13 @@
     "position_rank": 34,
     "adp": 353.5,
     "adp_position_rank": 61,
-    "value_gap": 27
+    "value_gap": 27,
+    "stats": {
+      "ppg": 6.3882,
+      "volume": 3.4706,
+      "snap_share": 0.5253,
+      "efficiency": 1.8407
+    }
   },
   {
     "id": "jaydn-ott-kc",
@@ -5222,7 +8066,13 @@
     "position_rank": 138,
     "adp": 353.67,
     "adp_position_rank": 137,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tanner-koziol-jac",
@@ -5233,7 +8083,13 @@
     "position_rank": 74,
     "adp": 354.0,
     "adp_position_rank": 62,
-    "value_gap": -12
+    "value_gap": -12,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jacob-cowing-sf",
@@ -5244,7 +8100,13 @@
     "position_rank": 104,
     "adp": 354.0,
     "adp_position_rank": 168,
-    "value_gap": 64
+    "value_gap": 64,
+    "stats": {
+      "ppg": 4.2333,
+      "volume": 2.3333,
+      "snap_share": 0.104,
+      "efficiency": 1.8143
+    }
   },
   {
     "id": "marcus-mariota-was",
@@ -5255,7 +8117,13 @@
     "position_rank": 33,
     "adp": 354.13,
     "adp_position_rank": 46,
-    "value_gap": 13
+    "value_gap": 13,
+    "stats": {
+      "ppg": 15.2533,
+      "volume": 14.6667,
+      "snap_share": 0.2683,
+      "efficiency": 1.04
+    }
   },
   {
     "id": "joe-milton-iii-dal",
@@ -5266,7 +8134,13 @@
     "position_rank": 9,
     "adp": 354.18,
     "adp_position_rank": 47,
-    "value_gap": 38
+    "value_gap": 38,
+    "stats": {
+      "ppg": 19.24,
+      "volume": 29.0,
+      "snap_share": 0.95,
+      "efficiency": 0.6634
+    }
   },
   {
     "id": "luke-musgrave-gb",
@@ -5277,7 +8151,13 @@
     "position_rank": 54,
     "adp": 355.25,
     "adp_position_rank": 63,
-    "value_gap": 9
+    "value_gap": 9,
+    "stats": {
+      "ppg": 1.6429,
+      "volume": 1.4286,
+      "snap_share": 0.2975,
+      "efficiency": 1.15
+    }
   },
   {
     "id": "tim-patrick-nyj",
@@ -5288,7 +8168,13 @@
     "position_rank": 84,
     "adp": 355.5,
     "adp_position_rank": 169,
-    "value_gap": 85
+    "value_gap": 85,
+    "stats": {
+      "ppg": 6.16,
+      "volume": 2.9333,
+      "snap_share": 0.5824,
+      "efficiency": 2.1
+    }
   },
   {
     "id": "riley-leonard-ind",
@@ -5299,7 +8185,13 @@
     "position_rank": 52,
     "adp": 356.29,
     "adp_position_rank": 48,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "gardner-minshew-ii-ari",
@@ -5310,7 +8202,13 @@
     "position_rank": 32,
     "adp": 356.33,
     "adp_position_rank": 49,
-    "value_gap": 17
+    "value_gap": 17,
+    "stats": {
+      "ppg": 9.632,
+      "volume": 30.6,
+      "snap_share": 0.865,
+      "efficiency": 0.3148
+    }
   },
   {
     "id": "ben-sinnott-was",
@@ -5321,7 +8219,13 @@
     "position_rank": 48,
     "adp": 356.58,
     "adp_position_rank": 64,
-    "value_gap": 16
+    "value_gap": 16,
+    "stats": {
+      "ppg": 3.45,
+      "volume": 1.25,
+      "snap_share": 0.234,
+      "efficiency": 2.76
+    }
   },
   {
     "id": "jimmy-horn-jr-car",
@@ -5332,7 +8236,13 @@
     "position_rank": 176,
     "adp": 356.67,
     "adp_position_rank": 170,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "daniel-bellinger-ten",
@@ -5343,7 +8253,13 @@
     "position_rank": 49,
     "adp": 356.71,
     "adp_position_rank": 65,
-    "value_gap": 16
+    "value_gap": 16,
+    "stats": {
+      "ppg": 3.7857,
+      "volume": 2.4286,
+      "snap_share": 0.3306,
+      "efficiency": 1.5588
+    }
   },
   {
     "id": "mason-rudolph-pit",
@@ -5354,7 +8270,13 @@
     "position_rank": 30,
     "adp": 358.0,
     "adp_position_rank": 50,
-    "value_gap": 20
+    "value_gap": 20,
+    "stats": {
+      "ppg": 11.975,
+      "volume": 28.5,
+      "snap_share": 0.8475,
+      "efficiency": 0.4202
+    }
   },
   {
     "id": "matt-hibner-bal",
@@ -5365,7 +8287,13 @@
     "position_rank": 75,
     "adp": 358.0,
     "adp_position_rank": 66,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mitchell-evans-car",
@@ -5376,7 +8304,13 @@
     "position_rank": 76,
     "adp": 359.25,
     "adp_position_rank": 67,
-    "value_gap": -9
+    "value_gap": -9,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "mo-alie-cox-ind",
@@ -5387,7 +8321,13 @@
     "position_rank": 50,
     "adp": 360.0,
     "adp_position_rank": 68,
-    "value_gap": 18
+    "value_gap": 18,
+    "stats": {
+      "ppg": 2.725,
+      "volume": 1.8333,
+      "snap_share": 0.4382,
+      "efficiency": 1.4864
+    }
   },
   {
     "id": "elijah-mitchell-fa",
@@ -5398,7 +8338,13 @@
     "position_rank": 139,
     "adp": 360.67,
     "adp_position_rank": 138,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "josh-oliver-min",
@@ -5409,7 +8355,13 @@
     "position_rank": 35,
     "adp": 361.0,
     "adp_position_rank": 69,
-    "value_gap": 34
+    "value_gap": 34,
+    "stats": {
+      "ppg": 5.9818,
+      "volume": 2.5455,
+      "snap_share": 0.5363,
+      "efficiency": 2.35
+    }
   },
   {
     "id": "sam-roush-chi",
@@ -5420,7 +8372,13 @@
     "position_rank": 77,
     "adp": 362.33,
     "adp_position_rank": 70,
-    "value_gap": -7
+    "value_gap": -7,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "damien-martinez-gb",
@@ -5431,7 +8389,13 @@
     "position_rank": 140,
     "adp": 365.29,
     "adp_position_rank": 139,
-    "value_gap": -1
+    "value_gap": -1,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "deion-burks-ind",
@@ -5442,7 +8406,13 @@
     "position_rank": 177,
     "adp": 365.56,
     "adp_position_rank": 171,
-    "value_gap": -6
+    "value_gap": -6,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "zach-ertz-fa",
@@ -5453,7 +8423,13 @@
     "position_rank": 14,
     "adp": 365.67,
     "adp_position_rank": 71,
-    "value_gap": 57
+    "value_gap": 57,
+    "stats": {
+      "ppg": 10.4353,
+      "volume": 5.3529,
+      "snap_share": 0.674,
+      "efficiency": 1.9495
+    }
   },
   {
     "id": "deandre-hopkins-bal",
@@ -5464,7 +8440,13 @@
     "position_rank": 70,
     "adp": 365.75,
     "adp_position_rank": 172,
-    "value_gap": 102
+    "value_gap": 102,
+    "stats": {
+      "ppg": 9.1875,
+      "volume": 5.0,
+      "snap_share": 0.4584,
+      "efficiency": 1.8375
+    }
   },
   {
     "id": "jalen-milroe-sea",
@@ -5475,7 +8457,13 @@
     "position_rank": 53,
     "adp": 367.67,
     "adp_position_rank": 51,
-    "value_gap": -2
+    "value_gap": -2,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "taysom-hill-fa",
@@ -5486,7 +8474,13 @@
     "position_rank": 8,
     "adp": 370.67,
     "adp_position_rank": 72,
-    "value_gap": 64
+    "value_gap": 64,
+    "stats": {
+      "ppg": 12.7925,
+      "volume": 8.75,
+      "snap_share": 0.425,
+      "efficiency": 1.462
+    }
   },
   {
     "id": "elijah-higgins-ari",
@@ -5497,7 +8491,13 @@
     "position_rank": 47,
     "adp": 370.67,
     "adp_position_rank": 72,
-    "value_gap": 25
+    "value_gap": 25,
+    "stats": {
+      "ppg": 3.5143,
+      "volume": 1.7143,
+      "snap_share": 0.3806,
+      "efficiency": 2.05
+    }
   },
   {
     "id": "antonio-gibson-fa",
@@ -5508,7 +8508,13 @@
     "position_rank": 49,
     "adp": 371.2,
     "adp_position_rank": 140,
-    "value_gap": 91
+    "value_gap": 91,
+    "stats": {
+      "ppg": 6.0824,
+      "volume": 8.7647,
+      "snap_share": 0.3329,
+      "efficiency": 0.694
+    }
   },
   {
     "id": "nate-boerkircher-jac",
@@ -5519,7 +8525,13 @@
     "position_rank": 78,
     "adp": 371.5,
     "adp_position_rank": 74,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jackson-hawes-buf",
@@ -5530,7 +8542,13 @@
     "position_rank": 79,
     "adp": 373.0,
     "adp_position_rank": 75,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "adam-trautman-den",
@@ -5541,7 +8559,13 @@
     "position_rank": 44,
     "adp": 374.8,
     "adp_position_rank": 76,
-    "value_gap": 32
+    "value_gap": 32,
+    "stats": {
+      "ppg": 3.3692,
+      "volume": 1.6923,
+      "snap_share": 0.5,
+      "efficiency": 1.9909
+    }
   },
   {
     "id": "tyrod-taylor-gb",
@@ -5552,7 +8576,13 @@
     "position_rank": 38,
     "adp": 375.0,
     "adp_position_rank": 52,
-    "value_gap": 14
+    "value_gap": 14,
+    "stats": {
+      "ppg": 10.03,
+      "volume": 11.0,
+      "snap_share": 0.31,
+      "efficiency": 0.9118
+    }
   },
   {
     "id": "marquez-valdes-scantling-dal",
@@ -5563,7 +8593,13 @@
     "position_rank": 85,
     "adp": 375.0,
     "adp_position_rank": 173,
-    "value_gap": 88
+    "value_gap": 88,
+    "stats": {
+      "ppg": 6.5,
+      "volume": 3.4615,
+      "snap_share": 0.5436,
+      "efficiency": 1.8778
+    }
   },
   {
     "id": "josh-cameron-jac",
@@ -5574,7 +8610,13 @@
     "position_rank": 178,
     "adp": 375.5,
     "adp_position_rank": 174,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "tyler-conklin-det",
@@ -5585,7 +8627,13 @@
     "position_rank": 19,
     "adp": 376.67,
     "adp_position_rank": 77,
-    "value_gap": 58
+    "value_gap": 58,
+    "stats": {
+      "ppg": 7.6188,
+      "volume": 4.5625,
+      "snap_share": 0.8006,
+      "efficiency": 1.6699
+    }
   },
   {
     "id": "drew-sample-cin",
@@ -5596,7 +8644,13 @@
     "position_rank": 43,
     "adp": 376.67,
     "adp_position_rank": 77,
-    "value_gap": 34
+    "value_gap": 34,
+    "stats": {
+      "ppg": 3.3182,
+      "volume": 2.0909,
+      "snap_share": 0.5718,
+      "efficiency": 1.587
+    }
   },
   {
     "id": "luke-schoonmaker-dal",
@@ -5607,7 +8661,13 @@
     "position_rank": 39,
     "adp": 378.2,
     "adp_position_rank": 79,
-    "value_gap": 40
+    "value_gap": 40,
+    "stats": {
+      "ppg": 5.71,
+      "volume": 3.6,
+      "snap_share": 0.3447,
+      "efficiency": 1.5861
+    }
   },
   {
     "id": "kendrick-law-det",
@@ -5618,7 +8678,13 @@
     "position_rank": 179,
     "adp": 378.5,
     "adp_position_rank": 175,
-    "value_gap": -4
+    "value_gap": -4,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "jason-sanders-nyj",
@@ -5629,7 +8695,13 @@
     "position_rank": 34,
     "adp": 381.0,
     "adp_position_rank": 34,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "trey-lance-lac",
@@ -5640,7 +8712,13 @@
     "position_rank": 41,
     "adp": 382.0,
     "adp_position_rank": 53,
-    "value_gap": 12
+    "value_gap": 12,
+    "stats": {
+      "ppg": 3.185,
+      "volume": 10.25,
+      "snap_share": 0.3325,
+      "efficiency": 0.3107
+    }
   },
   {
     "id": "dean-connors-lar",
@@ -5651,7 +8729,13 @@
     "position_rank": 141,
     "adp": 382.0,
     "adp_position_rank": 141,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   },
   {
     "id": "juju-smith-schuster-fa",
@@ -5662,7 +8746,13 @@
     "position_rank": 92,
     "adp": 383.5,
     "adp_position_rank": 176,
-    "value_gap": 84
+    "value_gap": 84,
+    "stats": {
+      "ppg": 4.8273,
+      "volume": 2.3636,
+      "snap_share": 0.4741,
+      "efficiency": 2.0423
+    }
   },
   {
     "id": "dyami-brown-was",
@@ -5673,7 +8763,13 @@
     "position_rank": 97,
     "adp": 383.78,
     "adp_position_rank": 177,
-    "value_gap": 80
+    "value_gap": 80,
+    "stats": {
+      "ppg": 4.4933,
+      "volume": 2.8667,
+      "snap_share": 0.48,
+      "efficiency": 1.5674
+    }
   },
   {
     "id": "lil-jordan-humphrey-den",
@@ -5684,7 +8780,13 @@
     "position_rank": 96,
     "adp": 389.0,
     "adp_position_rank": 178,
-    "value_gap": 82
+    "value_gap": 82,
+    "stats": {
+      "ppg": 4.5929,
+      "volume": 3.2143,
+      "snap_share": 0.4811,
+      "efficiency": 1.4289
+    }
   },
   {
     "id": "jermaine-burton-fa",
@@ -5695,7 +8797,13 @@
     "position_rank": 108,
     "adp": 390.5,
     "adp_position_rank": 179,
-    "value_gap": 71
+    "value_gap": 71,
+    "stats": {
+      "ppg": 3.675,
+      "volume": 3.5,
+      "snap_share": 0.135,
+      "efficiency": 1.05
+    }
   },
   {
     "id": "michael-trigg-dal",
@@ -5706,6 +8814,12 @@
     "position_rank": 80,
     "adp": 395.67,
     "adp_position_rank": 80,
-    "value_gap": 0
+    "value_gap": 0,
+    "stats": {
+      "ppg": null,
+      "volume": null,
+      "snap_share": null,
+      "efficiency": null
+    }
   }
 ]

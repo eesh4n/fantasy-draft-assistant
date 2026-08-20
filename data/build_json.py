@@ -11,7 +11,13 @@ UI. Schema (hard contract):
   "position_rank": integer (1-indexed, by value_score within position),
   "adp": number,
   "adp_position_rank": integer (1-indexed, by adp within position),
-  "value_gap": integer (adp_position_rank - position_rank)
+  "value_gap": integer (adp_position_rank - position_rank),
+  "stats": {                          // raw inputs behind value_score, for
+    "ppg": number|null,               // a "why this ranking" detail view.
+    "volume": number|null,            // null for K/DEF (ADP-only model)
+    "snap_share": number|null,        // and for rookies with no 2024 stats.
+    "efficiency": number|null
+  }
 }
 """
 import json
@@ -19,9 +25,17 @@ import re
 import sys
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 DATA_DIR = Path(__file__).resolve().parent
+
+
+def clean_num(v):
+    """None for NaN/missing, else a rounded float."""
+    if v is None or (isinstance(v, float) and np.isnan(v)):
+        return None
+    return round(float(v), 4)
 
 
 def slugify(name: str, team: str) -> str:
@@ -61,6 +75,12 @@ def main():
                 "adp": round(float(row["adp"]), 2),
                 "adp_position_rank": int(row["adp_position_rank"]),
                 "value_gap": int(row["value_gap"]),
+                "stats": {
+                    "ppg": clean_num(row.get("ppg")),
+                    "volume": clean_num(row.get("volume")),
+                    "snap_share": clean_num(row.get("snap_share")),
+                    "efficiency": clean_num(row.get("efficiency")),
+                },
             }
         )
 

@@ -178,6 +178,81 @@ function resetDraft() {
   renderAll();
 }
 
+// ---------- Player detail / rationale ----------
+function fmtStat(v, suffix = "") {
+  if (v === null || v === undefined) return "—";
+  const rounded = suffix === "%" ? Math.round(v) : Math.round(v * 10) / 10;
+  return `${rounded}${suffix}`;
+}
+
+function buildRationale(player) {
+  const lines = [];
+  const s = player.stats || {};
+  const hasStats = s.ppg !== null && s.ppg !== undefined;
+
+  if (player.position === "K" || player.position === "DEF") {
+    lines.push(
+      `${player.position === "K" ? "Kickers" : "Team defenses"} don't have individual production stats to model, so this ranking is based on ADP alone — it just mirrors expert consensus rather than an independent read.`
+    );
+  } else if (!hasStats) {
+    lines.push(
+      `No 2024 stat line exists for ${player.name} (rookie or no games played), so there's nothing to compare production against. This ranking is ADP-only and deliberately placed below every stat-based player at the position — a low or negative value gap here is a data limitation, not a real "fade" signal.`
+    );
+  } else {
+    lines.push(
+      `In 2024, ${player.name} averaged ${fmtStat(s.ppg)} PPR points/game on ${fmtStat(s.volume)} touches or targets/game, playing ${fmtStat(s.snap_share !== null ? Math.round(s.snap_share * 100) : null, "%")} of offensive snaps — producing ${fmtStat(s.efficiency)} points per opportunity.`
+    );
+    if (player.value_gap > 10) {
+      lines.push(
+        `That production ranks #${player.position_rank} among ${player.position}s, but ADP has them going like the #${player.adp_position_rank} — a gap of ${player.value_gap} spots. The market is pricing them behind what their own numbers support: a value pick.`
+      );
+    } else if (player.value_gap < -10) {
+      lines.push(
+        `That production only ranks #${player.position_rank} among ${player.position}s, yet ADP has them going like the #${player.adp_position_rank} — priced ${Math.abs(player.value_gap)} spots ahead of what their numbers support. Could be a name/hype premium, or a real role change since 2024 the model can't see.`
+      );
+    } else {
+      lines.push(
+        `Production rank (#${player.position_rank}) and ADP rank (#${player.adp_position_rank}) are close — the market has this one about right.`
+      );
+    }
+  }
+  return lines;
+}
+
+function openPlayerDetail(player) {
+  const content = document.getElementById("playerDetailContent");
+  const gapClass = player.value_gap > 0 ? "gap-positive" : (player.value_gap < 0 ? "gap-neg" : "");
+  const gapText = player.value_gap > 0 ? `+${player.value_gap}` : `${player.value_gap}`;
+  const rationale = buildRationale(player);
+  const s = player.stats || {};
+
+  content.innerHTML = `
+    <h2 class="detail-title">${escapeHtml(player.name)}
+      <span class="pos-pill pos-${player.position}">${player.position}</span>
+    </h2>
+    <div class="detail-sub">${escapeHtml(player.team)} · ADP ${player.adp} (position #${player.adp_position_rank}) · value rank #${player.position_rank} · gap <span class="${gapClass}">${gapText}</span></div>
+
+    <div class="detail-stat-grid">
+      <div class="detail-stat"><span class="detail-stat-label">PPG (PPR)</span><span class="detail-stat-value">${fmtStat(s.ppg)}</span></div>
+      <div class="detail-stat"><span class="detail-stat-label">Volume/game</span><span class="detail-stat-value">${fmtStat(s.volume)}</span></div>
+      <div class="detail-stat"><span class="detail-stat-label">Snap share</span><span class="detail-stat-value">${fmtStat(s.snap_share !== null && s.snap_share !== undefined ? Math.round(s.snap_share * 100) : null, "%")}</span></div>
+      <div class="detail-stat"><span class="detail-stat-label">Pts/opportunity</span><span class="detail-stat-value">${fmtStat(s.efficiency)}</span></div>
+    </div>
+
+    <div class="detail-rationale">
+      ${rationale.map(l => `<p>${escapeHtml(l)}</p>`).join("")}
+    </div>
+
+    <p class="detail-note">Stats are 2024 season per-game averages (last completed season). "Gap" = ADP position rank minus value-model position rank.</p>
+  `;
+
+  document.getElementById("playerDetailOverlay").hidden = false;
+}
+
+function closePlayerDetail() {
+  document.getElementById("playerDetailOverlay").hidden = true;
+}
+
 // ---------- Derived data ----------
 function getAvailablePlayers() {
   return allPlayers.filter(p => !draftedIds.has(p.id) && !mineIds.has(p.id));
@@ -307,7 +382,7 @@ function renderTable() {
     const gapText = player.value_gap > 0 ? `+${player.value_gap}` : `${player.value_gap}`;
 
     tr.innerHTML = `
-      <td class="col-name"><span class="player-name">${escapeHtml(player.name)}</span></td>
+      <td class="col-name"><span class="player-name player-name-link">${escapeHtml(player.name)}</span></td>
       <td><span class="pos-pill pos-${player.position}">${player.position}</span></td>
       <td>${escapeHtml(player.team)}</td>
       <td>#${player.position_rank}</td>
@@ -315,6 +390,8 @@ function renderTable() {
       <td class="gap-cell"><span class="${gapClass}">${gapText}</span></td>
       <td class="actions-cell"></td>
     `;
+
+    tr.querySelector(".player-name-link").addEventListener("click", () => openPlayerDetail(player));
 
     const actionsCell = tr.querySelector(".actions-cell");
 
@@ -410,8 +487,9 @@ function renderRecommendations() {
     main.className = "rec-main";
 
     const name = document.createElement("div");
-    name.className = "rec-name";
+    name.className = "rec-name rec-name-link";
     name.textContent = `${player.name}`;
+    name.addEventListener("click", () => openPlayerDetail(player));
 
     const meta = document.createElement("div");
     meta.className = "rec-meta";
@@ -464,6 +542,12 @@ function wireControls() {
   document.getElementById("resetBtn").addEventListener("click", openResetConfirm);
   document.getElementById("resetCancelBtn").addEventListener("click", closeResetConfirm);
   document.getElementById("resetConfirmBtn").addEventListener("click", resetDraft);
+
+  document.getElementById("playerDetailCloseBtn").addEventListener("click", closePlayerDetail);
+  const detailOverlay = document.getElementById("playerDetailOverlay");
+  detailOverlay.addEventListener("click", e => {
+    if (e.target === detailOverlay) closePlayerDetail();
+  });
 }
 
 // ---------- Init ----------

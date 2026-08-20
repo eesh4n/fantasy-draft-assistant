@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <h1>Fantasy Draft Assistant</h1>
+    <div class="topbar-actions">
+      <span id="dataSourceBadge" class="badge">loading…</span>
+      <button id="resetBtn" class="btn btn-danger">Reset Draft</button>
+    </div>
+  </header>
+
+  <div class="main-grid">
+
+    <!-- LEFT: player pool -->
+    <section class="pool-panel">
+      <div class="search-row">
+        <input id="searchInput" type="text" placeholder="Filter by name or position (QB, RB, WR, TE, K, DEF)…" autocomplete="off" autofocus>
+        <div class="pos-filters" id="posFilters">
+          <button class="pos-chip active" data-pos="ALL">ALL</button>
+          <button class="pos-chip" data-pos="QB">QB</button>
+          <button class="pos-chip" data-pos="RB">RB</button>
+          <button class="pos-chip" data-pos="WR">WR</button>
+          <button class="pos-chip" data-pos="TE">TE</button>
+          <button class="pos-chip" data-pos="K">K</button>
+          <button class="pos-chip" data-pos="DEF">DEF</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="player-table">
+          <thead>
+            <tr>
+              <th class="col-name">Name</th>
+              <th>Pos</th>
+              <th>Team</th>
+              <th>Val Rank</th>
+              <th>ADP</th>
+              <th>Gap</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="playerTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty-state" style="display:none;">No players match.</div>
+    </section>
+
+    <!-- RIGHT: roster + recommendations -->
+    <aside class="side-panel">
+      <div class="panel roster-panel">
+        <h2>Your Roster</h2>
+        <div id="rosterSlots" class="roster-slots"></div>
+      </div>
+
+      <div class="panel rec-panel">
+        <h2>Top Recommendations</h2>
+        <div id="recList" class="rec-list"></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

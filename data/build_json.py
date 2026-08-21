@@ -301,9 +301,25 @@ def load_chart_notes():
     return result
 
 
+def load_stat_notes():
+    """data/guide_stat_notes.csv -- player-specific reasoning paraphrased
+    from the guide's "Top 50 Stats" section (target-share splits, red-zone
+    competition, efficiency trends, injury/schedule context, etc). This is
+    the analyst's actual analytical reasoning, not just a ranking number --
+    kept as a display-only note, same as chart notes, not scored.
+    Returns {player_name: stat_note}.
+    """
+    path = DATA_DIR / "guide_stat_notes.csv"
+    if not path.exists():
+        return {}
+    notes_df = pd.read_csv(path)
+    return dict(zip(notes_df["player_name"], notes_df["stat_note"]))
+
+
 def main():
     df = pd.read_csv(DATA_DIR / "joined.csv")
     chart_notes = load_chart_notes()
+    stat_notes = load_stat_notes()
 
     # Only keep rows with a usable ADP (unranked players aren't useful for
     # a draft assistant) and a team.
@@ -397,6 +413,7 @@ def main():
                     "chart_source": (
                         chart_notes[name][0] if name in chart_notes else None
                     ),
+                    "stat_note": stat_notes.get(name),
                     "sacks": clean_num(row.get("def_sacks")),
                     "interceptions": clean_num(row.get("def_interceptions")),
                     "fumble_recoveries": clean_num(row.get("def_fumble_recoveries")),

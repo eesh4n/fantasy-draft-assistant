@@ -467,12 +467,24 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         df["efficiency"] = (passing_pts + rushing_pts) / opportunities.replace(0, np.nan)
 
         components = {
-            "ppg": 0.38,
-            "volume": 0.13,
-            "rushing_ppg": 0.13,
-            "snap_share": 0.13,
+            "ppg": 0.36,
+            "volume": 0.12,
+            "rushing_ppg": 0.12,
+            "snap_share": 0.12,
             "efficiency": 0.08,
-            "guide_adj_ppg": 0.15,
+            "guide_adj_ppg": 0.14,
+            # Real per-player "Luck Metric" (data/guide_luck_metric.csv):
+            # pct of season fantasy points lost/gained to variance (OT
+            # points, penalty-nullified plays, dropped TDs, tackled-at-1,
+            # etc). Positive = unlucky = positive-regression candidate, so
+            # this is added WITHOUT inverting -- a higher (more positive)
+            # value should raise the composite. Small weight since it only
+            # covers a top/bottom-25 subset (~50 players total across all
+            # 4 positions) and the existing >=30%-non-null threshold below
+            # will drop it entirely for positions where coverage is too
+            # sparse to trust, same protection as every other optional
+            # component in this file.
+            "pct_pts_lost_to_luck": 0.06,
         }
     else:
         # Receiving-only fantasy production, per game -- kept separate from
@@ -540,17 +552,18 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             df["pct_rb1_rank_inv"] = -df["pct_rb1_rank"]
 
             components = {
-                "ppg": 0.184,
-                "rushing_ppg": 0.092,
-                "receiving_ppg": 0.1196,
-                "red_zone_share": 0.0644,
-                "snap_share": 0.092,
-                "efficiency": 0.0644,
-                "guide_adj_ppg": 0.138,
-                "ol_run_block_rank": 0.0644,
-                "proj_volume_rank": 0.1012,
-                "playcaller_rb_ppg_rank_inv": 0.04,
-                "pct_rb1_rank_inv": 0.04,
+                "ppg": 0.174,
+                "rushing_ppg": 0.087,
+                "receiving_ppg": 0.113,
+                "red_zone_share": 0.061,
+                "snap_share": 0.087,
+                "efficiency": 0.061,
+                "guide_adj_ppg": 0.130,
+                "ol_run_block_rank": 0.061,
+                "proj_volume_rank": 0.096,
+                "playcaller_rb_ppg_rank_inv": 0.038,
+                "pct_rb1_rank_inv": 0.038,
+                "pct_pts_lost_to_luck": 0.054,  # see QB block above for reasoning
             }
         elif pos == "WR":
             # playcaller_wr_ppg_rank: REAL team-level playcaller context
@@ -561,24 +574,26 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             df["playcaller_wr_ppg_rank_inv"] = -df["playcaller_wr_ppg_rank"]
 
             components = {
-                "ppg": 0.2375,
-                "rushing_ppg": 0.114,
-                "receiving_ppg": 0.152,
-                "red_zone_share": 0.076,
-                "snap_share": 0.114,
-                "efficiency": 0.076,
-                "guide_adj_ppg": 0.1805,
-                "playcaller_wr_ppg_rank_inv": 0.05,
+                "ppg": 0.223,
+                "rushing_ppg": 0.107,
+                "receiving_ppg": 0.143,
+                "red_zone_share": 0.071,
+                "snap_share": 0.107,
+                "efficiency": 0.071,
+                "guide_adj_ppg": 0.170,
+                "playcaller_wr_ppg_rank_inv": 0.047,
+                "pct_pts_lost_to_luck": 0.061,  # see QB block above for reasoning
             }
         else:
             components = {
-                "ppg": 0.25,
-                "rushing_ppg": 0.12,
-                "receiving_ppg": 0.16,
-                "red_zone_share": 0.08,
-                "snap_share": 0.12,
-                "efficiency": 0.08,
-                "guide_adj_ppg": 0.19,
+                "ppg": 0.235,
+                "rushing_ppg": 0.113,
+                "receiving_ppg": 0.150,
+                "red_zone_share": 0.075,
+                "snap_share": 0.113,
+                "efficiency": 0.075,
+                "guide_adj_ppg": 0.179,
+                "pct_pts_lost_to_luck": 0.06,  # see QB block above for reasoning
             }
 
     available = {}

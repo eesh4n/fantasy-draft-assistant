@@ -29,6 +29,83 @@ const CONFIG = {
 
 const SLOT_ORDER = ["QB", "RB", "WR", "TE", "FLEX", "K", "DEF", "BENCH"];
 const STORAGE_KEY = "draftAssistant.state.v1";
+const LEAGUE_SIZE_KEY = "draftAssistant.leagueSize.v1";
+
+// ---------- Draft strategy (from Joel Smyth's Draft Guide 2026) ----------
+// Round-by-round target is a MEDIAN plan, not a hard rule -- "Best Player
+// Available still most important" per the guide. Shown as guidance only.
+const ROUND_TARGETS = [
+  "RB", "RB", "WR", "BPA (best player available)", "WR", "BPA", "BPA",
+  "QB", "Upside WR", "Punt TE (or best value)", "Top Handcuff", "Upside QB",
+  "Favorite Deep Sleeper", "D/ST", "Kicker / IR stash"
+];
+
+const POSITION_STRATEGY = {
+  QB: {
+    main: "Main target: ADP QB7-11 range -- snipe a favorite that falls (usually 2-3 still there in Round 8).",
+    secondary: "Secondary: a late rushing QB (works ~70% of the time) -- Purdy/Nix count as volume plays here too.",
+    note: "QB3-6 are going way later this year -- still worth waiting, but if one falls far it's likely a real value (QB3 2026 ADP ~55th overall; QB6 2025 ADP was ~59th)."
+  },
+  RB: {
+    main: "Main target: leave the draft with 3 RBs from the top ~25-30. RB/RB in rounds 1-2 is how ~90% of league winners are built.",
+    secondary: "RB30-40 is mostly a waste of a pick compared to that same range at QB/WR/TE.",
+    note: "Prefer hunting backup/handcuff RBs late over a TE2 or early K/D-ST in most league formats."
+  },
+  WR: {
+    main: "Main target: Round 3 & 5 WR range -- prefer WR over most RBs as a whole this range.",
+    secondary: "The WR5-12 range specifically isn't a favorite compared to the RBs in that same round or the WRs available a round later.",
+    note: "WR is the best position for hunting late-round upside."
+  },
+  TE: {
+    main: "Main target: wait for best value -- take TE whenever it's genuinely the best player available, any range.",
+    secondary: "TE2-4 is fine if you're stuck with no favorite RB/WR left. Round 7/8 is a good spot to grab the last mid-tier TE once RB/WR is dried up.",
+    note: "Punting TE completely (and streaming/waiting) is a legitimate, working strategy."
+  }
+};
+
+const OVERALL_RULES = [
+  "Don't draft off rankings without understanding ADP -- use the ranking-vs-ADP gap to find real value, not just to follow a list.",
+  "\"Don't beat ADP\": the goal isn't a safe RB30 who finishes RB29 -- take the riskier, higher-upside player if their true value potential is higher.",
+  "No K or D/ST until the last two rounds, unless you're trying to intimidate the room.",
+  "Good \"process\" picks late: rookie WRs, rushing QBs, talent on good offenses, and cemented RB2s/handcuffs.",
+  "Balance risk across your roster -- avoid stacking several boom/bust or injury-prone profiles onto the same team.",
+  "Waivers matter as much as the draft, all season -- stay active early and even right after the draft."
+];
+
+function getLeagueSize() {
+  const stored = Number(localStorage.getItem(LEAGUE_SIZE_KEY));
+  return stored && stored >= 4 && stored <= 20 ? stored : 12;
+}
+
+function renderStrategyPanel() {
+  const totalPicks = draftedIds.size + mineIds.size;
+  const leagueSize = getLeagueSize();
+  const round = Math.floor(totalPicks / leagueSize) + 1;
+  const target = ROUND_TARGETS[round - 1] || "Best player available";
+  const roundEl = document.getElementById("strategyRound");
+  const posNote = POSITION_STRATEGY[target] ? POSITION_STRATEGY[target].main : null;
+  roundEl.innerHTML = `
+    <div class="strategy-round-num">Round ${round}</div>
+    <div class="strategy-round-target">Target: <strong>${escapeHtml(target)}</strong></div>
+    ${posNote ? `<div class="strategy-round-note">${escapeHtml(posNote)}</div>` : ""}
+  `;
+
+  const bodyEl = document.getElementById("strategyRulesBody");
+  const posBlocks = Object.entries(POSITION_STRATEGY).map(([pos, s]) => `
+    <div class="strategy-pos-block">
+      <div class="strategy-pos-name">${pos}</div>
+      <div>${escapeHtml(s.main)}</div>
+      <div class="strategy-pos-secondary">${escapeHtml(s.secondary)}</div>
+      <div class="strategy-pos-note">${escapeHtml(s.note)}</div>
+    </div>
+  `).join("");
+  bodyEl.innerHTML = `
+    <div class="strategy-rules-list">
+      ${OVERALL_RULES.map(r => `<div class="strategy-rule">${escapeHtml(r)}</div>`).join("")}
+    </div>
+    ${posBlocks}
+  `;
+}
 
 // ---------- State ----------
 // allPlayers: full player list as loaded from json (never mutated)
@@ -386,6 +463,7 @@ function renderAll() {
   renderTable();
   renderRoster();
   renderRecommendations();
+  renderStrategyPanel();
 }
 
 function matchesFilters(player) {
@@ -611,6 +689,25 @@ function wireControls() {
 
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") closeAllOverlays();
+  });
+
+  const leagueSizeInput = document.getElementById("leagueSizeInput");
+  leagueSizeInput.value = getLeagueSize();
+  leagueSizeInput.addEventListener("input", () => {
+    const v = Number(leagueSizeInput.value);
+    if (v >= 4 && v <= 20) {
+      localStorage.setItem(LEAGUE_SIZE_KEY, String(v));
+      renderStrategyPanel();
+    }
+  });
+
+  const rulesToggle = document.getElementById("strategyRulesToggle");
+  const rulesBody = document.getElementById("strategyRulesBody");
+  rulesToggle.addEventListener("click", () => {
+    rulesBody.hidden = !rulesBody.hidden;
+    rulesToggle.textContent = rulesBody.hidden
+      ? "Show full rules & position notes"
+      : "Hide full rules & position notes";
   });
 }
 

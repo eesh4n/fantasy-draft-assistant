@@ -379,6 +379,8 @@ def main():
                         if pd.notna(row.get("guide_reason"))
                         else None
                     ),
+                    "pct_pts_lost_to_luck": clean_num(row.get("pct_pts_lost_to_luck")),
+                    "pts_lost_to_luck": clean_num(row.get("pts_lost_to_luck")),
                     "ol_run_block_rank": clean_num(row.get("guide_ol_run_block_rank_2025")),
                     "proj_volume_rank": clean_num(row.get("guide_proj_volume_rank")),
                     "adj_volume_25_rank": clean_num(row.get("guide_adj_volume_25_rank")),

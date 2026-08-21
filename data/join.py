@@ -523,6 +523,64 @@ def main():
         for col in guide_ppg_cols:
             final[col] = pd.NA
 
+    # Bring in the analyst's "Luck Metric" (data/guide_luck_metric.csv) --
+    # a real, per-player points-lost/gained-to-variance number (OT points,
+    # penalty-nullified plays, tackled-at-the-1, dropped TDs, DPIs, etc)
+    # for the top/bottom 25 unluckiest/luckiest players of 2025. Positive
+    # pct_pts_lost_to_luck = unlucky (positive-regression candidate);
+    # negative = lucky (some regression risk). Same matching pattern as
+    # guide_adjusted_ppg above (name+position exact, then last-name-exact/
+    # first-name-fuzzy fallback), applied only to QB/RB/WR/TE.
+    guide_luck_path = DATA_DIR / "guide_luck_metric.csv"
+    guide_luck_cols = ["pts_lost_to_luck", "pct_pts_lost_to_luck"]
+    if guide_luck_path.exists():
+        guide_luck = pd.read_csv(guide_luck_path)
+        guide_luck["norm_name"] = guide_luck["player_name"].apply(normalize_name)
+        guide_luck = guide_luck.drop_duplicates("norm_name", keep="first")
+
+        final["norm_name"] = final["player_name"].apply(normalize_name)
+        stat_pos_mask2 = final["position"].isin(["QB", "RB", "WR", "TE"])
+        stat_rows2 = final[stat_pos_mask2].merge(
+            guide_luck[["norm_name"] + guide_luck_cols], on="norm_name", how="left"
+        )
+
+        def _name_parts2(norm_name):
+            toks = norm_name.split(" ") if isinstance(norm_name, str) else []
+            if not toks:
+                return "", ""
+            return toks[0], toks[-1]
+
+        guide_luck["_first"] = guide_luck["norm_name"].apply(lambda n: _name_parts2(n)[0])
+        guide_luck["_last"] = guide_luck["norm_name"].apply(lambda n: _name_parts2(n)[1])
+
+        unmatched_mask2 = stat_rows2["pct_pts_lost_to_luck"].isna()
+        for idx in stat_rows2[unmatched_mask2].index:
+            row = stat_rows2.loc[idx]
+            target_first, target_last = _name_parts2(row["norm_name"])
+            best = None
+            best_score = 0
+            for _, cand in guide_luck.iterrows():
+                if cand["_last"] != target_last:
+                    continue
+                s = fuzz.partial_ratio(target_first, cand["_first"])
+                if s >= 85 and s > best_score:
+                    best_score = s
+                    best = cand
+            if best is not None:
+                for col in guide_luck_cols:
+                    stat_rows2.loc[idx, col] = best[col]
+
+        non_stat_rows2 = final[~stat_pos_mask2].copy()
+        for col in guide_luck_cols:
+            non_stat_rows2[col] = pd.NA
+        final = pd.concat([stat_rows2, non_stat_rows2], ignore_index=True, sort=False)
+        final = final.drop(columns=["norm_name"])
+    else:
+        print(f"WARNING: {guide_luck_path} not found -- continuing without "
+              f"luck-metric columns (will be all-null).")
+        for col in guide_luck_cols:
+            final[col] = pd.NA
+
     # Bring in REAL offensive-line context hand-transcribed from Joel
     # Smyth's Draft Guide 2026 (data/guide_ol_stats.csv) -- 2025 run-block
     # rank, trend, OL continuity/cohesion, and the analyst's 2026

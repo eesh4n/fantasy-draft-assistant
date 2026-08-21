@@ -77,6 +77,23 @@ function getLeagueSize() {
   return stored && stored >= 4 && stored <= 20 ? stored : 12;
 }
 
+// Top picks matching the CURRENT round's target position (from
+// ROUND_TARGETS), so the panel doesn't just say "target: RB" -- it names
+// the 3 actual best available players for that target right now. For a
+// non-positional round (BPA / Upside WR / Punt TE / etc), falls back to
+// the existing overall recommendation ranking, since there's no single
+// position to filter to.
+function getRoundTargetPicks(target, n = 3) {
+  const posMap = { RB: "RB", WR: "WR", QB: "QB", TE: "TE", "D/ST": "DEF" };
+  const pos = posMap[target];
+  const available = getAvailablePlayers().filter(p => p.team !== "FA");
+  const openCounts = getOpenSlotCounts();
+  const pool = pos ? available.filter(p => p.position === pos) : available;
+  const scored = pool.map(p => ({ player: p, score: computeRecommendationScore(p, openCounts) }));
+  scored.sort((a, b) => b.score - a.score);
+  return scored.slice(0, n);
+}
+
 function renderStrategyPanel() {
   const totalPicks = draftedIds.size + mineIds.size;
   const leagueSize = getLeagueSize();
@@ -84,10 +101,24 @@ function renderStrategyPanel() {
   const target = ROUND_TARGETS[round - 1] || "Best player available";
   const roundEl = document.getElementById("strategyRound");
   const posNote = POSITION_STRATEGY[target] ? POSITION_STRATEGY[target].main : null;
+  const picks = getRoundTargetPicks(target, 3);
+  const picksHtml = picks.length
+    ? `<div class="strategy-picks">
+        <div class="strategy-picks-label">Top picks for this round:</div>
+        ${picks.map(({ player }) => `
+          <div class="strategy-pick-row">
+            <span class="pos-pill pos-${player.position}">${player.position}</span>
+            <span class="strategy-pick-name">${escapeHtml(player.name)}</span>
+            <span class="strategy-pick-adp">ADP ${player.adp}</span>
+          </div>
+        `).join("")}
+      </div>`
+    : `<div class="strategy-picks-label">No available players match this round's target.</div>`;
   roundEl.innerHTML = `
     <div class="strategy-round-num">Round ${round}</div>
     <div class="strategy-round-target">Target: <strong>${escapeHtml(target)}</strong></div>
     ${posNote ? `<div class="strategy-round-note">${escapeHtml(posNote)}</div>` : ""}
+    ${picksHtml}
   `;
 
   const bodyEl = document.getElementById("strategyRulesBody");
@@ -300,6 +331,11 @@ function buildRationale(player) {
     lines.push(
       `In 2024, ${player.name} averaged ${fmtStat(s.ppg)} PPR points/game on ${fmtStat(s.volume)} touches or targets/game, playing ${fmtStat(s.snap_share !== null ? Math.round(s.snap_share * 100) : null, "%")} of offensive snaps — producing ${fmtStat(s.efficiency)} points per opportunity.`
     );
+    if (s.ml_predicted_ppg !== null && s.ml_predicted_ppg !== undefined) {
+      lines.push(
+        `The model, trained on 7 past seasons of NFL data (2018–2024), projects them for ${fmtStat(s.ml_predicted_ppg)} points/game next season — this prediction, not a hand-picked formula, now drives most of their ranking here.`
+      );
+    }
     if (s.rushing_ppg !== null && s.rushing_ppg !== undefined && s.receiving_ppg !== null && s.receiving_ppg !== undefined) {
       lines.push(
         `Of that, ${fmtStat(s.rushing_ppg)} pts/game came on the ground and ${fmtStat(s.receiving_ppg)} pts/game came through the air (receptions count extra in this PPR league) — with a ${fmtStat(s.td_rate !== null && s.td_rate !== undefined ? s.td_rate * 100 : null, "%")} touchdown rate per touch/target, a rough proxy for goal-line role.`

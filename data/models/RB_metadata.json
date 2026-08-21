@@ -1,0 +1,52 @@
+{
+  "position": "RB",
+  "features": [
+    "ppg",
+    "rushing_ppg",
+    "receiving_ppg",
+    "red_zone_share",
+    "snap_share",
+    "efficiency"
+  ],
+  "model_type": "ridge",
+  "hyperparams": {
+    "alpha": 10.0
+  },
+  "n_train_rows": 390,
+  "season_pairs": [
+    "2018->2019",
+    "2019->2020",
+    "2020->2021",
+    "2021->2022",
+    "2022->2023",
+    "2023->2024"
+  ],
+  "min_games_year1": 4,
+  "min_games_year2": 8,
+  "cv_n_splits": 5,
+  "candidates": {
+    "ridge": {
+      "alpha": 10.0,
+      "cv_r2_mean": 0.5080657324849565,
+      "cv_mae_mean": 2.9456160485722758
+    },
+    "elasticnet": {
+      "alpha": 0.05,
+      "l1_ratio": 0.2,
+      "cv_r2_mean": 0.5080164660838062,
+      "cv_mae_mean": 2.944862268261331
+    },
+    "gbm": {
+      "cv_r2_mean": 0.49640673495371723,
+      "cv_mae_mean": 2.969487085970532
+    },
+    "naive_baseline": {
+      "cv_r2_mean": 0.42179557539668605,
+      "cv_mae_mean": 3.1784091383101565
+    }
+  },
+  "chosen_cv_r2_mean": 0.5080657324849565,
+  "chosen_cv_mae_mean": 2.9456160485722758,
+  "naive_baseline_cv_r2_mean": 0.42179557539668605,
+  "naive_baseline_cv_mae_mean": 3.1784091383101565
+}

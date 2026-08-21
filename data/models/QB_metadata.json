@@ -1,0 +1,51 @@
+{
+  "position": "QB",
+  "features": [
+    "ppg",
+    "volume",
+    "rushing_ppg",
+    "snap_share",
+    "efficiency"
+  ],
+  "model_type": "ridge",
+  "hyperparams": {
+    "alpha": 3.0
+  },
+  "n_train_rows": 173,
+  "season_pairs": [
+    "2018->2019",
+    "2019->2020",
+    "2020->2021",
+    "2021->2022",
+    "2022->2023",
+    "2023->2024"
+  ],
+  "min_games_year1": 4,
+  "min_games_year2": 8,
+  "cv_n_splits": 5,
+  "candidates": {
+    "ridge": {
+      "alpha": 3.0,
+      "cv_r2_mean": 0.311603093803466,
+      "cv_mae_mean": 2.7844895258363445
+    },
+    "elasticnet": {
+      "alpha": 0.01,
+      "l1_ratio": 0.2,
+      "cv_r2_mean": 0.3108671350973376,
+      "cv_mae_mean": 2.7919617759679665
+    },
+    "gbm": {
+      "cv_r2_mean": 0.20341829203109874,
+      "cv_mae_mean": 3.089086752119504
+    },
+    "naive_baseline": {
+      "cv_r2_mean": -0.11490373058110726,
+      "cv_mae_mean": 3.4747062574208343
+    }
+  },
+  "chosen_cv_r2_mean": 0.311603093803466,
+  "chosen_cv_mae_mean": 2.7844895258363445,
+  "naive_baseline_cv_r2_mean": -0.11490373058110726,
+  "naive_baseline_cv_mae_mean": 3.4747062574208343
+}

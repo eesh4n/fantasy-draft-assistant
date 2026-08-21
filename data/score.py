@@ -11,66 +11,119 @@ fantasy_points_ppr column:
   here -- no such column exists in nfl_data_py's seasonal data, and they're
   rare enough not to meaningfully move rankings. See README.)
 
-For QB/RB/WR/TE (positions with real seasonal stats):
-  - Standardize (z-score) a handful of per-game / rate stats within each
-    position group.
-  - Combine into a composite "value_score" with position-specific weights
-    (see below). The two position groups get different components because
-    QBs don't receive, and RB/WR/TE touchdown equity and receiving work
-    need to be visible separately from raw rushing volume.
+For QB/RB/WR/TE, value_score is now PRIMARILY an ML-model-derived signal,
+not a hand-weighted formula -- see "ML value model" section below for the
+full design. The composite mechanism (z-score each available component,
+weight, sum, with missing-data redistribution) is unchanged from before;
+what changed is WHICH components feed it: the cluster of raw per-game
+production stats that used to be individually weighted (ppg, rushing_ppg,
+receiving_ppg, red_zone_share, snap_share, efficiency, and for QB, volume
+instead of receiving_ppg/red_zone_share) is now replaced by a single
+ml_predicted_ppg component -- the output of a real, cross-validated
+scikit-learn model (trained in train_ml_model.py on 7 seasons of
+historical nfl_data_py data, 2018-2024) -- carrying the SAME combined
+weight those raw components used to hold. The guide_*/playcaller_*
+components below are unchanged, for the reason explained in "ML value
+model": they can't be part of the trained model (no historical equivalent
+exists), but they're real analyst signal, so they stay in as a secondary
+blend on top of the model's own prediction, at their original weights.
+
+  ML value model (replaces the old hand-weighted RB/WR/TE and QB
+  production clusters):
+        train_ml_model.py pulls nfl_data_py seasonal + play-by-play data
+        for 2018-2024 (7 seasons -> 6 consecutive season-pairs) and, for
+        each position, builds a supervised (season Y features) ->
+        (season Y+1 actual ppg) training table -- a genuine forecasting
+        setup matching the real draft-ranking use case (use THIS season's
+        profile to predict NEXT season's output). Features are computed by
+        directly reusing compute_stat_group_scores() (this same function,
+        below) against each historical season's raw stats, so the
+        historical training features and this file's live inference
+        features are guaranteed to be computed by the same code path.
+        Per position, Ridge, ElasticNet, and a shallow/regularized
+        GradientBoostingRegressor are compared via k-fold cross-validation
+        against each other AND against a naive "last year's ppg predicts
+        next year's ppg" baseline; the best-generalizing model (tree only
+        wins if it beats the best linear model's CV R^2 by a real margin,
+        given the small per-position n) is refit on the full training set
+        and saved to data/models/{position}_model.joblib, with feature
+        order/hyperparameters/CV performance recorded in
+        data/models/{position}_metadata.json. See train_ml_model.py's
+        module docstring for the complete methodology, leak-free
+        season-pair construction, and minimum-games filters.
+
+        This file (score.py) loads that saved model+metadata (see
+        load_ml_model() below) and applies it to the CURRENT season's
+        (2024 base) features -- the exact same feature columns, in the
+        exact same order the model was trained on -- producing
+        ml_predicted_ppg per player. This becomes the PRIMARY signal in
+        value_score, replacing the hand-picked weights that used to sit on
+        ppg/rushing_ppg/receiving_ppg/red_zone_share/snap_share/efficiency
+        (RB/WR/TE) or ppg/volume/rushing_ppg/snap_share/efficiency (QB)
+        directly. The replacement weight for ml_predicted_ppg is exactly
+        the SUM of the weights those raw components used to hold in the
+        pre-ML composite (see each position's components dict below for
+        the exact numbers) -- i.e. "the model's own prediction now stands
+        in for the whole raw-production cluster it was trained to
+        summarize," nothing more, nothing redistributed elsewhere.
+        ml_predicted_ppg, along with the raw feature columns that feed it,
+        is also surfaced in stats.ml_predicted_ppg (build_json.py) for
+        transparency/detail views.
+        Players who never appear in a saved model's feature set as
+        non-null (e.g. missing snap_pct) get their missing feature
+        median-imputed before prediction, matching this file's existing
+        median-impute convention for every other optional component.
+        If a position's model file is missing entirely (train_ml_model.py
+        not yet run), ml_predicted_ppg falls back to the player's own raw
+        ppg (a safe, documented degenerate case -- see load_ml_model()).
 
   RB/WR/TE components:
-        0.30  ppg            -- total PPR points per game (overall anchor)
-        0.15  rushing_ppg    -- rushing-only fantasy points/game
-                                 (0.1 pt/rush yard + 6 pt/rush TD)
-        0.20  receiving_ppg  -- receiving-only fantasy points/game
-                                 (1 pt/reception + 0.1 pt/rec yard +
-                                 6 pt/rec TD). Weighted ABOVE rushing_ppg
-                                 on purpose: this is a PPR league (see
-                                 "Value model" below and README), so a
-                                 given unit of receiving work is worth more
-                                 than the same unit of rushing work, and a
-                                 receiving back/slot WR shouldn't get
-                                 buried under a between-the-tackles runner
-                                 with similar total touches.
-        0.10  red_zone_share -- REAL red-zone usage: (red-zone rush
-                                 attempts + red-zone targets) / (total
-                                 carries + targets), computed from 2024
-                                 play-by-play data (yardline_100 <= 20) by
-                                 redzone.py and joined in by join.py via
-                                 player_id (gsis_id). Per an analyst's
-                                 claim that red-zone touches are one of
-                                 the two most predictive stats for RB
-                                 touchdown production (~65% of RB TDs),
-                                 this replaces the old td_rate proxy,
-                                 which only measured TDs-per-opportunity
-                                 over ALL opportunities (not red-zone-
-                                 specific) because nfl_data_py's seasonal
-                                 aggregate data has no red-zone columns.
-                                 See redzone.py's docstring for the exact
+        (ml_predicted_ppg weight below is the SUM of the old ppg .30 +
+        rushing_ppg .15 + receiving_ppg .20 + red_zone_share .10 +
+        snap_share .15 + efficiency .10 weights = 1.00 for the ORIGINAL
+        pre-guide-data composite; see the guide-adjusted math further down
+        for the actual current weights after guide_adj_ppg etc. were
+        folded in -- the RB/WR/TE-specific components dicts in the code
+        below show the final numbers actually used.)
+        ml_predicted_ppg -- the model's own next-season PPG prediction,
+                                 trained on ppg, rushing_ppg, receiving_ppg,
+                                 red_zone_share, snap_share, efficiency
+                                 (see "ML value model" above). Replaces all
+                                 six of those as individually-weighted
+                                 composite inputs; each remains available
+                                 individually in stats.* for detail views.
+        red_zone_share (feature, not composite weight) -- REAL red-zone
+                                 usage: (red-zone rush attempts + red-zone
+                                 targets) / (total carries + targets),
+                                 computed from 2024 play-by-play data
+                                 (yardline_100 <= 20) by redzone.py and
+                                 joined in by join.py via player_id
+                                 (gsis_id). Per an analyst's claim that
+                                 red-zone touches are one of the two most
+                                 predictive stats for RB touchdown
+                                 production (~65% of RB TDs), this
+                                 replaces the old td_rate proxy, which only
+                                 measured TDs-per-opportunity over ALL
+                                 opportunities (not red-zone-specific)
+                                 because nfl_data_py's seasonal aggregate
+                                 data has no red-zone columns. See
+                                 redzone.py's docstring for the exact
                                  red-zone/goal-line definitions used and
-                                 the goal_line_share stat (not currently
-                                 in the composite, but surfaced in
+                                 the goal_line_share stat (not part of the
+                                 model's feature set, but surfaced in
                                  stats.goal_line_share for detail views).
-        0.15  snap_share     -- average offensive snap %
-        0.10  efficiency     -- PPR points per opportunity (carries+targets)
 
   QB components:
-        0.45  ppg            -- total PPR points per game
-        0.15  volume         -- pass attempts per game
-        0.15  rushing_ppg    -- rushing-only fantasy points/game (same
-                                 formula as above). This is what the old
-                                 model missed entirely: a dual-threat QB
-                                 with real rushing production is worth
-                                 meaningfully more than a pocket passer
-                                 with the same passing line, and lumping
-                                 "volume" into pass attempts alone couldn't
-                                 see that. rushing_ppg is legitimately near
-                                 zero for most pocket passers -- that's a
-                                 real (low) value, not missing data, so it
-                                 is never redistributed away for QBs.
-        0.15  snap_share     -- average offensive snap %
-        0.10  efficiency     -- PPR points per opportunity (attempts+carries)
+        ml_predicted_ppg -- the model's own next-season PPG prediction,
+                                 trained on ppg, volume (pass attempts/
+                                 game), rushing_ppg, snap_share, efficiency
+                                 -- replacing all five as individually-
+                                 weighted composite inputs (same mechanism
+                                 as RB/WR/TE above). rushing_ppg being part
+                                 of the trained feature set means the model
+                                 itself learns how much a dual-threat QB's
+                                 rushing production is worth, rather than
+                                 that being a hand-picked weight.
 
   guide_adj_ppg (ALL FOUR positions -- QB/RB/WR/TE):
         REAL analyst data hand-transcribed from Joel Smyth's Draft Guide
@@ -101,6 +154,24 @@ For QB/RB/WR/TE (positions with real seasonal stats):
                     guide_adj_ppg .19
           RB:      see below -- RB carves further room out of the WR/TE
                     split to also fit its two guide-sourced components.
+
+        ML REPLACEMENT NOTE: everything above this point in the docstring
+        (the weight numbers through the rest of this section, including
+        the RB/playcaller sections below) describes the historical
+        evolution of the composite's weights, kept for the paper trail.
+        The CURRENT composite (see "ML value model" above and the
+        `components` dicts in compute_stat_group_scores()) takes each
+        position's raw-production cluster from these numbers -- QB:
+        ppg+volume+rushing_ppg+snap_share+efficiency; RB/WR/TE:
+        ppg+rushing_ppg+receiving_ppg+red_zone_share+snap_share+
+        efficiency -- and replaces that whole cluster with a single
+        ml_predicted_ppg entry at the SUM of those weights. Every
+        guide_*/playcaller_*/luck weight below (guide_adj_ppg,
+        ol_run_block_rank, proj_volume_rank, playcaller_rb_ppg_rank_inv,
+        pct_rb1_rank_inv, playcaller_wr_ppg_rank_inv,
+        pct_pts_lost_to_luck) is UNCHANGED from the numbers documented
+        below -- only the raw-production cluster was swapped out for the
+        model's prediction.
 
   RB-only additions (on top of guide_adj_ppg above):
         0.07  ol_run_block_rank -- REAL 2025 offensive-line run-blocking
@@ -426,6 +497,92 @@ YDS_TO_PTS = 0.1       # rushing AND receiving yards, per this league's rules
 TD_TO_PTS = 6          # rushing AND receiving TDs
 REC_TO_PTS = 1         # PPR: 1 pt/reception
 
+MODELS_DIR = DATA_DIR / "models"
+
+# Must exactly match FEATURES_BY_POS in train_ml_model.py -- these are the
+# columns each position's saved model expects, in order. See that file's
+# module docstring for why this specific feature set (all computable
+# identically for any past season, unlike the guide_*/playcaller_* columns).
+ML_FEATURES_BY_POS = {
+    "QB": ["ppg", "volume", "rushing_ppg", "snap_share", "efficiency"],
+    "RB": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+    "WR": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+    "TE": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+}
+
+_ML_MODEL_CACHE = {}
+
+
+def load_ml_model(pos: str):
+    """Loads (and caches) the trained sklearn Pipeline for `pos`, saved by
+    train_ml_model.py to data/models/{pos}_model.joblib. Returns None if
+    the model file doesn't exist (e.g. train_ml_model.py hasn't been run
+    yet) -- callers must handle that by falling back to raw ppg, see
+    compute_ml_predicted_ppg() below.
+    """
+    if pos in _ML_MODEL_CACHE:
+        return _ML_MODEL_CACHE[pos]
+    model_path = MODELS_DIR / f"{pos}_model.joblib"
+    if not model_path.exists():
+        _ML_MODEL_CACHE[pos] = None
+        return None
+    import joblib
+    model = joblib.load(model_path)
+    _ML_MODEL_CACHE[pos] = model
+    return model
+
+
+def compute_ml_predicted_ppg(df: pd.DataFrame, pos: str) -> pd.Series:
+    """Applies the trained per-position model (see "ML value model" in the
+    module docstring) to this season's already-computed feature columns
+    (ppg, rushing_ppg, receiving_ppg, red_zone_share, snap_share,
+    efficiency, volume -- computed earlier in compute_stat_group_scores by
+    this same function file) to produce ml_predicted_ppg: the model's own
+    projection of next season's PPG for each player, given their CURRENT
+    (2024 base) production profile.
+
+    Missing individual features are median-imputed within this position
+    group before prediction -- the same missing-data convention used
+    everywhere else in this file, so a player missing e.g. snap_pct still
+    gets a prediction rather than being silently dropped.
+
+    Falls back to the player's own raw ppg (a safe, clearly-documented
+    degenerate case -- not a crash) if this position has no saved model
+    yet (train_ml_model.py hasn't been run).
+    """
+    model = load_ml_model(pos)
+    feature_cols = ML_FEATURES_BY_POS[pos]
+    if model is None:
+        print(f"WARNING: no saved ML model for {pos} (run train_ml_model.py) "
+              f"-- falling back to raw ppg for ml_predicted_ppg.")
+        return df["ppg"].copy()
+
+    X = df[feature_cols].copy()
+    for col in feature_cols:
+        X[col] = X[col].fillna(X[col].median())
+    # A position group that's entirely missing one feature (e.g. all-null
+    # snap_pct) would median-impute to NaN; fall back to 0 in that
+    # unlikely edge case so predict() doesn't error.
+    X = X.fillna(0)
+    preds = pd.Series(model.predict(X.to_numpy(dtype=float)), index=df.index)
+
+    # Low-snap-share shrinkage: a backup with a tiny 2024 snap share (e.g.
+    # a QB2 who played a handful of series) produces a noisy, unreliable
+    # per-game RATE -- the model can extrapolate that small, hot sample
+    # into an inflated next-season prediction (confirmed live: Marcus
+    # Mariota at 26.8% snap share was predicted to QB8 off a small sample,
+    # well above his actual 2024 ppg). Shrink ml_predicted_ppg toward the
+    # player's own raw ppg in proportion to how little we actually saw of
+    # them -- full trust in the model at snap_share >= FULL_CONF, linearly
+    # down to full distrust (pure raw ppg) at snap_share <= NO_CONF. This
+    # does not discard the model's signal for anyone with a real sample --
+    # it only tempers it for players whose 2024 rate stat is itself noisy.
+    FULL_CONF, NO_CONF = 0.5, 0.1
+    snap = df["snap_share"].fillna(0)
+    confidence = ((snap - NO_CONF) / (FULL_CONF - NO_CONF)).clip(0, 1)
+    preds = confidence * preds + (1 - confidence) * df["ppg"].fillna(preds)
+    return preds
+
 
 def compute_passing_pts(df: pd.DataFrame) -> pd.Series:
     return (
@@ -466,12 +623,14 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         opportunities = df["attempts"].fillna(0) + df["carries"].fillna(0)
         df["efficiency"] = (passing_pts + rushing_pts) / opportunities.replace(0, np.nan)
 
+        # ML value model -- see module docstring "ML value model". Replaces
+        # the old individually-weighted ppg/volume/rushing_ppg/snap_share/
+        # efficiency cluster (which summed to 0.80) with a single
+        # ml_predicted_ppg component at that same combined weight.
+        df["ml_predicted_ppg"] = compute_ml_predicted_ppg(df, pos)
+
         components = {
-            "ppg": 0.36,
-            "volume": 0.12,
-            "rushing_ppg": 0.12,
-            "snap_share": 0.12,
-            "efficiency": 0.08,
+            "ml_predicted_ppg": 0.36 + 0.12 + 0.12 + 0.12 + 0.08,  # = 0.80, sum of old ppg/volume/rushing_ppg/snap_share/efficiency weights
             "guide_adj_ppg": 0.14,
             # Real per-player "Luck Metric" (data/guide_luck_metric.csv):
             # pct of season fantasy points lost/gained to variance (OT
@@ -503,6 +662,14 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         opportunities = df["carries"].fillna(0) + df["targets"].fillna(0)
         df["volume"] = opportunities / games  # combined touches+targets/game
         df["efficiency"] = (rushing_pts + receiving_pts) / opportunities.replace(0, np.nan)
+
+        # ML value model -- see module docstring "ML value model". Replaces
+        # the old individually-weighted ppg/rushing_ppg/receiving_ppg/
+        # red_zone_share/snap_share/efficiency cluster with a single
+        # ml_predicted_ppg component at that cluster's combined weight
+        # (computed per position below, right where that old cluster's
+        # weights used to be spelled out).
+        df["ml_predicted_ppg"] = compute_ml_predicted_ppg(df, pos)
 
         # REAL red-zone usage share, not a TD-rate proxy. red_zone_share
         # comes from data/redzone_stats.csv (built by redzone.py from 2024
@@ -552,12 +719,9 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             df["pct_rb1_rank_inv"] = -df["pct_rb1_rank"]
 
             components = {
-                "ppg": 0.174,
-                "rushing_ppg": 0.087,
-                "receiving_ppg": 0.113,
-                "red_zone_share": 0.061,
-                "snap_share": 0.087,
-                "efficiency": 0.061,
+                # sum of old ppg .174 + rushing_ppg .087 + receiving_ppg .113
+                # + red_zone_share .061 + snap_share .087 + efficiency .061
+                "ml_predicted_ppg": 0.174 + 0.087 + 0.113 + 0.061 + 0.087 + 0.061,  # = 0.583
                 "guide_adj_ppg": 0.130,
                 "ol_run_block_rank": 0.061,
                 "proj_volume_rank": 0.096,
@@ -574,24 +738,18 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             df["playcaller_wr_ppg_rank_inv"] = -df["playcaller_wr_ppg_rank"]
 
             components = {
-                "ppg": 0.223,
-                "rushing_ppg": 0.107,
-                "receiving_ppg": 0.143,
-                "red_zone_share": 0.071,
-                "snap_share": 0.107,
-                "efficiency": 0.071,
+                # sum of old ppg .223 + rushing_ppg .107 + receiving_ppg .143
+                # + red_zone_share .071 + snap_share .107 + efficiency .071
+                "ml_predicted_ppg": 0.223 + 0.107 + 0.143 + 0.071 + 0.107 + 0.071,  # = 0.722
                 "guide_adj_ppg": 0.170,
                 "playcaller_wr_ppg_rank_inv": 0.047,
                 "pct_pts_lost_to_luck": 0.061,  # see QB block above for reasoning
             }
         else:
             components = {
-                "ppg": 0.235,
-                "rushing_ppg": 0.113,
-                "receiving_ppg": 0.150,
-                "red_zone_share": 0.075,
-                "snap_share": 0.113,
-                "efficiency": 0.075,
+                # sum of old ppg .235 + rushing_ppg .113 + receiving_ppg .150
+                # + red_zone_share .075 + snap_share .113 + efficiency .075
+                "ml_predicted_ppg": 0.235 + 0.113 + 0.150 + 0.075 + 0.113 + 0.075,  # = 0.761
                 "guide_adj_ppg": 0.179,
                 "pct_pts_lost_to_luck": 0.06,  # see QB block above for reasoning
             }
@@ -685,7 +843,13 @@ def compute_kicker_scores(df: pd.DataFrame) -> pd.DataFrame:
     # bucket at all -- fall back fully to their (shrunk) overall fg_pct.
     fg_pct_50plus_shrunk = fg_pct_50plus_shrunk.where(fg50_attempts > 0, fg_pct_shrunk)
 
-    df["is_dome_numeric"] = df["is_dome"].astype(float)
+    # is_dome can arrive as a real bool, a numpy bool, or (after a CSV
+    # round-trip) the literal strings "True"/"False" -- normalize all three
+    # before casting to float, rather than assuming a clean bool dtype.
+    is_dome_raw = df["is_dome"]
+    if is_dome_raw.dtype == object:
+        is_dome_raw = is_dome_raw.map({"True": True, "False": False, True: True, False: False})
+    df["is_dome_numeric"] = is_dome_raw.astype(float)
     # Lower ADP = better; invert so higher adp_anchor = more valuable,
     # matching every other z-scored component here.
     df["adp_anchor"] = -df["adp"]

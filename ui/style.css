@@ -460,6 +460,34 @@ body{
   font-size:13px;
   margin-top:2px;
 }
+.strategy-picks{
+  margin-top:8px;
+  border-top:1px solid var(--border);
+  padding-top:8px;
+}
+.strategy-picks-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.4px;
+  color:var(--text-dim);
+  margin-bottom:6px;
+}
+.strategy-pick-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 0;
+  font-size:13px;
+}
+.strategy-pick-name{
+  flex:1;
+  font-weight:600;
+}
+.strategy-pick-adp{
+  font-size:11px;
+  color:var(--text-dim);
+}
+
 .strategy-round-note{
   font-size:12px;
   color:var(--text-dim);

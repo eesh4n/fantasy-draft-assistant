@@ -7,7 +7,15 @@ UI. Schema (hard contract):
   "name": "string",
   "position": "QB|RB|WR|TE|K|DEF",
   "team": "string, team abbreviation",
-  "value_score": number,
+  "value_score": number,             // For QB/RB/WR/TE, now PRIMARILY
+                                       // derived from a trained ML model's
+                                       // ml_predicted_ppg (see stats.
+                                       // ml_predicted_ppg below and score.
+                                       // py's "ML value model" docstring
+                                       // section) -- NOT a hand-weighted
+                                       // formula anymore. K/DEF are
+                                       // unchanged (own real-data models,
+                                       // out of scope for the ML swap).
   "position_rank": integer (1-indexed, by value_score within position),
   "adp": number,
   "adp_position_rank": integer (1-indexed, by adp within position),
@@ -17,6 +25,29 @@ UI. Schema (hard contract):
     "volume": number|null,            // null for K/DEF (ADP-only model)
     "snap_share": number|null,        // and for rookies with no 2024 stats.
     "efficiency": number|null,
+    "ml_predicted_ppg": number|null,  // QB/RB/WR/TE only. THE PRIMARY
+                                       // signal in value_score now (see
+                                       // score.py's module docstring "ML
+                                       // value model"). Output of a real,
+                                       // per-position scikit-learn model
+                                       // (Ridge/ElasticNet, cross-validated
+                                       // against a naive baseline and a
+                                       // shallow GBM in train_ml_model.py,
+                                       // trained on 7 seasons of nfl_data_py
+                                       // history, 2018-2024) applied to this
+                                       // player's CURRENT ppg/rushing_ppg/
+                                       // receiving_ppg/red_zone_share/
+                                       // snap_share/efficiency (RB/WR/TE) or
+                                       // ppg/volume/rushing_ppg/snap_share/
+                                       // efficiency (QB) profile -- i.e. the
+                                       // model's own projection of this
+                                       // player's NEXT-season PPG. Replaces
+                                       // the old hand-weighted composite of
+                                       // those raw components. null only if
+                                       // no model file exists for this
+                                       // position (train_ml_model.py not
+                                       // yet run) or the player has no 2024
+                                       // stat line at all.
     "rushing_ppg": number|null,       // rushing-only fantasy pts/game
                                        // (QB/RB/WR/TE)
     "receiving_ppg": number|null,     // receiving-only fantasy pts/game
@@ -354,6 +385,7 @@ def main():
                     "volume": clean_num(row.get("volume")),
                     "snap_share": clean_num(row.get("snap_share")),
                     "efficiency": clean_num(row.get("efficiency")),
+                    "ml_predicted_ppg": clean_num(row.get("ml_predicted_ppg")),
                     "rushing_ppg": clean_num(row.get("rushing_ppg")),
                     "receiving_ppg": clean_num(row.get("receiving_ppg")),
                     "red_zone_share": clean_num(row.get("red_zone_share")),

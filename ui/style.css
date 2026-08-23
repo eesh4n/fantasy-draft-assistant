@@ -141,6 +141,67 @@ body{
   text-decoration:underline;
 }
 
+.compare-bar{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--bg-panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+  z-index:50;
+  font-size:13px;
+}
+
+.compare-box{
+  position:relative;
+  background:var(--bg-panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px 26px;
+  width:800px;
+  max-width:92vw;
+  max-height:85vh;
+  overflow-y:auto;
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+
+.compare-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+.compare-table th, .compare-table td{
+  border-bottom:1px solid var(--border);
+  padding:8px 10px;
+  text-align:left;
+}
+.compare-table th{
+  color:var(--text-dim);
+  font-weight:600;
+  font-size:11px;
+  text-transform:uppercase;
+}
+.compare-best{
+  color:var(--green);
+  font-weight:700;
+  background:var(--green-bg);
+}
+.compare-verdict{
+  margin-top:16px;
+  padding:12px;
+  background:var(--bg-panel-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-size:14px;
+  line-height:1.5;
+}
+
 .player-detail-box{
   position:relative;
   background:var(--bg-panel);
@@ -364,6 +425,34 @@ body{
 .gap-neg{
   color:var(--text-dim);
 }
+.gap-nodata{
+  color:var(--text-dim);
+  font-style:italic;
+  font-size:11px;
+}
+
+.col-compare{
+  width:32px;
+  text-align:center;
+}
+.compare-checkbox{
+  cursor:pointer;
+}
+.fav-star{
+  background:none;
+  border:none;
+  color:var(--text-dim);
+  cursor:pointer;
+  font-size:14px;
+  padding:0 4px 0 0;
+  vertical-align:middle;
+}
+.fav-star.active{
+  color:#fbbf24;
+}
+.fav-star:hover{
+  color:#fbbf24;
+}
 
 .actions-cell{
   display:flex;
@@ -525,6 +614,30 @@ body{
   position:absolute;
   left:0;
 }
+.strategy-round-plan{
+  border-top:1px solid var(--border);
+  padding-top:8px;
+  margin-top:8px;
+}
+.strategy-round-plan-row{
+  display:flex;
+  gap:8px;
+  padding:3px 0;
+  font-size:12px;
+}
+.strategy-round-plan-row.current{
+  color:var(--accent);
+  font-weight:700;
+}
+.strategy-round-plan-num{
+  width:26px;
+  flex-shrink:0;
+  color:var(--text-dim);
+}
+.strategy-round-plan-row.current .strategy-round-plan-num{
+  color:var(--accent);
+}
+
 .strategy-pos-block{
   border-top:1px solid var(--border);
   padding-top:8px;

@@ -600,6 +600,29 @@ def zscore(s: pd.Series) -> pd.Series:
     return (s - s.mean()) / std
 
 
+# Sample-size guardrail: a player with very few 2024 games can produce a
+# huge single-game rate stat (e.g. one spot start) that, un-shrunk, ranks
+# ABOVE legitimate full-season starters -- confirmed bug: Joe Milton III
+# (Cowboys backup QB) had 1 game at a 95% snap share and a big garbage-
+# time-adjacent stat line, and with no games-played floor anywhere in this
+# pipeline he ranked QB4 overall with a +43 value_gap. Two-part fix:
+#   1. MIN_GAMES_FOR_STATS: below this, a player is treated as having NO
+#      usable stat sample at all and falls into the same ADP-only fallback
+#      path as a rookie with zero 2024 games (see the has_stats gate below).
+#   2. FULL_CONFIDENCE_GAMES: between MIN_GAMES_FOR_STATS and this, the
+#      composite z-score is linearly shrunk toward 0 (league-average) by
+#      games/FULL_CONFIDENCE_GAMES, so a 4-game outlier stat line pulls
+#      most of the way toward "unremarkable" rather than fully counting --
+#      a standard small-sample shrinkage estimator, not just a hard cutoff.
+MIN_GAMES_FOR_STATS = 3
+FULL_CONFIDENCE_GAMES = 10
+
+
+def sample_size_shrinkage(games_series: pd.Series) -> pd.Series:
+    factor = (games_series.fillna(0) / FULL_CONFIDENCE_GAMES).clip(upper=1.0)
+    return factor
+
+
 def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
     games = df["games"].replace(0, np.nan)
@@ -772,6 +795,7 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         z = zscore(df[col].fillna(df[col].median()))
         composite += z * (weight / weight_sum)
 
+    composite = composite * sample_size_shrinkage(df["games"])
     df["value_score"] = composite
     return df
 
@@ -1087,7 +1111,10 @@ def main():
             # points value. Every actual point calculation in this file
             # uses the league's custom scoring (compute_passing_pts, plus
             # the rushing/receiving math above), never this column's value.
-            has_stats = group["fantasy_points_ppr"].notna() & (group["games"] > 0)
+            # MIN_GAMES_FOR_STATS (not just > 0): a 1-2 game sample is not
+            # a real signal -- see MIN_GAMES_FOR_STATS / sample_size_shrinkage
+            # docstring above for the confirmed bug this fixes.
+            has_stats = group["fantasy_points_ppr"].notna() & (group["games"] >= MIN_GAMES_FOR_STATS)
             with_stats = group[has_stats]
             without_stats = group[~has_stats]
 

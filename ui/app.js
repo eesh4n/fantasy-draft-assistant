@@ -122,6 +122,17 @@ function renderStrategyPanel() {
   `;
 
   const bodyEl = document.getElementById("strategyRulesBody");
+  const roundPlanHtml = `
+    <div class="strategy-round-plan">
+      <div class="strategy-pos-name">Round-by-round plan</div>
+      ${ROUND_TARGETS.map((t, i) => `
+        <div class="strategy-round-plan-row${i + 1 === round ? " current" : ""}">
+          <span class="strategy-round-plan-num">R${i + 1}</span>
+          <span>${escapeHtml(t)}</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
   const posBlocks = Object.entries(POSITION_STRATEGY).map(([pos, s]) => `
     <div class="strategy-pos-block">
       <div class="strategy-pos-name">${pos}</div>
@@ -134,6 +145,7 @@ function renderStrategyPanel() {
     <div class="strategy-rules-list">
       ${OVERALL_RULES.map(r => `<div class="strategy-rule">${escapeHtml(r)}</div>`).join("")}
     </div>
+    ${roundPlanHtml}
     ${posBlocks}
   `;
 }
@@ -149,6 +161,44 @@ let mineIds = new Set();
 let rosterSlots = buildEmptyRosterSlots();
 let searchTerm = "";
 let activePosFilter = "ALL";
+let compareIds = new Set();
+let favoriteIds = new Set();
+
+const FAVORITES_KEY = "draftAssistant.favorites.v1";
+// Seeded once on first load only -- the user's own personal late-round
+// sleeper picks (their call, not the model's), per an explicit request to
+// save these as a watchlist. If the user un-favorites one, it stays
+// removed (seeding only fires when no saved favorites exist yet at all).
+const DEFAULT_FAVORITE_NAMES = ["Mike Washington", "De'Zhaun Stribling", "KC Concepcion", "Travis Etienne"];
+
+function loadFavorites() {
+  try {
+    const raw = localStorage.getItem(FAVORITES_KEY);
+    if (raw) {
+      favoriteIds = new Set(JSON.parse(raw));
+      return;
+    }
+  } catch (e) { /* fall through to seeding */ }
+  favoriteIds = new Set();
+  DEFAULT_FAVORITE_NAMES.forEach(n => {
+    const p = allPlayers.find(p => p.name.toLowerCase().includes(n.toLowerCase().split(" ")[0]) && p.name.toLowerCase().includes(n.toLowerCase().split(" ").slice(-1)[0]));
+    if (p) favoriteIds.add(p.id);
+  });
+  saveFavorites();
+}
+
+function saveFavorites() {
+  try {
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.from(favoriteIds)));
+  } catch (e) { console.warn("Failed to save favorites", e); }
+}
+
+function toggleFavorite(playerId) {
+  if (favoriteIds.has(playerId)) favoriteIds.delete(playerId);
+  else favoriteIds.add(playerId);
+  saveFavorites();
+  renderTable();
+}
 
 function buildEmptyRosterSlots() {
   const slots = {};
@@ -278,6 +328,94 @@ function markMine(playerId) {
 function closeAllOverlays() {
   document.getElementById("resetConfirmOverlay").hidden = true;
   document.getElementById("playerDetailOverlay").hidden = true;
+  document.getElementById("compareOverlay").hidden = true;
+}
+
+// ---------- Compare players ----------
+function renderCompareBar() {
+  const bar = document.getElementById("compareBar");
+  const count = document.getElementById("compareBarCount");
+  if (compareIds.size < 2) {
+    bar.hidden = true;
+    return;
+  }
+  bar.hidden = false;
+  count.textContent = `${compareIds.size} selected`;
+}
+
+const COMPARE_ROWS = [
+  { label: "Position", get: p => p.position, higherBetter: null },
+  { label: "Team", get: p => p.team, higherBetter: null },
+  { label: "Value rank (pos)", get: p => p.position_rank, higherBetter: false },
+  { label: "ADP", get: p => p.adp, higherBetter: false },
+  { label: "Value gap", get: p => p.value_gap, higherBetter: true },
+  { label: "Model value score", get: p => p.value_score, higherBetter: true },
+  { label: "ML predicted PPG", get: p => (p.stats && p.stats.ml_predicted_ppg != null ? p.stats.ml_predicted_ppg : null), higherBetter: true },
+  { label: "'25 adj PPG (guide)", get: p => (p.stats && p.stats.guide_adj_ppg != null ? p.stats.guide_adj_ppg : null), higherBetter: true },
+  { label: "2024 PPG (base)", get: p => (p.stats ? p.stats.ppg : null), higherBetter: true },
+  { label: "Snap share", get: p => (p.stats && p.stats.snap_share != null ? Math.round(p.stats.snap_share * 100) + "%" : null), higherBetter: null },
+];
+
+function openCompareModal() {
+  closeAllOverlays();
+  const players = allPlayers.filter(p => compareIds.has(p.id));
+  if (players.length < 2) return;
+
+  const content = document.getElementById("compareContent");
+  const headerCells = players.map(p => `<th>${escapeHtml(p.name)}</th>`).join("");
+
+  const rowsHtml = COMPARE_ROWS.map(row => {
+    const values = players.map(p => row.get(p));
+    let bestIdx = -1;
+    if (row.higherBetter !== null) {
+      const numeric = values.map(v => (typeof v === "number" ? v : null));
+      if (numeric.some(v => v !== null)) {
+        const best = row.higherBetter
+          ? Math.max(...numeric.filter(v => v !== null))
+          : Math.min(...numeric.filter(v => v !== null));
+        bestIdx = numeric.indexOf(best);
+      }
+    }
+    const cells = values.map((v, i) => {
+      const text = v === null || v === undefined ? "—" : v;
+      const cls = i === bestIdx ? "compare-best" : "";
+      return `<td class="${cls}">${escapeHtml(String(text))}</td>`;
+    }).join("");
+    return `<tr><th>${escapeHtml(row.label)}</th>${cells}</tr>`;
+  }).join("");
+
+  // Verdict: same-position comparisons use value_score directly (it's
+  // z-scored within position, so directly comparable there). Cross-
+  // position comparisons are flagged as directional-only, since
+  // value_score's z-score normalization isn't calibrated to be precisely
+  // comparable ACROSS positions (a WR's z-score distribution isn't the
+  // same shape as a QB's).
+  const samePos = players.every(p => p.position === players[0].position);
+  const sorted = [...players].sort((a, b) => b.value_score - a.value_score);
+  const winner = sorted[0];
+  let verdict = `The model prefers <strong>${escapeHtml(winner.name)}</strong> (highest value_score: ${winner.value_score.toFixed(2)}).`;
+  if (!samePos) {
+    verdict += ` Note: these players are at different positions -- value_score is normalized within each position separately, so this comparison is directional, not precisely calibrated across positions. Treat it as "the model rates this one higher relative to their own position peers," not a strict points comparison.`;
+  }
+
+  content.innerHTML = `
+    <h2 style="margin:0 0 14px;">Compare Players</h2>
+    <div style="overflow-x:auto;">
+      <table class="compare-table">
+        <thead><tr><th></th>${headerCells}</tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div>
+    <div class="compare-verdict">${verdict}</div>
+  `;
+
+  document.getElementById("compareOverlay").hidden = false;
+}
+
+function clearCompare() {
+  compareIds.clear();
+  renderCompareBar();
+  renderTable();
 }
 
 // Native confirm() is unreliable here — some browsers/embedded webviews
@@ -547,21 +685,45 @@ function renderTable() {
     if (isDrafted) tr.classList.add("drafted-row");
     if (isMine) tr.classList.add("mine-row");
 
+    // A player with no real 2024 stats (rookies, mainly) is ranked purely
+    // by ADP in a fallback tier BELOW every stat-based player at that
+    // position -- by design (see score.py), so their raw value_gap number
+    // (e.g. Jeanty at -75) looks like a real "way overpriced" red flag when
+    // it's actually just "no production data exists yet to rank against."
+    // Show that plainly instead of a misleading number.
+    const hasNoStats = !player.stats || player.stats.ppg === null || player.stats.ppg === undefined;
     const gapClass = player.value_gap > 0 ? "gap-positive" : (player.value_gap < 0 ? "gap-neg" : "");
-    const gapText = player.value_gap > 0 ? `+${player.value_gap}` : `${player.value_gap}`;
+    const gapText = hasNoStats
+      ? "no data"
+      : (player.value_gap > 0 ? `+${player.value_gap}` : `${player.value_gap}`);
+    const gapCellClass = hasNoStats ? "gap-nodata" : gapClass;
 
+    const isFav = favoriteIds.has(player.id);
+    const isCompared = compareIds.has(player.id);
     tr.innerHTML = `
-      <td class="col-name"><span class="player-name player-name-link">${escapeHtml(player.name)}</span></td>
+      <td class="col-compare"><input type="checkbox" class="compare-checkbox" ${isCompared ? "checked" : ""}></td>
+      <td class="col-name">
+        <button class="fav-star${isFav ? " active" : ""}" title="Favorite / sleeper watchlist" type="button">★</button>
+        <span class="player-name player-name-link">${escapeHtml(player.name)}</span>
+      </td>
       <td><span class="pos-pill pos-${player.position}">${player.position}</span></td>
       <td>${escapeHtml(player.team)}</td>
       <td>#${player.position_rank}</td>
       <td>${player.adp}</td>
-      <td class="gap-cell"><span class="${gapClass}">${gapText}</span></td>
+      <td class="gap-cell"><span class="${gapCellClass}">${gapText}</span></td>
       <td>${player.stats && player.stats.guide_adj_ppg != null ? player.stats.guide_adj_ppg : "—"}</td>
       <td class="actions-cell"></td>
     `;
 
     tr.querySelector(".player-name-link").addEventListener("click", () => openPlayerDetail(player));
+
+    tr.querySelector(".fav-star").addEventListener("click", () => toggleFavorite(player.id));
+
+    tr.querySelector(".compare-checkbox").addEventListener("change", e => {
+      if (e.target.checked) compareIds.add(player.id);
+      else compareIds.delete(player.id);
+      renderCompareBar();
+    });
 
     const actionsCell = tr.querySelector(".actions-cell");
 
@@ -663,8 +825,7 @@ function renderRecommendations() {
 
     const meta = document.createElement("div");
     meta.className = "rec-meta";
-    const gapText = player.value_gap > 0 ? ` · +${player.value_gap} value` : "";
-    meta.textContent = `${player.position} · ${player.team} · rank #${player.position_rank}${gapText}`;
+    meta.textContent = `${player.position} · ${player.team} · rank #${player.position_rank} · ADP ${player.adp}`;
 
     main.appendChild(name);
     main.appendChild(meta);
@@ -717,6 +878,14 @@ function wireControls() {
     if (e.target === resetOverlay) closeResetConfirm();
   });
 
+  document.getElementById("compareBarOpenBtn").addEventListener("click", openCompareModal);
+  document.getElementById("compareBarClearBtn").addEventListener("click", clearCompare);
+  document.getElementById("compareCloseBtn").addEventListener("click", closeAllOverlays);
+  const compareOverlay = document.getElementById("compareOverlay");
+  compareOverlay.addEventListener("click", e => {
+    if (e.target === compareOverlay) closeAllOverlays();
+  });
+
   document.getElementById("playerDetailCloseBtn").addEventListener("click", closePlayerDetail);
   const detailOverlay = document.getElementById("playerDetailOverlay");
   detailOverlay.addEventListener("click", e => {
@@ -752,5 +921,6 @@ function wireControls() {
   wireControls();
   loadState();
   await loadPlayers();
+  loadFavorites();
   renderAll();
 })();

@@ -13,10 +13,10 @@
   "hyperparams": {
     "alpha": 0.1
   },
-  "cv_r2_mean": 0.46118127187518854,
-  "cv_mae_mean": 3.095592898180498,
-  "naive_baseline_r2": 0.3481739154909467,
-  "naive_baseline_mae": 3.387692148288918,
+  "cv_r2_mean": 0.4600799851670791,
+  "cv_mae_mean": 3.0956051736463936,
+  "naive_baseline_r2": 0.34872008354822953,
+  "naive_baseline_mae": 3.3875854269169836,
   "n_rows": 438,
   "n_real_2025_rows": 48,
   "retrained_with_real_2025": true

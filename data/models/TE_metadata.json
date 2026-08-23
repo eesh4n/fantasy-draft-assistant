@@ -9,14 +9,15 @@
     "snap_share",
     "efficiency"
   ],
-  "model_type": "ridge",
+  "model_type": "elasticnet",
   "hyperparams": {
-    "alpha": 10.0
+    "alpha": 0.03,
+    "l1_ratio": 0.1
   },
-  "cv_r2_mean": 0.4961584934475972,
-  "cv_mae_mean": 2.0696742652381146,
-  "naive_baseline_r2": 0.40514253969930064,
-  "naive_baseline_mae": 2.2289353326007983,
+  "cv_r2_mean": 0.49628810001862406,
+  "cv_mae_mean": 2.0682888709076734,
+  "naive_baseline_r2": 0.4052318763642261,
+  "naive_baseline_mae": 2.2288776002290036,
   "n_rows": 322,
   "n_real_2025_rows": 10,
   "retrained_with_real_2025": true

@@ -227,7 +227,19 @@ BASE_FEATURES_BY_POS = {
 # one is and why it's a genuine historical analog (or, for `age`, just
 # real data the original pass never used).
 EXTRA_FEATURE_GROUPS_BY_POS = {
-    "QB": {"age": ["age"]},
+    # turnover_durability = int_rate (interceptions/attempt -- a genuine
+    # turnover-risk signal, computed in score.py's compute_stat_group_scores
+    # QB branch from raw interceptions/attempts) + games (raw games-played
+    # count, already present on every season's df -- a durability signal).
+    # Bundled as one group (rather than tested individually) because a
+    # targeted CV experiment (see data/train_ml_model.py history / task
+    # notes) showed base+int_rate+games (CV R^2 0.3746 on the historical-
+    # only 173-row table) clearly beats base+int_rate alone (0.3600),
+    # base+games alone (0.3261), and base+age (0.3056) -- while
+    # base+age+int_rate+games (0.3672) is WORSE than the bundled pair
+    # without age, so age is deliberately kept as its own separate,
+    # independently-tested group rather than folded in.
+    "QB": {"age": ["age"], "turnover_durability": ["int_rate", "games"]},
     "RB": {"age": ["age"], "team_ctx": ["team_rb_ppg_hist", "team_ol_rb_ybc_att"]},
     "WR": {"age": ["age"], "team_ctx": ["team_wr_ppg_hist"]},
     "TE": {"age": ["age"]},

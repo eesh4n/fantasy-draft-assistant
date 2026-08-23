@@ -38,6 +38,15 @@ def build_real_2025_pair(pos: str, feature_cols: list) -> pd.DataFrame:
     sub = joined[joined["position"] == pos].copy()
     sub = sub[sub["real2025_total_pts"].notna()]
     sub = sub[sub["games"] >= tm.MIN_GAMES_YEAR1]  # same 2024-side games floor as every other pair
+
+    # int_rate isn't a materialized column in joined.csv (only the raw
+    # interceptions/attempts columns it's derived from are) -- compute it
+    # here identically to score.py's compute_stat_group_scores QB branch
+    # so the real-2025 pair isn't silently dropped for any feature-set
+    # variant that includes it (e.g. QB's turnover_durability group).
+    if "int_rate" in feature_cols and "int_rate" not in sub.columns:
+        sub["int_rate"] = sub["interceptions"].fillna(0) / sub["attempts"].replace(0, np.nan)
+
     missing = [c for c in feature_cols if c not in sub.columns]
     if missing:
         return pd.DataFrame()

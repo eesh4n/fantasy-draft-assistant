@@ -376,9 +376,12 @@ const COMPARE_ROWS = [
   // ADP-fallback ranking mechanism (see score.py / the "hasNoStats"
   // handling in renderTable) -- it's a data limitation, not a real
   // "overpriced" signal. Mirror renderTable's hasNoStats check (ppg OR
-  // guide_adj_ppg OR real2025_total_pts) instead of ppg alone, so a rookie
-  // with real guide/2025 signal (e.g. Ashton Jeanty) shows their real gap.
-  { label: "Value gap", get: p => (p.stats && (p.stats.ppg != null || p.stats.guide_adj_ppg != null || p.stats.real2025_total_pts != null) ? p.value_gap : null), higherBetter: true },
+  // guide_adj_ppg OR real2025_total_pts OR pct_pts_lost_to_luck OR
+  // proj_volume_rank -- score.py's full PLAYER_LEVEL_GUIDE_COLS gate)
+  // instead of ppg alone, so a rookie with real guide/2025 signal (e.g.
+  // Ashton Jeanty, or Jeremiyah Love who qualifies via proj_volume_rank
+  // alone) shows their real gap.
+  { label: "Value gap", get: p => (p.stats && (p.stats.ppg != null || p.stats.guide_adj_ppg != null || p.stats.real2025_total_pts != null || p.stats.pct_pts_lost_to_luck != null || p.stats.proj_volume_rank != null) ? p.value_gap : null), higherBetter: true },
   { label: "Model value score", get: p => p.value_score, higherBetter: true },
   { label: "ML predicted PPG", get: p => (p.stats && p.stats.ml_predicted_ppg != null ? p.stats.ml_predicted_ppg : null), higherBetter: true },
   { label: "'25 adj PPG (guide)", get: p => (p.stats && p.stats.guide_adj_ppg != null ? p.stats.guide_adj_ppg : null), higherBetter: true },
@@ -768,11 +771,19 @@ function renderTable() {
     // score.py now scores a rookie with real guide_adj_ppg/real2025_total_pts
     // (e.g. Ashton Jeanty) through the full composite despite having no
     // 2024 ppg, so their value_gap IS real signal now. Check for any of the
-    // three signals score.py's gate actually uses, not just ppg.
+    // signals score.py's PLAYER_LEVEL_GUIDE_COLS gate actually uses, not
+    // just ppg/guide_adj_ppg/real2025_total_pts -- confirmed bug: that
+    // narrower 3-column check missed pct_pts_lost_to_luck and
+    // proj_volume_rank, which alone can also qualify a zero-2024-stats
+    // rookie for the full composite (e.g. Jeremiyah Love, Jadarian Price --
+    // real proj_volume_rank, nothing else), wrongly showing "no data" for
+    // players who do have real ranking signal.
     const hasNoStats = !player.stats || (
       player.stats.ppg == null &&
       player.stats.guide_adj_ppg == null &&
-      player.stats.real2025_total_pts == null
+      player.stats.real2025_total_pts == null &&
+      player.stats.pct_pts_lost_to_luck == null &&
+      player.stats.proj_volume_rank == null
     );
     const gapClass = player.value_gap > 0 ? "gap-positive" : (player.value_gap < 0 ? "gap-neg" : "");
     const gapText = hasNoStats

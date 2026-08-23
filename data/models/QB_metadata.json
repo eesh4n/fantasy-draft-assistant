@@ -1,21 +1,23 @@
 {
   "position": "QB",
-  "feature_set": "base",
+  "feature_set": "base+turnover_durability",
   "features": [
     "ppg",
     "volume",
     "rushing_ppg",
     "snap_share",
-    "efficiency"
+    "efficiency",
+    "int_rate",
+    "games"
   ],
   "model_type": "ridge",
   "hyperparams": {
-    "alpha": 0.03
+    "alpha": 0.3
   },
-  "cv_r2_mean": 0.19486575742428286,
-  "cv_mae_mean": 3.257208413969029,
-  "naive_baseline_r2": -0.119501303292469,
-  "naive_baseline_mae": 3.821590487116256,
+  "cv_r2_mean": 0.21058370963121348,
+  "cv_mae_mean": 3.1856152001871516,
+  "naive_baseline_r2": -0.18711082398430065,
+  "naive_baseline_mae": 3.821080176487939,
   "n_rows": 206,
   "n_real_2025_rows": 33,
   "retrained_with_real_2025": true

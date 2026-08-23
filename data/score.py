@@ -900,6 +900,17 @@ def compute_stat_group_scores(df: pd.DataFrame, season: int = LIVE_SEASON) -> pd
         opportunities = df["attempts"].fillna(0) + df["carries"].fillna(0)
         df["efficiency"] = (passing_pts + rushing_pts) / opportunities.replace(0, np.nan)
 
+        # int_rate: interceptions per attempt -- a genuine turnover-risk
+        # signal (year-over-year QB performance regresses hard around
+        # turnover-proneness) computable identically for every historical
+        # season and for live inference from raw `interceptions`/`attempts`
+        # columns already pulled above. `games` (raw games-played count,
+        # already present on df) is a durability signal. Both are tested
+        # together as train_ml_model.py's "turnover_durability" QB feature
+        # group -- see that file's module docstring for the CV result that
+        # justified adopting them.
+        df["int_rate"] = df["interceptions"].fillna(0) / df["attempts"].replace(0, np.nan)
+
         # ML value model -- see module docstring "ML value model". Replaces
         # the old individually-weighted ppg/volume/rushing_ppg/snap_share/
         # efficiency cluster (which summed to 0.80) with a single
@@ -1485,11 +1496,33 @@ def main():
             # trained features -- see "ROUND 2" in the module docstring)
             # but is kept here too since it's still real signal a player
             # could have with nothing else.
-            guide_cols_present = [c for c in [
-                "guide_adj_ppg", "guide_ol_run_block_rank_2025", "guide_proj_volume_rank",
-                "real2025_total_pts", "pct_pts_lost_to_luck", "pct_rb1_rank",
-                "playcaller_wr_ppg_rank",
-            ] if c in group.columns]
+            #
+            # Confirmed bug (found auditing the sample_size_shrinkage fix
+            # above): PLAYER_LEVEL_GUIDE_COLS are all about THIS player
+            # specifically (joined by name). guide_ol_run_block_rank_2025 /
+            # pct_rb1_rank / playcaller_wr_ppg_rank are TEAM-level context
+            # (joined by team in join.py) -- the exact same value is shared
+            # by every player on that team, bench/UDFA depth included. Once
+            # sample_size_shrinkage stopped zeroing NaN-games rows out
+            # (factor=1.0 instead of 0), a player whose ONLY populated
+            # column was one of these team-level ranks got a full-confidence
+            # composite that was ~100% determined by that shared team
+            # ordinal (every other component washes out to a neutral
+            # median-imputed z=0) -- e.g. ~95 blank UDFA/depth WRs, tied in
+            # groups of 2-3 by team rank alone, outranked real players with
+            # actual (if modest) 2024 production, including Brandon Aiyuk
+            # (7 real games) landing below ~20 statistically blank rookies.
+            # Fix: a team-level-only column no longer grants has_stats on
+            # its own -- it still feeds the composite (unchanged) for any
+            # player who qualifies via a real player-level signal, but by
+            # itself it isn't enough to pull a zero-2024-stats player out of
+            # the ADP-only fallback, since it says nothing that
+            # distinguishes this player from any teammate.
+            PLAYER_LEVEL_GUIDE_COLS = [
+                "guide_adj_ppg", "guide_proj_volume_rank",
+                "real2025_total_pts", "pct_pts_lost_to_luck",
+            ]
+            guide_cols_present = [c for c in PLAYER_LEVEL_GUIDE_COLS if c in group.columns]
             has_guide_signal = pd.Series(False, index=group.index)
             for c in guide_cols_present:
                 has_guide_signal = has_guide_signal | group[c].notna()

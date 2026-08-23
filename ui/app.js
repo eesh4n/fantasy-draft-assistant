@@ -468,15 +468,20 @@ function buildRationale(player) {
     );
   } else if (!hasStats) {
     lines.push(
-      `No 2024 stat line exists for ${player.name} (rookie or no games played), so there's nothing to compare production against. This ranking is ADP-only and deliberately placed below every stat-based player at the position — a low or negative value gap here is a data limitation, not a real "fade" signal.`
+      `No 2024 stat line exists for ${player.name} (rookie or no games played), so there's nothing to compare base production against. ${s.real2025_total_pts !== null && s.real2025_total_pts !== undefined ? `Real 2025 production does exist though — ${fmtStat(s.real2025_total_pts)} total fantasy points this season, pulled directly from actual box scores — and that's what's driving this ranking instead.` : `This ranking is ADP-only and deliberately placed below every stat-based player at the position — a low or negative value gap here is a data limitation, not a real "fade" signal.`}`
     );
   } else {
+    if (s.real2025_total_pts !== null && s.real2025_total_pts !== undefined) {
+      lines.push(
+        `So far in 2025, ${player.name} has ${fmtStat(s.real2025_total_pts)} total fantasy points — real, actual production from this season's box scores (not a projection), pulled directly from NFL.com. This is now one of the strongest signals in their ranking.`
+      );
+    }
     lines.push(
-      `In 2024, ${player.name} averaged ${fmtStat(s.ppg)} PPR points/game on ${fmtStat(s.volume)} touches or targets/game, playing ${fmtStat(s.snap_share !== null ? Math.round(s.snap_share * 100) : null, "%")} of offensive snaps — producing ${fmtStat(s.efficiency)} points per opportunity.`
+      `Their 2024 base line: ${fmtStat(s.ppg)} PPR points/game on ${fmtStat(s.volume)} touches or targets/game, playing ${fmtStat(s.snap_share !== null ? Math.round(s.snap_share * 100) : null, "%")} of offensive snaps — producing ${fmtStat(s.efficiency)} points per opportunity.`
     );
     if (s.ml_predicted_ppg !== null && s.ml_predicted_ppg !== undefined) {
       lines.push(
-        `The model, trained on 7 past seasons of NFL data (2018–2024), projects them for ${fmtStat(s.ml_predicted_ppg)} points/game next season — this prediction, not a hand-picked formula, now drives most of their ranking here.`
+        `The model, trained on 7 past seasons of NFL data (2018–2024), projects them for ${fmtStat(s.ml_predicted_ppg)} points/game — this prediction, blended with real 2025 production where available, now drives most of their ranking here.`
       );
     }
     if (s.rushing_ppg !== null && s.rushing_ppg !== undefined && s.receiving_ppg !== null && s.receiving_ppg !== undefined) {
@@ -503,7 +508,7 @@ function buildRationale(player) {
       );
     } else if (player.value_gap < -10) {
       lines.push(
-        `That production only ranks #${player.position_rank} among ${player.position}s, yet ADP has them going like the #${player.adp_position_rank} — priced ${Math.abs(player.value_gap)} spots ahead of what their numbers support. Could be a name/hype premium, or a real role change since 2024 the model can't see.`
+        `That production only ranks #${player.position_rank} among ${player.position}s, yet ADP has them going like the #${player.adp_position_rank} — priced ${Math.abs(player.value_gap)} spots ahead of what their numbers support. ${s.real2025_total_pts !== null && s.real2025_total_pts !== undefined ? "That gap already accounts for real 2025 production, so it's a genuine disagreement with the market, not just stale data." : "Could be a name/hype premium, or a real role change this season the model can't see without 2025 data for this player."}`
       );
     } else {
       lines.push(

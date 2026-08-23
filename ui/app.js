@@ -662,8 +662,11 @@ function renderTable() {
   tbody.innerHTML = "";
 
   const arrow = sortDir === 1 ? " ↑" : " ↓";
-  document.getElementById("sortValRank").textContent = "Val Rank" + (sortColumn === "valrank" ? arrow : "");
-  document.getElementById("sortAdp").textContent = "ADP" + (sortColumn === "adp" ? arrow : "");
+  const SORT_LABELS = { valrank: "Val Rank", adp: "ADP", pos: "Pos", team: "Team", gap: "Gap", ppg: "'25 PPG" };
+  Object.entries({ sortValRank: "valrank", sortAdp: "adp", sortPos: "pos", sortTeam: "team", sortGap: "gap", sortPpg: "ppg" })
+    .forEach(([elId, col]) => {
+      document.getElementById(elId).textContent = SORT_LABELS[col] + (sortColumn === col ? arrow : "");
+    });
 
   // Sortable by clicking the ADP or Val Rank column header (sortColumn/
   // sortDir). Default: ADP ascending in the ALL view (a normal draft
@@ -672,17 +675,32 @@ function renderTable() {
   // position_rank ascending within a single position filter. Either can
   // be overridden by clicking a header, which applies regardless of the
   // current position filter.
+  // null/undefined always sort to the bottom regardless of direction, so
+  // e.g. sorting by '25 PPG doesn't shove every guide-uncovered player to
+  // the top when sorted ascending.
+  const SORT_GETTERS = {
+    valrank: p => p.position_rank,
+    adp: p => p.adp,
+    gap: p => p.value_gap,
+    ppg: p => (p.stats ? p.stats.guide_adj_ppg : null),
+    pos: p => p.position,
+    team: p => p.team,
+  };
   const visible = allPlayers
     .filter(matchesFilters)
     .sort((a, b) => {
-      if (sortColumn === "valrank") {
-        return sortDir * (a.position_rank - b.position_rank || b.value_score - a.value_score);
+      if (sortColumn === "adp" && activePosFilter === "ALL") {
+        return sortDir * (a.adp - b.adp);
       }
-      if (sortColumn === "adp") {
-        if (activePosFilter === "ALL") return sortDir * (a.adp - b.adp);
-        return sortDir * (a.position_rank - b.position_rank || b.value_score - a.value_score);
+      if (sortColumn === "default" || !SORT_GETTERS[sortColumn]) {
+        return a.position_rank - b.position_rank || b.value_score - a.value_score;
       }
-      return 0;
+      const get = SORT_GETTERS[sortColumn];
+      const av = get(a), bv = get(b);
+      if (av === null || av === undefined) return bv === null || bv === undefined ? 0 : 1;
+      if (bv === null || bv === undefined) return -1;
+      if (typeof av === "string") return sortDir * av.localeCompare(bv);
+      return sortDir * (av - bv) || (b.value_score - a.value_score);
     });
 
   if (visible.length === 0) {
@@ -933,6 +951,10 @@ function wireControls() {
   }
   document.getElementById("sortValRank").addEventListener("click", () => setSort("valrank"));
   document.getElementById("sortAdp").addEventListener("click", () => setSort("adp"));
+  document.getElementById("sortPos").addEventListener("click", () => setSort("pos"));
+  document.getElementById("sortTeam").addEventListener("click", () => setSort("team"));
+  document.getElementById("sortGap").addEventListener("click", () => setSort("gap"));
+  document.getElementById("sortPpg").addEventListener("click", () => setSort("ppg"));
 
   const rulesToggle = document.getElementById("strategyRulesToggle");
   const rulesBody = document.getElementById("strategyRulesBody");

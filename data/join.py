@@ -42,6 +42,8 @@ import pandas as pd
 from rapidfuzz import fuzz, process
 
 DATA_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(DATA_DIR))
+import score as score_mod  # noqa: E402 -- reuse LIVE_SEASON for the age pull below
 
 SUFFIXES = {"jr", "sr", "ii", "iii", "iv", "v"}
 
@@ -757,6 +759,26 @@ def main():
               f"playcaller/scheme context columns (will be all-null).")
         for col in guide_pc_cols:
             final[col] = pd.NA
+
+    # Bring in `age` (nfl_data_py's own roster-snapshot age column) for the
+    # live 2024 base season -- real data, pulled the exact same way
+    # train_ml_model.py pulls it for every historical season (see that
+    # file's pull_seasonal_stats()), so this is a genuine, honestly-sourced
+    # feature candidate for the ML model (see train_ml_model.py's module
+    # docstring "ROUND 2" section) rather than a live-only shortcut.
+    # Matched on player_id (gsis_id) -- the same reliable key redzone_stats
+    # uses above, no fuzzy-match risk.
+    try:
+        import nfl_data_py as nfl
+        age_rosters = nfl.import_seasonal_rosters([score_mod.LIVE_SEASON])
+        age_rosters = age_rosters.sort_values("week").drop_duplicates("player_id", keep="last")
+        age_rosters = age_rosters[["player_id", "age"]]
+        final = final.merge(age_rosters, on="player_id", how="left")
+        n_age = final["age"].notna().sum()
+        print(f"Age (nfl_data_py rosters, season {score_mod.LIVE_SEASON}) matched: {n_age} of {len(final)} rows")
+    except Exception as e:
+        print(f"WARNING: could not pull age data ({e}); continuing without age column.")
+        final["age"] = pd.NA
 
     out_path = DATA_DIR / "joined.csv"
     final.to_csv(out_path, index=False)

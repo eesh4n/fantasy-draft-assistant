@@ -499,18 +499,24 @@ REC_TO_PTS = 1         # PPR: 1 pt/reception
 
 MODELS_DIR = DATA_DIR / "models"
 
-# Must exactly match FEATURES_BY_POS in train_ml_model.py -- these are the
-# columns each position's saved model expects, in order. See that file's
-# module docstring for why this specific feature set (all computable
-# identically for any past season, unlike the guide_*/playcaller_* columns).
-ML_FEATURES_BY_POS = {
-    "QB": ["ppg", "volume", "rushing_ppg", "snap_share", "efficiency"],
-    "RB": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
-    "WR": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
-    "TE": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
-}
+# The 2024-base "live" season this pipeline runs inference on -- matches
+# pull.py's STATS_SEASON. Used only by the team-context historical-analog
+# features below (team_ol_rb_ybc_att needs to know which season's PFR data
+# to pull for the CURRENT live composite); bump alongside pull.py's
+# STATS_SEASON when a new season's data is published.
+LIVE_SEASON = 2024
 
+# NOTE: the per-position feature list a saved model actually expects is no
+# longer hardcoded here -- it's read straight from each position's
+# data/models/{pos}_metadata.json ("features" key), which train_ml_model.py
+# writes out after its feature-set-selection search (see that file's module
+# docstring "FEATURE VARIANTS tested per position"). This guarantees
+# score.py can never drift out of sync with whatever feature set a given
+# training run actually picked (base, base+age, base+team_ctx, etc.) --
+# previously this was a hand-copied duplicate of train_ml_model.py's dict
+# and the two could silently disagree.
 _ML_MODEL_CACHE = {}
+_ML_FEATURES_CACHE = {}
 
 
 def load_ml_model(pos: str):
@@ -532,6 +538,95 @@ def load_ml_model(pos: str):
     return model
 
 
+def load_ml_features(pos: str) -> list:
+    """Loads (and caches) the exact feature list/order for `pos`'s saved
+    model, from data/models/{pos}_metadata.json's "features" key -- see
+    note above. Falls back to the original 2024-era baseline feature set
+    if metadata is missing (shouldn't happen once train_ml_model.py has
+    been run, but keeps this file from crashing on a stale/partial
+    checkout)."""
+    if pos in _ML_FEATURES_CACHE:
+        return _ML_FEATURES_CACHE[pos]
+    meta_path = MODELS_DIR / f"{pos}_metadata.json"
+    fallback = {
+        "QB": ["ppg", "volume", "rushing_ppg", "snap_share", "efficiency"],
+        "RB": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+        "WR": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+        "TE": ["ppg", "rushing_ppg", "receiving_ppg", "red_zone_share", "snap_share", "efficiency"],
+    }[pos]
+    if not meta_path.exists():
+        _ML_FEATURES_CACHE[pos] = fallback
+        return fallback
+    import json
+    with open(meta_path) as f:
+        meta = json.load(f)
+    features = meta.get("features", fallback)
+    _ML_FEATURES_CACHE[pos] = features
+    return features
+
+
+def pull_team_ol_rb_ybc(season: int) -> pd.DataFrame:
+    """Team-level offensive-line run-blocking proxy: mean rushing
+    yards-before-contact per carry (PFR's ybc_att), aggregated to the team
+    level from nfl_data_py's import_seasonal_pfr('rush', ...). A real,
+    honestly-computable historical analog to the guide's
+    guide_ol_run_block_rank_2025 -- computed the SAME way for every
+    historical training season (via train_ml_model.py, which calls this
+    same function) and for the live season, so training features and live
+    inference features are guaranteed consistent. Excludes the '2TM'/'3TM'
+    multi-team PFR rows (ambiguous team attribution for a traded player).
+    Weighted by attempts so a handful of backup carries doesn't swing a
+    team's number as much as its starter's larger sample."""
+    import nfl_data_py as nfl
+
+    pfr_rush = nfl.import_seasonal_pfr("rush", [season])
+    pfr_rush = pfr_rush[~pfr_rush["tm"].isin(["2TM", "3TM"])].copy()
+    pfr_rush = pfr_rush.dropna(subset=["att", "ybc_att"])
+    pfr_rush = pfr_rush[pfr_rush["att"] > 0]
+
+    def weighted_mean(g):
+        w = g["att"]
+        return float((g["ybc_att"] * w).sum() / w.sum()) if w.sum() > 0 else np.nan
+
+    team_ybc = pfr_rush.groupby("tm").apply(weighted_mean).reset_index()
+    team_ybc.columns = ["team", "team_ol_rb_ybc_att"]
+    return team_ybc
+
+
+_TEAM_OL_YBC_CACHE = {}
+
+
+def add_team_context_features(df: pd.DataFrame, pos: str, season: int) -> pd.DataFrame:
+    """Adds team_rb_ppg_hist / team_wr_ppg_hist (this season's own
+    team-level average fantasy PPG at the position, aggregated from the
+    per-player `ppg` column already computed earlier in
+    compute_stat_group_scores) and, for RB, team_ol_rb_ybc_att (pulled via
+    pull_team_ol_rb_ybc above) -- see train_ml_model.py's module docstring
+    "ROUND 2" section for why these are genuine historical analogs to the
+    guide's playcaller_rb_ppg_rank / playcaller_wr_ppg_rank /
+    guide_ol_run_block_rank_2025 blend terms, tested as real trained-model
+    features rather than hand-picked post-prediction blend weights.
+    Called identically for every historical training season (via
+    train_ml_model.py) and for the live inference season, so there is one
+    code path computing this feature both times.
+    """
+    df = df.copy()
+    games = df["games"].fillna(0)
+    usable = games >= 1  # include committee/backup work, matching the
+    # guide's own team-level PPG-under-this-playcaller framing (whole
+    # depth chart's production, not just the starter).
+    if pos == "RB":
+        team_ppg = df.loc[usable].groupby("team")["ppg"].mean().rename("team_rb_ppg_hist")
+        df = df.merge(team_ppg, on="team", how="left")
+        if season not in _TEAM_OL_YBC_CACHE:
+            _TEAM_OL_YBC_CACHE[season] = pull_team_ol_rb_ybc(season)
+        df = df.merge(_TEAM_OL_YBC_CACHE[season], on="team", how="left")
+    elif pos == "WR":
+        team_ppg = df.loc[usable].groupby("team")["ppg"].mean().rename("team_wr_ppg_hist")
+        df = df.merge(team_ppg, on="team", how="left")
+    return df
+
+
 def compute_ml_predicted_ppg(df: pd.DataFrame, pos: str) -> pd.Series:
     """Applies the trained per-position model (see "ML value model" in the
     module docstring) to this season's already-computed feature columns
@@ -548,13 +643,26 @@ def compute_ml_predicted_ppg(df: pd.DataFrame, pos: str) -> pd.Series:
 
     Falls back to the player's own raw ppg (a safe, clearly-documented
     degenerate case -- not a crash) if this position has no saved model
-    yet (train_ml_model.py hasn't been run).
+    yet (train_ml_model.py hasn't been run), if a required feature column
+    isn't present on `df` at all, or if the saved model's expected input
+    shape doesn't match load_ml_features(pos) (e.g. a stale/partially
+    written models/{pos}_model.joblib + {pos}_metadata.json pair from a
+    run that didn't finish, or from a different, unrelated script writing
+    to the same models/ directory -- this file's feature set is no longer
+    a single hardcoded constant (see load_ml_features()), so this
+    consistency check matters more than it used to).
     """
     model = load_ml_model(pos)
-    feature_cols = ML_FEATURES_BY_POS[pos]
+    feature_cols = load_ml_features(pos)
     if model is None:
         print(f"WARNING: no saved ML model for {pos} (run train_ml_model.py) "
               f"-- falling back to raw ppg for ml_predicted_ppg.")
+        return df["ppg"].copy()
+
+    missing_cols = [c for c in feature_cols if c not in df.columns]
+    if missing_cols:
+        print(f"WARNING: {pos} model expects feature(s) {missing_cols} not present on "
+              f"this dataframe -- falling back to raw ppg for ml_predicted_ppg.")
         return df["ppg"].copy()
 
     X = df[feature_cols].copy()
@@ -564,7 +672,15 @@ def compute_ml_predicted_ppg(df: pd.DataFrame, pos: str) -> pd.Series:
     # snap_pct) would median-impute to NaN; fall back to 0 in that
     # unlikely edge case so predict() doesn't error.
     X = X.fillna(0)
-    preds = pd.Series(model.predict(X.to_numpy(dtype=float)), index=df.index)
+    try:
+        preds = pd.Series(model.predict(X.to_numpy(dtype=float)), index=df.index)
+    except (ValueError, AttributeError) as e:
+        print(f"WARNING: {pos} model.predict() failed ({e}) -- this usually means "
+              f"models/{pos}_model.joblib doesn't match models/{pos}_metadata.json's "
+              f"feature list (stale/mismatched files from an interrupted or unrelated "
+              f"training run). Falling back to raw ppg for ml_predicted_ppg. Re-run "
+              f"train_ml_model.py to regenerate a consistent pair.")
+        return df["ppg"].copy()
 
     # Low-snap-share shrinkage: a backup with a tiny 2024 snap share (e.g.
     # a QB2 who played a handful of series) produces a noisy, unreliable
@@ -592,12 +708,35 @@ def compute_passing_pts(df: pd.DataFrame) -> pd.Series:
     )
 
 
+ZSCORE_CLIP = 2.0  # was 3.0 -- still let ml_predicted_ppg peg at the ceiling
+# for Taysom Hill (TE) and Anthony Richardson (QB), both unusual rushing-
+# heavy statistical profiles the model has little/no in-distribution
+# training data for, so it extrapolates to an implausible prediction that
+# a 3.0 clip still let dominate. 2.0 is still a genuine outlier bar
+# (only ~2.3% of a normal distribution exceeds it) while meaningfully
+# reducing how much any single maxed-out component can dominate.
+
 def zscore(s: pd.Series) -> pd.Series:
+    """Standard z-score, clipped to +-ZSCORE_CLIP.
+
+    Confirmed bug this fixes: Taysom Hill (TE) has real rushing_ppg (~8
+    pts/game) that's a genuine, massive outlier for the position -- real
+    TEs almost never rush. Because the TE group's rushing_ppg has very
+    low variance (nearly everyone is near 0), his single real data point
+    produced an extreme unclipped z-score that dominated his composite
+    and ranked him TE1, despite an ADP of ~370 showing the market
+    correctly treats him as a low-value gadget player, not a true
+    receiving TE. Clipping every z-score to a fixed range prevents any
+    single stat outlier -- Hill or a future similar case -- from
+    single-handedly overwhelming the weighted composite, without needing
+    a player-specific carve-out.
+    """
     s = s.astype(float)
     std = s.std(ddof=0)
     if std == 0 or np.isnan(std):
         return pd.Series(np.zeros(len(s)), index=s.index)
-    return (s - s.mean()) / std
+    z = (s - s.mean()) / std
+    return z.clip(lower=-ZSCORE_CLIP, upper=ZSCORE_CLIP)
 
 
 # Sample-size guardrail: a player with very few 2024 games can produce a
@@ -623,7 +762,7 @@ def sample_size_shrinkage(games_series: pd.Series) -> pd.Series:
     return factor
 
 
-def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
+def compute_stat_group_scores(df: pd.DataFrame, season: int = LIVE_SEASON) -> pd.DataFrame:
     df = df.copy()
     games = df["games"].replace(0, np.nan)
     pos = df["position"].iloc[0]
@@ -654,7 +793,24 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
 
         components = {
             "ml_predicted_ppg": 0.36 + 0.12 + 0.12 + 0.12 + 0.08,  # = 0.80, sum of old ppg/volume/rushing_ppg/snap_share/efficiency weights
-            "guide_adj_ppg": 0.14,
+            # guide_adj_ppg weight -- EMPIRICALLY FIT (data/fit_blend_weight.py),
+            # not hand-picked. See that script + this file's module docstring
+            # "BLEND WEIGHT FITTING" for the full method: grid-search the
+            # ml_predicted_ppg<->guide_adj_ppg mix that best Spearman-
+            # correlates with REAL known 2025 outcomes (real2025_total_pts,
+            # actual nfl.com season totals) for the n=32 QBs with both
+            # signals. Result: guide_adj_ppg alone (Spearman 0.686) beats
+            # ml_predicted_ppg alone (0.143) by a wide margin on this
+            # validation, and the fitted mix puts ~92% of the two-way weight
+            # on guide_adj_ppg (fitted ratio ml:guide = 0.081, i.e.
+            # guide_weight = ml_weight / 0.081 = 9.877). See the docstring
+            # section for the honest caveat on why this isn't fully
+            # apples-to-apples (guide_adj_ppg is a same-season nowcast with
+            # real depth-chart/injury information; ml_predicted_ppg is a
+            # true year-ahead forecast from 2024 data alone) -- kept anyway,
+            # per this fit, because it's still the best available honest
+            # answer to "how should these two signals actually be weighted."
+            "guide_adj_ppg": 9.877,
             # Real per-player "Luck Metric" (data/guide_luck_metric.csv):
             # pct of season fantasy points lost/gained to variance (OT
             # points, penalty-nullified plays, dropped TDs, tackled-at-1,
@@ -696,6 +852,16 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         df["volume"] = opportunities / games  # combined touches+targets/game
         df["efficiency"] = (rushing_pts + receiving_pts) / opportunities.replace(0, np.nan)
 
+        # Team-context historical-analog features (team_rb_ppg_hist /
+        # team_wr_ppg_hist / team_ol_rb_ybc_att) -- see
+        # add_team_context_features() above and train_ml_model.py's module
+        # docstring "ROUND 2" section. Computed here (RB/WR only) so
+        # they're available to compute_ml_predicted_ppg() below whenever a
+        # position's saved model actually uses them (per its metadata's
+        # feature list) -- harmless no-op columns otherwise.
+        if pos in ("RB", "WR"):
+            df = add_team_context_features(df, pos, season)
+
         # ML value model -- see module docstring "ML value model". Replaces
         # the old individually-weighted ppg/rushing_ppg/receiving_ppg/
         # red_zone_share/snap_share/efficiency cluster with a single
@@ -722,43 +888,62 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
         # weighted RB/WR/TE comparisons; goal_line_share is exposed for
         # detail views/spot-checking instead.
         if pos == "RB":
-            # RB carves out room for two RB-only guide-sourced components
-            # (ol_run_block_rank, proj_volume_rank) on top of guide_adj_ppg
-            # -- see module docstring "RB-only additions" for the full
-            # reasoning and the redistribution math.
+            # RB carves out room for RB-only guide-sourced components on
+            # top of guide_adj_ppg -- see module docstring "RB-only
+            # additions" for the original reasoning/redistribution math.
             #
-            # ol_run_block_rank: REAL 2025 team run-blocking rank (1=best),
-            # from data/guide_ol_stats.csv joined by team in join.py.
-            # Inverted (lower/better rank -> higher value) so it points the
-            # same direction as every other z-scored component.
-            df["ol_run_block_rank"] = -df["guide_ol_run_block_rank_2025"]
-
+            # ml_predicted_ppg NOW ABSORBS TWO OF THESE (2026 retrain --
+            # see train_ml_model.py's module docstring "ROUND 2"): the RB
+            # model's feature-set search found that team_rb_ppg_hist (a
+            # real historical analog of playcaller_rb_ppg_rank -- this same
+            # team's own average fantasy RB PPG, computed identically for
+            # every 2018-2024 season) and team_ol_rb_ybc_att (a real
+            # historical analog of guide_ol_run_block_rank_2025 -- team
+            # rushing yards-before-contact per carry from PFR) genuinely
+            # improved CV R^2 (0.5081 -> 0.5282, clearing
+            # FEATURE_IMPROVEMENT_MARGIN) when added as TRAINED model
+            # features. So ol_run_block_rank and playcaller_rb_ppg_rank_inv
+            # are REMOVED from this hand-picked post-prediction blend --
+            # keeping them here too would double-count the same underlying
+            # signal once as a learned feature and once as a hand weight --
+            # and their old weight (.061 + .038 = .099) is folded into
+            # ml_predicted_ppg's weight instead, below.
+            #
             # proj_volume_rank: the analyst's own forward-looking 2026 RB
             # volume projection (targets + goal-line attempts weighted),
-            # from data/guide_rb_volume.csv joined by name in join.py.
-            # Distinct from red_zone_share (backward-looking, from 2024
-            # play-by-play) -- this is a forward projection, genuinely
-            # additional signal. Inverted like ol_run_block_rank above.
+            # from data/guide_rb_volume.csv joined by name in join.py. This
+            # one has NO honest historical analog (it's a pure forward
+            # projection with nothing to validate against in past seasons),
+            # so it stays a hand-picked post-prediction blend term.
+            # Inverted (lower/better rank -> higher value) so it points the
+            # same direction as every other z-scored component.
             df["proj_volume_rank"] = -df["guide_proj_volume_rank"]
 
-            # playcaller_rb_ppg_rank / pct_rb1_rank: REAL team-level
-            # playcaller/scheme context from data/guide_playcaller_stats.csv
-            # (joined by team in join.py) -- see module docstring "RB-only
-            # playcaller/scheme additions" for the full reasoning and
-            # redistribution math. Both are 1=best ranks, inverted before
-            # z-scoring so a lower/better rank scores higher, matching every
-            # other rank-based component here.
-            df["playcaller_rb_ppg_rank_inv"] = -df["playcaller_rb_ppg_rank"]
+            # pct_rb1_rank: REAL %RB1 bellcow-share rank from
+            # data/guide_playcaller_stats.csv (joined by team in join.py).
+            # No historical analog was built for this one this round (would
+            # need a full backfield-committee-share reconstruction from
+            # play-by-play for every historical season -- out of scope this
+            # pass, an honest limitation, not attempted) -- stays hand-
+            # picked. Inverted before z-scoring like every other rank here.
             df["pct_rb1_rank_inv"] = -df["pct_rb1_rank"]
 
             components = {
                 # sum of old ppg .174 + rushing_ppg .087 + receiving_ppg .113
                 # + red_zone_share .061 + snap_share .087 + efficiency .061
-                "ml_predicted_ppg": 0.174 + 0.087 + 0.113 + 0.061 + 0.087 + 0.061,  # = 0.583
-                "guide_adj_ppg": 0.130,
-                "ol_run_block_rank": 0.061,
+                # + ol_run_block_rank .061 + playcaller_rb_ppg_rank_inv .038
+                # (both now absorbed into the model itself -- see comment
+                # above) = 0.682
+                "ml_predicted_ppg": 0.174 + 0.087 + 0.113 + 0.061 + 0.087 + 0.061 + 0.061 + 0.038,  # = 0.682
+                # guide_adj_ppg weight -- EMPIRICALLY FIT, not hand-picked
+                # (data/fit_blend_weight.py; see QB block above for the full
+                # method). n=45 RBs with both ml_predicted_ppg and
+                # guide_adj_ppg. guide_adj_ppg alone: Spearman 0.644 vs real
+                # 2025 outcomes; ml_predicted_ppg alone: 0.420. Fitted ratio
+                # ml:guide = 0.053 -> guide_weight = ml_weight(.682)/.053 =
+                # 12.958. Same nowcast-vs-forecast caveat as QB applies.
+                "guide_adj_ppg": 12.958,
                 "proj_volume_rank": 0.096,
-                "playcaller_rb_ppg_rank_inv": 0.038,
                 "pct_rb1_rank_inv": 0.038,
                 "pct_pts_lost_to_luck": 0.054,  # see QB block above for reasoning
                 "real2025_total_pts": 0.12,  # see QB block above for reasoning
@@ -769,18 +954,44 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             # join.py) -- see module docstring "WR-only playcaller
             # addition" for the redistribution math. Inverted before
             # z-scoring like the RB version above.
+            #
+            # UNLIKE RB's playcaller_rb_ppg_rank, this one STAYS a
+            # hand-picked blend term: the WR model's feature-set search
+            # (train_ml_model.py "ROUND 2") DID test the honest historical
+            # analog (team_wr_ppg_hist, this team's own historical average
+            # fantasy WR PPG) as a trained feature, but it produced no real
+            # improvement over `age` alone (CV R^2 0.5409 either way,
+            # base+age+team_ctx == base+age to 4 decimals) -- so it was NOT
+            # adopted into the model, and playcaller_wr_ppg_rank_inv is kept
+            # here unchanged. Honestly reported as "tested, not adopted,"
+            # not silently dropped.
             df["playcaller_wr_ppg_rank_inv"] = -df["playcaller_wr_ppg_rank"]
 
             components = {
                 # sum of old ppg .223 + rushing_ppg .107 + receiving_ppg .143
                 # + red_zone_share .071 + snap_share .107 + efficiency .071
                 "ml_predicted_ppg": 0.223 + 0.107 + 0.143 + 0.071 + 0.107 + 0.071,  # = 0.722
-                "guide_adj_ppg": 0.170,
+                # guide_adj_ppg weight -- EMPIRICALLY FIT, not hand-picked
+                # (data/fit_blend_weight.py; see QB block above for the full
+                # method). n=29 WRs with both signals. guide_adj_ppg alone:
+                # Spearman 0.718 vs real 2025 outcomes; ml_predicted_ppg
+                # alone: 0.342. Fitted ratio ml:guide = 0.111 -> guide_weight
+                # = ml_weight(.722)/.111 = 6.498. Same nowcast-vs-forecast
+                # caveat as QB applies.
+                "guide_adj_ppg": 6.498,
                 "playcaller_wr_ppg_rank_inv": 0.047,
                 "pct_pts_lost_to_luck": 0.061,  # see QB block above for reasoning
                 "real2025_total_pts": 0.14,  # see QB block above for reasoning
             }
         else:
+            # TE: guide_adj_ppg weight LEFT HAND-PICKED, deliberately NOT
+            # empirically refit -- data/fit_blend_weight.py found only
+            # n=11 TEs with both ml_predicted_ppg and guide_adj_ppg AND a
+            # real2025_total_pts outcome to validate against (MIN_N_TO_TRUST
+            # = 20 in that script). Fitting a blend weight off 11 rows would
+            # be noise dressed up as precision, not a real answer -- kept at
+            # its original hand-picked value instead. Documented explicitly
+            # rather than silently reusing another position's fitted ratio.
             components = {
                 # sum of old ppg .235 + rushing_ppg .113 + receiving_ppg .150
                 # + red_zone_share .075 + snap_share .113 + efficiency .075
@@ -1146,7 +1357,8 @@ def main():
             # signal. Only players with NEITHER 2024 stats NOR any guide
             # match remain in the pure ADP-only fallback.
             guide_cols_present = [c for c in [
-                "guide_adj_ppg", "guide_ol_run_block_rank_2025", "guide_proj_volume_rank"
+                "guide_adj_ppg", "guide_ol_run_block_rank_2025", "guide_proj_volume_rank",
+                "real2025_total_pts",
             ] if c in group.columns]
             has_guide_signal = pd.Series(False, index=group.index)
             for c in guide_cols_present:

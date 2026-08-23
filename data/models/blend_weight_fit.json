@@ -1,0 +1,706 @@
+{
+  "QB": {
+    "position": "QB",
+    "n": 32,
+    "best_alpha_on_ml": 0.075,
+    "best_spearman": 0.6932,
+    "spearman_pure_ml": 0.1431,
+    "spearman_pure_guide": 0.6859,
+    "ml_to_guide_ratio": 0.081,
+    "trust": "OK",
+    "curve": [
+      {
+        "alpha": 0.0,
+        "spearman": 0.6859
+      },
+      {
+        "alpha": 0.025,
+        "spearman": 0.6778
+      },
+      {
+        "alpha": 0.05,
+        "spearman": 0.6818
+      },
+      {
+        "alpha": 0.075,
+        "spearman": 0.6932
+      },
+      {
+        "alpha": 0.1,
+        "spearman": 0.6906
+      },
+      {
+        "alpha": 0.125,
+        "spearman": 0.68
+      },
+      {
+        "alpha": 0.15,
+        "spearman": 0.6837
+      },
+      {
+        "alpha": 0.175,
+        "spearman": 0.684
+      },
+      {
+        "alpha": 0.2,
+        "spearman": 0.662
+      },
+      {
+        "alpha": 0.225,
+        "spearman": 0.6485
+      },
+      {
+        "alpha": 0.25,
+        "spearman": 0.6356
+      },
+      {
+        "alpha": 0.275,
+        "spearman": 0.6052
+      },
+      {
+        "alpha": 0.3,
+        "spearman": 0.5931
+      },
+      {
+        "alpha": 0.325,
+        "spearman": 0.5704
+      },
+      {
+        "alpha": 0.35,
+        "spearman": 0.5641
+      },
+      {
+        "alpha": 0.375,
+        "spearman": 0.5594
+      },
+      {
+        "alpha": 0.4,
+        "spearman": 0.5462
+      },
+      {
+        "alpha": 0.425,
+        "spearman": 0.5345
+      },
+      {
+        "alpha": 0.45,
+        "spearman": 0.5279
+      },
+      {
+        "alpha": 0.475,
+        "spearman": 0.5257
+      },
+      {
+        "alpha": 0.5,
+        "spearman": 0.5095
+      },
+      {
+        "alpha": 0.525,
+        "spearman": 0.4861
+      },
+      {
+        "alpha": 0.55,
+        "spearman": 0.4703
+      },
+      {
+        "alpha": 0.575,
+        "spearman": 0.4696
+      },
+      {
+        "alpha": 0.6,
+        "spearman": 0.4659
+      },
+      {
+        "alpha": 0.625,
+        "spearman": 0.4428
+      },
+      {
+        "alpha": 0.65,
+        "spearman": 0.4267
+      },
+      {
+        "alpha": 0.675,
+        "spearman": 0.4135
+      },
+      {
+        "alpha": 0.7,
+        "spearman": 0.3999
+      },
+      {
+        "alpha": 0.725,
+        "spearman": 0.3776
+      },
+      {
+        "alpha": 0.75,
+        "spearman": 0.3684
+      },
+      {
+        "alpha": 0.775,
+        "spearman": 0.3647
+      },
+      {
+        "alpha": 0.8,
+        "spearman": 0.3387
+      },
+      {
+        "alpha": 0.825,
+        "spearman": 0.3277
+      },
+      {
+        "alpha": 0.85,
+        "spearman": 0.312
+      },
+      {
+        "alpha": 0.875,
+        "spearman": 0.3072
+      },
+      {
+        "alpha": 0.9,
+        "spearman": 0.2793
+      },
+      {
+        "alpha": 0.925,
+        "spearman": 0.2566
+      },
+      {
+        "alpha": 0.95,
+        "spearman": 0.2317
+      },
+      {
+        "alpha": 0.975,
+        "spearman": 0.1701
+      },
+      {
+        "alpha": 1.0,
+        "spearman": 0.1431
+      }
+    ]
+  },
+  "RB": {
+    "position": "RB",
+    "n": 45,
+    "best_alpha_on_ml": 0.05,
+    "best_spearman": 0.6485,
+    "spearman_pure_ml": 0.4202,
+    "spearman_pure_guide": 0.6442,
+    "ml_to_guide_ratio": 0.053,
+    "trust": "OK",
+    "curve": [
+      {
+        "alpha": 0.0,
+        "spearman": 0.6442
+      },
+      {
+        "alpha": 0.025,
+        "spearman": 0.6453
+      },
+      {
+        "alpha": 0.05,
+        "spearman": 0.6485
+      },
+      {
+        "alpha": 0.075,
+        "spearman": 0.6352
+      },
+      {
+        "alpha": 0.1,
+        "spearman": 0.6259
+      },
+      {
+        "alpha": 0.125,
+        "spearman": 0.6363
+      },
+      {
+        "alpha": 0.15,
+        "spearman": 0.6375
+      },
+      {
+        "alpha": 0.175,
+        "spearman": 0.6178
+      },
+      {
+        "alpha": 0.2,
+        "spearman": 0.6096
+      },
+      {
+        "alpha": 0.225,
+        "spearman": 0.6085
+      },
+      {
+        "alpha": 0.25,
+        "spearman": 0.6028
+      },
+      {
+        "alpha": 0.275,
+        "spearman": 0.5991
+      },
+      {
+        "alpha": 0.3,
+        "spearman": 0.5921
+      },
+      {
+        "alpha": 0.325,
+        "spearman": 0.5869
+      },
+      {
+        "alpha": 0.35,
+        "spearman": 0.5845
+      },
+      {
+        "alpha": 0.375,
+        "spearman": 0.5705
+      },
+      {
+        "alpha": 0.4,
+        "spearman": 0.5499
+      },
+      {
+        "alpha": 0.425,
+        "spearman": 0.5454
+      },
+      {
+        "alpha": 0.45,
+        "spearman": 0.5486
+      },
+      {
+        "alpha": 0.475,
+        "spearman": 0.5368
+      },
+      {
+        "alpha": 0.5,
+        "spearman": 0.5309
+      },
+      {
+        "alpha": 0.525,
+        "spearman": 0.5243
+      },
+      {
+        "alpha": 0.55,
+        "spearman": 0.5224
+      },
+      {
+        "alpha": 0.575,
+        "spearman": 0.5174
+      },
+      {
+        "alpha": 0.6,
+        "spearman": 0.5141
+      },
+      {
+        "alpha": 0.625,
+        "spearman": 0.5098
+      },
+      {
+        "alpha": 0.65,
+        "spearman": 0.5131
+      },
+      {
+        "alpha": 0.675,
+        "spearman": 0.5127
+      },
+      {
+        "alpha": 0.7,
+        "spearman": 0.5143
+      },
+      {
+        "alpha": 0.725,
+        "spearman": 0.4973
+      },
+      {
+        "alpha": 0.75,
+        "spearman": 0.4969
+      },
+      {
+        "alpha": 0.775,
+        "spearman": 0.4779
+      },
+      {
+        "alpha": 0.8,
+        "spearman": 0.4705
+      },
+      {
+        "alpha": 0.825,
+        "spearman": 0.4681
+      },
+      {
+        "alpha": 0.85,
+        "spearman": 0.4687
+      },
+      {
+        "alpha": 0.875,
+        "spearman": 0.4579
+      },
+      {
+        "alpha": 0.9,
+        "spearman": 0.4427
+      },
+      {
+        "alpha": 0.925,
+        "spearman": 0.4376
+      },
+      {
+        "alpha": 0.95,
+        "spearman": 0.4308
+      },
+      {
+        "alpha": 0.975,
+        "spearman": 0.4184
+      },
+      {
+        "alpha": 1.0,
+        "spearman": 0.4202
+      }
+    ]
+  },
+  "WR": {
+    "position": "WR",
+    "n": 29,
+    "best_alpha_on_ml": 0.1,
+    "best_spearman": 0.737,
+    "spearman_pure_ml": 0.3422,
+    "spearman_pure_guide": 0.7183,
+    "ml_to_guide_ratio": 0.111,
+    "trust": "OK",
+    "curve": [
+      {
+        "alpha": 0.0,
+        "spearman": 0.7183
+      },
+      {
+        "alpha": 0.025,
+        "spearman": 0.7247
+      },
+      {
+        "alpha": 0.05,
+        "spearman": 0.7287
+      },
+      {
+        "alpha": 0.075,
+        "spearman": 0.7365
+      },
+      {
+        "alpha": 0.1,
+        "spearman": 0.737
+      },
+      {
+        "alpha": 0.125,
+        "spearman": 0.7274
+      },
+      {
+        "alpha": 0.15,
+        "spearman": 0.72
+      },
+      {
+        "alpha": 0.175,
+        "spearman": 0.7136
+      },
+      {
+        "alpha": 0.2,
+        "spearman": 0.7045
+      },
+      {
+        "alpha": 0.225,
+        "spearman": 0.7122
+      },
+      {
+        "alpha": 0.25,
+        "spearman": 0.7016
+      },
+      {
+        "alpha": 0.275,
+        "spearman": 0.6735
+      },
+      {
+        "alpha": 0.3,
+        "spearman": 0.6646
+      },
+      {
+        "alpha": 0.325,
+        "spearman": 0.6631
+      },
+      {
+        "alpha": 0.35,
+        "spearman": 0.6444
+      },
+      {
+        "alpha": 0.375,
+        "spearman": 0.6479
+      },
+      {
+        "alpha": 0.4,
+        "spearman": 0.6447
+      },
+      {
+        "alpha": 0.425,
+        "spearman": 0.6284
+      },
+      {
+        "alpha": 0.45,
+        "spearman": 0.6136
+      },
+      {
+        "alpha": 0.475,
+        "spearman": 0.6043
+      },
+      {
+        "alpha": 0.5,
+        "spearman": 0.5927
+      },
+      {
+        "alpha": 0.525,
+        "spearman": 0.5809
+      },
+      {
+        "alpha": 0.55,
+        "spearman": 0.5784
+      },
+      {
+        "alpha": 0.575,
+        "spearman": 0.5656
+      },
+      {
+        "alpha": 0.6,
+        "spearman": 0.5547
+      },
+      {
+        "alpha": 0.625,
+        "spearman": 0.5488
+      },
+      {
+        "alpha": 0.65,
+        "spearman": 0.5247
+      },
+      {
+        "alpha": 0.675,
+        "spearman": 0.5104
+      },
+      {
+        "alpha": 0.7,
+        "spearman": 0.484
+      },
+      {
+        "alpha": 0.725,
+        "spearman": 0.4624
+      },
+      {
+        "alpha": 0.75,
+        "spearman": 0.4614
+      },
+      {
+        "alpha": 0.775,
+        "spearman": 0.4419
+      },
+      {
+        "alpha": 0.8,
+        "spearman": 0.4318
+      },
+      {
+        "alpha": 0.825,
+        "spearman": 0.4087
+      },
+      {
+        "alpha": 0.85,
+        "spearman": 0.3858
+      },
+      {
+        "alpha": 0.875,
+        "spearman": 0.3912
+      },
+      {
+        "alpha": 0.9,
+        "spearman": 0.3902
+      },
+      {
+        "alpha": 0.925,
+        "spearman": 0.3872
+      },
+      {
+        "alpha": 0.95,
+        "spearman": 0.3712
+      },
+      {
+        "alpha": 0.975,
+        "spearman": 0.3515
+      },
+      {
+        "alpha": 1.0,
+        "spearman": 0.3422
+      }
+    ]
+  },
+  "TE": {
+    "position": "TE",
+    "n": 11,
+    "best_alpha_on_ml": 0.925,
+    "best_spearman": 0.2909,
+    "spearman_pure_ml": 0.2779,
+    "spearman_pure_guide": 0.0818,
+    "ml_to_guide_ratio": 12.333,
+    "trust": "TOO SMALL (n=11 < 20) -- kept hand-picked, not adopted",
+    "curve": [
+      {
+        "alpha": 0.0,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.025,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.05,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.075,
+        "spearman": 0.1182
+      },
+      {
+        "alpha": 0.1,
+        "spearman": 0.1182
+      },
+      {
+        "alpha": 0.125,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.15,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.175,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.2,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.225,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.25,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.275,
+        "spearman": 0.0727
+      },
+      {
+        "alpha": 0.3,
+        "spearman": 0.0727
+      },
+      {
+        "alpha": 0.325,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.35,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.375,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.4,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.425,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.45,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.475,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.5,
+        "spearman": 0.0818
+      },
+      {
+        "alpha": 0.525,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.55,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.575,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.6,
+        "spearman": 0.0545
+      },
+      {
+        "alpha": 0.625,
+        "spearman": 0.0636
+      },
+      {
+        "alpha": 0.65,
+        "spearman": 0.1182
+      },
+      {
+        "alpha": 0.675,
+        "spearman": 0.1
+      },
+      {
+        "alpha": 0.7,
+        "spearman": 0.0727
+      },
+      {
+        "alpha": 0.725,
+        "spearman": 0.0727
+      },
+      {
+        "alpha": 0.75,
+        "spearman": 0.1091
+      },
+      {
+        "alpha": 0.775,
+        "spearman": 0.1091
+      },
+      {
+        "alpha": 0.8,
+        "spearman": 0.1091
+      },
+      {
+        "alpha": 0.825,
+        "spearman": 0.1364
+      },
+      {
+        "alpha": 0.85,
+        "spearman": 0.2091
+      },
+      {
+        "alpha": 0.875,
+        "spearman": 0.2455
+      },
+      {
+        "alpha": 0.9,
+        "spearman": 0.2455
+      },
+      {
+        "alpha": 0.925,
+        "spearman": 0.2909
+      },
+      {
+        "alpha": 0.95,
+        "spearman": 0.2636
+      },
+      {
+        "alpha": 0.975,
+        "spearman": 0.2818
+      },
+      {
+        "alpha": 1.0,
+        "spearman": 0.2779
+      }
+    ]
+  }
+}

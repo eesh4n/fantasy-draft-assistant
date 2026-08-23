@@ -1114,7 +1114,32 @@ def main():
             # MIN_GAMES_FOR_STATS (not just > 0): a 1-2 game sample is not
             # a real signal -- see MIN_GAMES_FOR_STATS / sample_size_shrinkage
             # docstring above for the confirmed bug this fixes.
-            has_stats = group["fantasy_points_ppr"].notna() & (group["games"] >= MIN_GAMES_FOR_STATS)
+            has_2024_stats = group["fantasy_points_ppr"].notna() & (group["games"] >= MIN_GAMES_FOR_STATS)
+
+            # Confirmed bug: a rookie with real 2025 guide data (e.g. Ashton
+            # Jeanty -- guide big-board rank 16, guide_adj_ppg 14.5,
+            # proj_volume_rank #4, high confidence) was being routed straight
+            # into the pure-ADP fallback below purely because they have no
+            # 2024 stat line, completely IGNORING that real guide signal.
+            # A player with real guide data counts as having "stats" even
+            # with zero 2024 games -- they go through
+            # compute_stat_group_scores() same as everyone else; every
+            # column built from 2024 raw stats will be NaN for them and get
+            # median-imputed to a neutral (average) z-score by the existing
+            # per-component fillna(median) logic below -- same missing-data
+            # handling already used for any player missing any one
+            # component -- while the real guide_adj_ppg/ol_run_block_rank/
+            # proj_volume_rank columns contribute a genuine, non-neutral
+            # signal. Only players with NEITHER 2024 stats NOR any guide
+            # match remain in the pure ADP-only fallback.
+            guide_cols_present = [c for c in [
+                "guide_adj_ppg", "guide_ol_run_block_rank_2025", "guide_proj_volume_rank"
+            ] if c in group.columns]
+            has_guide_signal = pd.Series(False, index=group.index)
+            for c in guide_cols_present:
+                has_guide_signal = has_guide_signal | group[c].notna()
+
+            has_stats = has_2024_stats | has_guide_signal
             with_stats = group[has_stats]
             without_stats = group[~has_stats]
 

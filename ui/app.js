@@ -163,13 +163,18 @@ let searchTerm = "";
 let activePosFilter = "ALL";
 let compareIds = new Set();
 let favoriteIds = new Set();
+let sortColumn = "adp"; // "adp" | "valrank"
+let sortDir = 1; // 1 = ascending (best first for both adp and valrank)
 
 const FAVORITES_KEY = "draftAssistant.favorites.v1";
 // Seeded once on first load only -- the user's own personal late-round
 // sleeper picks (their call, not the model's), per an explicit request to
 // save these as a watchlist. If the user un-favorites one, it stays
 // removed (seeding only fires when no saved favorites exist yet at all).
-const DEFAULT_FAVORITE_NAMES = ["Mike Washington", "De'Zhaun Stribling", "KC Concepcion", "Travis Etienne"];
+const DEFAULT_FAVORITE_NAMES = [
+  "Mike Washington", "De'Zhaun Stribling", "KC Concepcion", "Travis Etienne",
+  "Jonah Coleman", "Keaton Mitchell", "Malik Willis", "Jalen Coker",
+];
 
 function loadFavorites() {
   try {

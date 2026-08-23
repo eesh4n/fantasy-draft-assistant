@@ -361,6 +361,14 @@ body{
   border-collapse:collapse;
 }
 
+.sortable-th{
+  cursor:pointer;
+  user-select:none;
+}
+.sortable-th:hover{
+  color:var(--text);
+}
+
 .player-table thead th{
   position:sticky;
   top:0;

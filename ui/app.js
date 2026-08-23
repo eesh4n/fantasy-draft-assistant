@@ -661,17 +661,28 @@ function renderTable() {
   const emptyState = document.getElementById("emptyState");
   tbody.innerHTML = "";
 
-  // Default (ALL) view sorts by overall ADP, like a normal draft board —
-  // interleaving by position_rank there produced a confusing round-robin
-  // (every position's #1, then every position's #2, ...). Within a single
-  // position filter, position_rank is more useful, so keep that sort there.
+  const arrow = sortDir === 1 ? " ↑" : " ↓";
+  document.getElementById("sortValRank").textContent = "Val Rank" + (sortColumn === "valrank" ? arrow : "");
+  document.getElementById("sortAdp").textContent = "ADP" + (sortColumn === "adp" ? arrow : "");
+
+  // Sortable by clicking the ADP or Val Rank column header (sortColumn/
+  // sortDir). Default: ADP ascending in the ALL view (a normal draft
+  // board -- interleaving by position_rank there produced a confusing
+  // round-robin of every position's #1, then every position's #2, ...);
+  // position_rank ascending within a single position filter. Either can
+  // be overridden by clicking a header, which applies regardless of the
+  // current position filter.
   const visible = allPlayers
     .filter(matchesFilters)
     .sort((a, b) => {
-      if (activePosFilter === "ALL") {
-        return a.adp - b.adp;
+      if (sortColumn === "valrank") {
+        return sortDir * (a.position_rank - b.position_rank || b.value_score - a.value_score);
       }
-      return a.position_rank - b.position_rank || b.value_score - a.value_score;
+      if (sortColumn === "adp") {
+        if (activePosFilter === "ALL") return sortDir * (a.adp - b.adp);
+        return sortDir * (a.position_rank - b.position_rank || b.value_score - a.value_score);
+      }
+      return 0;
     });
 
   if (visible.length === 0) {
@@ -910,6 +921,18 @@ function wireControls() {
       renderStrategyPanel();
     }
   });
+
+  function setSort(col) {
+    if (sortColumn === col) {
+      sortDir = -sortDir;
+    } else {
+      sortColumn = col;
+      sortDir = 1;
+    }
+    renderTable();
+  }
+  document.getElementById("sortValRank").addEventListener("click", () => setSort("valrank"));
+  document.getElementById("sortAdp").addEventListener("click", () => setSort("adp"));
 
   const rulesToggle = document.getElementById("strategyRulesToggle");
   const rulesBody = document.getElementById("strategyRulesBody");

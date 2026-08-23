@@ -1,5 +1,6 @@
 {
   "position": "QB",
+  "feature_set": "base",
   "features": [
     "ppg",
     "volume",
@@ -7,166 +8,15 @@
     "snap_share",
     "efficiency"
   ],
-  "feature_set_variant": "base",
   "model_type": "ridge",
   "hyperparams": {
-    "alpha": 3.0
+    "alpha": 0.03
   },
-  "n_train_rows": 173,
-  "season_pairs": [
-    "2018->2019",
-    "2019->2020",
-    "2020->2021",
-    "2021->2022",
-    "2022->2023",
-    "2023->2024"
-  ],
-  "min_games_year1": 4,
-  "min_games_year2": 8,
-  "cv_n_splits": 5,
-  "candidates": {
-    "ridge": {
-      "alpha": 3.0,
-      "cv_r2_mean": 0.311603093803466,
-      "cv_mae_mean": 2.7844895258363445
-    },
-    "lasso": {
-      "alpha": 0.01,
-      "cv_r2_mean": 0.3093257483276194,
-      "cv_mae_mean": 2.79636302122488
-    },
-    "elasticnet": {
-      "alpha": 0.01,
-      "l1_ratio": 0.1,
-      "cv_r2_mean": 0.3110361853318271,
-      "cv_mae_mean": 2.791390397600023
-    },
-    "gbm": {
-      "cv_r2_mean": 0.20341829203109874,
-      "cv_mae_mean": 3.089086752119504
-    },
-    "random_forest": {
-      "max_depth": 3,
-      "min_samples_leaf": 10,
-      "cv_r2_mean": 0.2884092058264726,
-      "cv_mae_mean": 2.854440957469234
-    },
-    "ensemble": {
-      "cv_r2_mean": 0.3155812741382279,
-      "cv_mae_mean": 2.7525819762973533,
-      "components": [
-        "ridge",
-        "random_forest"
-      ]
-    },
-    "naive_baseline": {
-      "cv_r2_mean": -0.11490373058110726,
-      "cv_mae_mean": 3.4747062574208343
-    }
-  },
-  "chosen_cv_r2_mean": 0.311603093803466,
-  "chosen_cv_mae_mean": 2.7844895258363445,
-  "naive_baseline_cv_r2_mean": -0.11490373058110726,
-  "naive_baseline_cv_mae_mean": 3.4747062574208343,
-  "feature_set_variants_tried": {
-    "base": {
-      "feature_cols": [
-        "ppg",
-        "volume",
-        "rushing_ppg",
-        "snap_share",
-        "efficiency"
-      ],
-      "n_rows": 173,
-      "best_linear_cv_r2": 0.311603093803466,
-      "candidates": {
-        "ridge": {
-          "alpha": 3.0,
-          "cv_r2_mean": 0.311603093803466,
-          "cv_mae_mean": 2.7844895258363445
-        },
-        "lasso": {
-          "alpha": 0.01,
-          "cv_r2_mean": 0.3093257483276194,
-          "cv_mae_mean": 2.79636302122488
-        },
-        "elasticnet": {
-          "alpha": 0.01,
-          "l1_ratio": 0.1,
-          "cv_r2_mean": 0.3110361853318271,
-          "cv_mae_mean": 2.791390397600023
-        },
-        "gbm": {
-          "cv_r2_mean": 0.20341829203109874,
-          "cv_mae_mean": 3.089086752119504
-        },
-        "random_forest": {
-          "max_depth": 3,
-          "min_samples_leaf": 10,
-          "cv_r2_mean": 0.2884092058264726,
-          "cv_mae_mean": 2.854440957469234
-        },
-        "ensemble": {
-          "cv_r2_mean": 0.3155812741382279,
-          "cv_mae_mean": 2.7525819762973533,
-          "components": [
-            "ridge",
-            "random_forest"
-          ]
-        },
-        "naive_baseline": {
-          "cv_r2_mean": -0.11490373058110726,
-          "cv_mae_mean": 3.4747062574208343
-        }
-      }
-    },
-    "base+age": {
-      "feature_cols": [
-        "ppg",
-        "volume",
-        "rushing_ppg",
-        "snap_share",
-        "efficiency",
-        "age"
-      ],
-      "n_rows": 173,
-      "best_linear_cv_r2": 0.3056469450664229,
-      "candidates": {
-        "ridge": {
-          "alpha": 3.0,
-          "cv_r2_mean": 0.3056469450664229,
-          "cv_mae_mean": 2.7981888495697036
-        },
-        "lasso": {
-          "alpha": 0.01,
-          "cv_r2_mean": 0.3032242529248311,
-          "cv_mae_mean": 2.8118516444958117
-        },
-        "elasticnet": {
-          "alpha": 0.03,
-          "l1_ratio": 0.3,
-          "cv_r2_mean": 0.30534007809234326,
-          "cv_mae_mean": 2.796596228990155
-        },
-        "gbm": {
-          "cv_r2_mean": 0.2300284611123969,
-          "cv_mae_mean": 3.076901215931437
-        },
-        "random_forest": {
-          "max_depth": 3,
-          "min_samples_leaf": 5,
-          "cv_r2_mean": 0.3001184879224951,
-          "cv_mae_mean": 2.8209601695621584
-        },
-        "ensemble": {
-          "cv_r2_mean": 0.31678006101494677,
-          "cv_mae_mean": 2.760133504370702,
-          "components": [
-            "ridge",
-            "random_forest"
-          ]
-        }
-      }
-    }
-  }
+  "cv_r2_mean": 0.19486575742428286,
+  "cv_mae_mean": 3.257208413969029,
+  "naive_baseline_r2": -0.119501303292469,
+  "naive_baseline_mae": 3.821590487116256,
+  "n_rows": 206,
+  "n_real_2025_rows": 33,
+  "retrained_with_real_2025": true
 }

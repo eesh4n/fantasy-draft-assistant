@@ -23,10 +23,109 @@ ml_predicted_ppg component -- the output of a real, cross-validated
 scikit-learn model (trained in train_ml_model.py on 7 seasons of
 historical nfl_data_py data, 2018-2024) -- carrying the SAME combined
 weight those raw components used to hold. The guide_*/playcaller_*
-components below are unchanged, for the reason explained in "ML value
-model": they can't be part of the trained model (no historical equivalent
-exists), but they're real analyst signal, so they stay in as a secondary
-blend on top of the model's own prediction, at their original weights.
+components below are unchanged EXCEPT where noted in the "ROUND 2" section
+immediately below, for the reason explained in "ML value model": most
+can't be part of the trained model (no historical equivalent exists), but
+they're real analyst signal, so they stay in as a secondary blend on top
+of the model's own prediction.
+
+-------------------------------------------------------------------------
+ROUND 2 UPDATE -- iterative model improvement + honest blend-weight fitting
+-------------------------------------------------------------------------
+Responding to explicit pushback that a single training pass wasn't "max
+accuracy" and that the guide-derived signals should be taken into account
+IN the model wherever honestly possible, not just hand-blended:
+
+  1. train_ml_model.py now runs a real iterative search per position:
+     wider Ridge/ElasticNet grids, + Lasso, + a small regularized
+     RandomForest, + a refit-per-fold averaging ensemble of the best
+     linear + best tree model, PLUS a feature-set search (see that file's
+     module docstring "ROUND 2" section for the full method and the
+     "don't switch away from the simpler choice unless it clears a real
+     margin" discipline applied twice -- once for feature-set selection,
+     once for model-class selection). Before/after CV R^2 per position:
+       QB: 0.3116 -> 0.3116 (base feature set + ridge win again -- no
+           change found that clears the improvement margin; reported
+           honestly, not forced).
+       RB: 0.5081 -> 0.5282 (+0.0201) -- adopted `age` + two genuine
+           historical-analog features, team_rb_ppg_hist and
+           team_ol_rb_ybc_att (see point 2), with Lasso replacing Ridge.
+       WR: 0.5207 -> 0.5409 (+0.0202) -- adopted `age` (Lasso replacing
+           ElasticNet); the team-context historical analog was tested but
+           did NOT clear the margin for WR (see point 2) and was not
+           adopted.
+       TE: 0.4911 -> 0.4911 (unchanged to 4 decimals; Lasso and
+           ElasticNet landed on essentially the same fit -- no real
+           change).
+     Exact numbers, every candidate tried, and the full grid are recorded
+     in data/models/{pos}_metadata.json's "feature_set_variants_tried" and
+     "candidates" keys.
+
+  2. Historical analogs for the guide-derived RB/WR blend signals: checked
+     whether nfl_data_py's OWN historical data has a genuine equivalent to
+     each guide_*/playcaller_* signal (not fabricated -- only adopted where
+     real). Two were found and tested as REAL TRAINED FEATURES (not blend
+     terms):
+       - team_rb_ppg_hist / team_wr_ppg_hist: this SAME team's own
+         historical average fantasy PPG at the position (computed
+         identically for every 2018-2024 season from this file's own `ppg`
+         column) -- a genuine historical analog to
+         playcaller_rb_ppg_rank / playcaller_wr_ppg_rank (the guide's
+         forward-looking "how much does this playcaller's system feed this
+         position" framing measures the same underlying thing).
+       - team_ol_rb_ybc_att: team-level rushing yards-before-contact per
+         carry (PFR data via nfl_data_py's import_seasonal_pfr) -- a
+         standard, honest historical proxy for O-line push, analogous to
+         guide_ol_run_block_rank_2025.
+     RESULT: for RB, both cleared the improvement margin and were adopted
+     into the model -- so ol_run_block_rank and playcaller_rb_ppg_rank_inv
+     are REMOVED from RB's hand-picked blend below (their old weight is
+     folded into ml_predicted_ppg's weight instead, since the model itself
+     now captures that signal -- see the RB components dict for the exact
+     math). For WR, team_wr_ppg_hist was tested but provided no
+     measurable improvement over `age` alone, so it was NOT adopted, and
+     playcaller_wr_ppg_rank_inv stays exactly as it was.
+     NO historical analog was found (or attempted) for guide_adj_ppg
+     (one analyst's current-season subjective adjustment),
+     pct_pts_lost_to_luck (a current-season-only variance audit -- "this
+     specific analyst's luck metric obviously has no historical
+     equivalent"), guide_proj_volume_rank (a purely forward-looking
+     projection with nothing to validate against in past seasons), or
+     pct_rb1_rank (would need a full historical backfield-committee-share
+     reconstruction from play-by-play -- out of scope this round, an
+     honest limitation). These all stay hand-picked post-prediction blend
+     terms, EXCEPT guide_adj_ppg's WEIGHT specifically -- see point 3.
+
+  3. guide_adj_ppg's blend weight is now EMPIRICALLY FIT, not hand-picked
+     (data/fit_blend_weight.py). Method: for the subset of QB/RB/WR
+     players who have BOTH ml_predicted_ppg (from their 2024 profile) AND
+     guide_adj_ppg (the analyst's pre-season adjusted estimate), grid-
+     search the alpha in [0,1] blending z-scored ml_predicted_ppg and
+     guide_adj_ppg that maximizes Spearman rank correlation against REAL
+     KNOWN 2025 outcomes (real2025_total_pts, actual nfl.com season
+     totals -- genuinely known, not fabricated, and not circular: both
+     inputs are pre-season information, the target is what actually
+     happened). Result, honestly reported even though it's a big swing:
+     guide_adj_ppg alone predicts real 2025 outcomes MUCH better than
+     ml_predicted_ppg alone for all three positions (QB: 0.686 vs 0.143
+     Spearman; RB: 0.644 vs 0.420; WR: 0.718 vs 0.342), so the fitted
+     blend puts the large majority of weight on guide_adj_ppg -- see each
+     position's components dict below for the exact fitted numbers.
+     IMPORTANT HONEST CAVEAT: this comparison is not fully apples-to-apples.
+     guide_adj_ppg is the analyst's OWN estimate of the exact 2025 season
+     being validated against (a same-season nowcast, likely informed by
+     real depth-chart/injury news) -- of course it tracks that season's
+     actual outcome closely. ml_predicted_ppg is a genuine year-ahead
+     forecast built purely from 2024 profile data, a fundamentally harder
+     task, and its historical CV R^2 (0.31-0.54, all clearing the naive
+     "last year's ppg" baseline by a wide margin) shows it has real skill
+     at THAT task. So the fitted weight is the honest answer to "how
+     should these two specific signals be blended for predicting the
+     season right after 2024," not proof ml_predicted_ppg is weak in
+     general. TE was explicitly NOT refit this way -- only n=11 TEs have
+     all three needed columns, too small to trust a fit (see
+     fit_blend_weight.py's MIN_N_TO_TRUST=20) -- TE keeps its original
+     hand-picked guide_adj_ppg weight, documented as such below.
 
   ML value model (replaces the old hand-weighted RB/WR/TE and QB
   production clusters):

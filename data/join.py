@@ -581,6 +581,25 @@ def main():
         for col in guide_luck_cols:
             final[col] = pd.NA
 
+    # Bring in REAL 2025 season-total fantasy points, pulled directly from
+    # nfl.com's live 2025 stats pages (data/real2025_stats.csv, built by
+    # real2025_score.py) since nflverse/nfl_data_py still has no 2025 data
+    # published. Covers 155 players across passing/rushing/receiving --
+    # every real starter and most every fantasy-relevant backup, though not
+    # exhaustive bench depth. Joined by normalized name across QB/RB/WR/TE.
+    real2025_path = DATA_DIR / "real2025_stats.csv"
+    if real2025_path.exists():
+        real2025 = pd.read_csv(real2025_path)
+        final["norm_name"] = final["player_name"].apply(normalize_name)
+        final = final.merge(real2025, on="norm_name", how="left")
+        final = final.drop(columns=["norm_name"])
+        real2025_matched_count = final["real2025_total_pts"].notna().sum()
+        print(f"Real 2025 season stats (nfl.com) matched: {real2025_matched_count} rows")
+    else:
+        print(f"WARNING: {real2025_path} not found -- continuing without "
+              f"real2025_total_pts column (will be all-null).")
+        final["real2025_total_pts"] = pd.NA
+
     # Bring in REAL offensive-line context hand-transcribed from Joel
     # Smyth's Draft Guide 2026 (data/guide_ol_stats.csv) -- 2025 run-block
     # rank, trend, OL continuity/cohesion, and the analyst's 2026

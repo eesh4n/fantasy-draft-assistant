@@ -667,6 +667,16 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
             # sparse to trust, same protection as every other optional
             # component in this file.
             "pct_pts_lost_to_luck": 0.06,
+            # REAL 2025 season-total fantasy points, pulled directly from
+            # nfl.com's live 2025 stats pages (data/real2025_stats.csv --
+            # see real2025_score.py). This is ACTUAL 2025 production, not
+            # a projection or last year's stats -- the single most direct
+            # real-2025 signal in this whole model. Weighted comparably to
+            # guide_adj_ppg since both are real current-season data; covers
+            # 155 players (every real starter + most fantasy-relevant
+            # backups) so the existing >=30%-non-null threshold will keep
+            # it active for QB/RB/WR/TE.
+            "real2025_total_pts": 0.16,
         }
     else:
         # Receiving-only fantasy production, per game -- kept separate from
@@ -751,6 +761,7 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
                 "playcaller_rb_ppg_rank_inv": 0.038,
                 "pct_rb1_rank_inv": 0.038,
                 "pct_pts_lost_to_luck": 0.054,  # see QB block above for reasoning
+                "real2025_total_pts": 0.12,  # see QB block above for reasoning
             }
         elif pos == "WR":
             # playcaller_wr_ppg_rank: REAL team-level playcaller context
@@ -767,6 +778,7 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
                 "guide_adj_ppg": 0.170,
                 "playcaller_wr_ppg_rank_inv": 0.047,
                 "pct_pts_lost_to_luck": 0.061,  # see QB block above for reasoning
+                "real2025_total_pts": 0.14,  # see QB block above for reasoning
             }
         else:
             components = {
@@ -775,6 +787,7 @@ def compute_stat_group_scores(df: pd.DataFrame) -> pd.DataFrame:
                 "ml_predicted_ppg": 0.235 + 0.113 + 0.150 + 0.075 + 0.113 + 0.075,  # = 0.761
                 "guide_adj_ppg": 0.179,
                 "pct_pts_lost_to_luck": 0.06,  # see QB block above for reasoning
+                "real2025_total_pts": 0.14,  # see QB block above for reasoning
             }
 
     available = {}

@@ -406,6 +406,7 @@ def main():
                         else None
                     ),
                     "guide_adj_ppg": clean_num(row.get("guide_adj_ppg")),
+                    "real2025_total_pts": clean_num(row.get("real2025_total_pts")),
                     "guide_adj_ppg_reason": (
                         str(row.get("guide_reason"))
                         if pd.notna(row.get("guide_reason"))

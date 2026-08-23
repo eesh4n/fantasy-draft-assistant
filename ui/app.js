@@ -163,8 +163,14 @@ let searchTerm = "";
 let activePosFilter = "ALL";
 let compareIds = new Set();
 let favoriteIds = new Set();
-let sortColumn = "adp"; // "adp" | "valrank"
+let sortColumn = "adp"; // "adp" | "valrank" | "pos" | "team" | "gap" | "ppg"
 let sortDir = 1; // 1 = ascending (best first for both adp and valrank)
+// True once the user has actually clicked a sort header. Before that, the
+// table uses an implicit default (ADP asc in the ALL view, position_rank
+// asc within a position filter) rather than whatever sortColumn happens to
+// be initialized to -- keeps the header arrow from pointing at a column
+// that isn't actually driving the current sort.
+let userSorted = false;
 
 const FAVORITES_KEY = "draftAssistant.favorites.v1";
 // Seeded once on first load only -- the user's own personal late-round
@@ -323,6 +329,18 @@ function markMine(playerId) {
   renderAll();
 }
 
+// Undo a mistaken Mine/Drafted click. Before this existed, the ONLY way to
+// walk back a wrong click was the nuclear "Reset Draft" (wipes everything).
+// removePlayerFromRoster() already correctly frees the roster slot -- it
+// was just never wired to a button for this direction.
+function unmarkPlayer(playerId) {
+  draftedIds.delete(playerId);
+  mineIds.delete(playerId);
+  removePlayerFromRoster(playerId);
+  saveState();
+  renderAll();
+}
+
 // Two modals (reset-confirm, player-detail) share the same full-screen
 // overlay pattern. If both are ever open at once — e.g. Tab-key focus
 // reaching an element behind an open modal and Enter/Space activating it,
@@ -353,7 +371,14 @@ const COMPARE_ROWS = [
   { label: "Team", get: p => p.team, higherBetter: null },
   { label: "Value rank (pos)", get: p => p.position_rank, higherBetter: false },
   { label: "ADP", get: p => p.adp, higherBetter: false },
-  { label: "Value gap", get: p => p.value_gap, higherBetter: true },
+  // Players with NEITHER a 2024 stat line NOR any real guide/real-2025
+  // signal get an artificial (often deeply negative) value_gap purely as an
+  // ADP-fallback ranking mechanism (see score.py / the "hasNoStats"
+  // handling in renderTable) -- it's a data limitation, not a real
+  // "overpriced" signal. Mirror renderTable's hasNoStats check (ppg OR
+  // guide_adj_ppg OR real2025_total_pts) instead of ppg alone, so a rookie
+  // with real guide/2025 signal (e.g. Ashton Jeanty) shows their real gap.
+  { label: "Value gap", get: p => (p.stats && (p.stats.ppg != null || p.stats.guide_adj_ppg != null || p.stats.real2025_total_pts != null) ? p.value_gap : null), higherBetter: true },
   { label: "Model value score", get: p => p.value_score, higherBetter: true },
   { label: "ML predicted PPG", get: p => (p.stats && p.stats.ml_predicted_ppg != null ? p.stats.ml_predicted_ppg : null), higherBetter: true },
   { label: "'25 adj PPG (guide)", get: p => (p.stats && p.stats.guide_adj_ppg != null ? p.stats.guide_adj_ppg : null), higherBetter: true },
@@ -670,7 +695,11 @@ function renderTable() {
   const SORT_LABELS = { valrank: "Val Rank", adp: "ADP", pos: "Pos", team: "Team", gap: "Gap", ppg: "'25 PPG" };
   Object.entries({ sortValRank: "valrank", sortAdp: "adp", sortPos: "pos", sortTeam: "team", sortGap: "gap", sortPpg: "ppg" })
     .forEach(([elId, col]) => {
-      document.getElementById(elId).textContent = SORT_LABELS[col] + (sortColumn === col ? arrow : "");
+      // Only show an arrow once the user actually picked a column -- before
+      // that, sortColumn still holds its init value ("adp") even though
+      // the applied default sort may really be position_rank (filtered
+      // view), so showing the arrow there would point at the wrong header.
+      document.getElementById(elId).textContent = SORT_LABELS[col] + (userSorted && sortColumn === col ? arrow : "");
     });
 
   // Sortable by clicking the ADP or Val Rank column header (sortColumn/
@@ -694,10 +723,15 @@ function renderTable() {
   const visible = allPlayers
     .filter(matchesFilters)
     .sort((a, b) => {
-      if (sortColumn === "adp" && activePosFilter === "ALL") {
-        return sortDir * (a.adp - b.adp);
+      // Before the user clicks any header, use the implicit default
+      // (see comment above): ADP asc in ALL, position_rank asc filtered.
+      // sortColumn/sortDir are ignored here -- they still hold whatever
+      // they were initialized/left at, not a real user choice.
+      if (!userSorted) {
+        if (activePosFilter === "ALL") return a.adp - b.adp;
+        return a.position_rank - b.position_rank || b.value_score - a.value_score;
       }
-      if (sortColumn === "default" || !SORT_GETTERS[sortColumn]) {
+      if (!SORT_GETTERS[sortColumn]) {
         return a.position_rank - b.position_rank || b.value_score - a.value_score;
       }
       const get = SORT_GETTERS[sortColumn];
@@ -724,13 +758,22 @@ function renderTable() {
     if (isDrafted) tr.classList.add("drafted-row");
     if (isMine) tr.classList.add("mine-row");
 
-    // A player with no real 2024 stats (rookies, mainly) is ranked purely
-    // by ADP in a fallback tier BELOW every stat-based player at that
-    // position -- by design (see score.py), so their raw value_gap number
-    // (e.g. Jeanty at -75) looks like a real "way overpriced" red flag when
+    // A player with NEITHER 2024 stats NOR any real guide/real-2025 signal
+    // (see score.py's has_stats gate) is ranked purely by ADP in a fallback
+    // tier BELOW every stat-based player at that position, so their raw
+    // value_gap number looks like a real "way overpriced" red flag when
     // it's actually just "no production data exists yet to rank against."
-    // Show that plainly instead of a misleading number.
-    const hasNoStats = !player.stats || player.stats.ppg === null || player.stats.ppg === undefined;
+    // This used to key off stats.ppg alone, which was accurate back when
+    // no-2024-stats players were ALWAYS in the ADP-only fallback -- but
+    // score.py now scores a rookie with real guide_adj_ppg/real2025_total_pts
+    // (e.g. Ashton Jeanty) through the full composite despite having no
+    // 2024 ppg, so their value_gap IS real signal now. Check for any of the
+    // three signals score.py's gate actually uses, not just ppg.
+    const hasNoStats = !player.stats || (
+      player.stats.ppg == null &&
+      player.stats.guide_adj_ppg == null &&
+      player.stats.real2025_total_pts == null
+    );
     const gapClass = player.value_gap > 0 ? "gap-positive" : (player.value_gap < 0 ? "gap-neg" : "");
     const gapText = hasNoStats
       ? "no data"
@@ -772,6 +815,12 @@ function renderTable() {
       span.style.color = "var(--text-dim)";
       span.style.fontSize = "12px";
       actionsCell.appendChild(span);
+
+      const undoBtn = document.createElement("button");
+      undoBtn.className = "action-btn undo-btn";
+      undoBtn.textContent = "Undo";
+      undoBtn.addEventListener("click", () => unmarkPlayer(player.id));
+      actionsCell.appendChild(undoBtn);
     } else if (isMine) {
       const span = document.createElement("span");
       span.textContent = "✓ Mine";
@@ -779,6 +828,12 @@ function renderTable() {
       span.style.fontWeight = "700";
       span.style.fontSize = "12px";
       actionsCell.appendChild(span);
+
+      const undoBtn = document.createElement("button");
+      undoBtn.className = "action-btn undo-btn";
+      undoBtn.textContent = "Undo";
+      undoBtn.addEventListener("click", () => unmarkPlayer(player.id));
+      actionsCell.appendChild(undoBtn);
     } else {
       const mineBtn = document.createElement("button");
       mineBtn.className = "action-btn mine-btn";
@@ -946,12 +1001,17 @@ function wireControls() {
   });
 
   function setSort(col) {
-    if (sortColumn === col) {
+    // userSorted-guard: sortColumn defaults to "adp" before any click, so
+    // without checking userSorted here, the FIRST click on the ADP header
+    // would read as "already sorted by adp" and flip straight to
+    // descending instead of starting fresh at ascending.
+    if (userSorted && sortColumn === col) {
       sortDir = -sortDir;
     } else {
       sortColumn = col;
       sortDir = 1;
     }
+    userSorted = true;
     renderTable();
   }
   document.getElementById("sortValRank").addEventListener("click", () => setSort("valrank"));

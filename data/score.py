@@ -857,8 +857,24 @@ FULL_CONFIDENCE_GAMES = 10
 
 
 def sample_size_shrinkage(games_series: pd.Series) -> pd.Series:
-    factor = (games_series.fillna(0) / FULL_CONFIDENCE_GAMES).clip(upper=1.0)
-    return factor
+    # Confirmed bug: this only ever runs inside compute_stat_group_scores()
+    # on rows that already passed the has_stats gate (has_2024_stats |
+    # has_guide_signal), so a NaN games value here can ONLY mean "no 2024
+    # stat line, real guide/real2025 signal instead" (has_2024_stats
+    # requires games >= MIN_GAMES_FOR_STATS, which NaN never satisfies) --
+    # e.g. Ashton Jeanty, guide_adj_ppg 14.5 + real2025_total_pts 127.5 +
+    # proj_volume_rank #4. Shrinking toward 0 by games/FULL_CONFIDENCE_GAMES
+    # with fillna(0) multiplied their ENTIRE composite (including the real
+    # guide/real2025 signal that got them into this function at all) by
+    # exactly 0, silently wiping every rookie with real signal down to a
+    # tie with players who have NOTHING -- the has_stats gate fix let them
+    # in the door, then this zeroed them right back out. games-based
+    # shrinkage only makes sense as a penalty for a THIN 2024 sample; a
+    # player with no 2024 sample at all isn't thin, they're relying on a
+    # different (non-games-based) signal entirely, so they get full
+    # confidence (factor=1) instead of the old effective disqualification.
+    factor = (games_series / FULL_CONFIDENCE_GAMES).clip(upper=1.0)
+    return factor.fillna(1.0)
 
 
 def compute_stat_group_scores(df: pd.DataFrame, season: int = LIVE_SEASON) -> pd.DataFrame:
@@ -1455,9 +1471,24 @@ def main():
             # proj_volume_rank columns contribute a genuine, non-neutral
             # signal. Only players with NEITHER 2024 stats NOR any guide
             # match remain in the pure ADP-only fallback.
+            # Every real signal that feeds `components` in
+            # compute_stat_group_scores() below MUST also be listed here --
+            # a signal used in the composite but missing from this gate is
+            # exactly the bug class that let Jaxson Dart (real 2025 data,
+            # no 2024 stats) fall through to the ADP-only path despite
+            # having real signal. This list includes every guide-derived
+            # column that appears in ANY position's `components` dict:
+            # guide_adj_ppg/real2025_total_pts/pct_pts_lost_to_luck (all
+            # positions), guide_proj_volume_rank/pct_rb1_rank (RB),
+            # playcaller_wr_ppg_rank (WR). guide_ol_run_block_rank_2025 is
+            # no longer a components entry (absorbed into the RB ML model's
+            # trained features -- see "ROUND 2" in the module docstring)
+            # but is kept here too since it's still real signal a player
+            # could have with nothing else.
             guide_cols_present = [c for c in [
                 "guide_adj_ppg", "guide_ol_run_block_rank_2025", "guide_proj_volume_rank",
-                "real2025_total_pts",
+                "real2025_total_pts", "pct_pts_lost_to_luck", "pct_rb1_rank",
+                "playcaller_wr_ppg_rank",
             ] if c in group.columns]
             has_guide_signal = pd.Series(False, index=group.index)
             for c in guide_cols_present:

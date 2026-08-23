@@ -493,6 +493,16 @@ body{
   color:var(--text);
 }
 
+.undo-btn{
+  background:var(--bg-panel-2);
+  color:var(--text-dim);
+  border:1px solid var(--border);
+}
+.undo-btn:hover{
+  background:var(--gray-out);
+  color:var(--text);
+}
+
 /* ---------- side panel ---------- */
 .side-panel{
   display:flex;

@@ -592,6 +592,12 @@ def main():
     real2025_path = DATA_DIR / "real2025_stats.csv"
     if real2025_path.exists():
         real2025 = pd.read_csv(real2025_path)
+        # Guard against row-duplication if two different players ever
+        # normalize to the same name (a merge with a duplicated join key
+        # fans out into multiple output rows, not just a wrong value) --
+        # same defensive dedup already applied to every other name-keyed
+        # guide merge in this file (guide_luck, guide_vol, etc.).
+        real2025 = real2025.drop_duplicates("norm_name", keep="first")
         final["norm_name"] = final["player_name"].apply(normalize_name)
         final = final.merge(real2025, on="norm_name", how="left")
         final = final.drop(columns=["norm_name"])

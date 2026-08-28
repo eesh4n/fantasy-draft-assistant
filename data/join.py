@@ -366,6 +366,25 @@ def main():
         for col in def_prefixed_cols:
             final[col] = pd.NA
 
+    # Bring in real strength-of-schedule per team (data/schedule_strength.csv,
+    # built by build_schedule_strength.py from the real 2026 schedule crossed
+    # with each opponent's real points_allowed_per_game from defense_stats.csv
+    # above). Applies to EVERY position, not just DEF -- an offense's own
+    # schedule difficulty is context for QB/RB/WR/TE too. Team-level signal
+    # only (no weekly player projections in this pipeline), surfaced in the
+    # UI's trade calculator as supplementary context, not blended into
+    # value_score.
+    sos_path = DATA_DIR / "schedule_strength.csv"
+    sos_cols = ["sos_ros_rank", "sos_playoff_rank"]
+    if sos_path.exists():
+        sos = pd.read_csv(sos_path)
+        final = final.merge(sos[["team"] + sos_cols], on="team", how="left")
+    else:
+        print(f"WARNING: {sos_path} not found -- run build_schedule_strength.py "
+              f"first. Continuing without schedule-strength columns (will be all-null).")
+        for col in sos_cols:
+            final[col] = pd.NA
+
     # Bring in REAL analyst DEF data hand-transcribed from Joel Smyth's
     # Draft Guide 2026 (data/guide_def_stats.csv) -- pressure-rate rank and
     # adjusted-PPG rank from an actual analyst's own numbers, not the

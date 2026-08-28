@@ -352,6 +352,7 @@ function closeAllOverlays() {
   document.getElementById("resetConfirmOverlay").hidden = true;
   document.getElementById("playerDetailOverlay").hidden = true;
   document.getElementById("compareOverlay").hidden = true;
+  document.getElementById("tradeOverlay").hidden = true;
 }
 
 // ---------- Compare players ----------
@@ -449,6 +450,238 @@ function clearCompare() {
   compareIds.clear();
   renderCompareBar();
   renderTable();
+}
+
+// ---------- Trade Calculator ----------
+// Free, built-in alternative to paid tools (WalterFootball/RotoBot-style
+// trade graders) using data this app already has -- no external API/auth.
+//
+// The core problem with a naive "sum value_score on each side" trade
+// grader: value_score is z-scored WITHIN each position (see COMPARE_ROWS
+// comment above), so a top TE and a top QB aren't on a truly comparable
+// scale -- QB is deep (many playable options), TE craters fast after the
+// first few names. Summing raw value_score would treat a TE-for-QB swap
+// as if both positions were equally scarce, which they're not.
+//
+// Fix: convert every player's value_score into VALUE OVER REPLACEMENT
+// (VOR) before comparing anything -- the standard fantasy-analytics way
+// to make cross-position value comparable. Replacement level = the
+// value_score of the last realistic starter at that position, derived
+// from this league's actual roster requirements (CONFIG) and league
+// size, not a hardcoded assumption. A position that craters hard after
+// its starters (e.g. TE) will show a low replacement level relative to a
+// deep position (e.g. WR), so a mid-tier TE naturally scores a bigger
+// VOR than an equivalently-ranked WR -- scarcity falls out of the real
+// data instead of being hand-tuned.
+let tradeGiveIds = new Set();
+let tradeReceiveIds = new Set();
+
+// How the league's 2 FLEX (RB/WR/TE-eligible) slots get split when
+// computing each position's effective starter count -- a simplifying
+// heuristic (real flex usage skews RB > WR > TE), not derived from data,
+// since this app doesn't track league-wide flex-usage stats. Documented
+// here as an assumption, same as other estimated constants in this file.
+const FLEX_SHARE = { RB: 0.5, WR: 0.35, TE: 0.15 };
+
+function effectiveStarterCount(position, leagueSize) {
+  const base = CONFIG.roster[position] || 0;
+  const flexCut = FLEX_SHARE[position] || 0;
+  const starters = base + CONFIG.roster.FLEX * flexCut;
+  return Math.max(1, Math.round(starters * leagueSize));
+}
+
+// Replacement value per position, memoized per call (allPlayers/leagueSize
+// don't change mid-render). Falls back to the worst available value_score
+// at that position if the league is small enough that the replacement
+// rank exceeds the real player pool.
+function computeReplacementLevels() {
+  const leagueSize = getLeagueSize();
+  const byPos = {};
+  ["QB", "RB", "WR", "TE", "K", "DEF"].forEach(pos => {
+    const pool = allPlayers
+      .filter(p => p.position === pos && typeof p.value_score === "number")
+      .sort((a, b) => b.value_score - a.value_score);
+    if (!pool.length) { byPos[pos] = 0; return; }
+    const rank = effectiveStarterCount(pos, leagueSize);
+    const idx = Math.min(rank, pool.length - 1);
+    byPos[pos] = pool[idx].value_score;
+  });
+  return byPos;
+}
+
+function vorFor(player, replacementLevels) {
+  const repl = replacementLevels[player.position] ?? 0;
+  return (player.value_score ?? 0) - repl;
+}
+
+// Reuses the same "how badly do you need this position" scale as the
+// recommendation engine, so trade personalization and draft
+// recommendations reason about need identically.
+function tradeNeedMultiplier(position, openCounts) {
+  const needScore = positionNeedScore(position, openCounts);
+  if (needScore > 0) return 1 + Math.min(needScore, 3) * 0.35;
+  if (openCounts.BENCH > 0) return 1.0;
+  return 0.55;
+}
+
+// Consolidation/"best player" bonus: fantasy rosters are capped, so
+// landing the single best player in a trade is worth more than the raw
+// VOR sum implies -- you can't split a bench spot across two mediocre
+// players into one great one after the fact. Applied symmetrically to
+// both sides (whoever holds the single highest-VOR player in the whole
+// trade gets the bonus on their side), not just declared for a "winner".
+const CONSOLIDATION_WEIGHT = 0.15;
+
+function computeTradeSide(ids, replacementLevels, openCounts) {
+  const players = allPlayers.filter(p => ids.has(p.id));
+  const withVor = players.map(p => ({ player: p, vor: vorFor(p, replacementLevels) }));
+  const rawTotal = withVor.reduce((sum, x) => sum + x.vor, 0);
+  const personalizedTotal = withVor.reduce(
+    (sum, x) => sum + x.vor * tradeNeedMultiplier(x.player.position, openCounts), 0
+  );
+  const bestVor = withVor.length ? Math.max(...withVor.map(x => x.vor)) : 0;
+  return { players: withVor, rawTotal, personalizedTotal, bestVor };
+}
+
+function buildTradeVerdict(give, receive) {
+  const bothEmpty = give.players.length === 0 && receive.players.length === 0;
+  if (bothEmpty) {
+    return { verdict: "Add players to both sides to evaluate a trade.", detail: "" };
+  }
+  if (give.players.length === 0 || receive.players.length === 0) {
+    return { verdict: "Add at least one player on each side.", detail: "" };
+  }
+
+  const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+  const receiveAdj = receive.rawTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
+  const rawDiff = receiveAdj - giveAdj;
+
+  const givePers = give.personalizedTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+  const receivePers = receive.personalizedTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
+  const persDiff = receivePers - givePers;
+
+  // Fairness bands scaled off the spread of real VOR values in this
+  // dataset (top players land roughly 1.5-2.5 VOR above replacement) --
+  // a diff under ~0.15 reads as a wash, not a real edge either way.
+  const band = v => (v > 0.6 ? "clearly favors you" : v > 0.15 ? "slightly favors you" : v < -0.6 ? "clearly favors them" : v < -0.15 ? "slightly favors them" : "is roughly even");
+
+  const giveNames = give.players.map(x => x.player.name).join(", ");
+  const receiveNames = receive.players.map(x => x.player.name).join(", ");
+
+  let verdict = `Scarcity-adjusted, this trade <strong>${band(rawDiff)}</strong> (neutral read, no roster context: ${rawDiff >= 0 ? "+" : ""}${rawDiff.toFixed(2)} value units).`;
+
+  const lines = [];
+  lines.push(`You give up ${escapeHtml(giveNames)} (VOR total ${give.rawTotal.toFixed(2)}) for ${escapeHtml(receiveNames)} (VOR total ${receive.rawTotal.toFixed(2)}).`);
+  lines.push(`VOR (value over replacement) already accounts for positional scarcity from this league's real roster requirements -- a mid-tier TE and a mid-tier QB aren't compared on raw value_score, they're compared on how much better each is than the last realistic starter at their own position.`);
+  if (give.bestVor > receive.bestVor + 0.05) {
+    lines.push(`You're giving up the single best player in this trade (highest VOR) -- that consolidation cost is factored in, since one true stud is worth more than the sum-of-parts suggests.`);
+  } else if (receive.bestVor > give.bestVor + 0.05) {
+    lines.push(`You're picking up the single best player in this trade -- that consolidation value is factored in on your side.`);
+  }
+  if (Math.abs(persDiff - rawDiff) > 0.1) {
+    lines.push(`Factoring in YOUR current roster needs specifically, this trade <strong>${band(persDiff)}</strong> (${persDiff >= 0 ? "+" : ""}${persDiff.toFixed(2)}) -- ${persDiff > rawDiff ? "better for you than the neutral read, since it fills an open need" : "worse for you than the neutral read, since you already have that position covered"}.`);
+  } else {
+    lines.push(`Your current roster needs don't meaningfully change this read -- the personalized and neutral verdicts agree.`);
+  }
+
+  return { verdict, detail: lines.join(" ") };
+}
+
+// Team-level SOS context, not blended into VOR -- this pipeline has no
+// weekly player projections to honestly combine schedule strength with,
+// so it's shown as a separate informational flag only. Rank 1 = toughest
+// schedule in the league, 32 = easiest.
+function sosBadge(player) {
+  const rank = player.stats && player.stats.sos_playoff_rank;
+  if (rank == null) return "";
+  let cls = "sos-neutral", label = `Playoff SOS #${rank}`;
+  if (rank <= 8) { cls = "sos-tough"; label = `Tough playoff SOS #${rank}`; }
+  else if (rank >= 25) { cls = "sos-easy"; label = `Easy playoff SOS #${rank}`; }
+  return `<span class="sos-badge ${cls}" title="Strength of schedule for weeks 15-17, based on opponents' real points-allowed-per-game -- #1 = toughest, #32 = easiest">${label}</span>`;
+}
+
+function tradePlayerRow(player, side) {
+  return `
+    <div class="trade-player-row" data-id="${player.id}" data-side="${side}">
+      <span class="pos-pill pos-${player.position}">${player.position}</span>
+      <span class="trade-player-name">${escapeHtml(player.name)}</span>
+      <span class="trade-player-team">${escapeHtml(player.team)}</span>
+      ${sosBadge(player)}
+      <button class="trade-remove-btn" data-id="${player.id}" data-side="${side}" type="button" aria-label="Remove">&times;</button>
+    </div>
+  `;
+}
+
+function renderTradeCalculator() {
+  const replacementLevels = computeReplacementLevels();
+  const openCounts = getOpenSlotCounts();
+  const give = computeTradeSide(tradeGiveIds, replacementLevels, openCounts);
+  const receive = computeTradeSide(tradeReceiveIds, replacementLevels, openCounts);
+  const { verdict, detail } = buildTradeVerdict(give, receive);
+
+  const content = document.getElementById("tradeContent");
+  content.innerHTML = `
+    <h2 style="margin:0 0 6px;">Trade Calculator</h2>
+    <p class="trade-subtitle">Free, built into this app -- no external sync, uses the same value_score data as the rest of the tool. Scarcity-adjusted (value over replacement), not raw value_score.</p>
+    <div class="trade-columns">
+      <div class="trade-side">
+        <h3>You Give</h3>
+        <input class="trade-search" data-side="give" type="text" placeholder="Search a player to add…" autocomplete="off">
+        <div class="trade-search-results" data-side="give"></div>
+        <div class="trade-player-list">${give.players.map(x => tradePlayerRow(x.player, "give")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+      </div>
+      <div class="trade-side">
+        <h3>You Receive</h3>
+        <input class="trade-search" data-side="receive" type="text" placeholder="Search a player to add…" autocomplete="off">
+        <div class="trade-search-results" data-side="receive"></div>
+        <div class="trade-player-list">${receive.players.map(x => tradePlayerRow(x.player, "receive")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+      </div>
+    </div>
+    <div class="trade-verdict">${verdict}</div>
+    <div class="trade-detail">${detail}</div>
+    <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data -- it's informational only, not blended into the VOR math (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
+  `;
+
+  content.querySelectorAll(".trade-search").forEach(input => {
+    input.addEventListener("input", () => renderTradeSearchResults(input.dataset.side, input.value));
+  });
+  content.querySelectorAll(".trade-remove-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const set = btn.dataset.side === "give" ? tradeGiveIds : tradeReceiveIds;
+      set.delete(btn.dataset.id);
+      renderTradeCalculator();
+    });
+  });
+}
+
+function renderTradeSearchResults(side, term) {
+  const box = document.querySelector(`.trade-search-results[data-side="${side}"]`);
+  if (!box) return;
+  const q = term.trim().toLowerCase();
+  if (!q) { box.innerHTML = ""; return; }
+  const excludeIds = side === "give" ? tradeGiveIds : tradeReceiveIds;
+  const matches = allPlayers
+    .filter(p => !excludeIds.has(p.id) && p.name.toLowerCase().includes(q))
+    .slice(0, 8);
+  box.innerHTML = matches.map(p => `
+    <div class="trade-search-result" data-id="${p.id}" data-side="${side}">
+      <span class="pos-pill pos-${p.position}">${p.position}</span>
+      ${escapeHtml(p.name)} <span class="trade-search-result-team">${escapeHtml(p.team)}</span>
+    </div>
+  `).join("");
+  box.querySelectorAll(".trade-search-result").forEach(el => {
+    el.addEventListener("click", () => {
+      const set = el.dataset.side === "give" ? tradeGiveIds : tradeReceiveIds;
+      set.add(el.dataset.id);
+      renderTradeCalculator();
+    });
+  });
+}
+
+function openTradeCalculator() {
+  closeAllOverlays();
+  renderTradeCalculator();
+  document.getElementById("tradeOverlay").hidden = false;
 }
 
 // Native confirm() is unreliable here — some browsers/embedded webviews
@@ -995,6 +1228,13 @@ function wireControls() {
   const detailOverlay = document.getElementById("playerDetailOverlay");
   detailOverlay.addEventListener("click", e => {
     if (e.target === detailOverlay) closePlayerDetail();
+  });
+
+  document.getElementById("tradeCalcBtn").addEventListener("click", openTradeCalculator);
+  document.getElementById("tradeCloseBtn").addEventListener("click", closeAllOverlays);
+  const tradeOverlay = document.getElementById("tradeOverlay");
+  tradeOverlay.addEventListener("click", e => {
+    if (e.target === tradeOverlay) closeAllOverlays();
   });
 
   document.addEventListener("keydown", e => {

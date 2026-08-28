@@ -407,6 +407,8 @@ def main():
                     ),
                     "guide_adj_ppg": clean_num(row.get("guide_adj_ppg")),
                     "real2025_total_pts": clean_num(row.get("real2025_total_pts")),
+                    "sos_ros_rank": clean_num(row.get("sos_ros_rank")),
+                    "sos_playoff_rank": clean_num(row.get("sos_playoff_rank")),
                     "guide_adj_ppg_reason": (
                         str(row.get("guide_reason"))
                         if pd.notna(row.get("guide_reason"))

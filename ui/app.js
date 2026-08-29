@@ -579,7 +579,25 @@ function buildTradeVerdict(give, receive) {
     lines.push(`You're picking up the single best player in this trade -- that consolidation value is factored in on your side.`);
   }
   if (Math.abs(persDiff - rawDiff) > 0.1) {
-    lines.push(`Factoring in YOUR current roster needs specifically, this trade <strong>${band(persDiff)}</strong> (${persDiff >= 0 ? "+" : ""}${persDiff.toFixed(2)}) -- ${persDiff > rawDiff ? "better for you than the neutral read, since it fills an open need" : "worse for you than the neutral read, since you already have that position covered"}.`);
+    // Bug found via live testing: describing this as "better/worse than
+    // the neutral read" reads as contradicting the band() label right
+    // next to it -- e.g. "clearly favors you (+1.55)... worse for you"
+    // when persDiff (1.55) is smaller than rawDiff (2.65) but still
+    // clearly positive. Only call out a genuine reversal (sign flip)
+    // explicitly; otherwise describe the edge as growing/shrinking, which
+    // can't contradict the band label since the direction word always
+    // matches which way persDiff actually moved.
+    const signFlipped = Math.sign(persDiff) !== Math.sign(rawDiff) && rawDiff !== 0 && persDiff !== 0;
+    const movedTowardYou = persDiff > rawDiff;
+    let roosterNote;
+    if (signFlipped) {
+      roosterNote = `this actually flips the verdict once your roster is factored in`;
+    } else {
+      roosterNote = movedTowardYou
+        ? `the edge in your favor grows once your roster is factored in, since it fills an open need`
+        : `the edge shrinks once your roster is factored in, since you already have that position covered`;
+    }
+    lines.push(`Factoring in YOUR current roster needs specifically, this trade <strong>${band(persDiff)}</strong> (${persDiff >= 0 ? "+" : ""}${persDiff.toFixed(2)}) -- ${roosterNote}.`);
   } else {
     lines.push(`Your current roster needs don't meaningfully change this read -- the personalized and neutral verdicts agree.`);
   }

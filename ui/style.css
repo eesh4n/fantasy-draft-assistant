@@ -267,6 +267,7 @@ body{
 }
 .trade-player-name{font-weight:600;}
 .trade-player-team{color:var(--text-dim);font-size:12px;}
+.trade-player-values{color:var(--text-dim);font-size:11px;white-space:nowrap;}
 .trade-remove-btn{
   margin-left:auto;
   background:none;
@@ -303,6 +304,26 @@ body{
   line-height:1.5;
   color:var(--text-dim);
 }
+.trade-their-roster{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed var(--border);
+}
+.trade-their-roster h3{
+  margin:0 0 8px;
+  font-size:14px;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.trade-optional-tag{
+  font-size:11px;
+  font-weight:400;
+  color:var(--text-dim);
+  text-transform:none;
+}
+.trade-their-list{max-height:180px;overflow-y:auto;}
 .trade-scope-note{
   margin-top:10px;
   font-size:11px;

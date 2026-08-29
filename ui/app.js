@@ -475,6 +475,35 @@ function clearCompare() {
 // data instead of being hand-tuned.
 let tradeGiveIds = new Set();
 let tradeReceiveIds = new Set();
+// The trade partner's CURRENT full roster (not part of the trade itself)
+// -- optional context so the calculator can judge whether a trade would
+// actually make sense for THEM too, not just you. Without this, the
+// personalized read only ever reasons about your own needs, which can't
+// tell you whether the other manager would realistically accept.
+let tradeTheirIds = new Set();
+
+// Pure (non-mutating) version of assignPlayerToRoster/findOpenSlotIndex --
+// simulates filling a SEPARATE roster (the trade partner's) using the
+// exact same CONFIG.slotPriority logic your own roster uses, without
+// touching the global rosterSlots. Order matters for a real draft (who
+// picked what when), but for a need ESTIMATE from a final roster list,
+// slot-filling order doesn't change the final open-slot counts as long as
+// there's enough room for every real starter -- CONFIG's roster sizes are
+// applied identically either way.
+function simulateOpenSlotCounts(playerIds) {
+  const slots = buildEmptyRosterSlots();
+  const players = allPlayers.filter(p => playerIds.has(p.id));
+  players.forEach(player => {
+    const priority = CONFIG.slotPriority[player.position] || ["BENCH"];
+    for (const slotKey of priority) {
+      const idx = slots[slotKey] ? slots[slotKey].findIndex(v => v === null) : -1;
+      if (idx !== -1) { slots[slotKey][idx] = player.id; break; }
+    }
+  });
+  const open = {};
+  SLOT_ORDER.forEach(key => { open[key] = slots[key].filter(v => v === null).length; });
+  return open;
+}
 
 // How the league's 2 FLEX (RB/WR/TE-eligible) slots get split when
 // computing each position's effective starter count -- a simplifying
@@ -532,18 +561,25 @@ function tradeNeedMultiplier(position, openCounts) {
 // trade gets the bonus on their side), not just declared for a "winner".
 const CONSOLIDATION_WEIGHT = 0.15;
 
+function weightedVorTotal(withVorArray, openCounts) {
+  return withVorArray.reduce(
+    (sum, x) => sum + x.vor * tradeNeedMultiplier(x.player.position, openCounts), 0
+  );
+}
+
 function computeTradeSide(ids, replacementLevels, openCounts) {
   const players = allPlayers.filter(p => ids.has(p.id));
   const withVor = players.map(p => ({ player: p, vor: vorFor(p, replacementLevels) }));
   const rawTotal = withVor.reduce((sum, x) => sum + x.vor, 0);
-  const personalizedTotal = withVor.reduce(
-    (sum, x) => sum + x.vor * tradeNeedMultiplier(x.player.position, openCounts), 0
-  );
+  const personalizedTotal = weightedVorTotal(withVor, openCounts);
   const bestVor = withVor.length ? Math.max(...withVor.map(x => x.vor)) : 0;
   return { players: withVor, rawTotal, personalizedTotal, bestVor };
 }
 
-function buildTradeVerdict(give, receive) {
+// theirOpenCounts is null when no partner roster has been entered --
+// two-sided evaluation is optional context, not required to use the
+// calculator at all.
+function buildTradeVerdict(give, receive, theirOpenCounts) {
   const bothEmpty = give.players.length === 0 && receive.players.length === 0;
   if (bothEmpty) {
     return { verdict: "Add players to both sides to evaluate a trade.", detail: "" };
@@ -602,6 +638,20 @@ function buildTradeVerdict(give, receive) {
     lines.push(`Your current roster needs don't meaningfully change this read -- the personalized and neutral verdicts agree.`);
   }
 
+  if (theirOpenCounts) {
+    // From the trade partner's side: they're giving up the "You Receive"
+    // set and getting the "You Give" set -- weighted by THEIR open
+    // counts, not yours, so this actually estimates whether they'd have
+    // real incentive to accept, not just whether the trade is good for you.
+    const theirGain = weightedVorTotal(give.players, theirOpenCounts) + CONSOLIDATION_WEIGHT * give.bestVor;
+    const theirCost = weightedVorTotal(receive.players, theirOpenCounts) + CONSOLIDATION_WEIGHT * receive.bestVor;
+    const theirDiff = theirGain - theirCost;
+    const theirBand = theirDiff > 0.6 ? "a clear win for them" : theirDiff > 0.15 ? "a mild win for them" : theirDiff < -0.6 ? "a clear loss for them" : theirDiff < -0.15 ? "a mild loss for them" : "roughly even for them";
+    lines.push(`Based on the roster you entered for them, this trade looks like <strong>${theirBand}</strong> (${theirDiff >= 0 ? "+" : ""}${theirDiff.toFixed(2)} from their side) -- ${theirDiff < -0.15 ? "they may be reluctant to accept as-is, since it doesn't address their own roster needs well." : "they'd likely have real incentive to accept."}`);
+  } else {
+    lines.push(`Add their current roster below for a two-sided read -- right now this only evaluates whether the trade is good for YOU, not whether they'd actually want it.`);
+  }
+
   return { verdict, detail: lines.join(" ") };
 }
 
@@ -618,14 +668,44 @@ function sosBadge(player) {
   return `<span class="sos-badge ${cls}" title="Strength of schedule for weeks 15-17, based on opponents' real points-allowed-per-game -- #1 = toughest, #32 = easiest">${label}</span>`;
 }
 
-function tradePlayerRow(player, side) {
+function tradePlayerRow(player, vor, side) {
+  // Shows the RAW numbers VOR is derived from, not just the abstracted
+  // VOR total -- value_score (this app's core composite: ML prediction +
+  // guide data + real 2025 production, same number shown everywhere else
+  // in the app) and real2025_total_pts (actual box-score points this
+  // season, when available) alongside the scarcity-adjusted VOR, so
+  // nothing is hidden behind the derived metric.
+  const rawScore = typeof player.value_score === "number" ? player.value_score.toFixed(2) : "—";
+  const real2025 = player.stats && player.stats.real2025_total_pts != null ? player.stats.real2025_total_pts : null;
+  const realLine = real2025 != null ? ` · ${real2025} real '25 pts` : "";
   return `
     <div class="trade-player-row" data-id="${player.id}" data-side="${side}">
       <span class="pos-pill pos-${player.position}">${player.position}</span>
       <span class="trade-player-name">${escapeHtml(player.name)}</span>
       <span class="trade-player-team">${escapeHtml(player.team)}</span>
+      <span class="trade-player-values" title="value_score = this app's core composite (ML prediction + guide data + real 2025 production); VOR = value_score minus the replacement-level player at this position/league size">value_score ${rawScore} · VOR ${vor.toFixed(2)}${realLine}</span>
       ${sosBadge(player)}
       <button class="trade-remove-btn" data-id="${player.id}" data-side="${side}" type="button" aria-label="Remove">&times;</button>
+    </div>
+  `;
+}
+
+function tradeSideSet(side) {
+  if (side === "give") return tradeGiveIds;
+  if (side === "receive") return tradeReceiveIds;
+  return tradeTheirIds;
+}
+
+// Lightweight row for the "their roster" context list -- no VOR/value
+// display, since these players aren't part of the trade being evaluated,
+// just context for estimating the OTHER team's positional needs.
+function tradeTheirRosterRow(player) {
+  return `
+    <div class="trade-player-row" data-id="${player.id}" data-side="their">
+      <span class="pos-pill pos-${player.position}">${player.position}</span>
+      <span class="trade-player-name">${escapeHtml(player.name)}</span>
+      <span class="trade-player-team">${escapeHtml(player.team)}</span>
+      <button class="trade-remove-btn" data-id="${player.id}" data-side="their" type="button" aria-label="Remove">&times;</button>
     </div>
   `;
 }
@@ -635,28 +715,36 @@ function renderTradeCalculator() {
   const openCounts = getOpenSlotCounts();
   const give = computeTradeSide(tradeGiveIds, replacementLevels, openCounts);
   const receive = computeTradeSide(tradeReceiveIds, replacementLevels, openCounts);
-  const { verdict, detail } = buildTradeVerdict(give, receive);
+  const theirOpenCounts = tradeTheirIds.size > 0 ? simulateOpenSlotCounts(tradeTheirIds) : null;
+  const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts);
+  const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
 
   const content = document.getElementById("tradeContent");
   content.innerHTML = `
     <h2 style="margin:0 0 6px;">Trade Calculator</h2>
-    <p class="trade-subtitle">Free, built into this app -- no external sync, uses the same value_score data as the rest of the tool. Scarcity-adjusted (value over replacement), not raw value_score.</p>
+    <p class="trade-subtitle">Free, built into this app -- no external sync. Each player shows both the raw value_score (this app's core composite) and VOR (that same value_score adjusted for positional scarcity) -- the verdict below uses VOR, since raw value_score isn't directly comparable across positions, but nothing is hidden.</p>
     <div class="trade-columns">
       <div class="trade-side">
         <h3>You Give</h3>
         <input class="trade-search" data-side="give" type="text" placeholder="Search a player to add…" autocomplete="off">
         <div class="trade-search-results" data-side="give"></div>
-        <div class="trade-player-list">${give.players.map(x => tradePlayerRow(x.player, "give")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+        <div class="trade-player-list">${give.players.map(x => tradePlayerRow(x.player, x.vor, "give")).join("") || '<div class="trade-empty">No players added</div>'}</div>
       </div>
       <div class="trade-side">
         <h3>You Receive</h3>
         <input class="trade-search" data-side="receive" type="text" placeholder="Search a player to add…" autocomplete="off">
         <div class="trade-search-results" data-side="receive"></div>
-        <div class="trade-player-list">${receive.players.map(x => tradePlayerRow(x.player, "receive")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+        <div class="trade-player-list">${receive.players.map(x => tradePlayerRow(x.player, x.vor, "receive")).join("") || '<div class="trade-empty">No players added</div>'}</div>
       </div>
     </div>
     <div class="trade-verdict">${verdict}</div>
     <div class="trade-detail">${detail}</div>
+    <div class="trade-their-roster">
+      <h3>Their Current Roster <span class="trade-optional-tag">optional -- for a two-sided fairness read</span></h3>
+      <input class="trade-search" data-side="their" type="text" placeholder="Add players on the OTHER team's current roster…" autocomplete="off">
+      <div class="trade-search-results" data-side="their"></div>
+      <div class="trade-player-list trade-their-list">${theirPlayers.map(tradeTheirRosterRow).join("") || '<div class="trade-empty">No players added -- the verdict above only evaluates the trade for you until this is filled in</div>'}</div>
+    </div>
     <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data -- it's informational only, not blended into the VOR math (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
   `;
 
@@ -665,8 +753,7 @@ function renderTradeCalculator() {
   });
   content.querySelectorAll(".trade-remove-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const set = btn.dataset.side === "give" ? tradeGiveIds : tradeReceiveIds;
-      set.delete(btn.dataset.id);
+      tradeSideSet(btn.dataset.side).delete(btn.dataset.id);
       renderTradeCalculator();
     });
   });
@@ -677,7 +764,7 @@ function renderTradeSearchResults(side, term) {
   if (!box) return;
   const q = term.trim().toLowerCase();
   if (!q) { box.innerHTML = ""; return; }
-  const excludeIds = side === "give" ? tradeGiveIds : tradeReceiveIds;
+  const excludeIds = tradeSideSet(side);
   const matches = allPlayers
     .filter(p => !excludeIds.has(p.id) && p.name.toLowerCase().includes(q))
     .slice(0, 8);
@@ -689,8 +776,7 @@ function renderTradeSearchResults(side, term) {
   `).join("");
   box.querySelectorAll(".trade-search-result").forEach(el => {
     el.addEventListener("click", () => {
-      const set = el.dataset.side === "give" ? tradeGiveIds : tradeReceiveIds;
-      set.add(el.dataset.id);
+      tradeSideSet(el.dataset.side).add(el.dataset.id);
       renderTradeCalculator();
     });
   });

@@ -25,6 +25,7 @@
       <span id="dataSourceBadge" class="badge">loading…</span>
       <span id="buildVersionBadge" class="badge badge-build" title="Build version — confirm this matches the latest code">build v29</span>
       <button id="tradeCalcBtn" class="btn" type="button">Trade Calculator</button>
+      <button id="tradeBlockBtn" class="btn" type="button">Trade Block</button>
       <button id="resetBtn" class="btn btn-danger">Reset Draft</button>
     </div>
   </header>
@@ -63,6 +64,13 @@
     <div class="trade-box">
       <button id="tradeCloseBtn" class="detail-close-btn" aria-label="Close">&times;</button>
       <div id="tradeContent"></div>
+    </div>
+  </div>
+
+  <div id="tradeBlockOverlay" class="reset-confirm-overlay" hidden>
+    <div class="trade-box">
+      <button id="tradeBlockCloseBtn" class="detail-close-btn" aria-label="Close">&times;</button>
+      <div id="tradeBlockContent"></div>
     </div>
   </div>
 

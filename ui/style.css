@@ -241,10 +241,57 @@ body{
   color:var(--text);
   cursor:default;
 }
+.trade-compare-toggle-btn{
+  display:block;
+  margin:0 0 18px;
+  font-size:12px;
+  padding:8px 14px;
+}
 .trade-columns{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:18px;
+}
+.trade-offer-b{
+  margin-top:24px;
+  padding-top:18px;
+  border-top:1px dashed var(--border);
+}
+.trade-offer-b-heading{
+  margin:0 0 12px;
+  font-size:14px;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.trade-verdict-b,
+.trade-detail-b{
+  /* Same visual language as Offer A's .trade-verdict/.trade-detail, kept
+     as separate classes so Offer A's own divs stay untouched by anything
+     styling Offer B specifically. */
+}
+.trade-offer-compare{
+  margin-top:14px;
+  padding:12px 14px;
+  background:var(--bg-panel-2);
+  border:1px solid var(--accent-dim);
+  border-radius:var(--radius);
+  font-size:14px;
+  font-weight:600;
+  line-height:1.5;
+  text-align:center;
+}
+.trade-offer-compare-pending{
+  font-weight:400;
+  font-style:italic;
+  color:var(--text-dim);
+  border-color:var(--border);
+}
+.trade-offer-compare-a-wins,
+.trade-offer-compare-b-wins{
+  color:var(--green);
+  border-color:var(--green-bg);
 }
 .trade-side h3{margin:0 0 8px;font-size:14px;}
 .trade-search{
@@ -305,6 +352,40 @@ body{
   font-size:12px;
   font-style:italic;
   padding:8px 0;
+}
+.trade-block-note{
+  margin:0 0 14px;
+  padding:10px 12px;
+  background:var(--bg-panel-2);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-size:13px;
+  font-style:italic;
+  color:var(--text-dim);
+}
+.trade-block-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.trade-block-item{
+  padding-bottom:2px;
+}
+.trade-block-row{
+  flex-wrap:wrap;
+}
+.trade-block-send-btn{
+  margin-left:auto;
+  font-size:12px;
+  padding:6px 10px;
+  white-space:nowrap;
+}
+.trade-block-reason{
+  margin-top:4px;
+  padding:8px 10px;
+  font-size:12px;
+  line-height:1.4;
+  color:var(--text-dim);
 }
 .trade-grade-badge{
   margin-top:18px;

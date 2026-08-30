@@ -576,6 +576,101 @@ function computeTradeSide(ids, replacementLevels, openCounts) {
   return { players: withVor, rawTotal, personalizedTotal, bestVor };
 }
 
+// Neutral (non-roster-weighted) VOR diff, including the consolidation
+// bonus -- this is the same "rawDiff" buildTradeVerdict uses for its
+// band() label. Pulled out to a standalone helper so findSweetener (and
+// anything else that needs to test "what if we added player X") can
+// recompute this exact number without duplicating/drifting from the
+// verdict's own math.
+function computeRawDiff(give, receive) {
+  const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+  const receiveAdj = receive.rawTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
+  return receiveAdj - giveAdj;
+}
+
+// ---------- Trade sweetener suggestions ----------
+// If the trade currently favors the OTHER side (rawDiff < -0.15, matching
+// buildTradeVerdict's own "slightly/clearly favors them" bands), the fix
+// is for the user to ask to RECEIVE more -- not give more -- so this
+// searches the trade partner's CURRENT roster (tradeTheirIds, the only
+// visibility this app has into what they could offer as bait) for the
+// smallest possible addition to "You Receive" that brings the trade back
+// to roughly even. Smallest on purpose: a real trade partner is more
+// likely to part with their least valuable spare piece than their best
+// bench player, so we search from the low end and stop at the first (i.e.
+// lowest-VOR) player that actually closes the gap, rather than suggesting
+// whichever partner player is most valuable overall.
+//
+// If the trade instead clearly favors the USER (rawDiff > 0.6), there's
+// no gap to close -- but a lopsided offer is also the kind of offer a
+// real manager is likely to decline or lowball-counter. In that case,
+// suggest sweetening FROM the user's own bench (rosterSlots) with their
+// single lowest-VOR spare player, as a lighter-touch "make it more likely
+// to get accepted" note.
+function findSweetener(give, receive, replacementLevels, rawDiff) {
+  if (rawDiff < -0.15) {
+    if (tradeTheirIds.size === 0) {
+      return { direction: "need_their_roster" };
+    }
+
+    const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+    const candidates = allPlayers
+      .filter(p => tradeTheirIds.has(p.id) && !tradeGiveIds.has(p.id) && !tradeReceiveIds.has(p.id))
+      .map(p => ({ player: p, vor: vorFor(p, replacementLevels) }))
+      .sort((a, b) => a.vor - b.vor);
+
+    for (const cand of candidates) {
+      const newRawTotal = receive.rawTotal + cand.vor;
+      const newBestVor = Math.max(receive.bestVor, cand.vor);
+      const newReceiveAdj = newRawTotal + CONSOLIDATION_WEIGHT * newBestVor;
+      const newDiff = newReceiveAdj - giveAdj;
+      if (newDiff >= -0.15) {
+        return { direction: "add_to_receive", player: cand.player, newDiff };
+      }
+    }
+    return null; // nothing on their roster (alone) closes the gap
+  }
+
+  if (rawDiff > 0.6) {
+    const usedIds = new Set([...tradeGiveIds, ...tradeReceiveIds]);
+    const benchIds = [];
+    SLOT_ORDER.forEach(key => {
+      rosterSlots[key].forEach(id => {
+        if (id && !usedIds.has(id)) benchIds.push(id);
+      });
+    });
+    const spare = allPlayers
+      .filter(p => benchIds.includes(p.id))
+      .map(p => ({ player: p, vor: vorFor(p, replacementLevels) }))
+      .sort((a, b) => a.vor - b.vor)[0];
+    if (!spare) return null;
+    return { direction: "add_to_give", player: spare.player, newDiff: null };
+  }
+
+  return null;
+}
+
+function renderTradeSweetener(give, receive, replacementLevels, rawDiff) {
+  // Only meaningful once both sides actually have players -- rawDiff is
+  // undefined/garbage otherwise (buildTradeVerdict bails out earlier too).
+  if (give.players.length === 0 || receive.players.length === 0) return "";
+
+  const sweetener = findSweetener(give, receive, replacementLevels, rawDiff);
+  if (!sweetener) return "";
+
+  if (sweetener.direction === "need_their_roster") {
+    return `<div class="trade-sweetener">💡 Add their roster below to see which of their bench players would even out this trade.</div>`;
+  }
+  if (sweetener.direction === "add_to_receive") {
+    const vor = vorFor(sweetener.player, replacementLevels);
+    return `<div class="trade-sweetener">💡 <strong>Fair-trade sweetener:</strong> ask them to also include ${escapeHtml(sweetener.player.name)} (${escapeHtml(sweetener.player.position)}, VOR ${vor.toFixed(2)}) in "You Receive" -- that's the smallest addition from their current roster that would bring this trade to roughly even (${sweetener.newDiff >= 0 ? "+" : ""}${sweetener.newDiff.toFixed(2)}).</div>`;
+  }
+  if (sweetener.direction === "add_to_give") {
+    return `<div class="trade-sweetener">💡 This trade clearly favors you -- consider tossing in ${escapeHtml(sweetener.player.name)} (${escapeHtml(sweetener.player.position)}) from your bench to make the offer more likely to actually get accepted.</div>`;
+  }
+  return "";
+}
+
 // theirOpenCounts is null when no partner roster has been entered --
 // two-sided evaluation is optional context, not required to use the
 // calculator at all.
@@ -588,9 +683,7 @@ function buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels) {
     return { verdict: "Add at least one player on each side.", detail: "" };
   }
 
-  const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
-  const receiveAdj = receive.rawTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
-  const rawDiff = receiveAdj - giveAdj;
+  const rawDiff = computeRawDiff(give, receive);
 
   const givePers = give.personalizedTotal + CONSOLIDATION_WEIGHT * give.bestVor;
   const receivePers = receive.personalizedTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
@@ -765,6 +858,8 @@ function renderTradeCalculator() {
   const receive = computeTradeSide(tradeReceiveIds, replacementLevels, openCounts);
   const theirOpenCounts = tradeTheirIds.size > 0 ? simulateOpenSlotCounts(tradeTheirIds) : null;
   const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels);
+  const rawDiff = computeRawDiff(give, receive);
+  const sweetenerHtml = renderTradeSweetener(give, receive, replacementLevels, rawDiff);
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
 
   const content = document.getElementById("tradeContent");
@@ -793,6 +888,7 @@ function renderTradeCalculator() {
     </div>
     <div class="trade-verdict">${verdict}</div>
     <div class="trade-detail">${detail}</div>
+    ${sweetenerHtml}
     <div class="trade-their-roster">
       <h3>Their Current Roster <span class="trade-optional-tag">optional -- for a two-sided fairness read</span></h3>
       <input class="trade-search" data-side="their" type="text" placeholder="Add players on the OTHER team's current roster…" autocomplete="off">

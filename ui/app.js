@@ -579,7 +579,7 @@ function computeTradeSide(ids, replacementLevels, openCounts) {
 // theirOpenCounts is null when no partner roster has been entered --
 // two-sided evaluation is optional context, not required to use the
 // calculator at all.
-function buildTradeVerdict(give, receive, theirOpenCounts) {
+function buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels) {
   const bothEmpty = give.players.length === 0 && receive.players.length === 0;
   if (bothEmpty) {
     return { verdict: "Add players to both sides to evaluate a trade.", detail: "" };
@@ -608,7 +608,18 @@ function buildTradeVerdict(give, receive, theirOpenCounts) {
 
   const lines = [];
   lines.push(`You give up ${escapeHtml(giveNames)} (VOR total ${give.rawTotal.toFixed(2)}) for ${escapeHtml(receiveNames)} (VOR total ${receive.rawTotal.toFixed(2)}).`);
-  lines.push(`VOR (value over replacement) already accounts for positional scarcity from this league's real roster requirements -- a mid-tier TE and a mid-tier QB aren't compared on raw value_score, they're compared on how much better each is than the last realistic starter at their own position.`);
+  // Dynamic, not a canned line: names the ACTUAL positions in THIS trade
+  // and their real computed replacement levels, instead of always citing
+  // the same "mid-tier TE vs mid-tier QB" example regardless of what's
+  // actually being traded.
+  const allPositions = [...give.players, ...receive.players].map(x => x.player.position);
+  const distinctPositions = [...new Set(allPositions)];
+  if (distinctPositions.length <= 1) {
+    lines.push(`Every player here is the same position (${distinctPositions[0] || "n/a"}), so this trade doesn't cross a scarcity gap -- VOR and raw value_score point the same direction in this specific case, unlike a cross-position trade where they can diverge.`);
+  } else {
+    const replParts = distinctPositions.map(pos => `${pos} ${(replacementLevels[pos] ?? 0).toFixed(2)}`).join(", ");
+    lines.push(`This trade crosses positions (${distinctPositions.join(" / ")}) -- in this league, the last realistic starter's value_score sits at ${replParts}. That real gap between positions (not an assumption) is what VOR subtracts out before comparing anyone here.`);
+  }
   if (give.bestVor > receive.bestVor + 0.05) {
     lines.push(`You're giving up the single best player in this trade (highest VOR) -- that consolidation cost is factored in, since one true stud is worth more than the sum-of-parts suggests.`);
   } else if (receive.bestVor > give.bestVor + 0.05) {
@@ -716,7 +727,7 @@ function renderTradeCalculator() {
   const give = computeTradeSide(tradeGiveIds, replacementLevels, openCounts);
   const receive = computeTradeSide(tradeReceiveIds, replacementLevels, openCounts);
   const theirOpenCounts = tradeTheirIds.size > 0 ? simulateOpenSlotCounts(tradeTheirIds) : null;
-  const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts);
+  const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels);
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
 
   const content = document.getElementById("tradeContent");

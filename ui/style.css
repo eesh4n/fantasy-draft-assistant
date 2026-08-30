@@ -304,6 +304,39 @@ body{
   font-style:italic;
   padding:8px 0;
 }
+.trade-grade-badge{
+  margin-top:18px;
+  padding:10px;
+  width:88px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  font-size:36px;
+  font-weight:800;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:var(--bg-panel-2);
+  line-height:1;
+}
+.trade-grade-badge.grade-Aplus,
+.trade-grade-badge.grade-A,
+.trade-grade-badge.grade-B{
+  color:var(--green);
+  border-color:var(--green-bg);
+  background:var(--green-bg);
+}
+.trade-grade-badge.grade-Cplus,
+.trade-grade-badge.grade-C{
+  color:var(--text-dim);
+  border-color:var(--border);
+}
+.trade-grade-badge.grade-Dplus,
+.trade-grade-badge.grade-D,
+.trade-grade-badge.grade-F{
+  color:var(--red);
+  border-color:rgba(229,72,77,0.4);
+  background:rgba(229,72,77,0.1);
+}
 .trade-verdict{
   margin-top:18px;
   padding:14px;

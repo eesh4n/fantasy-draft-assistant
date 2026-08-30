@@ -765,6 +765,22 @@ function renderTradeSweetener(give, receive, replacementLevels, rawDiff) {
   return "";
 }
 
+// Letter-grade version of the same rawDiff buildTradeVerdict's band()
+// labels -- wider spread (8 tiers instead of band()'s 5) so the badge
+// carries more granularity than the qualitative text. Symmetric around 0,
+// with "C" as the fair/even center, and always from the USER's
+// perspective (a trade that favors you grades higher).
+function tradeGradeLetter(rawDiff) {
+  if (rawDiff >= 1.2) return "A+";
+  if (rawDiff >= 0.6) return "A";
+  if (rawDiff >= 0.3) return "B";
+  if (rawDiff >= 0.15) return "C+";
+  if (rawDiff >= -0.15) return "C";
+  if (rawDiff >= -0.3) return "D+";
+  if (rawDiff >= -0.6) return "D";
+  return "F";
+}
+
 // theirOpenCounts is null when no partner roster has been entered --
 // two-sided evaluation is optional context, not required to use the
 // calculator at all.
@@ -954,6 +970,12 @@ function renderTradeCalculator() {
   const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels);
   const rawDiff = computeRawDiff(give, receive);
   const sweetenerHtml = renderTradeSweetener(give, receive, replacementLevels, rawDiff);
+  const gradeBadgeHtml = give.players.length > 0 && receive.players.length > 0
+    ? (() => {
+        const letter = tradeGradeLetter(rawDiff);
+        return `<div class="trade-grade-badge grade-${letter.replace('+', 'plus')}">${letter}</div>`;
+      })()
+    : "";
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
   const tradeHistory = loadTradeHistory();
 
@@ -984,6 +1006,7 @@ function renderTradeCalculator() {
         <div class="trade-player-list">${receive.players.map(x => tradePlayerRow(x.player, x.vor, "receive")).join("") || '<div class="trade-empty">No players added</div>'}</div>
       </div>
     </div>
+    ${gradeBadgeHtml}
     <div class="trade-verdict">${verdict}</div>
     ${tradeGiveIds.size > 0 && tradeReceiveIds.size > 0 ? `<button class="btn trade-save-btn" type="button">Save this trade</button>` : ""}
     <div class="trade-detail">${detail}</div>

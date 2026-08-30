@@ -12,6 +12,8 @@
   --red:#e5484d;
   --gray-out:#3a3f47;
   --mine-bg:rgba(79,140,255,0.16);
+  --amber:#e5a33d;
+  --amber-bg:rgba(229,163,61,0.14);
   --radius:8px;
   font-family: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
 }
@@ -907,6 +909,45 @@ body{
 }
 .strategy-pos-secondary{ margin-top:4px; }
 .strategy-pos-note{ margin-top:4px; font-style:italic; }
+
+.roster-need-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:10px;
+}
+
+.roster-need-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:34px;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.02em;
+  border:1px solid var(--border);
+  cursor:default;
+}
+
+.roster-need-chip.roster-need-high{
+  color:var(--red);
+  border-color:rgba(229,72,77,0.4);
+  background:rgba(229,72,77,0.12);
+}
+
+.roster-need-chip.roster-need-some{
+  color:var(--amber);
+  border-color:rgba(229,163,61,0.4);
+  background:var(--amber-bg);
+}
+
+.roster-need-chip.roster-need-covered{
+  color:var(--green);
+  border-color:var(--green-bg);
+  background:var(--green-bg);
+}
 
 .roster-slots{
   display:flex;

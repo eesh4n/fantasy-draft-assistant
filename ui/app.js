@@ -482,6 +482,17 @@ let tradeReceiveIds = new Set();
 // tell you whether the other manager would realistically accept.
 let tradeTheirIds = new Set();
 
+// "Compare a second offer" mode -- lets the user hold two independent
+// give/receive packages (Offer A and Offer B) from the SAME trade partner
+// side by side, e.g. two different counter-offers a partner floated for
+// the same player being shopped. Off by default so the calculator's
+// default single-offer behavior is unchanged; the second pair's ids are
+// intentionally NOT cleared when the toggle goes off, so re-enabling it
+// restores whatever was there (simplicity over cleanup, per spec).
+let compareOffersEnabled = false;
+let tradeGive2Ids = new Set();
+let tradeReceive2Ids = new Set();
+
 const TRADE_HISTORY_KEY = "draftAssistant.tradeHistory.v1";
 const TRADE_HISTORY_MAX = 20;
 
@@ -944,6 +955,8 @@ function tradePlayerRow(player, vor, side) {
 function tradeSideSet(side) {
   if (side === "give") return tradeGiveIds;
   if (side === "receive") return tradeReceiveIds;
+  if (side === "give2") return tradeGive2Ids;
+  if (side === "receive2") return tradeReceive2Ids;
   return tradeTheirIds;
 }
 
@@ -1494,9 +1507,45 @@ const SLOT_LABELS = {
   FLEX: "FLEX", K: "K", DEF: "DEF", BENCH: "BENCH"
 };
 
+// Positions shown in the roster need-strip: individual positions only
+// (FLEX and BENCH aren't a single position, so they're excluded).
+const ROSTER_NEED_POSITIONS = ["QB", "RB", "WR", "TE", "K", "DEF"];
+
+function renderRosterNeedStrip() {
+  const container = document.getElementById("rosterNeedStrip");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const openCounts = getOpenSlotCounts();
+
+  ROSTER_NEED_POSITIONS.forEach(position => {
+    const needScore = positionNeedScore(position, openCounts);
+    let tier, tierLabel;
+    if (needScore >= 2) {
+      tier = "high";
+      tierLabel = "high need";
+    } else if (needScore === 1) {
+      tier = "some";
+      tierLabel = "could use depth";
+    } else {
+      tier = "covered";
+      tierLabel = "covered";
+    }
+
+    const chip = document.createElement("span");
+    chip.className = `roster-need-chip roster-need-${tier}`;
+    chip.textContent = position;
+    const slotWord = needScore === 1 ? "slot" : "slots";
+    chip.title = `${position}: ${needScore} open ${slotWord} — ${tierLabel}`;
+    container.appendChild(chip);
+  });
+}
+
 function renderRoster() {
   const container = document.getElementById("rosterSlots");
   container.innerHTML = "";
+
+  renderRosterNeedStrip();
 
   SLOT_ORDER.forEach(slotKey => {
     rosterSlots[slotKey].forEach((playerId, idx) => {

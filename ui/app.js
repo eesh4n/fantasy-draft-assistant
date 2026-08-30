@@ -663,7 +663,44 @@ function buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels) {
     lines.push(`Add their current roster below for a two-sided read -- right now this only evaluates whether the trade is good for YOU, not whether they'd actually want it.`);
   }
 
+  // Playoff SOS isn't blended into the VOR math (see sosBadge() below for
+  // why), but when a trade is otherwise too close to call on value alone,
+  // a notably tough/easy Weeks 15-17 slate is a legitimate qualitative
+  // tiebreaker worth flagging -- it just shouldn't drown out a trade
+  // that's already a clear win or loss on value.
+  if (Math.abs(rawDiff) <= 0.6) {
+    const giveSos = mostExtremeSos(give.players);
+    const receiveSos = mostExtremeSos(receive.players);
+    const isNotable = x => x && (x.player.stats.sos_playoff_rank <= 8 || x.player.stats.sos_playoff_rank >= 25);
+    const giveNotable = isNotable(giveSos);
+    const receiveNotable = isNotable(receiveSos);
+    if (receiveNotable && (!giveNotable || Math.abs(receiveSos.player.stats.sos_playoff_rank - 16.5) > Math.abs(giveSos.player.stats.sos_playoff_rank - 16.5))) {
+      const rank = receiveSos.player.stats.sos_playoff_rank;
+      const descriptor = rank <= 8 ? "a tough" : "an easy";
+      lines.push(`This trade is close on value, so it's worth weighing playoff schedule: ${escapeHtml(receiveSos.player.name)} (you'd receive) has ${descriptor} Weeks 15-17 slate (#${rank}), which matters more in a close call like this than it would in a lopsided trade.`);
+    } else if (giveNotable) {
+      const rank = giveSos.player.stats.sos_playoff_rank;
+      const descriptor = rank <= 8 ? "a tough" : "an easy";
+      lines.push(`This trade is close on value, so it's worth weighing playoff schedule: ${escapeHtml(giveSos.player.name)} (you'd give up) has ${descriptor} Weeks 15-17 slate (#${rank}), which matters more in a close call like this than it would in a lopsided trade.`);
+    }
+  }
+
   return { verdict, detail: lines.join(" ") };
+}
+
+// Returns the {player, vor} entry (from a computeTradeSide().players array)
+// whose sos_playoff_rank is most extreme (closest to 1 or 32), or null if
+// none of the players have SOS data. Used to pick a single most-relevant
+// callout rather than enumerating every player's schedule.
+function mostExtremeSos(playersWithVor) {
+  let best = null, bestDist = -1;
+  for (const x of playersWithVor) {
+    const rank = x.player.stats && x.player.stats.sos_playoff_rank;
+    if (rank == null) continue;
+    const dist = Math.abs(rank - 16.5);
+    if (dist > bestDist) { best = x; bestDist = dist; }
+  }
+  return best;
 }
 
 // Team-level SOS context, not blended into VOR -- this pipeline has no
@@ -762,7 +799,7 @@ function renderTradeCalculator() {
       <div class="trade-search-results" data-side="their"></div>
       <div class="trade-player-list trade-their-list">${theirPlayers.map(tradeTheirRosterRow).join("") || '<div class="trade-empty">No players added -- the verdict above only evaluates the trade for you until this is filled in</div>'}</div>
     </div>
-    <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data -- it's informational only, not blended into the VOR math (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
+    <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data, and called out below when it's close enough to matter -- not blended into the VOR math itself (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
   `;
 
   content.querySelectorAll(".trade-search").forEach(input => {

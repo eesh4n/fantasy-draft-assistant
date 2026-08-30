@@ -482,6 +482,100 @@ let tradeReceiveIds = new Set();
 // tell you whether the other manager would realistically accept.
 let tradeTheirIds = new Set();
 
+const TRADE_HISTORY_KEY = "draftAssistant.tradeHistory.v1";
+const TRADE_HISTORY_MAX = 20;
+
+// Lightweight save/load recall for evaluated trades -- NOT a permanent
+// archive (capped at TRADE_HISTORY_MAX, oldest dropped first), just a way
+// to revisit or compare a trade you already looked at. Names are stored
+// alongside ids so a saved trade still displays sensibly even if a player
+// is later removed from the dataset (e.g. offseason roster file refresh).
+function loadTradeHistory() {
+  try {
+    const raw = localStorage.getItem(TRADE_HISTORY_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { console.warn("Failed to load trade history", e); }
+  return [];
+}
+
+function saveTradeHistory(list) {
+  try {
+    localStorage.setItem(TRADE_HISTORY_KEY, JSON.stringify(list));
+  } catch (e) { console.warn("Failed to save trade history", e); }
+}
+
+function saveCurrentTrade() {
+  if (tradeGiveIds.size === 0 || tradeReceiveIds.size === 0) return;
+  const nameFor = id => {
+    const p = allPlayers.find(pl => pl.id === id);
+    return p ? p.name : id;
+  };
+  const entry = {
+    id: `trade_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    giveIds: Array.from(tradeGiveIds),
+    receiveIds: Array.from(tradeReceiveIds),
+    theirIds: Array.from(tradeTheirIds),
+    savedAt: new Date().toISOString(),
+    giveNames: Array.from(tradeGiveIds).map(nameFor),
+    receiveNames: Array.from(tradeReceiveIds).map(nameFor),
+  };
+  const history = loadTradeHistory();
+  history.push(entry);
+  while (history.length > TRADE_HISTORY_MAX) history.shift();
+  saveTradeHistory(history);
+  renderTradeCalculator();
+}
+
+function loadSavedTrade(entryId) {
+  const history = loadTradeHistory();
+  const entry = history.find(e => e.id === entryId);
+  if (!entry) return;
+  const validIds = new Set(allPlayers.map(p => p.id));
+  tradeGiveIds = new Set((entry.giveIds || []).filter(id => validIds.has(id)));
+  tradeReceiveIds = new Set((entry.receiveIds || []).filter(id => validIds.has(id)));
+  tradeTheirIds = new Set((entry.theirIds || []).filter(id => validIds.has(id)));
+  renderTradeCalculator();
+}
+
+function deleteSavedTrade(entryId) {
+  const history = loadTradeHistory().filter(e => e.id !== entryId);
+  saveTradeHistory(history);
+  renderTradeCalculator();
+}
+
+// Simple day-granularity relative time (e.g. "today", "3d ago") falling
+// back to a short date once it's old enough that "Nd ago" stops being
+// useful at a glance.
+function formatTradeSavedAt(iso) {
+  const saved = new Date(iso);
+  if (isNaN(saved.getTime())) return "";
+  const now = new Date();
+  const dayMs = 24 * 60 * 60 * 1000;
+  const diffDays = Math.floor((new Date(now.toDateString()) - new Date(saved.toDateString())) / dayMs);
+  if (diffDays <= 0) return "today";
+  if (diffDays === 1) return "yesterday";
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return saved.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function tradeHistoryItemHtml(entry) {
+  const give = (entry.giveNames || []).join(", ") || "—";
+  const receive = (entry.receiveNames || []).join(", ") || "—";
+  const when = formatTradeSavedAt(entry.savedAt);
+  return `
+    <div class="trade-history-item" data-id="${entry.id}">
+      <div class="trade-history-summary">
+        <span class="trade-history-line">Give: ${escapeHtml(give)} &rarr; Receive: ${escapeHtml(receive)}</span>
+        <span class="trade-history-when">saved ${escapeHtml(when)}</span>
+      </div>
+      <div class="trade-history-actions">
+        <button class="btn trade-history-load-btn" data-id="${entry.id}" type="button">Load</button>
+        <button class="btn btn-danger trade-history-delete-btn" data-id="${entry.id}" type="button">Delete</button>
+      </div>
+    </div>
+  `;
+}
+
 // Pure (non-mutating) version of assignPlayerToRoster/findOpenSlotIndex --
 // simulates filling a SEPARATE roster (the trade partner's) using the
 // exact same CONFIG.slotPriority logic your own roster uses, without
@@ -861,6 +955,7 @@ function renderTradeCalculator() {
   const rawDiff = computeRawDiff(give, receive);
   const sweetenerHtml = renderTradeSweetener(give, receive, replacementLevels, rawDiff);
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
+  const tradeHistory = loadTradeHistory();
 
   const content = document.getElementById("tradeContent");
   content.innerHTML = `
@@ -887,6 +982,7 @@ function renderTradeCalculator() {
       </div>
     </div>
     <div class="trade-verdict">${verdict}</div>
+    ${tradeGiveIds.size > 0 && tradeReceiveIds.size > 0 ? `<button class="btn trade-save-btn" type="button">Save this trade</button>` : ""}
     <div class="trade-detail">${detail}</div>
     ${sweetenerHtml}
     <div class="trade-their-roster">
@@ -894,6 +990,10 @@ function renderTradeCalculator() {
       <input class="trade-search" data-side="their" type="text" placeholder="Add players on the OTHER team's current roster…" autocomplete="off">
       <div class="trade-search-results" data-side="their"></div>
       <div class="trade-player-list trade-their-list">${theirPlayers.map(tradeTheirRosterRow).join("") || '<div class="trade-empty">No players added -- the verdict above only evaluates the trade for you until this is filled in</div>'}</div>
+    </div>
+    <div class="trade-history">
+      <h3>Saved Trades</h3>
+      <div class="trade-history-list">${tradeHistory.length ? tradeHistory.slice().reverse().map(tradeHistoryItemHtml).join("") : '<div class="trade-empty">No saved trades yet</div>'}</div>
     </div>
     <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data, and called out below when it's close enough to matter -- not blended into the VOR math itself (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
   `;
@@ -906,6 +1006,16 @@ function renderTradeCalculator() {
       tradeSideSet(btn.dataset.side).delete(btn.dataset.id);
       renderTradeCalculator();
     });
+  });
+  const saveBtn = content.querySelector(".trade-save-btn");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => saveCurrentTrade());
+  }
+  content.querySelectorAll(".trade-history-load-btn").forEach(btn => {
+    btn.addEventListener("click", () => loadSavedTrade(btn.dataset.id));
+  });
+  content.querySelectorAll(".trade-history-delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => deleteSavedTrade(btn.dataset.id));
   });
 }
 

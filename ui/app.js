@@ -734,6 +734,12 @@ function renderTradeCalculator() {
   content.innerHTML = `
     <h2 style="margin:0 0 6px;">Trade Calculator</h2>
     <p class="trade-subtitle">Free, built into this app -- no external sync. Each player shows both the raw value_score (this app's core composite) and VOR (that same value_score adjusted for positional scarcity) -- the verdict below uses VOR, since raw value_score isn't directly comparable across positions, but nothing is hidden.</p>
+    <div class="trade-feature-badges">
+      <span class="trade-feature-badge" title="Converts every player's value_score into VOR, so a scarce position (TE) isn't compared unfairly against a deep one (QB).">📊 Position scarcity</span>
+      <span class="trade-feature-badge" title="Whoever lands the single highest-VOR player gets a bonus -- one stud beats two mediocre players.">💎 Consolidation bonus</span>
+      <span class="trade-feature-badge" title="Re-weighted using YOUR actual open roster slots -- not a generic fairness score.">🎯 Your roster, personalized</span>
+      <span class="trade-feature-badge" title="Add the other team's roster to see if THEY'D actually want this trade too.">🔄 Two-sided read</span>
+    </div>
     <div class="trade-columns">
       <div class="trade-side">
         <h3>You Give</h3>

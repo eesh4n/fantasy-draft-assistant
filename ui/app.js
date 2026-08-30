@@ -1073,6 +1073,9 @@ function renderTradeCalculator() {
       <span class="trade-feature-badge" title="Close on value? We surface the player with the toughest or easiest Weeks 15-17 schedule as a tiebreaker.">🗓️ Playoff SOS tiebreaker</span>
       <span class="trade-feature-badge" title="If a trade's lopsided, we suggest the smallest sweetener that would even it out.">💡 Fair-trade finder</span>
       <span class="trade-feature-badge" title="Save any trade you're evaluating and reload it later to compare offers.">💾 Trade history</span>
+      <span class="trade-feature-badge" title="A quick A+ to F grade on top of the full breakdown, for an at-a-glance read.">🎓 Letter grade</span>
+      <span class="trade-feature-badge" title="Hold two competing offers side by side and see which one actually wins.">⚖️ Compare two offers</span>
+      <span class="trade-feature-badge" title="A one-click audit of your own bench for real trade value you're not using.">📤 Trade Block audit</span>
     </div>
     <button class="btn trade-compare-toggle-btn" type="button">${compareOffersEnabled ? "Hide second offer" : "Compare a second offer"}</button>
     <div class="trade-columns">
@@ -1209,23 +1212,40 @@ function computeTradeBlockCandidates() {
       return { player: p, vor, mult, isBench, score };
     });
 
-  // Primary pool: not a position of need (mult <= 1.0, i.e. the calculator's
-  // "covered"/"bench-only" tiers, never the "need" tiers above 1.0) AND a
-  // real, positive VOR -- actual market value worth shopping.
-  const primary = scored
-    .filter(x => x.mult <= 1.0 && x.vor > 0)
+  // Bug found via live testing: a 1.15x bench nudge isn't nearly enough to
+  // outweigh the raw VOR gap between a bench filler and an actual starter
+  // (e.g. Jahmyr Gibbs, VOR 2.10) -- the old single-pool sort surfaced star
+  // RUNNING STARTERS as "trade block" candidates just because their
+  // position wasn't short a slot. A self-audit tool suggesting you shop
+  // your own studs is actively wrong, not just suboptimal. Fix: bench
+  // surplus is its own strictly-higher-priority tier -- starters only ever
+  // appear as a fallback when bench can't fill the list, never ranked
+  // above a bench player by score alone.
+  const benchPrimary = scored
+    .filter(x => x.isBench && x.mult <= 1.0 && x.vor > 0)
     .sort((a, b) => b.score - a.score);
 
-  let candidates = primary;
+  let candidates = benchPrimary;
   let lean = false;
   if (candidates.length < TRADE_BLOCK_MIN_BEFORE_LEAN) {
-    // Widen to any non-need-position player (VOR can be at/below
-    // replacement) so a thin roster still shows *something*, per spec --
-    // still never a position you're actually short on.
-    candidates = scored
-      .filter(x => x.mult <= 1.0)
+    // Widen bench-only first (VOR can be at/below replacement), still
+    // never a starter, before ever considering starters at all.
+    const benchWidened = scored
+      .filter(x => x.isBench && x.mult <= 1.0)
       .sort((a, b) => b.score - a.score);
-    lean = true;
+    if (benchWidened.length >= TRADE_BLOCK_MIN_BEFORE_LEAN) {
+      candidates = benchWidened;
+      lean = true;
+    } else {
+      // Bench alone genuinely can't fill the list -- only now bring in
+      // deep-position starters, appended AFTER every bench candidate so
+      // they never outrank real bench surplus.
+      const starters = scored
+        .filter(x => !x.isBench && x.mult <= 1.0 && x.vor > 0)
+        .sort((a, b) => b.score - a.score);
+      candidates = [...benchWidened, ...starters];
+      lean = true;
+    }
   }
 
   return { candidates: candidates.slice(0, TRADE_BLOCK_MAX), openCounts, lean };

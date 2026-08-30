@@ -353,6 +353,7 @@ function closeAllOverlays() {
   document.getElementById("playerDetailOverlay").hidden = true;
   document.getElementById("compareOverlay").hidden = true;
   document.getElementById("tradeOverlay").hidden = true;
+  document.getElementById("tradeBlockOverlay").hidden = true;
 }
 
 // ---------- Compare players ----------
@@ -481,6 +482,17 @@ let tradeReceiveIds = new Set();
 // personalized read only ever reasons about your own needs, which can't
 // tell you whether the other manager would realistically accept.
 let tradeTheirIds = new Set();
+
+// "Compare a second offer" mode -- lets the user hold two independent
+// give/receive packages (Offer A and Offer B) from the SAME trade partner
+// side by side, e.g. two different counter-offers a partner floated for
+// the same player being shopped. Off by default so the calculator's
+// default single-offer behavior is unchanged; the second pair's ids are
+// intentionally NOT cleared when the toggle goes off, so re-enabling it
+// restores whatever was there (simplicity over cleanup, per spec).
+let compareOffersEnabled = false;
+let tradeGive2Ids = new Set();
+let tradeReceive2Ids = new Set();
 
 const TRADE_HISTORY_KEY = "draftAssistant.tradeHistory.v1";
 const TRADE_HISTORY_MAX = 20;
@@ -765,6 +777,22 @@ function renderTradeSweetener(give, receive, replacementLevels, rawDiff) {
   return "";
 }
 
+// Letter-grade version of the same rawDiff buildTradeVerdict's band()
+// labels -- wider spread (8 tiers instead of band()'s 5) so the badge
+// carries more granularity than the qualitative text. Symmetric around 0,
+// with "C" as the fair/even center, and always from the USER's
+// perspective (a trade that favors you grades higher).
+function tradeGradeLetter(rawDiff) {
+  if (rawDiff >= 1.2) return "A+";
+  if (rawDiff >= 0.6) return "A";
+  if (rawDiff >= 0.3) return "B";
+  if (rawDiff >= 0.15) return "C+";
+  if (rawDiff >= -0.15) return "C";
+  if (rawDiff >= -0.3) return "D+";
+  if (rawDiff >= -0.6) return "D";
+  return "F";
+}
+
 // theirOpenCounts is null when no partner roster has been entered --
 // two-sided evaluation is optional context, not required to use the
 // calculator at all.
@@ -928,6 +956,8 @@ function tradePlayerRow(player, vor, side) {
 function tradeSideSet(side) {
   if (side === "give") return tradeGiveIds;
   if (side === "receive") return tradeReceiveIds;
+  if (side === "give2") return tradeGive2Ids;
+  if (side === "receive2") return tradeReceive2Ids;
   return tradeTheirIds;
 }
 
@@ -945,6 +975,64 @@ function tradeTheirRosterRow(player) {
   `;
 }
 
+// ---------- Compare-two-offers mode (Offer B) ----------
+// Renders a second, fully independent give/receive pair using the exact
+// same computeTradeSide/buildTradeVerdict/tradePlayerRow pipeline as Offer
+// A below, so none of the grading logic is duplicated -- only the markup
+// wrapper differs. Kept as a standalone helper (rather than folding into
+// Offer A's own template block) so this stays structurally independent of
+// Offer A's `.trade-verdict`/`.trade-detail` divs, which other in-flight
+// trade-calculator work touches directly.
+function renderTradeOfferBSection(replacementLevels, openCounts, theirOpenCounts) {
+  const give2 = computeTradeSide(tradeGive2Ids, replacementLevels, openCounts);
+  const receive2 = computeTradeSide(tradeReceive2Ids, replacementLevels, openCounts);
+  const { verdict: verdict2, detail: detail2 } = buildTradeVerdict(give2, receive2, theirOpenCounts, replacementLevels);
+  const html = `
+    <div class="trade-offer-b">
+      <h3 class="trade-offer-b-heading">Offer B <span class="trade-optional-tag">a second, independent offer to compare against Offer A above</span></h3>
+      <div class="trade-columns">
+        <div class="trade-side">
+          <h3>You Give (B)</h3>
+          <input class="trade-search" data-side="give2" type="text" placeholder="Search a player to add…" autocomplete="off">
+          <div class="trade-search-results" data-side="give2"></div>
+          <div class="trade-player-list">${give2.players.map(x => tradePlayerRow(x.player, x.vor, "give2")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+        </div>
+        <div class="trade-side">
+          <h3>You Receive (B)</h3>
+          <input class="trade-search" data-side="receive2" type="text" placeholder="Search a player to add…" autocomplete="off">
+          <div class="trade-search-results" data-side="receive2"></div>
+          <div class="trade-player-list">${receive2.players.map(x => tradePlayerRow(x.player, x.vor, "receive2")).join("") || '<div class="trade-empty">No players added</div>'}</div>
+        </div>
+      </div>
+      <div class="trade-verdict trade-verdict-b">${verdict2}</div>
+      <div class="trade-detail trade-detail-b">${detail2}</div>
+    </div>
+  `;
+  return { give2, receive2, html };
+}
+
+// One-line head-to-head summary comparing Offer A and Offer B, using the
+// same neutral rawDiff math each offer's own verdict is already built from
+// (computeRawDiff) -- so this always agrees with what each offer's
+// individual verdict says, instead of a separately-tuned comparison metric
+// that could drift out of sync with them.
+function renderTradeOfferComparison(give, receive, give2, receive2) {
+  const aReady = give.players.length > 0 && receive.players.length > 0;
+  const bReady = give2.players.length > 0 && receive2.players.length > 0;
+  if (!aReady || !bReady) {
+    return `<div class="trade-offer-compare trade-offer-compare-pending">Add players to both sides of Offer A and Offer B to compare them head-to-head.</div>`;
+  }
+  const rawDiffA = computeRawDiff(give, receive);
+  const rawDiffB = computeRawDiff(give2, receive2);
+  const spread = rawDiffB - rawDiffA;
+  if (Math.abs(spread) < 0.15) {
+    return `<div class="trade-offer-compare">Offer A and Offer B are roughly equivalent for you (within ${Math.abs(spread).toFixed(2)} value units).</div>`;
+  }
+  const better = spread > 0 ? "B" : "A";
+  const worse = spread > 0 ? "A" : "B";
+  return `<div class="trade-offer-compare trade-offer-compare-${better === "B" ? "b-wins" : "a-wins"}">Offer ${better} is a better deal for you than Offer ${worse} by ${Math.abs(spread).toFixed(2)} value units.</div>`;
+}
+
 function renderTradeCalculator() {
   const replacementLevels = computeReplacementLevels();
   const openCounts = getOpenSlotCounts();
@@ -954,8 +1042,24 @@ function renderTradeCalculator() {
   const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels);
   const rawDiff = computeRawDiff(give, receive);
   const sweetenerHtml = renderTradeSweetener(give, receive, replacementLevels, rawDiff);
+  const gradeBadgeHtml = give.players.length > 0 && receive.players.length > 0
+    ? (() => {
+        const letter = tradeGradeLetter(rawDiff);
+        return `<div class="trade-grade-badge grade-${letter.replace('+', 'plus')}">${letter}</div>`;
+      })()
+    : "";
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
   const tradeHistory = loadTradeHistory();
+
+  // Compare-two-offers mode: only computed/rendered when the toggle is on,
+  // so the common (single-offer) path pays no extra cost.
+  let offerBHtml = "";
+  let offerCompareHtml = "";
+  if (compareOffersEnabled) {
+    const offerB = renderTradeOfferBSection(replacementLevels, openCounts, theirOpenCounts);
+    offerBHtml = offerB.html;
+    offerCompareHtml = renderTradeOfferComparison(give, receive, offerB.give2, offerB.receive2);
+  }
 
   const content = document.getElementById("tradeContent");
   content.innerHTML = `
@@ -969,25 +1073,32 @@ function renderTradeCalculator() {
       <span class="trade-feature-badge" title="Close on value? We surface the player with the toughest or easiest Weeks 15-17 schedule as a tiebreaker.">🗓️ Playoff SOS tiebreaker</span>
       <span class="trade-feature-badge" title="If a trade's lopsided, we suggest the smallest sweetener that would even it out.">💡 Fair-trade finder</span>
       <span class="trade-feature-badge" title="Save any trade you're evaluating and reload it later to compare offers.">💾 Trade history</span>
+      <span class="trade-feature-badge" title="A quick A+ to F grade on top of the full breakdown, for an at-a-glance read.">🎓 Letter grade</span>
+      <span class="trade-feature-badge" title="Hold two competing offers side by side and see which one actually wins.">⚖️ Compare two offers</span>
+      <span class="trade-feature-badge" title="A one-click audit of your own bench for real trade value you're not using.">📤 Trade Block audit</span>
     </div>
+    <button class="btn trade-compare-toggle-btn" type="button">${compareOffersEnabled ? "Hide second offer" : "Compare a second offer"}</button>
     <div class="trade-columns">
       <div class="trade-side">
-        <h3>You Give</h3>
+        <h3>You Give${compareOffersEnabled ? " (A)" : ""}</h3>
         <input class="trade-search" data-side="give" type="text" placeholder="Search a player to add…" autocomplete="off">
         <div class="trade-search-results" data-side="give"></div>
         <div class="trade-player-list">${give.players.map(x => tradePlayerRow(x.player, x.vor, "give")).join("") || '<div class="trade-empty">No players added</div>'}</div>
       </div>
       <div class="trade-side">
-        <h3>You Receive</h3>
+        <h3>You Receive${compareOffersEnabled ? " (A)" : ""}</h3>
         <input class="trade-search" data-side="receive" type="text" placeholder="Search a player to add…" autocomplete="off">
         <div class="trade-search-results" data-side="receive"></div>
         <div class="trade-player-list">${receive.players.map(x => tradePlayerRow(x.player, x.vor, "receive")).join("") || '<div class="trade-empty">No players added</div>'}</div>
       </div>
     </div>
+    ${gradeBadgeHtml}
     <div class="trade-verdict">${verdict}</div>
     ${tradeGiveIds.size > 0 && tradeReceiveIds.size > 0 ? `<button class="btn trade-save-btn" type="button">Save this trade</button>` : ""}
     <div class="trade-detail">${detail}</div>
     ${sweetenerHtml}
+    ${offerBHtml}
+    ${compareOffersEnabled ? offerCompareHtml : ""}
     <div class="trade-their-roster">
       <h3>Their Current Roster <span class="trade-optional-tag">optional -- for a two-sided fairness read</span></h3>
       <input class="trade-search" data-side="their" type="text" placeholder="Add players on the OTHER team's current roster…" autocomplete="off">
@@ -1013,6 +1124,13 @@ function renderTradeCalculator() {
   const saveBtn = content.querySelector(".trade-save-btn");
   if (saveBtn) {
     saveBtn.addEventListener("click", () => saveCurrentTrade());
+  }
+  const compareToggleBtn = content.querySelector(".trade-compare-toggle-btn");
+  if (compareToggleBtn) {
+    compareToggleBtn.addEventListener("click", () => {
+      compareOffersEnabled = !compareOffersEnabled;
+      renderTradeCalculator();
+    });
   }
   content.querySelectorAll(".trade-history-load-btn").forEach(btn => {
     btn.addEventListener("click", () => loadSavedTrade(btn.dataset.id));
@@ -1049,6 +1167,155 @@ function openTradeCalculator() {
   closeAllOverlays();
   renderTradeCalculator();
   document.getElementById("tradeOverlay").hidden = false;
+}
+
+// ---------- Trade Block self-audit ----------
+// "Which of MY OWN players should I be shopping around?" -- the inverse
+// question from the Trade Calculator (which asks "is this specific trade
+// fair?"). Reuses the exact same VOR/replacement-level/tradeNeedMultiplier
+// pipeline as the calculator so the two features never disagree about a
+// player's value, but flips tradeNeedMultiplier's meaning: the calculator
+// uses a LOW multiplier (surplus position) to discount a player's value
+// when judging an incoming trade, while a trade-block candidate is GOOD
+// specifically because their multiplier is low -- you have real, positive
+// trade value (VOR) at a position you don't personally need. A player at
+// a position you're short on (multiplier > 1.0) never belongs on this
+// list even with a great VOR, since you need them yourself.
+const TRADE_BLOCK_MAX = 8;
+const TRADE_BLOCK_MIN_BEFORE_LEAN = 3;
+// Bench occupants are the primary candidates (per spec) -- nudge their
+// score up a bit so they rank ahead of a similarly-valued started player,
+// without hard-excluding a deep-position starter from showing up too.
+const TRADE_BLOCK_BENCH_BIAS = 1.15;
+
+function computeTradeBlockCandidates() {
+  const replacementLevels = computeReplacementLevels();
+  const openCounts = getOpenSlotCounts();
+
+  const rosteredIds = new Set();
+  SLOT_ORDER.forEach(key => {
+    rosterSlots[key].forEach(id => { if (id) rosteredIds.add(id); });
+  });
+  const benchIds = new Set(rosterSlots.BENCH.filter(id => id));
+
+  const scored = allPlayers
+    .filter(p => rosteredIds.has(p.id))
+    .map(p => {
+      const vor = vorFor(p, replacementLevels);
+      const mult = tradeNeedMultiplier(p.position, openCounts);
+      const isBench = benchIds.has(p.id);
+      // Direction is deliberately inverted from weightedVorTotal: dividing
+      // by mult means a LOW need multiplier (surplus/covered position)
+      // amplifies the score, and a HIGH multiplier (real need) suppresses
+      // it -- the opposite of how the Trade Calculator personalizes value.
+      const score = (vor / mult) * (isBench ? TRADE_BLOCK_BENCH_BIAS : 1.0);
+      return { player: p, vor, mult, isBench, score };
+    });
+
+  // Bug found via live testing: a 1.15x bench nudge isn't nearly enough to
+  // outweigh the raw VOR gap between a bench filler and an actual starter
+  // (e.g. Jahmyr Gibbs, VOR 2.10) -- the old single-pool sort surfaced star
+  // RUNNING STARTERS as "trade block" candidates just because their
+  // position wasn't short a slot. A self-audit tool suggesting you shop
+  // your own studs is actively wrong, not just suboptimal. Fix: bench
+  // surplus is its own strictly-higher-priority tier -- starters only ever
+  // appear as a fallback when bench can't fill the list, never ranked
+  // above a bench player by score alone.
+  const benchPrimary = scored
+    .filter(x => x.isBench && x.mult <= 1.0 && x.vor > 0)
+    .sort((a, b) => b.score - a.score);
+
+  let candidates = benchPrimary;
+  let lean = false;
+  if (candidates.length < TRADE_BLOCK_MIN_BEFORE_LEAN) {
+    // Widen bench-only first (VOR can be at/below replacement), still
+    // never a starter, before ever considering starters at all.
+    const benchWidened = scored
+      .filter(x => x.isBench && x.mult <= 1.0)
+      .sort((a, b) => b.score - a.score);
+    if (benchWidened.length >= TRADE_BLOCK_MIN_BEFORE_LEAN) {
+      candidates = benchWidened;
+      lean = true;
+    } else {
+      // Bench alone genuinely can't fill the list -- only now bring in
+      // deep-position starters, appended AFTER every bench candidate so
+      // they never outrank real bench surplus.
+      const starters = scored
+        .filter(x => !x.isBench && x.mult <= 1.0 && x.vor > 0)
+        .sort((a, b) => b.score - a.score);
+      candidates = [...benchWidened, ...starters];
+      lean = true;
+    }
+  }
+
+  return { candidates: candidates.slice(0, TRADE_BLOCK_MAX), openCounts, lean };
+}
+
+// Short, dynamic (numbers-driven) explanation for why a given player
+// showed up here -- matches this file's existing style of building
+// explanatory text from the actual computed values (see buildTradeVerdict)
+// rather than a fixed canned string.
+function tradeBlockReason(x) {
+  const pos = x.player.position;
+  const parts = [];
+  if (x.mult <= 0.6) {
+    parts.push(`${pos} is fully covered on your roster right now, so this VOR of ${x.vor.toFixed(2)} is surplus value you're not using`);
+  } else if (x.mult <= 1.0) {
+    parts.push(`${pos} isn't a starting need for you (only bench depth), and a VOR of ${x.vor.toFixed(2)} means the market still values them`);
+  } else {
+    parts.push(`Solid VOR (${x.vor.toFixed(2)}), but ${pos} is thin on your bench, so this is a fallback pick`);
+  }
+  if (x.isBench) {
+    parts.push("currently on your bench -- a clean chip to shop.");
+  } else {
+    parts.push(`currently in your starting lineup, but ${pos} is deep enough behind them that moving them wouldn't hurt.`);
+  }
+  return parts.join(" -- ");
+}
+
+function tradeBlockRow(x) {
+  const rawScore = typeof x.player.value_score === "number" ? x.player.value_score.toFixed(2) : "—";
+  return `
+    <div class="trade-block-item">
+      <div class="trade-player-row trade-block-row" data-id="${x.player.id}">
+        <span class="pos-pill pos-${x.player.position}">${x.player.position}</span>
+        <span class="trade-player-name">${escapeHtml(x.player.name)}</span>
+        <span class="trade-player-team">${escapeHtml(x.player.team)}</span>
+        <span class="trade-player-values" title="value_score = this app's core composite; VOR = value_score minus the replacement-level player at this position/league size">value_score ${rawScore} · VOR ${x.vor.toFixed(2)} · ${x.isBench ? "bench" : "starter"}</span>
+        <button class="btn trade-block-send-btn" data-id="${x.player.id}" type="button">Send to Trade Calculator</button>
+      </div>
+      <div class="trade-block-reason">${tradeBlockReason(x)}</div>
+    </div>
+  `;
+}
+
+function renderTradeBlock() {
+  const { candidates, lean } = computeTradeBlockCandidates();
+  const content = document.getElementById("tradeBlockContent");
+
+  const leanNote = candidates.length === 0
+    ? `<div class="trade-block-note">Your roster is lean -- not much to trade away right now.</div>`
+    : (lean ? `<div class="trade-block-note">Your roster is lean -- not much surplus to trade away, but here's what's available.</div>` : "");
+
+  content.innerHTML = `
+    <h2 style="margin:0 0 6px;">Trade Block</h2>
+    <p class="trade-subtitle">A one-click self-audit of your OWN roster, ranked by the biggest surplus you're not using -- real trade value (VOR) at a position you don't personally need right now. Bench players are prioritized, but a deep-position starter can still show up.</p>
+    ${leanNote}
+    <div class="trade-block-list">${candidates.map(tradeBlockRow).join("") || ""}</div>
+  `;
+
+  content.querySelectorAll(".trade-block-send-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      tradeGiveIds.add(btn.dataset.id);
+      openTradeCalculator();
+    });
+  });
+}
+
+function openTradeBlock() {
+  closeAllOverlays();
+  renderTradeBlock();
+  document.getElementById("tradeBlockOverlay").hidden = false;
 }
 
 // Native confirm() is unreliable here — some browsers/embedded webviews
@@ -1471,9 +1738,45 @@ const SLOT_LABELS = {
   FLEX: "FLEX", K: "K", DEF: "DEF", BENCH: "BENCH"
 };
 
+// Positions shown in the roster need-strip: individual positions only
+// (FLEX and BENCH aren't a single position, so they're excluded).
+const ROSTER_NEED_POSITIONS = ["QB", "RB", "WR", "TE", "K", "DEF"];
+
+function renderRosterNeedStrip() {
+  const container = document.getElementById("rosterNeedStrip");
+  if (!container) return;
+  container.innerHTML = "";
+
+  const openCounts = getOpenSlotCounts();
+
+  ROSTER_NEED_POSITIONS.forEach(position => {
+    const needScore = positionNeedScore(position, openCounts);
+    let tier, tierLabel;
+    if (needScore >= 2) {
+      tier = "high";
+      tierLabel = "high need";
+    } else if (needScore === 1) {
+      tier = "some";
+      tierLabel = "could use depth";
+    } else {
+      tier = "covered";
+      tierLabel = "covered";
+    }
+
+    const chip = document.createElement("span");
+    chip.className = `roster-need-chip roster-need-${tier}`;
+    chip.textContent = position;
+    const slotWord = needScore === 1 ? "slot" : "slots";
+    chip.title = `${position}: ${needScore} open ${slotWord} — ${tierLabel}`;
+    container.appendChild(chip);
+  });
+}
+
 function renderRoster() {
   const container = document.getElementById("rosterSlots");
   container.innerHTML = "";
+
+  renderRosterNeedStrip();
 
   SLOT_ORDER.forEach(slotKey => {
     rosterSlots[slotKey].forEach((playerId, idx) => {
@@ -1602,6 +1905,13 @@ function wireControls() {
   const tradeOverlay = document.getElementById("tradeOverlay");
   tradeOverlay.addEventListener("click", e => {
     if (e.target === tradeOverlay) closeAllOverlays();
+  });
+
+  document.getElementById("tradeBlockBtn").addEventListener("click", openTradeBlock);
+  document.getElementById("tradeBlockCloseBtn").addEventListener("click", closeAllOverlays);
+  const tradeBlockOverlay = document.getElementById("tradeBlockOverlay");
+  tradeBlockOverlay.addEventListener("click", e => {
+    if (e.target === tradeBlockOverlay) closeAllOverlays();
   });
 
   document.addEventListener("keydown", e => {

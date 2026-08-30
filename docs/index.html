@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draft Assistant</title>
+<!--
+  CACHE-BUSTING BUILD VERSION
+  ---------------------------
+  app.js and style.css are loaded below with a "?v=BUILD_VERSION" query string
+  so browsers can't silently keep serving a stale cached copy after edits.
+  IMPORTANT: bump BUILD_VERSION (e.g. v3 -> v4) every single time you change
+  app.js or style.css, otherwise browsers may keep using the old cached file
+  even after a refresh. Update BOTH tags below AND the #buildVersionBadge
+  text in the header so the on-screen badge stays accurate.
+-->
+<link rel="stylesheet" href="style.css?v=v28">
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <h1>Fantasy Draft Assistant</h1>
+    <div class="topbar-actions">
+      <span id="dataSourceBadge" class="badge">loading…</span>
+      <span id="buildVersionBadge" class="badge badge-build" title="Build version — confirm this matches the latest code">build v28</span>
+      <button id="tradeCalcBtn" class="btn" type="button">Trade Calculator</button>
+      <button id="resetBtn" class="btn btn-danger">Reset Draft</button>
+    </div>
+  </header>
+
+  <div id="resetConfirmOverlay" class="reset-confirm-overlay" hidden>
+    <div class="reset-confirm-box">
+      <p>Reset the entire draft? This clears drafted players, your roster, and cannot be undone.</p>
+      <div class="reset-confirm-actions">
+        <button id="resetCancelBtn" class="btn">Cancel</button>
+        <button id="resetConfirmBtn" class="btn btn-danger">Reset Draft</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="playerDetailOverlay" class="reset-confirm-overlay" hidden>
+    <div class="player-detail-box">
+      <button id="playerDetailCloseBtn" class="detail-close-btn" aria-label="Close">&times;</button>
+      <div id="playerDetailContent"></div>
+    </div>
+  </div>
+
+  <div id="compareOverlay" class="reset-confirm-overlay" hidden>
+    <div class="compare-box">
+      <button id="compareCloseBtn" class="detail-close-btn" aria-label="Close">&times;</button>
+      <div id="compareContent"></div>
+    </div>
+  </div>
+
+  <div id="compareBar" class="compare-bar" hidden>
+    <span id="compareBarCount"></span>
+    <button id="compareBarOpenBtn" class="btn" type="button">Compare</button>
+    <button id="compareBarClearBtn" class="btn" type="button">Clear</button>
+  </div>
+
+  <div id="tradeOverlay" class="reset-confirm-overlay" hidden>
+    <div class="trade-box">
+      <button id="tradeCloseBtn" class="detail-close-btn" aria-label="Close">&times;</button>
+      <div id="tradeContent"></div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+
+    <!-- LEFT: player pool -->
+    <section class="pool-panel">
+      <div class="search-row">
+        <input id="searchInput" type="text" placeholder="Filter by name or position (QB, RB, WR, TE, K, DEF)…" autocomplete="off" autofocus>
+        <div class="pos-filters" id="posFilters">
+          <button class="pos-chip active" data-pos="ALL">ALL</button>
+          <button class="pos-chip" data-pos="QB">QB</button>
+          <button class="pos-chip" data-pos="RB">RB</button>
+          <button class="pos-chip" data-pos="WR">WR</button>
+          <button class="pos-chip" data-pos="TE">TE</button>
+          <button class="pos-chip" data-pos="K">K</button>
+          <button class="pos-chip" data-pos="DEF">DEF</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="player-table">
+          <thead>
+            <tr>
+              <th class="col-compare" title="Select players to compare">Cmp</th>
+              <th class="col-name">Name</th>
+              <th id="sortPos" class="sortable-th">Pos</th>
+              <th id="sortTeam" class="sortable-th">Team</th>
+              <th id="sortValRank" class="sortable-th">Val Rank</th>
+              <th id="sortAdp" class="sortable-th">ADP</th>
+              <th id="sortGap" class="sortable-th">Gap</th>
+              <th id="sortPpg" class="sortable-th" title="Analyst's context-adjusted 2025 PPG, from Joel Smyth's Draft Guide 2026 -- blank if this player isn't covered by the guide">'25 PPG</th>
+              <th class="col-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="playerTableBody">
+          </tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty-state" style="display:none;">No players match.</div>
+    </section>
+
+    <!-- RIGHT: roster + recommendations -->
+    <aside class="side-panel">
+      <div class="panel roster-panel">
+        <h2>Your Roster</h2>
+        <div id="rosterSlots" class="roster-slots"></div>
+      </div>
+
+      <div class="panel rec-panel">
+        <h2>Top Recommendations</h2>
+        <div id="recList" class="rec-list"></div>
+      </div>
+
+      <div class="panel strategy-panel">
+        <div class="strategy-header">
+          <h2>Draft Strategy</h2>
+          <label class="league-size-label">Teams
+            <input id="leagueSizeInput" type="number" min="4" max="20" value="12">
+          </label>
+        </div>
+        <div id="strategyRound" class="strategy-round"></div>
+        <button id="strategyRulesToggle" class="btn strategy-rules-toggle" type="button">Show full rules & position notes</button>
+        <div id="strategyRulesBody" class="strategy-rules-body" hidden></div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<script src="app.js?v=v28"></script>
+</body>
+</html>

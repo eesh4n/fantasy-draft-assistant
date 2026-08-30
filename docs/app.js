@@ -482,6 +482,100 @@ let tradeReceiveIds = new Set();
 // tell you whether the other manager would realistically accept.
 let tradeTheirIds = new Set();
 
+const TRADE_HISTORY_KEY = "draftAssistant.tradeHistory.v1";
+const TRADE_HISTORY_MAX = 20;
+
+// Lightweight save/load recall for evaluated trades -- NOT a permanent
+// archive (capped at TRADE_HISTORY_MAX, oldest dropped first), just a way
+// to revisit or compare a trade you already looked at. Names are stored
+// alongside ids so a saved trade still displays sensibly even if a player
+// is later removed from the dataset (e.g. offseason roster file refresh).
+function loadTradeHistory() {
+  try {
+    const raw = localStorage.getItem(TRADE_HISTORY_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { console.warn("Failed to load trade history", e); }
+  return [];
+}
+
+function saveTradeHistory(list) {
+  try {
+    localStorage.setItem(TRADE_HISTORY_KEY, JSON.stringify(list));
+  } catch (e) { console.warn("Failed to save trade history", e); }
+}
+
+function saveCurrentTrade() {
+  if (tradeGiveIds.size === 0 || tradeReceiveIds.size === 0) return;
+  const nameFor = id => {
+    const p = allPlayers.find(pl => pl.id === id);
+    return p ? p.name : id;
+  };
+  const entry = {
+    id: `trade_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+    giveIds: Array.from(tradeGiveIds),
+    receiveIds: Array.from(tradeReceiveIds),
+    theirIds: Array.from(tradeTheirIds),
+    savedAt: new Date().toISOString(),
+    giveNames: Array.from(tradeGiveIds).map(nameFor),
+    receiveNames: Array.from(tradeReceiveIds).map(nameFor),
+  };
+  const history = loadTradeHistory();
+  history.push(entry);
+  while (history.length > TRADE_HISTORY_MAX) history.shift();
+  saveTradeHistory(history);
+  renderTradeCalculator();
+}
+
+function loadSavedTrade(entryId) {
+  const history = loadTradeHistory();
+  const entry = history.find(e => e.id === entryId);
+  if (!entry) return;
+  const validIds = new Set(allPlayers.map(p => p.id));
+  tradeGiveIds = new Set((entry.giveIds || []).filter(id => validIds.has(id)));
+  tradeReceiveIds = new Set((entry.receiveIds || []).filter(id => validIds.has(id)));
+  tradeTheirIds = new Set((entry.theirIds || []).filter(id => validIds.has(id)));
+  renderTradeCalculator();
+}
+
+function deleteSavedTrade(entryId) {
+  const history = loadTradeHistory().filter(e => e.id !== entryId);
+  saveTradeHistory(history);
+  renderTradeCalculator();
+}
+
+// Simple day-granularity relative time (e.g. "today", "3d ago") falling
+// back to a short date once it's old enough that "Nd ago" stops being
+// useful at a glance.
+function formatTradeSavedAt(iso) {
+  const saved = new Date(iso);
+  if (isNaN(saved.getTime())) return "";
+  const now = new Date();
+  const dayMs = 24 * 60 * 60 * 1000;
+  const diffDays = Math.floor((new Date(now.toDateString()) - new Date(saved.toDateString())) / dayMs);
+  if (diffDays <= 0) return "today";
+  if (diffDays === 1) return "yesterday";
+  if (diffDays < 7) return `${diffDays}d ago`;
+  return saved.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function tradeHistoryItemHtml(entry) {
+  const give = (entry.giveNames || []).join(", ") || "—";
+  const receive = (entry.receiveNames || []).join(", ") || "—";
+  const when = formatTradeSavedAt(entry.savedAt);
+  return `
+    <div class="trade-history-item" data-id="${entry.id}">
+      <div class="trade-history-summary">
+        <span class="trade-history-line">Give: ${escapeHtml(give)} &rarr; Receive: ${escapeHtml(receive)}</span>
+        <span class="trade-history-when">saved ${escapeHtml(when)}</span>
+      </div>
+      <div class="trade-history-actions">
+        <button class="btn trade-history-load-btn" data-id="${entry.id}" type="button">Load</button>
+        <button class="btn btn-danger trade-history-delete-btn" data-id="${entry.id}" type="button">Delete</button>
+      </div>
+    </div>
+  `;
+}
+
 // Pure (non-mutating) version of assignPlayerToRoster/findOpenSlotIndex --
 // simulates filling a SEPARATE roster (the trade partner's) using the
 // exact same CONFIG.slotPriority logic your own roster uses, without
@@ -576,6 +670,101 @@ function computeTradeSide(ids, replacementLevels, openCounts) {
   return { players: withVor, rawTotal, personalizedTotal, bestVor };
 }
 
+// Neutral (non-roster-weighted) VOR diff, including the consolidation
+// bonus -- this is the same "rawDiff" buildTradeVerdict uses for its
+// band() label. Pulled out to a standalone helper so findSweetener (and
+// anything else that needs to test "what if we added player X") can
+// recompute this exact number without duplicating/drifting from the
+// verdict's own math.
+function computeRawDiff(give, receive) {
+  const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+  const receiveAdj = receive.rawTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
+  return receiveAdj - giveAdj;
+}
+
+// ---------- Trade sweetener suggestions ----------
+// If the trade currently favors the OTHER side (rawDiff < -0.15, matching
+// buildTradeVerdict's own "slightly/clearly favors them" bands), the fix
+// is for the user to ask to RECEIVE more -- not give more -- so this
+// searches the trade partner's CURRENT roster (tradeTheirIds, the only
+// visibility this app has into what they could offer as bait) for the
+// smallest possible addition to "You Receive" that brings the trade back
+// to roughly even. Smallest on purpose: a real trade partner is more
+// likely to part with their least valuable spare piece than their best
+// bench player, so we search from the low end and stop at the first (i.e.
+// lowest-VOR) player that actually closes the gap, rather than suggesting
+// whichever partner player is most valuable overall.
+//
+// If the trade instead clearly favors the USER (rawDiff > 0.6), there's
+// no gap to close -- but a lopsided offer is also the kind of offer a
+// real manager is likely to decline or lowball-counter. In that case,
+// suggest sweetening FROM the user's own bench (rosterSlots) with their
+// single lowest-VOR spare player, as a lighter-touch "make it more likely
+// to get accepted" note.
+function findSweetener(give, receive, replacementLevels, rawDiff) {
+  if (rawDiff < -0.15) {
+    if (tradeTheirIds.size === 0) {
+      return { direction: "need_their_roster" };
+    }
+
+    const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
+    const candidates = allPlayers
+      .filter(p => tradeTheirIds.has(p.id) && !tradeGiveIds.has(p.id) && !tradeReceiveIds.has(p.id))
+      .map(p => ({ player: p, vor: vorFor(p, replacementLevels) }))
+      .sort((a, b) => a.vor - b.vor);
+
+    for (const cand of candidates) {
+      const newRawTotal = receive.rawTotal + cand.vor;
+      const newBestVor = Math.max(receive.bestVor, cand.vor);
+      const newReceiveAdj = newRawTotal + CONSOLIDATION_WEIGHT * newBestVor;
+      const newDiff = newReceiveAdj - giveAdj;
+      if (newDiff >= -0.15) {
+        return { direction: "add_to_receive", player: cand.player, newDiff };
+      }
+    }
+    return null; // nothing on their roster (alone) closes the gap
+  }
+
+  if (rawDiff > 0.6) {
+    const usedIds = new Set([...tradeGiveIds, ...tradeReceiveIds]);
+    const benchIds = [];
+    SLOT_ORDER.forEach(key => {
+      rosterSlots[key].forEach(id => {
+        if (id && !usedIds.has(id)) benchIds.push(id);
+      });
+    });
+    const spare = allPlayers
+      .filter(p => benchIds.includes(p.id))
+      .map(p => ({ player: p, vor: vorFor(p, replacementLevels) }))
+      .sort((a, b) => a.vor - b.vor)[0];
+    if (!spare) return null;
+    return { direction: "add_to_give", player: spare.player, newDiff: null };
+  }
+
+  return null;
+}
+
+function renderTradeSweetener(give, receive, replacementLevels, rawDiff) {
+  // Only meaningful once both sides actually have players -- rawDiff is
+  // undefined/garbage otherwise (buildTradeVerdict bails out earlier too).
+  if (give.players.length === 0 || receive.players.length === 0) return "";
+
+  const sweetener = findSweetener(give, receive, replacementLevels, rawDiff);
+  if (!sweetener) return "";
+
+  if (sweetener.direction === "need_their_roster") {
+    return `<div class="trade-sweetener">💡 Add their roster below to see which of their bench players would even out this trade.</div>`;
+  }
+  if (sweetener.direction === "add_to_receive") {
+    const vor = vorFor(sweetener.player, replacementLevels);
+    return `<div class="trade-sweetener">💡 <strong>Fair-trade sweetener:</strong> ask them to also include ${escapeHtml(sweetener.player.name)} (${escapeHtml(sweetener.player.position)}, VOR ${vor.toFixed(2)}) in "You Receive" -- that's the smallest addition from their current roster that would bring this trade to roughly even (${sweetener.newDiff >= 0 ? "+" : ""}${sweetener.newDiff.toFixed(2)}).</div>`;
+  }
+  if (sweetener.direction === "add_to_give") {
+    return `<div class="trade-sweetener">💡 This trade clearly favors you -- consider tossing in ${escapeHtml(sweetener.player.name)} (${escapeHtml(sweetener.player.position)}) from your bench to make the offer more likely to actually get accepted.</div>`;
+  }
+  return "";
+}
+
 // theirOpenCounts is null when no partner roster has been entered --
 // two-sided evaluation is optional context, not required to use the
 // calculator at all.
@@ -588,9 +777,7 @@ function buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels) {
     return { verdict: "Add at least one player on each side.", detail: "" };
   }
 
-  const giveAdj = give.rawTotal + CONSOLIDATION_WEIGHT * give.bestVor;
-  const receiveAdj = receive.rawTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
-  const rawDiff = receiveAdj - giveAdj;
+  const rawDiff = computeRawDiff(give, receive);
 
   const givePers = give.personalizedTotal + CONSOLIDATION_WEIGHT * give.bestVor;
   const receivePers = receive.personalizedTotal + CONSOLIDATION_WEIGHT * receive.bestVor;
@@ -663,7 +850,44 @@ function buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels) {
     lines.push(`Add their current roster below for a two-sided read -- right now this only evaluates whether the trade is good for YOU, not whether they'd actually want it.`);
   }
 
+  // Playoff SOS isn't blended into the VOR math (see sosBadge() below for
+  // why), but when a trade is otherwise too close to call on value alone,
+  // a notably tough/easy Weeks 15-17 slate is a legitimate qualitative
+  // tiebreaker worth flagging -- it just shouldn't drown out a trade
+  // that's already a clear win or loss on value.
+  if (Math.abs(rawDiff) <= 0.6) {
+    const giveSos = mostExtremeSos(give.players);
+    const receiveSos = mostExtremeSos(receive.players);
+    const isNotable = x => x && (x.player.stats.sos_playoff_rank <= 8 || x.player.stats.sos_playoff_rank >= 25);
+    const giveNotable = isNotable(giveSos);
+    const receiveNotable = isNotable(receiveSos);
+    if (receiveNotable && (!giveNotable || Math.abs(receiveSos.player.stats.sos_playoff_rank - 16.5) > Math.abs(giveSos.player.stats.sos_playoff_rank - 16.5))) {
+      const rank = receiveSos.player.stats.sos_playoff_rank;
+      const descriptor = rank <= 8 ? "a tough" : "an easy";
+      lines.push(`This trade is close on value, so it's worth weighing playoff schedule: ${escapeHtml(receiveSos.player.name)} (you'd receive) has ${descriptor} Weeks 15-17 slate (#${rank}), which matters more in a close call like this than it would in a lopsided trade.`);
+    } else if (giveNotable) {
+      const rank = giveSos.player.stats.sos_playoff_rank;
+      const descriptor = rank <= 8 ? "a tough" : "an easy";
+      lines.push(`This trade is close on value, so it's worth weighing playoff schedule: ${escapeHtml(giveSos.player.name)} (you'd give up) has ${descriptor} Weeks 15-17 slate (#${rank}), which matters more in a close call like this than it would in a lopsided trade.`);
+    }
+  }
+
   return { verdict, detail: lines.join(" ") };
+}
+
+// Returns the {player, vor} entry (from a computeTradeSide().players array)
+// whose sos_playoff_rank is most extreme (closest to 1 or 32), or null if
+// none of the players have SOS data. Used to pick a single most-relevant
+// callout rather than enumerating every player's schedule.
+function mostExtremeSos(playersWithVor) {
+  let best = null, bestDist = -1;
+  for (const x of playersWithVor) {
+    const rank = x.player.stats && x.player.stats.sos_playoff_rank;
+    if (rank == null) continue;
+    const dist = Math.abs(rank - 16.5);
+    if (dist > bestDist) { best = x; bestDist = dist; }
+  }
+  return best;
 }
 
 // Team-level SOS context, not blended into VOR -- this pipeline has no
@@ -728,7 +952,10 @@ function renderTradeCalculator() {
   const receive = computeTradeSide(tradeReceiveIds, replacementLevels, openCounts);
   const theirOpenCounts = tradeTheirIds.size > 0 ? simulateOpenSlotCounts(tradeTheirIds) : null;
   const { verdict, detail } = buildTradeVerdict(give, receive, theirOpenCounts, replacementLevels);
+  const rawDiff = computeRawDiff(give, receive);
+  const sweetenerHtml = renderTradeSweetener(give, receive, replacementLevels, rawDiff);
   const theirPlayers = allPlayers.filter(p => tradeTheirIds.has(p.id));
+  const tradeHistory = loadTradeHistory();
 
   const content = document.getElementById("tradeContent");
   content.innerHTML = `
@@ -739,6 +966,9 @@ function renderTradeCalculator() {
       <span class="trade-feature-badge" title="Whoever lands the single highest-VOR player gets a bonus -- one stud beats two mediocre players.">💎 Consolidation bonus</span>
       <span class="trade-feature-badge" title="Re-weighted using YOUR actual open roster slots -- not a generic fairness score.">🎯 Your roster, personalized</span>
       <span class="trade-feature-badge" title="Add the other team's roster to see if THEY'D actually want this trade too.">🔄 Two-sided read</span>
+      <span class="trade-feature-badge" title="Close on value? We surface the player with the toughest or easiest Weeks 15-17 schedule as a tiebreaker.">🗓️ Playoff SOS tiebreaker</span>
+      <span class="trade-feature-badge" title="If a trade's lopsided, we suggest the smallest sweetener that would even it out.">💡 Fair-trade finder</span>
+      <span class="trade-feature-badge" title="Save any trade you're evaluating and reload it later to compare offers.">💾 Trade history</span>
     </div>
     <div class="trade-columns">
       <div class="trade-side">
@@ -755,14 +985,20 @@ function renderTradeCalculator() {
       </div>
     </div>
     <div class="trade-verdict">${verdict}</div>
+    ${tradeGiveIds.size > 0 && tradeReceiveIds.size > 0 ? `<button class="btn trade-save-btn" type="button">Save this trade</button>` : ""}
     <div class="trade-detail">${detail}</div>
+    ${sweetenerHtml}
     <div class="trade-their-roster">
       <h3>Their Current Roster <span class="trade-optional-tag">optional -- for a two-sided fairness read</span></h3>
       <input class="trade-search" data-side="their" type="text" placeholder="Add players on the OTHER team's current roster…" autocomplete="off">
       <div class="trade-search-results" data-side="their"></div>
       <div class="trade-player-list trade-their-list">${theirPlayers.map(tradeTheirRosterRow).join("") || '<div class="trade-empty">No players added -- the verdict above only evaluates the trade for you until this is filled in</div>'}</div>
     </div>
-    <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data -- it's informational only, not blended into the VOR math (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
+    <div class="trade-history">
+      <h3>Saved Trades</h3>
+      <div class="trade-history-list">${tradeHistory.length ? tradeHistory.slice().reverse().map(tradeHistoryItemHtml).join("") : '<div class="trade-empty">No saved trades yet</div>'}</div>
+    </div>
+    <div class="trade-scope-note">Playoff-week (15-17) strength of schedule is shown per player above, based on real opponent points-allowed data, and called out below when it's close enough to matter -- not blended into the VOR math itself (this app has no weekly player-projection model to combine it with honestly). Not covered here: Dynasty/keeper/draft-pick value (redraft-only model), and syncing a real league from Sleeper/ESPN/Yahoo -- evaluate any trade by adding the players manually above.</div>
   `;
 
   content.querySelectorAll(".trade-search").forEach(input => {
@@ -773,6 +1009,16 @@ function renderTradeCalculator() {
       tradeSideSet(btn.dataset.side).delete(btn.dataset.id);
       renderTradeCalculator();
     });
+  });
+  const saveBtn = content.querySelector(".trade-save-btn");
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => saveCurrentTrade());
+  }
+  content.querySelectorAll(".trade-history-load-btn").forEach(btn => {
+    btn.addEventListener("click", () => loadSavedTrade(btn.dataset.id));
+  });
+  content.querySelectorAll(".trade-history-delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => deleteSavedTrade(btn.dataset.id));
   });
 }
 

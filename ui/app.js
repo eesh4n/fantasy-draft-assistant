@@ -966,6 +966,9 @@ function renderTradeCalculator() {
       <span class="trade-feature-badge" title="Whoever lands the single highest-VOR player gets a bonus -- one stud beats two mediocre players.">💎 Consolidation bonus</span>
       <span class="trade-feature-badge" title="Re-weighted using YOUR actual open roster slots -- not a generic fairness score.">🎯 Your roster, personalized</span>
       <span class="trade-feature-badge" title="Add the other team's roster to see if THEY'D actually want this trade too.">🔄 Two-sided read</span>
+      <span class="trade-feature-badge" title="Close on value? We surface the player with the toughest or easiest Weeks 15-17 schedule as a tiebreaker.">🗓️ Playoff SOS tiebreaker</span>
+      <span class="trade-feature-badge" title="If a trade's lopsided, we suggest the smallest sweetener that would even it out.">💡 Fair-trade finder</span>
+      <span class="trade-feature-badge" title="Save any trade you're evaluating and reload it later to compare offers.">💾 Trade history</span>
     </div>
     <div class="trade-columns">
       <div class="trade-side">

@@ -343,6 +343,43 @@ body{
   text-transform:none;
 }
 .trade-their-list{max-height:180px;overflow-y:auto;}
+.trade-save-btn{margin-top:12px;}
+.trade-history{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px dashed var(--border);
+}
+.trade-history h3{margin:0 0 8px;font-size:14px;}
+.trade-history-list{display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;}
+.trade-history-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 10px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--bg-panel-2);
+  font-size:13px;
+}
+.trade-history-summary{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:0;
+}
+.trade-history-line{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.trade-history-when{color:var(--text-dim);font-size:11px;}
+.trade-history-actions{
+  display:flex;
+  gap:6px;
+  flex-shrink:0;
+}
+.trade-history-actions .btn{padding:6px 10px;font-size:12px;}
 .trade-scope-note{
   margin-top:10px;
   font-size:11px;
